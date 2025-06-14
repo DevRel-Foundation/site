@@ -386,7 +386,6 @@ header {
   padding-right: var(--space-m);
 }
 
-
 /* Grid layout utility */
 .u-grid {
   display: grid;
@@ -460,4 +459,8 @@ header>* {
   .u-grid-12 {
     grid-template-columns: repeat(6, 1fr);
   }
+}
+
+.llm-gen {
+  color: red;
 }
