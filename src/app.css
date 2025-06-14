@@ -1,0 +1,463 @@
+/* 
+* This is the base style sheet for everything.
+* Don't forget to include the reset CSS file before this one.
+*/
+
+/* Fluid Space Scale
+ * Generated with https://utopia.fyi/space/calculator
+ * Using a min viewport of 320px and max viewport of 1240px
+ * Using the golden ratio (1.618) for spacing progression
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Font settings */
+  --font-main: 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-headings: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* Nunito Sans for body text, Nunito for headings */
+
+  /* Fluid typography scale - based on golden ratio (1.618) */
+  --step--2: clamp(0.68rem, 0.66rem + 0.11vw, 0.75rem);
+  --step--1: clamp(0.83rem, 0.79rem + 0.22vw, 0.96rem);
+  --step-0: clamp(1rem, 0.94rem + 0.33vw, 1.2rem);
+  --step-1: clamp(1.2rem, 1.09rem + 0.57vw, 1.55rem);
+  --step-2: clamp(1.44rem, 1.28rem + 0.87vw, 2rem);
+  --step-3: clamp(1.73rem, 1.5rem + 1.3vw, 2.5rem);
+  --step-4: clamp(2.07rem, 1.73rem + 1.9vw, 3.09rem);
+  --step-5: clamp(2.49rem, 2.01rem + 2.7vw, 4.05rem);
+
+  /* Grid and container settings */
+  --grid-max-width: 77.5rem;
+
+  /* 1240px */
+  --grid-gutter: var(--space-s-l, clamp(1.05rem, 0.68rem + 2.04vw, 2.75rem));
+  --grid-columns: 12;
+
+  /* Column width - based on golden ratio progression */
+  --grid-column-min: clamp(1rem, 0.8rem + 1vw, 1.618rem);
+  --grid-column-max: clamp(3.09rem, 2.5rem + 3vw, 5rem);
+
+  --color-background: hsl(48, 100%, 98%);
+  --color-text: hsl(0, 0%, 32%);
+  --color-background-secondary-1: hsl(48, 61.8%, 94%);
+  --color-background-secondary-2: hsl(48, 13%, 92%);
+
+  /* Brand accent colors */
+  --color-mint: hsl(90, 65%, 81%);
+  --color-blue: hsl(193, 100%, 92%);
+  --color-teal: hsl(168, 85%, 91%);
+  --color-gold: hsl(41.9, 100%, 91.6%);
+  --color-accent-text: var(--color-mint);
+  --color-link: hsl(140, 38.2%, 18%);
+
+  --color-background-dark: hsl(42, 10%, 10%);
+  --color-text-dark: hsl(48, 20%, 90%);
+  --color-background-secondary-1-dark: hsl(42, 16.2%, 16%);
+  --color-background-secondary-2-dark: hsl(42, 10%, 20%);
+
+  --color-mint-dark: hsl(90, 98%, 18%);
+  --color-blue-dark: hsl(193, 72%, 14%);
+  --color-teal-dark: hsl(168, 63%, 14%);
+  --color-gold-dark: hsl(41.7, 74.5%, 21.6%);
+  --color-accent-text-dark: var(--color-mint-dark);
+  --color-link-dark: hsl(90, 65%, 81%);
+
+  /* Border radius scale - based on our circular motif design language */
+  --radius-xs: 4px;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-xl: 24px;
+  --radius-circle: 50%;
+
+  /* Space scale with min and max values using golden ratio (1.618) */
+  --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
+  --space-2xs: clamp(0.4rem, 0.37rem + 0.17vw, 0.5rem);
+  --space-xs: clamp(0.65rem, 0.6rem + 0.28vw, 0.81rem);
+  --space-s: clamp(1.05rem, 0.97rem + 0.45vw, 1.31rem);
+  --space-m: clamp(1.7rem, 1.57rem + 0.73vw, 2.12rem);
+  --space-l: clamp(2.75rem, 2.54rem + 1.18vw, 3.43rem);
+  --space-xl: clamp(4.45rem, 4.11rem + 1.91vw, 5.55rem);
+  --space-2xl: clamp(7.2rem, 6.65rem + 3.09vw, 8.98rem);
+  --space-3xl: clamp(11.65rem, 10.76rem + 5vw, 14.53rem);
+
+  /* One-up pairs */
+  --space-3xs-2xs: clamp(0.25rem, 0.16rem + 0.5vw, 0.5rem);
+  --space-2xs-xs: clamp(0.4rem, 0.26rem + 0.78vw, 0.81rem);
+  --space-xs-s: clamp(0.65rem, 0.42rem + 1.26vw, 1.31rem);
+  --space-s-m: clamp(1.05rem, 0.68rem + 2.04vw, 2.12rem);
+  --space-m-l: clamp(1.7rem, 1.1rem + 3.3vw, 3.43rem);
+  --space-l-xl: clamp(2.75rem, 1.78rem + 5.34vw, 5.55rem);
+  --space-xl-2xl: clamp(4.45rem, 2.88rem + 8.64vw, 8.98rem);
+  --space-2xl-3xl: clamp(7.2rem, 4.66rem + 13.98vw, 14.53rem);
+
+  /* Custom pairs for organic growth patterns */
+  --space-organic-s: clamp(0.65rem, 0.42rem + 1.26vw, 2.12rem);
+  --space-organic-m: clamp(1.7rem, 1.1rem + 3.3vw, 5.55rem);
+
+  /* Border thickness based on golden ratio */
+  --border-thickness: 0.146rem;
+  /* Based on golden ratio (0.618) relative to 1rem, using the inverse of the inverse of the inverse of the inverse (0.146 * 0.618) */
+
+  /* Link styles */
+  --link-underline-style: solid;
+  --link-underline-offset: 0.2em;
+  --link-underline-thickness: 1px;
+}
+
+
+/* Utility classes for spacing */
+.space-stack-3xs {
+  margin-bottom: var(--space-3xs);
+}
+
+.space-stack-2xs {
+  margin-bottom: var(--space-2xs);
+}
+
+.space-stack-xs {
+  margin-bottom: var(--space-xs);
+}
+
+.space-stack-s {
+  margin-bottom: var(--space-s);
+}
+
+.space-stack-m {
+  margin-bottom: var(--space-m);
+}
+
+.space-stack-l {
+  margin-bottom: var(--space-l);
+}
+
+.space-stack-xl {
+  margin-bottom: var(--space-xl);
+}
+
+.space-stack-2xl {
+  margin-bottom: var(--space-2xl);
+}
+
+.space-stack-3xl {
+  margin-bottom: var(--space-3xl);
+}
+
+.space-inline-3xs {
+  margin-right: var(--space-3xs);
+}
+
+.space-inline-2xs {
+  margin-right: var(--space-2xs);
+}
+
+.space-inline-xs {
+  margin-right: var(--space-xs);
+}
+
+.space-inline-s {
+  margin-right: var(--space-s);
+}
+
+.space-inline-m {
+  margin-right: var(--space-m);
+}
+
+.space-inline-l {
+  margin-right: var(--space-l);
+}
+
+.space-inline-xl {
+  margin-right: var(--space-xl);
+}
+
+.space-inline-2xl {
+  margin-right: var(--space-2xl);
+}
+
+.space-inline-3xl {
+  margin-right: var(--space-3xl);
+}
+
+.padding-3xs {
+  padding: var(--space-3xs);
+}
+
+.padding-2xs {
+  padding: var(--space-2xs);
+}
+
+.padding-xs {
+  padding: var(--space-xs);
+}
+
+.padding-s {
+  padding: var(--space-s);
+}
+
+.padding-m {
+  padding: var(--space-m);
+}
+
+.padding-l {
+  padding: var(--space-l);
+}
+
+.padding-xl {
+  padding: var(--space-xl);
+}
+
+.padding-2xl {
+  padding: var(--space-2xl);
+}
+
+.padding-3xl {
+  padding: var(--space-3xl);
+}
+
+body.dark-mode {
+  --color-background: var(--color-background-dark);
+  --color-text: var(--color-text-dark);
+  --color-background-secondary-1: var(--color-background-secondary-1-dark);
+  --color-background-secondary-2: var(--color-background-secondary-2-dark);
+  --color-mint: var(--color-mint-dark);
+  --color-blue: var(--color-blue-dark);
+  --color-teal: var(--color-teal-dark);
+  --color-gold: var(--color-gold-dark);
+  --color-accent-text: var(--color-accent-text-dark);
+  --color-link: var(--color-link-dark);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  line-height: 1.5;
+}
+
+footer {
+  background-color: var(--color-background-secondary-2);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-headings);
+  line-height: 1.2;
+  margin-top: 0;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--step-5);
+  margin-bottom: var(--space-m);
+}
+
+h2 {
+  font-size: var(--step-4);
+  margin-bottom: var(--space-s);
+}
+
+h3 {
+  font-size: var(--step-3);
+  line-height: 1.2;
+  font-weight: 400;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-xs);
+}
+
+h4 {
+  font-size: var(--step-2);
+  margin-bottom: var(--space-xs);
+  font-weight: 300;
+}
+
+h5 {
+  font-size: var(--step-1);
+  margin-bottom: var(--space-2xs);
+  font-weight: 300;
+}
+
+h6 {
+  font-size: var(--step-0);
+  margin-bottom: var(--space-2xs);
+  font-weight: 300;
+}
+
+p {
+  font-size: var(--step-0);
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+
+code {
+  font-family: monospace;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-xs);
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-thickness: var(--link-underline-thickness);
+  text-decoration-style: var(--link-underline-style);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+small {
+  font-size: var(--step--1);
+}
+
+.text-xs {
+  font-size: var(--step--2);
+}
+
+.text-s {
+  font-size: var(--step--1);
+}
+
+.text-m {
+  font-size: var(--step-0);
+}
+
+.text-l {
+  font-size: var(--step-1);
+}
+
+.text-xl {
+  font-size: var(--step-2);
+}
+
+.text-2xl {
+  font-size: var(--step-3);
+}
+
+.text-3xl {
+  font-size: var(--step-4);
+}
+
+.text-4xl {
+  font-size: var(--step-5);
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+section,
+header {
+  width: 100%;
+}
+
+
+/* Container for centering content */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: var(--space-m);
+  padding-right: var(--space-m);
+}
+
+
+/* Grid layout utility */
+.u-grid {
+  display: grid;
+  gap: var(--grid-gutter);
+}
+
+/* Fluid grid that adapts to content and viewport */
+.u-grid-fluid {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-column-min), 1fr));
+}
+
+section>*,
+header>* {
+  max-width: var(--grid-max-width);
+  padding-inline: var(--grid-gutter);
+  box-sizing: border-box;
+}
+
+/* Responsive grid columns */
+.u-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.u-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.u-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.u-grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.u-grid-12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Golden ratio based asymmetric grid */
+.u-grid-golden {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: 1fr 1.618fr;
+  /* Golden ratio */
+}
+
+.u-grid-golden-reverse {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: 1.618fr 1fr;
+  /* Golden ratio reversed */
+}
+
+@media (max-width: 768px) {
+
+  .u-grid-2,
+  .u-grid-3,
+  .u-grid-4,
+  .u-grid-golden,
+  .u-grid-golden-reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .u-grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .u-grid-12 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
