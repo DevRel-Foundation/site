@@ -14,7 +14,7 @@
 
   <section class="working-group">
     <h2>Resource and Aggregation Group</h2>
-    <p>Focused on collecting, organizing, and curating the best resources for the DevRel community. This group works to create comprehensive toolkits, guidelines, and reference materials that help DevRel professionals excel in their roles.</p>
+    <p>Aggregates resources for a wide variety of use cases to support the Developer Relations professional community.</p>
     <a href="https://github.com/DevRel-Foundation/wg-resource-aggregation" target="_blank" rel="noopener" class="github-link">
       <img src={GitHubIcon} alt="GitHub" class="github-icon" />
       View on GitHub
@@ -285,13 +285,13 @@
   
   .members-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
     gap: var(--space-m);
   }
   
-  @media (max-width: 768px) {
+  @media (min-width: 769px) {
     .members-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
   }
 </style> 

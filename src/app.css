@@ -450,6 +450,12 @@ header>* {
 }
 
 @media (min-width: 769px) {
+
+  section>*,
+  header>* {
+    padding-inline: 0;
+  }
+
   .u-grid-2 {
     grid-template-columns: repeat(2, 1fr);
   }

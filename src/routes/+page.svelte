@@ -86,7 +86,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		padding: var(--space-2xl) var(--space-m);
+		padding: var(--space-2xl) 0;
 		background-color: var(--color-background);
 	}
 
