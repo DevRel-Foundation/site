@@ -57,6 +57,8 @@
 <style>
   .bio-member {
     display: flex;
+    flex-direction: column;
+    text-align: center;
     gap: var(--space-s);
     padding: var(--space-s);
     background-color: var(--color-background-secondary-1);
@@ -71,6 +73,7 @@
     border-radius: var(--radius-circle);
     object-fit: cover;
     flex-shrink: 0;
+    align-self: center;
   }
   
   .member-info {
@@ -112,14 +115,14 @@
     opacity: 1;
   }
   
-  @media (max-width: 768px) {
+  @media (min-width: 769px) {
     .bio-member {
-      flex-direction: column;
-      text-align: center;
+      flex-direction: row;
+      text-align: left;
     }
     
     .member-avatar {
-      align-self: center;
+      align-self: flex-start;
     }
   }
 </style> 

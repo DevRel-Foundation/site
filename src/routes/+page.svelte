@@ -15,10 +15,16 @@
 
 <div class="container">
 	<section class="hero">
-		<h1>Developer Relations Foundation</h1>
-		<p class="subtitle">
-			Fostering growth, community, and best practices in developer relations.
-		</p>
+		<div class="hero-title">
+			<h1>
+				<span class="devrel">DevRel</span>
+				<span class="foundation">Foundation</span>
+			</h1>
+            <p class="subtitle">
+                Fostering growth, community, and best practices in developer relations.
+            </p>
+		</div>
+        <img src="/src/lib/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
 	</section>
 
 	<section class="content-boxes">
@@ -44,10 +50,9 @@
 
 	<section class="newsletter-section">
 		<div class="newsletter-content">
-			<h2>Stay Connected</h2>
+			<h2>Join our newsletter</h2>
 			<p>
-				Join our newsletter to stay updated on DevRel Foundation news, events, and opportunities to
-				get involved in our community.
+				Stay updated with the latest in developer relations best practices, events, and community news.
 			</p>
 
 			<form class="newsletter-form" on:submit={handleNewsletterSubmit}>
@@ -59,30 +64,74 @@
 </div>
 
 <style>
+	.container {
+		position: relative;
+	}
+
+	.container::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100vw;
+		height: 100%;
+		background-image: radial-gradient(var(--pattern-color) 1px, transparent 1px);
+		background-size: var(--space-m) var(--space-m);
+		z-index: -1;
+	}
+
 	.hero {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		padding: var(--space-2xl) var(--space-m);
 		background-color: var(--color-background);
 	}
 
-	.hero h1 {
-		font-size: var(--step-5);
-		color: var(--color-text);
+	.hero-title {
 		margin-bottom: var(--space-m);
 	}
 
-	.hero .subtitle {
-		font-size: var(--step-2);
+	.hero h1 {
+		font-size: calc(var(--step-5) * 1.2);
 		color: var(--color-text);
-		margin-bottom: var(--space-xl);
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+        margin-bottom: var(--space-m);
+	}
+
+	.devrel {
+		line-height: 1;
+	}
+
+	.foundation {
+		font-weight: 200;
+		line-height: 1;
+	}
+
+	.hero-logo {
+		height: 100%;
+        max-width: calc(50% - var(--space-l));
+		width: auto;
+		flex-shrink: 0;
+	}
+
+	.hero .subtitle {
+		font-size: var(--step-1);
+		font-weight: 200;
+		color: var(--color-text);
 	}
 
 	.content-boxes {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: 1fr;
 		gap: var(--space-l);
-		padding: var(--space-xl) var(--space-m);
 		max-width: var(--grid-max-width);
 		margin: 0 auto;
+        margin-bottom: var(--space-2xl);
 	}
 
 	.content-box {
@@ -93,8 +142,8 @@
 	}
 
 	.content-box h3 {
+        margin-top: 0;
 		color: var(--color-text);
-		margin-bottom: var(--space-s);
 		font-size: var(--step-2);
 	}
 
@@ -104,8 +153,11 @@
 	}
 
 	.newsletter-section {
-		background-color: var(--color-background-secondary-2);
+		background-color: var(--color-mint);
 		padding: var(--space-xl) var(--space-m);
+		margin-bottom: var(--space-2xl);
+        border-radius: var(--radius-l);
+
 	}
 
 	.newsletter-content h2 {
@@ -122,18 +174,19 @@
 
 	.newsletter-form {
 		display: flex;
+		flex-direction: column;
 		gap: var(--space-s);
-		max-width: 400px;
 		margin: 0 auto;
 	}
 
 	.newsletter-form input {
-		flex: 1;
+		width: 100%;
 		padding: var(--space-s);
 		border: var(--border-thickness) solid var(--color-background-secondary-1);
 		border-radius: var(--radius-s);
 		background-color: var(--color-background);
 		color: var(--color-text);
+		box-sizing: border-box;
 	}
 
 	.newsletter-form button {
@@ -145,13 +198,13 @@
 		cursor: pointer;
 	}
 
-	@media (max-width: 768px) {
+	@media (min-width: 769px) {
 		.newsletter-form {
-			flex-direction: column;
+			flex-direction: row;
 		}
 
 		.content-boxes {
-			grid-template-columns: 1fr;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		}
 	}
 </style>

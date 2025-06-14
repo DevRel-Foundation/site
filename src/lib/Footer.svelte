@@ -9,7 +9,7 @@
     max-width: var(--grid-max-width);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--space-l);
   }
   
@@ -33,16 +33,17 @@
     margin-bottom: var(--space-2xs);
   }
   
-  @media (max-width: 768px) {
+  @media (min-width: 481px) {
     .footer-content {
       grid-template-columns: 1fr 1fr;
       gap: var(--space-m);
     }
   }
   
-  @media (max-width: 480px) {
+  @media (min-width: 769px) {
     .footer-content {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: var(--space-l);
     }
   }
 </style>

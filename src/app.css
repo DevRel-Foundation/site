@@ -65,6 +65,8 @@
   --color-accent-text-dark: var(--color-mint-dark);
   --color-link-dark: hsl(90, 65%, 81%);
 
+  --icon-filter: invert(0.2) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.2);
+
   /* Border radius scale - based on our circular motif design language */
   --radius-xs: 4px;
   --radius-s: 8px;
@@ -106,6 +108,9 @@
   --link-underline-style: solid;
   --link-underline-offset: 0.2em;
   --link-underline-thickness: 1px;
+
+  /* Pattern colors */
+  --pattern-color: hsla(0, 0%, 32%, 0.4);
 }
 
 
@@ -229,6 +234,8 @@ body.dark-mode {
   --color-gold: var(--color-gold-dark);
   --color-accent-text: var(--color-accent-text-dark);
   --color-link: var(--color-link-dark);
+  --icon-filter: invert(0.9) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.9);
+  --pattern-color: hsla(48, 20%, 90%, 0.1);
 }
 
 body {
@@ -408,56 +415,67 @@ header>* {
 
 /* Responsive grid columns */
 .u-grid-2 {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 
 .u-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
 }
 
 .u-grid-4 {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
 }
 
 .u-grid-6 {
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .u-grid-12 {
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 }
 
 /* Golden ratio based asymmetric grid */
 .u-grid-golden {
   display: grid;
   gap: var(--grid-gutter);
-  grid-template-columns: 1fr 1.618fr;
+  grid-template-columns: 1fr;
   /* Golden ratio */
 }
 
 .u-grid-golden-reverse {
   display: grid;
   gap: var(--grid-gutter);
-  grid-template-columns: 1.618fr 1fr;
+  grid-template-columns: 1fr;
   /* Golden ratio reversed */
 }
 
-@media (max-width: 768px) {
-
-  .u-grid-2,
-  .u-grid-3,
-  .u-grid-4,
-  .u-grid-golden,
-  .u-grid-golden-reverse {
-    grid-template-columns: 1fr;
+@media (min-width: 769px) {
+  .u-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .u-grid-6 {
+  .u-grid-3 {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .u-grid-12 {
+  .u-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .u-grid-golden {
+    grid-template-columns: 1fr 1.618fr;
+  }
+
+  .u-grid-golden-reverse {
+    grid-template-columns: 1.618fr 1fr;
+  }
+
+  .u-grid-6 {
     grid-template-columns: repeat(6, 1fr);
+  }
+
+  .u-grid-12 {
+    grid-template-columns: repeat(12, 1fr);
   }
 }
 
