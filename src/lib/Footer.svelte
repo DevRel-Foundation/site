@@ -1,0 +1,82 @@
+<style>
+  footer {
+    background-color: var(--color-background-secondary-2);
+    padding: var(--space-xl) var(--space-m);
+    border-top: var(--border-thickness) solid var(--color-background-secondary-1);
+  }
+  
+  .footer-content {
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: var(--space-l);
+  }
+  
+  .footer-column h2 {
+    color: var(--color-text);
+    font-size: var(--step-1);
+    margin-bottom: var(--space-s);
+  }
+  
+  .footer-column p {
+    color: var(--color-text);
+    font-size: var(--step-0);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .footer-column a {
+    color: var(--color-link);
+    text-decoration: none;
+    font-size: var(--step--1);
+    display: block;
+    margin-bottom: var(--space-2xs);
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-m);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <!-- Empty column -->
+    </div>
+    
+    <div class="footer-column">
+      <h2>About</h2>
+      <a href="#">About DRF</a>
+      <a href="#">Steering Committee</a>
+      <a href="#">Managers</a>
+      <a href="#">Working Group members</a>
+      <a href="#">Charter</a>
+      <a href="#">Code of Conduct</a>
+      <a href="#">Q&A</a>
+      <a href="#">Brand</a>
+    </div>
+    
+    <div class="footer-column">
+      <h2>Community</h2>
+      <a href="#">Get started</a>
+      <a href="#">Meetings and Calendar</a>
+      <a href="#">Events</a>
+    </div>
+    
+    <div class="footer-column">
+      <h2>Resources</h2>
+      <a href="#">Glossary</a>
+      <a href="#">Use Cases</a>
+      <a href="#">Brand/Style Guidebook</a>
+    </div>
+  </div>
+</footer> 
