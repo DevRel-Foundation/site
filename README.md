@@ -6,18 +6,40 @@ Still to add:
 - Media kit
 - Proper brand guide integration
 
-## Developing
+## 🚀 Run and Modify the Site Locally
 
-After downloading and running npm install:
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+
+To run the site locally:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/DevRel-Foundation/site.git
+cd site
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the development server
 
 ```bash
 npm run dev
+```
+To open it automatically in your default browser:
 
-# or start the server and open the app in a new browser tab
+```bash
 npm run dev -- --open
 ```
 
-## Building
+## 🏗️ Building
 
 ```bash
 npm run build
