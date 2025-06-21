@@ -15,35 +15,37 @@
 
 <div class="container">
 	<section class="hero">
-		<div class="hero-title">
-			<h1>
-				<span class="devrel">DevRel</span>
-				<span class="foundation">Foundation</span>
-			</h1>
-            <p class="subtitle">
-                Fostering growth, community, and best practices in developer relations.
-            </p>
+		<div class="hero-title-area">
+			<div class="hero-title">
+				<h1>
+					<span class="devrel">DevRel</span>
+					<span class="foundation">Foundation</span>
+				</h1>
+				<p class="subtitle">
+					Fostering growth, community, and best practices in developer relations.
+				</p>
+			</div>
+			<img src="/src/lib/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
 		</div>
-        <img src="/src/lib/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
 	</section>
 
 	<section class="content-boxes">
 		<div class="content-box">
-			<h3>Network</h3>
-			<p>Creating inclusive spaces where developers can connect, collaborate, and grow together.</p>
+			<h3>What we do</h3>
+			<p>Network with peers, collaborate on ideas, create resources, and encourage best practices.</p>
 		</div>
 
 		<div class="content-box">
-			<h3>Build together</h3>
+			<h3>Opportunities</h3>
 			<p>
-				Developing resources and programs that help technical audiences learn and adopt new technologies.
+				Get involved in the working groups, answer community questions, or help us host events.
 			</p>
 		</div>
 
 		<div class="content-box">
-			<h3>Create resources</h3>
+			<h3>Join us</h3>
 			<p>
-				Representing developer needs within organizations and ensuring their voices are heard in product decisions.
+				Join us on <a href="https://discord.gg/devrel">Discord</a> or <a href="https://github.com/DevRel-Foundation">GitHub</a> to get involved or engage with the community.
 			</p>
 		</div>
 	</section>
@@ -66,6 +68,7 @@
 <style>
 	.container {
 		position: relative;
+		box-sizing: border-box;
 	}
 
 	.container::before {
@@ -82,16 +85,19 @@
 	}
 
 	.hero {
+		padding: var(--space-2xl) 0;
+	}
+	
+	.hero-title-area {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		padding: var(--space-2xl) 0;
 		background-color: var(--color-background);
 	}
-
+	
 	.hero-title {
-		margin-bottom: var(--space-m);
+		/* margin-bottom: var(--space-m); */
 	}
 
 	.hero h1 {
