@@ -12,7 +12,7 @@
 	<title>About - Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container">
+<div class="container container-content">
 	<section class="mission-section">
 		<h1>About</h1>
 		<p>
