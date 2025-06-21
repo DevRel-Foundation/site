@@ -384,8 +384,6 @@ header {
   width: 100%;
 }
 
-
-/* Container for centering content */
 .container {
   max-width: 1200px;
   margin-left: auto;
@@ -393,6 +391,15 @@ header {
   width: 100%;
   padding-left: var(--space-m);
   padding-right: var(--space-m);
+}
+
+.container-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.content-box h2, .content-box h3 {
+  margin-top: 0;
 }
 
 /* Grid layout utility */
