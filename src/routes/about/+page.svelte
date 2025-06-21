@@ -1,177 +1,157 @@
 <script>
-  import BioSteeringCommittee from '$lib/BioSteeringCommittee.svelte';
+	import BioSteeringCommittee from '$lib/BioSteeringCommittee.svelte';
+	const img_wes = '/images/steering-committee/wes_f.jpg';
+	const img_ana = '/images/steering-committee/ana_j.jpg';
+	const img_jon = '/images/steering-committee/jon_l.jpg';
+	const img_kat = '/images/steering-committee/katie_m.jpg';
+	const img_phil = '/images/steering-committee/phil_l.jpg';
+	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 </script>
 
 <svelte:head>
-  <title>About - Developer Relations Foundation</title>
+	<title>About - Developer Relations Foundation</title>
 </svelte:head>
 
 <div class="container">
-  <section class="mission-section">
-    <h1>About</h1>
-    <p>
-      <strong>Mission:</strong> To elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
-    </p>
-  </section>
-
-  <section class="charter-section">
+	<section class="mission-section">
+		<h1>About</h1>
+		<p>
+			<strong>Mission:</strong> To elevate the professional practice of developer relations and increase
+			awareness of it as a driver of business value.
+		</p>
     <h2>Charter</h2>
     <p>
-      The Developer Relations Foundation Charter outlines the foundation's mission, purpose, and scope. It helps the community understand its role and direction and can be updated as the foundation evolves, with input from the community.
+      The Developer Relations Foundation Charter outlines the foundation's mission, purpose, and
+      scope. It helps the community understand its role and direction and can be updated as the
+      foundation evolves, with input from the community.
     </p>
     <p>
-      <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter_v1.0.adoc" target="_blank" rel="noopener">Read the full charter →</a>
+      <a
+        href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter_v1.0.adoc"
+        target="_blank"
+        rel="noopener">Read the full charter →</a
+      >
     </p>
-  </section>
+	</section>
 
-  <section class="team-section">
-    <h2>Steering Committee</h2>
-    <p class="llm-gen">
-      The Steering Committee provides oversight for the entire open collaborative project and helps establish initial lightweight processes to support community-driven initiatives. These experienced DevRel professionals work together to shape the day-to-day work within the Developer Relations Foundation and ensure the organization's mission is carried out effectively.
-    </p>
-    
-    <div class="team-grid">
-      <BioSteeringCommittee 
-        name="Sarah Chen"
-        title="Founding Developer Advocate at Promptfoo"
-        description="Experienced developer relations professional with expertise in community building and developer advocacy."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      
-      <BioSteeringCommittee 
-        name="Marcus Rodriguez"
-        title="Senior DevRel Manager at TechCorp"
-        description="Dedicated to building meaningful developer communities and fostering authentic connections between developers and companies."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      
-      <BioSteeringCommittee 
-        name="Alex Thompson"
-        title="Developer Experience Lead at CodeFlow"
-        description="Focused on creating exceptional developer experiences through thoughtful tooling, documentation, and support systems."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      
-      <BioSteeringCommittee 
-        name="Priya Patel"
-        title="Content Strategy Director at DevMedia"
-        description="Creating educational content and resources that help DevRel professionals grow and succeed in their careers."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      
-      <BioSteeringCommittee 
-        name="David Kim"
-        title="Events and Community Coordinator"
-        description="Organizing events and gatherings that bring the DevRel community together to learn, connect, and collaborate."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      
-      <BioSteeringCommittee 
-        name="Emily Watson"
-        title="Metrics and Analytics Specialist"
-        description="Developing frameworks and tools to measure the impact and success of developer relations programs."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      
-      <BioSteeringCommittee 
-        name="Jordan Lee"
-        title="Innovation and Emerging Trends Lead"
-        description="Exploring emerging trends and technologies to keep the DevRel community ahead of the curve."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-    </div>
-  </section>
+	<section class="team-section">
+		<div class="container">
+			<h2>Steering Committee</h2>
+			<p>
+				The Steering Committee provides oversight for the entire Developer Relations Foundation
+				(DRF). It is responsible for:
+			</p>
+			<ul>
+				<li>Governance and associated documentation</li>
+				<li>Management of working groups</li>
+				<li>Communications and GTM operations</li>
+				<li>Community building strategies and initiatives</li>
+				<li>Management of all DRF resources</li>
+			</ul>
+		</div>
+
+		<div class="team-grid">
+			<BioSteeringCommittee
+				name="Ana Jiménez"
+				title="LF ecosystem engagements, website, PM, advocacy"
+				accountabilities="Collaborates with LF sister projects + LFX, LF teams. Assists in shaping the DRF; ensures adherence to the charter and governance guidelines. Manages GitHub repos. LF rep for DRF."
+				bio="Ana Jiménez works as a Senior Project Manager at the Linux Foundation, supporting an open source community spread across four continents with over 3,000 practitioners. She serves as Project Manager for the TODO Group and DevRel Foundation and leads the strategy for the PyTorch Foundation Outreach Program, developing educational materials and initiatives to promote the adoption of the open source machine learning framework."
+				linkedin="https://www.linkedin.com/in/ana-jimenez-santamaria/"
+				twitter="#"
+				bluesky="#"
+				github="#"
+				website="#"
+				headshot={img_ana}
+			/>
+
+			<BioSteeringCommittee
+				name="Jonathan LeBlanc"
+				title="Engineering, governance, project management"
+				accountabilities="Website content. Github and Tool maintenance. Updates / adjustments / creation of DRF governing docs (e.g. charter, CoC, etc). Development and maintenance of DRF project plans."
+				bio="Jonathan LeBlanc is an Emmy award winning software engineer for pioneering live streaming video services, author of the O'Reilly books 'Identity and Data Security for Web Development' and 'Programming Social Applications', and former board member for the OAuth, OpenID, and OpenSocial specification groups. Currently functioning as the Vice President and GM of Platform at TraceLink, Jonathan has spent his career leading and architecting platform, product, and developer relations organizations globally."
+				linkedin="https://www.linkedin.com/in/jcleblanc/"
+				twitter="#"
+				bluesky="#"
+				github="#"
+				website="#"
+				headshot={img_jon}
+			/>
+
+			<BioSteeringCommittee
+				name="Katie Miller"
+				title="Communications, recruitment, governance"
+				accountabilities="Outbound, social media, and community comms. Managing volunteer recruitment and onboarding processes. Leverages non-profit board leadership experience to advise DRF."
+				bio="Katie Miller is a Developer Marketing leader who has built and managed developer programs and marketing initiatives for Slack, Asana, and Google. While her career has taken some interesting twists and turns, at its core has been a commitment to creating a better world by empowering people through knowledge and connection. She serves in leadership roles on multiple non-profit boards and is passionate about community building and governance best practices."
+				linkedin="https://www.linkedin.com/in/kmillrunner/"
+				twitter="#"
+				bluesky="#"
+				github="#"
+				website="#"
+				headshot={img_kat}
+			/>
+
+			<BioSteeringCommittee
+				name="Phil Leggetter"
+				title="Engineering, docs, comms, community, GTM"
+				accountabilities="Represent the SC in EMEA activities. Community partnerships e.g. DevRelCon, API Days. Supports working groups and community engagement initiatives."
+				bio="Phil Leggetter is an experienced Developer Experience, Developer Relations, and DevTools PLG leader with experience guiding startups through growth, acquisition, and accelerated growth at publicly traded enterprises. He has spent his career building software experiences to maximize developer productivity at companies such as Pusher (acquired by Message Bird), Nexmo (Acquired by Vonage), PostHog, Ably, and most recently, Hookdeck."
+				linkedin="https://www.linkedin.com/in/leggetter/"
+				twitter="#"
+				bluesky="#"
+				github="#"
+				website="#"
+				headshot={img_phil}
+			/>
+
+			<BioSteeringCommittee
+				name="Stacey Kruczek"
+				title="GTM, PR, website, brand, informal coffee chats (NA)"
+				accountabilities="Outreach and integrated marketing plans. Serves as a spokesperson, oversee messaging, press, and visibility. Oversees website and brand identity."
+				bio="Stacey Kruczek is a Developer Relations leader and founding Steering Committee member of the Developer Relations Foundation. With nearly a decade in DevRel, she has built and scaled developer communities, champion programs, and developer-first marketing strategies that drive real business impact. She focuses on bridging the gap between technical communities and business objectives, ensuring developers have the resources and support they need to succeed."
+				linkedin="https://www.linkedin.com/in/staceykruczek/"
+				twitter="#"
+				bluesky="#"
+				github="#"
+				website="#"
+				headshot={img_stacey}
+			/>
+
+			<BioSteeringCommittee
+				name="Wesley Faulkner"
+				title="Communications, community strategy, governance"
+				accountabilities="External communities communication and outreach. Develops community engagement strategies. Advises on governance. Builds relationships with external DevRel communities."
+				bio="Wesley Faulkner is a podcaster, public speaker, advocate for social change, and developer relations professional. He has worked for companies like AMD, Atlassian, Dell, IBM, and MongoDB. Wesley co-hosts two podcasts: Community Pulse, which explores the challenges and opportunities of community building in Developer Relations, and Radical Respect, which features conversations with Kim Scott on creating more inclusive and equitable workplaces."
+				linkedin="https://www.linkedin.com/in/wesley83/"
+				twitter="#"
+				bluesky="#"
+				github="#"
+				website="#"
+				headshot={img_wes}
+			/>
+		</div>
+	</section>
 </div>
 
 <style>
+  .container {
+    margin-bottom: var(--space-l);
+  }
 
-    .mission-section {
-      margin-bottom: var(--space-2xl);
-    }
-    
-    .mission-section h1 {
-      color: var(--color-text);
-      margin-bottom: var(--space-l);
-    }
-    
-    .mission-section p {
-      color: var(--color-text);
-      font-size: var(--step-1);
-      margin-bottom: var(--space-m);
-    }
-    
-    .charter-section {
-      margin-bottom: var(--space-2xl);
-      padding: var(--space-l);
-      background-color: var(--color-background-secondary-1);
-      border-radius: var(--radius-m);
-    }
-    
-    .charter-section h2 {
-      color: var(--color-text);
-      margin-bottom: var(--space-s);
-      font-size: var(--step-3);
-    }
-    
-    .charter-section p {
-      color: var(--color-text);
-      margin-bottom: var(--space-s);
-    }
-    
-    .charter-section a {
-      color: var(--color-link);
-    }
-    
-    .team-section h2 {
-      color: var(--color-text);
-      margin-bottom: var(--space-l);
-      font-size: var(--step-3);
-    }
-    
-    .team-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-l);
-    }
-    
-    @media (min-width: 769px) {
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (min-width: 1025px) {
-      .team-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-  </style>
-  
+	.team-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-l);
+	}
+
+	@media (min-width: 769px) {
+		.team-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1025px) {
+		.team-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>

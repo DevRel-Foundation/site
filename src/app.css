@@ -264,11 +264,13 @@ h3 {
 h1 {
   font-size: var(--step-5);
   margin-bottom: var(--space-m);
+  margin-top: var(--space-2xl);
 }
 
 h2 {
-  font-size: var(--step-4);
+  font-size: var(--step-3);
   margin-bottom: var(--space-s);
+  margin-top: var(--space-l);
 }
 
 h3 {
@@ -454,6 +456,11 @@ header>* {
   section>*,
   header>* {
     padding-inline: 0;
+  }
+
+  .container {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .u-grid-2 {
