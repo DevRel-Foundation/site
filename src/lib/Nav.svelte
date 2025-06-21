@@ -2,6 +2,7 @@
   import MenuIcon from 'iconoir/icons/menu.svg';
   import SunLightIcon from 'iconoir/icons/sun-light.svg';
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
+  import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import LogoSymbol from './drf_logo_symbol.svg';
   
   let isMenuOpen = $state(false);
@@ -73,6 +74,10 @@
           <img src={HalfMoonIcon} alt="Dark mode" />
         {/if}
       </button>
+      
+      <a href="https://discord.gg/devrel" target="_blank" rel="noopener noreferrer" class="discord-link" aria-label="Join our Discord">
+        <img src={DiscordIcon} alt="Discord" />
+      </a>
       
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
@@ -196,6 +201,10 @@
   .menu-toggle img {
     width: 1.5rem;
     height: 1.5rem;
+    filter: var(--icon-filter);
+  }
+  
+  .discord-link img {
     filter: var(--icon-filter);
   }
   
