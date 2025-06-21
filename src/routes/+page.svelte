@@ -18,7 +18,7 @@
 		<div class="hero-title-area">
 			<div class="hero-title">
 				<h1>
-					<span class="devrel">DevRel</span>
+					<span class="devrel">DEVREL</span>
 					<span class="foundation">Foundation</span>
 				</h1>
 				<p class="subtitle">
@@ -160,7 +160,7 @@
 
 	.newsletter-section {
 		background-color: var(--color-mint);
-		padding: var(--space-xl) var(--space-m);
+		padding: var(--space-l) var(--space-m);
 		margin-bottom: var(--space-2xl);
         border-radius: var(--radius-l);
 
@@ -168,6 +168,7 @@
 
 	.newsletter-content h2 {
 		color: var(--color-text);
+		margin-top: 0;
 		margin-bottom: var(--space-s);
 		font-size: var(--step-3);
 	}

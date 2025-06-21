@@ -14,12 +14,12 @@
 
 <div class="container container-content">
 	<section class="mission-section">
-		<h1>About</h1>
+		<h1 id="about">About</h1>
 		<p>
 			<strong>Mission:</strong> To elevate the professional practice of developer relations and increase
 			awareness of it as a driver of business value.
 		</p>
-    <h2>Charter</h2>
+    <h2 id="charter">Charter</h2>
     <p>
       The Developer Relations Foundation Charter outlines the foundation's mission, purpose, and
       scope. It helps the community understand its role and direction and can be updated as the
@@ -36,7 +36,7 @@
 
 	<section class="team-section">
 		<div class="container">
-			<h2>Steering Committee</h2>
+			<h2 id="steering-committee">Steering Committee</h2>
 			<p>
 				The Steering Committee provides oversight for the entire Developer Relations Foundation
 				(DRF). It is responsible for:

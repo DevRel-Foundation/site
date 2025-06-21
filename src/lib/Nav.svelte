@@ -56,6 +56,10 @@
     <div class="nav-brand">
       <a href="/">
         <img src={LogoSymbol} alt="DevRel Foundation" class="logo-symbol" />
+        <div class="brand-text">
+          <span class="devrel-text">DevRel</span>
+          <span class="foundation-text">Foundation</span>
+        </div>
       </a>
     </div>
     
@@ -126,6 +130,43 @@
     width: auto;
   }
   
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--space-xs);
+    line-height: 1;
+  }
+  
+  .devrel-text {
+    font-family: var(--font-headings);
+    font-weight: 800;
+    font-size: 16pt;
+    color: var(--color-logo-text);
+    text-transform: uppercase;
+  }
+  
+  .foundation-text {
+    font-family: var(--font-headings);
+    font-weight: 300;
+    font-size: 16pt;
+    color: var(--color-logo-text);
+    text-transform: uppercase;
+  }
+  
+  @media (max-width: 480px) {
+    .brand-text {
+      margin-left: var(--space-2xs);
+    }
+    
+    .devrel-text {
+      font-size: 0.75rem;
+    }
+    
+    .foundation-text {
+      font-size: 0.625rem;
+    }
+  }
+  
   .nav-menu-container {
     display: flex;
     align-items: center;
@@ -193,7 +234,8 @@
   }
   
   .theme-toggle:hover,
-  .menu-toggle:hover {
+  .menu-toggle:hover,
+  .discord-link:hover {
     background-color: var(--color-background-secondary-1);
   }
   
@@ -207,9 +249,16 @@
   .discord-link img {
     filter: var(--icon-filter);
   }
+
+  .discord-link {
+    padding: var(--space-xs);
+    border-radius: var(--radius-s);
+  }
   
   .menu-toggle {
     display: flex;
+    margin-left: var(--space-xs);
+    margin-right: var(--space-xs);
   }
   
   @media (min-width: 769px) {

@@ -9,9 +9,7 @@
 
 <div class="container">
   <h1>Working Groups</h1>
-  <p class="llm-gen">Our working groups are specialized teams focused on specific areas of developer relations, from community building and content creation to metrics and measurement. Each group brings together experts and practitioners to develop resources, standards, and best practices for their respective domains.</p>
-  <p class="llm-gen">These collaborative efforts result in valuable resources like guidelines, toolkits, and frameworks that help elevate the entire DevRel profession. Working group members have the opportunity to shape industry standards and contribute to the advancement of developer relations practices.</p>
-
+  <p>As part of a working group, you will help define various aspects of developer relations, establish goals of the working group, charter and implement operating principles following Foundation governance principles. </p>
   <section class="working-group">
     <h2>Resource and Aggregation Group</h2>
     <p>Aggregates resources for a wide variety of use cases to support the Developer Relations professional community.</p>
@@ -270,7 +268,6 @@
     color: var(--color-text);
     text-decoration: none;
     font-size: var(--step-0);
-    margin-bottom: var(--space-l);
     transition: color 0.2s ease;
   }
   

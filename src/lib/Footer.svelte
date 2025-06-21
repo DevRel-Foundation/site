@@ -23,14 +23,11 @@
     
     <div class="footer-column">
       <h2>About</h2>
-      <a href="#">About DRF</a>
-      <a href="#">Steering Committee</a>
-      <a href="#">Managers</a>
-      <a href="#">Working Group members</a>
-      <a href="#">Charter</a>
-      <a href="#">Code of Conduct</a>
-      <a href="#">Q&A</a>
-      <a href="#">Brand</a>
+      <a href="/about#about">About DRF</a>
+      <a href="/about#steering-committee">Steering Committee</a>
+      <a href="/about#charter">Charter</a>
+      <a href="/working-groups">Working Group members</a>
+      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md">Code of Conduct</a>
     </div>
     
     <div class="footer-column">
@@ -42,10 +39,22 @@
     
     <div class="footer-column">
       <h2>Resources</h2>
-      <a href="#">Glossary</a>
+      <a href="#">Gimme some links??</a>
       <a href="#">Use Cases</a>
       <a href="#">Brand/Style Guidebook</a>
     </div>
+  </div>
+  
+  
+  <div class="legal-notice container-content">
+    <hr />
+    <p>
+      All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. 
+      See the <a href="https://www.linuxfoundation.org/legal/trademark-usage" target="_blank" rel="noopener noreferrer">LF Trademark Usage</a> page for a list of trademarks. 
+      Linux is a registered trademark of Linus Torvalds: 
+      <a href="https://www.linuxfoundation.org/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and 
+      <a href="https://www.linuxfoundation.org/legal/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>.
+    </p>
   </div>
 </footer> 
 
@@ -55,7 +64,7 @@
     padding: var(--space-xl) var(--space-m);
     border-top: var(--border-thickness) solid var(--color-background-secondary-1);
   }
-  
+
   .footer-content {
     max-width: var(--grid-max-width);
     margin: 0 auto;
@@ -111,5 +120,32 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: var(--space-l);
     }
+  }
+  
+  hr {
+    border: none;
+    border-top: var(--border-thickness) solid var(--color-background-secondary-1);
+    margin: var(--space-l) 0;
+  }
+  
+  .legal-notice {
+    text-align: center;
+    margin-top: var(--space-m);
+  }
+  
+  .legal-notice p {
+    color: var(--color-text-secondary);
+    font-size: var(--step--2);
+    line-height: 1.4;
+    margin: 0;
+  }
+  
+  .legal-notice a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+  
+  .legal-notice a:hover {
+    text-decoration: underline;
   }
 </style>

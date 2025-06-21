@@ -72,6 +72,9 @@
 </div>
 
 <style>
+	.container {
+		margin-bottom: var(--space-2xl);
+	}
 	.events-list {
 		margin-top: var(--space-m);
 	}
