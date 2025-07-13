@@ -3,7 +3,7 @@
   import SunLightIcon from 'iconoir/icons/sun-light.svg';
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
-  import LogoSymbol from './drf_logo_symbol.svg';
+  import LogoSymbol from '/drf_logo_symbol.svg';
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
