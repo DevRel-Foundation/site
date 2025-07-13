@@ -1,294 +1,101 @@
-<script>
-  import BioWorkingGroup from '$lib/BioWorkingGroup.svelte';
-  import GitHubIcon from 'iconoir/icons/github.svg';
-</script>
-
 <svelte:head>
-  <title>Working Groups - Developer Relations Foundation</title>
+	<title>Working Groups - Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container">
-  <h1>Working Groups</h1>
-  <p>As part of a working group, you will help define various aspects of developer relations, establish goals of the working group, charter and implement operating principles following Foundation governance principles. </p>
-  <section class="working-group">
-    <h2>Resource and Aggregation Group</h2>
-    <p>Aggregates resources for a wide variety of use cases to support the Developer Relations professional community.</p>
-    <a href="https://github.com/DevRel-Foundation/wg-resource-aggregation" target="_blank" rel="noopener" class="github-link">
-      <img src={GitHubIcon} alt="GitHub" class="github-icon" />
-      View on GitHub
-    </a>
-    
-    <h3>Manager</h3>
-    <BioWorkingGroup 
-      name="Rachel Kim"
-      title="Resource Manager at DevTools Inc"
-      description="Leading resource aggregation and curation for the DevRel community."
-      linkedin="#"
-      twitter="#"
-      bluesky="#"
-      github="#"
-      website="#"
-    />
-    
-    <h3>Contributing Members</h3>
-    <div class="members-grid">
-      <BioWorkingGroup 
-        name="Tom Chen"
-        title="Content Strategist"
-        description="Specializing in technical documentation and resource organization."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      <BioWorkingGroup 
-        name="Lisa Park"
-        title="DevRel Consultant"
-        description="Expert in community resource development and knowledge sharing."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-    </div>
-  </section>
+<main class="container">
+	<div class="container-content">
+		<h1>Working Groups</h1>
 
-  <section class="working-group">
-    <h2>Metrics Reporting</h2>
-    <p>Developing frameworks and methodologies for measuring the success and impact of developer relations programs. This group creates standardized metrics, reporting templates, and ROI measurement tools for the DevRel industry.</p>
-    <a href="https://github.com/DevRel-Foundation/wg-metrics-reporting" target="_blank" rel="noopener" class="github-link">
-      <img src={GitHubIcon} alt="GitHub" class="github-icon" />
-      View on GitHub
-    </a>
-    
-    <h3>Manager</h3>
-    <BioWorkingGroup 
-      name="Mike Rodriguez"
-      title="Analytics Director at DataCorp"
-      description="Expert in DevRel metrics and data-driven decision making."
-      linkedin="#"
-      twitter="#"
-      bluesky="#"
-      github="#"
-      website="#"
-    />
-    
-    <h3>Contributing Members</h3>
-    <div class="members-grid">
-      <BioWorkingGroup 
-        name="Sarah Johnson"
-        title="Data Analyst"
-        description="Specializing in DevRel performance metrics and reporting."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      <BioWorkingGroup 
-        name="David Lee"
-        title="DevRel Manager"
-        description="Focused on measuring community engagement and developer satisfaction."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-    </div>
-  </section>
+		<p>
+			Our working groups are short-term, highly focused collaborations that tackle real challenges
+			and opportunities in developer relations. Designed to be agile and achievable, they operate
+			under two distinct tracks:
+		</p>
 
-  <section class="working-group">
-    <h2>Community Engagement</h2>
-    <p>Creating strategies and best practices for building and nurturing developer communities. This group focuses on community management, engagement techniques, and fostering inclusive spaces for developers to connect and grow.</p>
-    <a href="https://github.com/DevRel-Foundation/wg-community-engagement-support" target="_blank" rel="noopener" class="github-link">
-      <img src={GitHubIcon} alt="GitHub" class="github-icon" />
-      View on GitHub
-    </a>
-    
-    <h3>Manager</h3>
-    <BioWorkingGroup 
-      name="Emma Wilson"
-      title="Community Director at DevHub"
-      description="Passionate about building inclusive and engaging developer communities."
-      linkedin="#"
-      twitter="#"
-      bluesky="#"
-      github="#"
-      website="#"
-    />
-    
-    <h3>Contributing Members</h3>
-    <div class="members-grid">
-      <BioWorkingGroup 
-        name="Alex Thompson"
-        title="Community Manager"
-        description="Expert in community building and developer engagement strategies."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      <BioWorkingGroup 
-        name="Priya Singh"
-        title="DevRel Specialist"
-        description="Focused on creating meaningful connections within developer communities."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-    </div>
-  </section>
+		<h2>Sourcing Working Groups</h2>
+		<p>
+			These groups curate proven frameworks, models, templates, and resources from across the DevRel
+			ecosystem. By consolidating what already works, sourcing groups ensure that early to
+			mid-career DevRel professionals have access to tested, trustworthy guidance they can use
+			immediately.
+		</p>
 
-  <section class="working-group">
-    <h2>Innovation & Emerging Trends</h2>
-    <p>Exploring new technologies, platforms, and methodologies that are shaping the future of developer relations. This group identifies emerging trends and helps the DevRel community stay ahead of industry changes.</p>
-    <a href="https://github.com/DevRel-Foundation/wg-innovation-emerging-trends" target="_blank" rel="noopener" class="github-link">
-      <img src={GitHubIcon} alt="GitHub" class="github-icon" />
-      View on GitHub
-    </a>
-    
-    <h3>Manager</h3>
-    <BioWorkingGroup 
-      name="Jordan Smith"
-      title="Innovation Lead at TechForward"
-      description="Exploring emerging trends and technologies in the DevRel space."
-      linkedin="#"
-      twitter="#"
-      bluesky="#"
-      github="#"
-      website="#"
-    />
-    
-    <h3>Contributing Members</h3>
-    <div class="members-grid">
-      <BioWorkingGroup 
-        name="Chris Brown"
-        title="Technology Evangelist"
-        description="Tracking new platforms and tools for developer engagement."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      <BioWorkingGroup 
-        name="Maria Garcia"
-        title="DevRel Researcher"
-        description="Analyzing emerging trends and their impact on developer relations."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-    </div>
-  </section>
+		<h3>Examples of sourcing deliverables:</h3>
+		<ul>
+			<li>A repository of developer onboarding playbooks</li>
+			<li>Comparative guides to community engagement platforms</li>
+			<li>Collections of DevRel KPIs and success metrics</li>
+		</ul>
 
-  <section class="working-group">
-    <h2>Structure & Organization</h2>
-    <p>Developing organizational frameworks and governance structures for DevRel teams and initiatives. This group creates guidelines for team structures, roles, responsibilities, and organizational best practices.</p>
-    <a href="https://github.com/DevRel-Foundation/wg-structure-organization" target="_blank" rel="noopener" class="github-link">
-      <img src={GitHubIcon} alt="GitHub" class="github-icon" />
-      View on GitHub
-    </a>
-    
-    <h3>Manager</h3>
-    <BioWorkingGroup 
-      name="Kevin O'Brien"
-      title="Organizational Consultant"
-      description="Expert in DevRel team structures and organizational design."
-      linkedin="#"
-      twitter="#"
-      bluesky="#"
-      github="#"
-      website="#"
-    />
-    
-    <h3>Contributing Members</h3>
-    <div class="members-grid">
-      <BioWorkingGroup 
-        name="Nina Patel"
-        title="HR Specialist"
-        description="Focused on DevRel role definitions and career development paths."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-      <BioWorkingGroup 
-        name="Ryan Davis"
-        title="DevRel Director"
-        description="Creating organizational frameworks for effective DevRel teams."
-        linkedin="#"
-        twitter="#"
-        bluesky="#"
-        github="#"
-        website="#"
-      />
-    </div>
-  </section>
-</div>
+		<h2>Innovation Working Groups</h2>
+		<p>
+			These are experimental, time-boxed initiatives designed to fill gaps in the field. Each
+			innovation working group is launched around a clearly defined problem statement and aims to
+			produce new materials that advance the practice.
+		</p>
+
+		<h3>Examples of innovation deliverables:</h3>
+		<ul>
+			<li>Emerging models for measuring DevRel ROI in AI-driven communities</li>
+			<li>Inclusive community engagement frameworks for global audiences</li>
+			<li>Case studies of non-traditional DevRel team structures</li>
+		</ul>
+
+		<p>
+			All outputs are managed via <a href="https://github.com/DevRel-Foundation">GitHub</a> and organized
+			by theme for community access and contribution.
+		</p>
+
+		<h2>Why Working Groups Matter</h2>
+		<p>
+			The DRF's working groups are how we capture and advance its best thinking, by sharing what
+			works, building what's missing, and supporting each other through the process.
+		</p>
+
+		<p>
+			Our mission is to empower early-stage and mid-career DevRel professionals with the tools,
+			knowledge, and confidence they need to succeed. Working groups are a cornerstone of that
+			mission.
+		</p>
+
+		<h2>Who Should Join?</h2>
+		<ul>
+			<li>New and mid-career DevRel professionals seeking guidance and frameworks</li>
+			<li>Organizations launching or scaling DevRel functions</li>
+			<li>
+				Experienced DevRel leaders looking to mentor, contribute expertise, or shape the field
+			</li>
+		</ul>
+
+		<p>
+			Whether you're sharing a battle-tested template or helping define tomorrow's best practices,
+			there's a place for you here.
+		</p>
+
+		<h2>How It Works</h2>
+		<ul>
+			<li>Working groups are formed on a rolling basis.</li>
+			<li>Each group is time-bound, with clearly scoped objectives.</li>
+			<li>
+				Contributors can participate asynchronously and collaboratively through GitHub and community
+				meetings.
+			</li>
+			<li>Outputs are openly published and maintained as living resources.</li>
+		</ul>
+
+		<h2>Get Involved</h2>
+		<p>
+			Interested in joining a working group or proposing a new one? Join our <a
+				href="https://lists.dev-rel.org/g/community">mailing list</a
+			>
+			or <a href="https://discord.gg/ukMnmFjw43">Discord server</a> for updates as working group opportunities
+			are announced.
+		</p>
+	</div>
+</main>
 
 <style>
-  .working-group {
-    margin-bottom: var(--space-2xl);
-  }
-  
-  .working-group h2 {
-    color: var(--color-text);
-    margin-bottom: var(--space-s);
-    font-size: var(--step-3);
-  }
-  
-  .working-group h3 {
-    color: var(--color-text);
-    margin-top: var(--space-l);
-    margin-bottom: var(--space-s);
-    font-size: var(--step-2);
-  }
-  
-  .working-group p {
-    color: var(--color-text);
-    font-size: var(--step-0);
-    line-height: 1.6;
-    margin-bottom: var(--space-m);
-  }
-  
-  .github-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: var(--step-0);
-    transition: color 0.2s ease;
-  }
-  
-  .github-link:hover {
-    color: var(--color-primary);
-  }
-  
-  .github-icon {
-    width: 1.2em;
-    height: 1.2em;
-  }
-  
-  .members-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-m);
-  }
-  
-  @media (min-width: 769px) {
-    .members-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-  }
-</style> 
+	.container {
+		margin-bottom: var(--space-2xl);
+	}
+</style>

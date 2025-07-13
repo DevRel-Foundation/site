@@ -3,7 +3,6 @@
   import SunLightIcon from 'iconoir/icons/sun-light.svg';
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
-  import LogoSymbol from './drf_logo_symbol.svg';
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
@@ -55,7 +54,7 @@
   <div class="nav-container">
     <div class="nav-brand">
       <a href="/">
-        <img src={LogoSymbol} alt="DevRel Foundation" class="logo-symbol" />
+        <img src="/drf_logo_symbol.svg" alt="DevRel Foundation" class="logo-symbol" />
         <div class="brand-text">
           <span class="devrel-text">DevRel</span>
           <span class="foundation-text">Foundation</span>

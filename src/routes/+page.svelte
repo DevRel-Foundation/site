@@ -25,7 +25,7 @@
 					Fostering growth, community, and best practices in developer relations.
 				</p>
 			</div>
-			<img src="/src/lib/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
+			<img src="/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
 		</div>
 	</section>
 
