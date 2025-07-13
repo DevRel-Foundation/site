@@ -60,7 +60,7 @@
 
 <style>
   footer {
-    background-color: var(--color-background-secondary-2);
+    background-color: var(--color-background-secondary-1);
     padding: var(--space-xl) var(--space-m);
     border-top: var(--border-thickness) solid var(--color-background-secondary-1);
   }
