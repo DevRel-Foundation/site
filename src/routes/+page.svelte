@@ -36,9 +36,11 @@
 		</div>
 
 		<div class="content-box">
-			<h3>Opportunities</h3>
+			<h3>Projects</h3>
 			<p>
-				Get involved in the working groups, answer community questions, or help us host events.
+				Learn from and contribute to one of our <a href="/projects">projects</a>.
+				
+				We source and innovate on best practices and knowledge needed for practicing developer relations.
 			</p>
 		</div>
 

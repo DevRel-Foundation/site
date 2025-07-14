@@ -65,6 +65,7 @@
     <div class="nav-menu-container">
       <ul class="nav-menu" class:open={isMenuOpen}>
         <li><a href="/about" onclick={() => isMenuOpen = false}>About</a></li>
+        <li><a href="/projects" onclick={() => isMenuOpen = false}>Projects</a></li>
         <li><a href="/events" onclick={() => isMenuOpen = false}>Events</a></li>
         <li><a href="/join-us" onclick={() => isMenuOpen = false}>Join us</a></li>
         <li><a href="/working-groups" onclick={() => isMenuOpen = false}>Working groups</a></li>
