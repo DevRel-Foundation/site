@@ -54,7 +54,7 @@
 	<section>
 		<h1>Projects</h1>
 		<p>
-			<strong>Projects are the output of Developer Relations Foundation working group initiatives to source and innovate on best practices.</strong> These open-source initiatives gather knowledge, open-data, and resources that advance the effectiveness of Developer Relations tactics and foster technology adoption.
+			<strong>Projects are the output of Developer Relations Foundation working group initiatives to source and innovate on best practices.</strong> These open-source initiatives gather knowledge, open-data, and other resources that advance the effectiveness of Developer Relations activities and tactics.
 		</p>
 
 		<h2>Explore</h2>
