@@ -3,9 +3,36 @@
 
 	function handleNewsletterSubmit(event: SubmitEvent) {
 		event.preventDefault();
+		// Validate email before proceeding
+		if (!email || !isValidEmail(email)) {
+			alert('Please enter a valid email address');
+			return;
+		}
+		
 		// Handle newsletter signup
 		console.log('Newsletter signup:', email);
+		handleSubscribe(email);
 		email = '';
+	}
+
+	function isValidEmail(email: string): boolean {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(email);
+	}
+
+	function handleSubscribe(address: string) {
+		// Additional validation
+		if (!address || !isValidEmail(address)) {
+			console.error('Invalid email address');
+			return;
+		}
+		
+		// Sanitize and encode the email
+		const encodedEmail = encodeURIComponent(address.trim());
+		const subscribeUrl = `https://lists.dev-rel.org/g/community/join?email=${encodedEmail}`;
+		
+		// Open in new tab for security
+		window.open(subscribeUrl, '_blank', 'noopener,noreferrer');
 	}
 
 	function handleMissionClick() {
@@ -76,9 +103,9 @@
 
 	<section class="newsletter-section">
 		<div class="newsletter-content">
-			<h2>Join our newsletter</h2>
+			<h2>Subscribe to the Mailing List</h2>
 			<p>
-				Stay updated with the latest in developer relations best practices, events, and community news.
+				Stay in the loop with the latest announcements, events, best practices, and other community news.
 			</p>
 
 			<form class="newsletter-form" on:submit={handleNewsletterSubmit}>
@@ -221,35 +248,37 @@
 
 	.newsletter-section {
 		background-color: var(--color-mint);
-		padding: var(--space-l) var(--space-m);
-		margin: 0 var(--space-m) var(--space-2xl) var(--space-m);
+		padding: var(--space-m);
 		border-radius: var(--radius-l);
-
+		width: 80%;
+		max-width: calc(var(--grid-max-width) * 0.8);
+		margin: 0 auto var(--space-2xl) auto;
+		box-sizing: border-box;
 	}
 
 	.newsletter-content h2 {
 		color: var(--color-text);
 		margin-top: 0;
-		margin-bottom: var(--space-s);
+		margin-bottom: var(--space-xs);
 		font-size: var(--step-3);
 	}
 
 	.newsletter-content p {
 		color: var(--color-text);
-		margin-bottom: var(--space-l);
+		margin-bottom: var(--space-s);
 		font-size: var(--step-0);
 	}
 
 	.newsletter-form {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-s);
+		gap: var(--space-xs);
 		margin: 0 auto;
 	}
 
 	.newsletter-form input {
 		width: 100%;
-		padding: var(--space-s);
+		padding: var(--space-2xs);
 		border: var(--border-thickness) solid var(--color-background-secondary-1);
 		border-radius: var(--radius-s);
 		background-color: var(--color-background);
@@ -258,7 +287,7 @@
 	}
 
 	.newsletter-form button {
-		padding: var(--space-s) var(--space-m);
+		padding: var(--space-xs) var(--space-m);
 		background-color: var(--color-link);
 		color: var(--color-background);
 		border: none;
