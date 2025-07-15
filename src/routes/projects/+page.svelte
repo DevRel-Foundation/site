@@ -266,14 +266,14 @@
 		border: 1px solid var(--color-light-gray);
 		border-radius: 8px;
 		padding: var(--space-m);
-		background: color-mix(in srgb, var(--color-mint) 95%, black 5%);
+		background-color: var(--color-background-secondary-1);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 		transition: box-shadow 0.2s ease, transform 0.2s ease;
 	}
 
 	.project-card:hover {
 		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-		background: var(--color-mint);
+		background-color: var(--color-background-secondary-1);
 		transform: translateY(-2px);
 	}
 
