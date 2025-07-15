@@ -7,6 +7,22 @@
 		console.log('Newsletter signup:', email);
 		email = '';
 	}
+
+	function handleMissionClick() {
+		window.location.href = '/about/mission';
+	}
+
+	function handleProjectClick() {
+		window.location.href = '/projects';
+	}
+
+	function handleJoinClick() {
+		window.location.href = '/join-us';
+	}
+
+  import NetworkIcon from 'iconoir/icons/regular/network-right.svg';
+  import PlantIcon from 'iconoir/icons/regular/watering-soil.svg';
+  import TreeIcon from 'iconoir/icons/regular/tree.svg';
 </script>
 
 <svelte:head>
@@ -22,7 +38,7 @@
 					<span class="foundation">Foundation</span>
 				</h1>
 				<p class="subtitle">
-					Fostering growth, community, and best practices in developer relations.
+					Fostering growth, community, and best practices in Developer Relations.
 				</p>
 			</div>
 			<img src="/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
@@ -31,24 +47,30 @@
 
 	<section class="content-boxes">
 		<div class="content-box">
-			<h3>What we do</h3>
-			<p>Network with peers, collaborate on ideas, create resources, and encourage best practices.</p>
+			<img src={PlantIcon} alt="Plant" />
+			<h3 class="content-box-heading">Our Mission</h3>
+			<p>
+				We aspire to elevate the community of professionals and organizations building effective Developer Relations programs.
+			</p>
+			<button class="content-button" on:click={handleMissionClick}>Learn</button>
 		</div>
 
 		<div class="content-box">
-			<h3>Projects</h3>
+			<img src={TreeIcon} alt="Tree" />
+			<h3 class="content-box-heading">The Projects</h3>
 			<p>
-				Learn from and contribute to one of our <a href="/projects">projects</a>.
-				
-				We source and innovate on best practices and knowledge needed for practicing developer relations.
+				We source and innovate on the knowledge, systems and best practices needed to achieve technology adoption.
 			</p>
+			<button class="content-button" on:click={handleProjectClick}>Explore</button>
 		</div>
 
 		<div class="content-box">
-			<h3>Join us</h3>
+			<img src={NetworkIcon} alt="Network" />
+			<h3 class="content-box-heading">Join Us</h3>
 			<p>
-				Join us on <a href="https://discord.gg/devrel">Discord</a> or <a href="https://github.com/DevRel-Foundation">GitHub</a> to get involved or engage with the community.
+				Partner with us on <a href="https://discord.gg/devrel">Discord</a> and <a href="https://github.com/DevRel-Foundation">GitHub</a> to share your voice and collaborate with peers.
 			</p>
+			<button class="content-button" on:click={handleJoinClick}>Get Involved</button>
 		</div>
 	</section>
 
@@ -87,28 +109,32 @@
 	}
 
 	.hero {
-		padding: var(--space-2xl) 0;
+		padding: var(--space-m) var(--space-m);
 	}
 	
 	.hero-title-area {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		background-color: var(--color-background);
+		gap: var(--space-l);
+		max-width: var(--grid-max-width);
+		margin: 0 auto;
 	}
 	
 	.hero-title {
-		/* margin-bottom: var(--space-m); */
+		text-align: center;
+		flex: 1;
 	}
 
 	.hero h1 {
-		font-size: calc(var(--step-5) * 1.2);
+		font-size: var(--step-4);
 		color: var(--color-text);
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-        margin-bottom: var(--space-m);
+		margin-bottom: var(--space-m);
 	}
 
 	.devrel {
@@ -121,8 +147,8 @@
 	}
 
 	.hero-logo {
-		height: 100%;
-        max-width: calc(50% - var(--space-l));
+		height: auto;
+		max-width: min(40vw, 200px);
 		width: auto;
 		flex-shrink: 0;
 	}
@@ -139,32 +165,65 @@
 		gap: var(--space-l);
 		max-width: var(--grid-max-width);
 		margin: 0 auto;
-        margin-bottom: var(--space-2xl);
+		margin-bottom: var(--space-2xl);
+		padding: 0 var(--space-m);
 	}
 
 	.content-box {
 		background-color: var(--color-background-secondary-1);
-		padding: var(--space-l);
+		padding: var(--space-m);
 		border-radius: var(--radius-m);
 		border: var(--border-thickness) solid var(--color-background-secondary-2);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		min-height: 300px;
 	}
 
-	.content-box h3 {
-        margin-top: 0;
-		color: var(--color-text);
-		font-size: var(--step-2);
+	.content-box img {
+		width: 3rem;
+		height: 3rem;
+		filter: var(--icon-filter);
+		margin-bottom: var(--space-s);
+	}
+
+	.content-box-heading {
+		font-size: var(--step-3);
+		line-height: 1;
+		color: var(--color-mint-dark);
+		margin-bottom: var(--space-s);
+		margin-top: 0;
 	}
 
 	.content-box p {
 		color: var(--color-text);
 		font-size: var(--step-0);
+		flex-grow: 1;
+		margin-bottom: var(--space-s);
+	}
+
+	.content-button {
+		margin-top: auto;
+		padding: var(--space-3xs) var(--space-l);
+		background-color: var(--color-mint-dark);
+		color: var(--color-mint);
+		border: none;
+		border-radius: var(--radius-s);
+		cursor: pointer;
+		font-weight: 500;
+	}
+
+	.content-button:hover {
+		background-color: color-mix(in srgb, var(--color-mint-dark) 80%, white 20%);
+		color: var(--color-mint);
 	}
 
 	.newsletter-section {
 		background-color: var(--color-mint);
 		padding: var(--space-l) var(--space-m);
-		margin-bottom: var(--space-2xl);
-        border-radius: var(--radius-l);
+		margin: 0 var(--space-m) var(--space-2xl) var(--space-m);
+		border-radius: var(--radius-l);
 
 	}
 
@@ -208,6 +267,28 @@
 	}
 
 	@media (min-width: 769px) {
+		.hero {
+			padding: var(--space-l) var(--space-m);
+		}
+
+		.hero-title-area {
+			flex-direction: row;
+			gap: var(--space-m);
+			text-align: left;
+		}
+
+		.hero-title {
+			text-align: left;
+		}
+
+		.hero h1 {
+			font-size: calc(var(--step-5) * 1.2);
+		}
+
+		.hero-logo {
+			max-width: calc(40% - var(--space-l));
+		}
+
 		.newsletter-form {
 			flex-direction: row;
 		}
