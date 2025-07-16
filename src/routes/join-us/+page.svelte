@@ -44,10 +44,10 @@
 			</div>
 
 			<div class="content-box members">
-				<h3 class="box-header">Members</h3>
+				<h3 class="box-header">Leaders</h3>
 				<p class="box-question">Want to establish yourself as an industry leader?</p>
 				<p class="box-description">
-					<a href="/contact">Contact</a> the steering committee to learn more about membership and leadership opportunities. We can shape the ecosystem and drive cross-company collaboration with hundreds of participants together.
+					<a href="/contact">Contact</a> the steering committee to learn more about leadership opportunities. We can shape the ecosystem and drive cross-company collaboration with hundreds of participants together.
 				</p>
 				<a href="#lead" class="box-cta">BECOME A LEADER</a>
 			</div>
@@ -127,7 +127,7 @@
 		<div class="steps">
 			<a href="https://discord.gg/kfJkJ3Xd" class="cta-button" target="_blank">Step 1. Join the Discord Community</a>
 			<p>
-				The foundation's <a href="https://discord.gg/kfJkJ3Xd">Discord server</a> is the primary synchronous communication channel for community members. Here, you can connect with other DevRel professionals, ask questions, share experiences, and stay updated on activities.
+				The foundation's <a href="https://discord.gg/kfJkJ3Xd">Discord server</a> is the primary synchronous communication channel for community participants. Here, you can connect with other DevRel professionals, ask questions, share experiences, and stay updated on activities.
 			</p>
 
 			<a href="https://lists.dev-rel.org/g/community/join" class="cta-button" target="_blank">Step 2. Sign-up for the Mailing List</a>
