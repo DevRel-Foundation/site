@@ -1,10 +1,12 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7d892d4f-83f3-49a0-b146-784ddbcdb4dc/deploy-status)](https://app.netlify.com/projects/drf-site/deploys)
+
 # DRF main website
 
 The website is currently being developed; that includes this README.
 
 Still to add:
 - Media kit
-- Proper brand guide integration
+- Proper [brand guide integration](https://github.com/DevRel-Foundation/drf-branding)
 
 ## 🚀 Run and Modify the Site Locally
 
