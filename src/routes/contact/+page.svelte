@@ -10,9 +10,9 @@
   ];
 
   const quickLinks = [
-    { label: "LFX Project Control Center Documentation", url: "https://lfx.linuxfoundation.org/docs" },
+    { label: "LFX Project Control Center Documentation", url: "https://docs.linuxfoundation.org/lfx/" },
     { label: "LFX Project Control Center Support", url: "https://lfx.linuxfoundation.org/services/request" },
-    { label: "Foundation Charter", url: "https://example.org/charter" },
+    { label: "Foundation Charter", url: "https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" },
     { label: "Report an Issue for This Website", url: "https://github.com/DevRel-Foundation/site/issues" },
 	{ label: "Join Developer Relations Foundation", url: "./join-us" }
   ];
