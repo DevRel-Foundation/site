@@ -3,9 +3,12 @@
   import SunLightIcon from 'iconoir/icons/sun-light.svg';
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
+  import GitHubIcon from 'iconoir/icons/github.svg';
+  import MailIcon from 'iconoir/icons/mail.svg';
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
+  let activeDropdown = $state(null);
   let mediaQuery;
   
   function toggleMenu() {
@@ -21,6 +24,19 @@
     if (typeof window !== 'undefined') {
       localStorage.setItem('darkMode', isDarkMode.toString());
     }
+  }
+  
+  function showDropdown(menuItem) {
+    activeDropdown = menuItem;
+  }
+  
+  function hideDropdown() {
+    activeDropdown = null;
+  }
+  
+  function closeAll() {
+    isMenuOpen = false;
+    activeDropdown = null;
   }
   
   $effect(() => {
@@ -64,13 +80,133 @@
     
     <div class="nav-menu-container">
       <ul class="nav-menu" class:open={isMenuOpen}>
-        <li><a href="/about" onclick={() => isMenuOpen = false}>About</a></li>
-        <li><a href="/projects" onclick={() => isMenuOpen = false}>Projects</a></li>
-        <li><a href="/events" onclick={() => isMenuOpen = false}>Events</a></li>
-        <li><a href="/join-us" onclick={() => isMenuOpen = false}>Join us</a></li>
-        <li><a href="/working-groups" onclick={() => isMenuOpen = false}>Working groups</a></li>
-        <li><a href="/contact" onclick={() => isMenuOpen = false}>Contact</a></li>
+        <li class="nav-item dropdown-container" 
+            onmouseenter={() => showDropdown('about')} 
+            onmouseleave={hideDropdown}>
+          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'about'}>About</a>
+          <div class="dropdown" class:active={activeDropdown === 'about'}>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <h3 class="menu-header">About the DevRel Foundation</h3>
+                <div class="dropdown-items">
+                  <a href="/about/mission" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">Mission</span>
+                      <span class="item-description">Our vision and goals for the developer relations community.</span>
+                    </div>
+                  </a>
+                  <a href="/about/steering-committee" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">Steering Committee</span>
+                      <span class="item-description">Meet the leaders guiding the foundation.</span>
+                    </div>
+                  </a>
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item">
+                      <span class="item-title">Charter ↗</span>
+                      <span class="item-description">The scope, principles and operating guidelines for the foundation.
+                      </span>
+                    </div>
+                  </a>
+                  <a href="/about/working-groups" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">Working Groups</span>
+                      <span class="item-description">Working groups drive sourcing and innovation to benefit the DevRel community.
+                        
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-section">
+                <h3 class="menu-header">Additional Resources</h3>
+                <div class="dropdown-items">
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">Code of Conduct ↗</span>
+                    </div>
+                  </a>
+                  <a href="/contact" onclick={closeAll}>
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={MailIcon} alt="Get in Touch" class="social-icon" />
+                        Contact
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown-container" 
+            onmouseenter={() => showDropdown('projects')} 
+            onmouseleave={hideDropdown}>
+          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'projects'}>Projects</a>
+          <div class="dropdown" class:active={activeDropdown === 'projects'}>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <h3 class="menu-header">Get Involved</h3>
+                <div class="dropdown-items">
+                  <a href="/projects" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">Explore Projects</span>
+                      <span class="item-description">Find open-data, frameworks, and guides to support your program.</span>
+                    </div>
+                  </a>
+                  <a href="/join-us" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item">
+                      <span class="item-title">Contribute</span>
+                      <span class="item-description">Join the 400+ professionals who want to see DevRel thrive.
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-section">
+                <h3 class="menu-header">Additional Resources</h3>
+                <div class="dropdown-items">
+                  <a href="https://github.com/devrel-foundation/" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={GitHubIcon} alt="Explore our GitHub" class="social-icon" />
+                        GitHub ↗
+                      </span>
+                    </div>
+                  </a>
+                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
+                        Discord Community ↗
+                      </span>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+
+
+
+
+        <!-- <li><a href="/projects" onclick={closeAll}>Community</a></li> --> 
+        <!-- <li><a href="/working-groups" onclick={closeAll}>Working groups</a></li> --> 
+        <!-- <li><a href="/contact" onclick={closeAll}>Contact</a></li> --> 
       </ul>
+
+
+
+      <button class="cta" onclick={closeAll}>
+        <a href="/join-us">Join</a>
+      </button>
+
+      
       <button class="theme-toggle" onclick={toggleDarkMode} aria-label="Toggle dark mode">
         {#if isDarkMode}
           <img src={SunLightIcon} alt="Light mode" />
@@ -79,19 +215,48 @@
         {/if}
       </button>
       
-      <a href="https://discord.gg/devrel" target="_blank" rel="noopener noreferrer" class="discord-link" aria-label="Join our Discord">
+      <!--
+      <a href="https://discord.gg/kfJkJ3Xd" target="_blank" rel="noopener noreferrer" class="discord-link" aria-label="Join our Discord">
         <img src={DiscordIcon} alt="Discord" />
       </a>
+       -->
       
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
       </button>
     </div>
-    
   </div>
 </nav>
 
 <style>
+
+  .cta {
+    background-color: var(--color-mint);
+    color: var(--color-text-inverse);
+    padding: var(--space-xs) var(--space-s);
+    text-decoration: none;
+    border-radius: var(--radius-s);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: var(--space-l);
+    }
+
+    .cta a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cta:hover {
+    background-color: color-mix(in srgb, var(--color-mint), black 10%);
+  }
+
+
   .nav {
     background-color: var(--color-background);
     border-bottom: var(--border-thickness) solid var(--color-background-secondary-2);
@@ -220,6 +385,124 @@
     background-color: var(--color-background-secondary-1);
   }
 
+  .nav-link {
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--color-mint);
+    border-radius: 2px;
+  }
+
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    background: var(--color-background);
+    border-top: 3px solid var(--color-mint-dark);
+    border-bottom: 1px solid var(--color-mint-dark);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  
+  .dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .dropdown-content {
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+    padding: var(--space-l);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+  
+  .dropdown-section h3 {
+    margin: 0 0 var(--space-m) 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .dropdown-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+  
+  .dropdown-item {
+    font-size: 1.5rem;
+    padding: var(--space-3xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .dropdown-item-brief {
+    padding: calc(var(--space-4xs) / 32);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .dropdown-items a:has(.dropdown-item-brief):hover {
+    background-color: transparent;
+  }
+
+  .menu-header {
+    font-size: 0.7rem;
+    font-weight: 200;
+    color: var(--color-background-secondary-2);
+    margin-bottom: var(--space-s);
+  }
+  
+  .item-title {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    white-space: nowrap;
+  }
+  
+  .item-description {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .social-icon {
+    width: 1rem;
+    height: 1rem;
+    filter: var(--icon-filter);
+    flex-shrink: 0;
+  }
+  
   .theme-toggle,
   .menu-toggle {
     background: none;
@@ -289,4 +572,36 @@
       display: none;
     }
   }
-</style> 
+  
+  @media (max-width: 768px) {
+    .nav-link.active::after {
+      display: none;
+    }
+
+    .dropdown {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      border: none;
+      border-top: none;
+      background: var(--color-background-secondary-1);
+      margin-top: var(--space-xs);
+    }
+    
+    .dropdown-content {
+      padding: var(--space-s);
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+    }
+    
+    .dropdown-section h3 {
+      font-size: 0.9rem;
+    }
+
+    .dropdown-items {
+      gap: var(--space-2xs);
+    }
+  }
+</style>

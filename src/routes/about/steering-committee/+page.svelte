@@ -15,27 +15,6 @@
 </svelte:head>
 
 <div class="container container-content">
-	<section class="mission-section">
-		<h1 id="about">About</h1>
-		<p>
-			<strong>Mission:</strong> To elevate the professional practice of developer relations and increase
-			awareness of it as a driver of business value.
-		</p>
-    <h2 id="charter">Charter</h2>
-    <p>
-      The Developer Relations Foundation Charter outlines the foundation's mission, purpose, and
-      scope. It helps the community understand its role and direction and can be updated as the
-      foundation evolves, with input from the community.
-    </p>
-    <p>
-      <a
-        href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter_v1.0.adoc"
-        target="_blank"
-        rel="noopener">Read the full charter →</a
-      >
-    </p>
-	</section>
-
 	<section class="team-section">
 		<div class="container">
 			<h2 id="steering-committee">Steering Committee</h2>

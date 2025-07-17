@@ -2,14 +2,41 @@
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import LinkedInIcon from 'iconoir/icons/regular/linkedin.svg';
   import GitHubIcon from 'iconoir/icons/regular/github.svg';
+  import MailIcon from 'iconoir/icons/regular/mail.svg';
 </script>
 
 <footer>
   <div class="footer-content">
+
+    
     <div class="footer-column">
-      <h2>Join us</h2>
+      <h2>About</h2>
+      <a href="/about/mission">About DevRel Foundation</a>
+      <a href="/about/steering-committee">Steering Committee</a>
+      <a href="/about/working-groups">Working Groups</a>
+      <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" rel="noopener noreferrer">Charter ↗</a>
+    </div>
+    
+    <!-- 
+    <div class="footer-column">
+      <h2>Community</h2>
+      <a href="#">Get started</a>
+      <a href="#">Meetings and Calendar</a>
+      <a href="#">Events</a>
+    </div>
+    -->
+    
+    <div class="footer-column">
+      <h2>Resources</h2>
+      <a href="/projects">Projects</a>
+      <a href="https://github.com/DevRel-Foundation/drf-branding" target="_blank" rel="noopener noreferrer">Brand Guidelines ↗</a>
+      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md">Code of Conduct ↗</a>
+    </div>
+
+    <div class="footer-column">
+      <h2>Community</h2>
       <div class="social-icons">
-        <a href="https://discord.gg/devrel" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+        <a href="https://discord.gg/kfJkJ3Xd" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
           <img src={DiscordIcon} alt="Discord" />
         </a>
         <a href="https://linkedin.com/company/devrel-foundation" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
@@ -18,31 +45,15 @@
         <a href="https://github.com/devrel-foundation" target="_blank" rel="noopener noreferrer" aria-label="Follow us on GitHub">
           <img src={GitHubIcon} alt="GitHub" />
         </a>
+        <a href="https://lists.dev-rel.org/g/community" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to Community Group">
+          <img src={MailIcon} alt="Mail" />
+        </a>
+
+
+
       </div>
     </div>
-    
-    <div class="footer-column">
-      <h2>About</h2>
-      <a href="/about#about">About DRF</a>
-      <a href="/about#steering-committee">Steering Committee</a>
-      <a href="/about#charter">Charter</a>
-      <a href="/working-groups">Working Group members</a>
-      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md">Code of Conduct</a>
-    </div>
-    
-    <div class="footer-column">
-      <h2>Community</h2>
-      <a href="#">Get started</a>
-      <a href="#">Meetings and Calendar</a>
-      <a href="#">Events</a>
-    </div>
-    
-    <div class="footer-column">
-      <h2>Resources</h2>
-      <a href="#">Gimme some links??</a>
-      <a href="#">Use Cases</a>
-      <a href="#">Brand/Style Guidebook</a>
-    </div>
+
   </div>
   
   
@@ -117,8 +128,9 @@
   
   @media (min-width: 769px) {
     .footer-content {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: var(--space-l);
+      justify-items: center;
     }
   }
   
