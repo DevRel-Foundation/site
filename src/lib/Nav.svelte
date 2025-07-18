@@ -80,6 +80,9 @@
     
     <div class="nav-menu-container">
       <ul class="nav-menu" class:open={isMenuOpen}>
+
+
+
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('about')} 
             onmouseleave={hideDropdown}>
@@ -101,18 +104,18 @@
                       <span class="item-description">Meet the leaders guiding the foundation.</span>
                     </div>
                   </a>
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">Charter ↗</span>
-                      <span class="item-description">The scope, principles and operating guidelines for the foundation.
-                      </span>
-                    </div>
-                  </a>
                   <a href="/about/working-groups" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Working Groups</span>
                       <span class="item-description">Working groups drive sourcing and innovation to benefit the DevRel community.
                         
+                      </span>
+                    </div>
+                  </a>
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item">
+                      <span class="item-title">Charter ↗</span>
+                      <span class="item-description">The scope, principles and operating guidelines for the foundation.
                       </span>
                     </div>
                   </a>
@@ -139,6 +142,33 @@
             </div>
           </div>
         </li>
+
+        <li class="nav-item dropdown-container" 
+            onmouseenter={() => showDropdown('learn')} 
+            onmouseleave={hideDropdown}>
+          <a href="/learn" class="nav-link" class:active={activeDropdown === 'learn'}>Learn</a>
+          <div class="dropdown" class:active={activeDropdown === 'learn'}>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <h3 class="menu-header">Learn About DevRel</h3>
+                <div class="dropdown-items">
+                  <a href="/learn/what-is-devrel" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">What is Developer Relations?</span>
+                      <span class="item-description">Defining the critical role for technology adoption.</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-section">
+                <h3 class="menu-header"> </h3>
+                <div class="dropdown-items">
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
 
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('projects')} 
@@ -183,7 +213,6 @@
                       </span>
                     </div>
                   </a>
-
                 </div>
               </div>
             </div>
