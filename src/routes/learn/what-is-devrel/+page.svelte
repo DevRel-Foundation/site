@@ -2,11 +2,11 @@
   const endorsers = [
     "Jayson DeLancey",
     "Wesley Faulkner",
-    "Tessa Kriesel",
     "Stacey Kruczek",
     "Jonathan LeBlanc",
+	"Aditya Oberoi",
     "Phil Leggetter",
-    "Caroline Lewko",
+	"Ana Jimenez Santamaria",
     "Katie Miller"
   ];
 
@@ -33,10 +33,9 @@
 		<h1>What is Developer Relations?</h1>
 
 		<p>
-			<strong>Developer Relations</strong> is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s products.
+			<strong>Developer Relations</strong> is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s technology.
 		</p>
 
-    <div class="section-divider"></div>
 
     <div class="pillars-grid">
       <div class="pillar-circle">Advocacy</div>
@@ -45,18 +44,19 @@
       <div class="pillar-circle">Technical Support</div>
     </div>
 
-    <div class="section-divider"></div>
 
-		<p>
-			This definition is a synthesis of the collective knowledge and experience of the Developer Relations community. This definition is intended to be a living document,
-      and we welcome contributions to future versions of the definition as the practice of DevRel evolves.
-		</p>
+
+
+	<p>
+		Definitions on this page are synthesis of the collective knowledge and experiences of the Developer Relations community.
+	</p>
+
+    <div class="section-divider"></div>
 
     <p>
-      The DRF DevRel definition is endorsed by a growing list of professionals in the field. Please contact our <a href="mailto:steering-committee@dev-rel.org">Steering Committee</a> to become and endorser and added to this list.
+      The DevRel Foundation definitions are endorsed by a growing list of professional in the field to align on the core principles and practices of Developer Relations. This is a living document and we welcome contributions to future iterations.
     </p>
 
-    <div class="section-divider"></div>
 
 		<div class="endorsements-grid">
 			{#each columns as column}
@@ -69,12 +69,11 @@
 		</div>
 
     <div class="contribute-button-container">
-      <a href="https://github.com/DevRel-Foundation/site" target="_blank" class="contribute-button">
-        Contribute to the definition →
+      <a href="/join-us" target="_blank" class="contribute-button">
+        Contribute to or endorse these definitions →
       </a>
     </div>
   </section>
-
 </div>
 
 <style>
@@ -133,6 +132,14 @@
     padding: var(--space-xs);
     font-size: var(--step--1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .pillar-circle:hover {
+    box-shadow: 0 0 20px rgba(115, 207, 181, 0.6), 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--color-mint-dark);
+    transform: translateY(-6px);
   }
 
   .endorsements-grid {
@@ -158,7 +165,9 @@
 	.section-divider {
 		width: 100%;
 		height: 3px;
-		margin: var(--space-m) var(--space-s);
+		background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
+		margin: var(--space-s) var(--space-xs);
+		border-radius: var(--radius-s);
 	}
 
   @media (max-width: 768px) {

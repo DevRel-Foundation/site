@@ -146,7 +146,7 @@
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('learn')} 
             onmouseleave={hideDropdown}>
-          <a href="/learn" class="nav-link" class:active={activeDropdown === 'learn'}>Learn</a>
+          <a href="/learn/what-is-devrel" class="nav-link" class:active={activeDropdown === 'learn'}>Learn</a>
           <div class="dropdown" class:active={activeDropdown === 'learn'}>
             <div class="dropdown-content">
               <div class="dropdown-section">
@@ -155,7 +155,7 @@
                   <a href="/learn/what-is-devrel" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">What is Developer Relations?</span>
-                      <span class="item-description">Defining the critical role for technology adoption.</span>
+                      <span class="item-description">Defining this critical role in technology adoption.</span>
                     </div>
                   </a>
                 </div>
@@ -168,7 +168,6 @@
             </div>
           </div>
         </li>
-
 
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('projects')} 
