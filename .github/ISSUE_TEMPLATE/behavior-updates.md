@@ -1,7 +1,7 @@
 ---
-name: Behavior Updates
+name: Code Updates
 about: Changes to the behavior, design, navigation, and website functionality.
-title: Code | Describe desired behavior...
+title: Section | Describe desired behavior...
 labels: site:code
 assignees: ''
 
