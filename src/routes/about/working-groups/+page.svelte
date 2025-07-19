@@ -23,7 +23,7 @@
 
 		<p>
 			Participating in working groups and projects is the best way to immerse yourself into
-			the community. Working groups meet regularly to discuss, track progress, and collaborate on projects that address some of the biggest challenges that DevRel professionals face today.
+			the DevRel community. Working groups meet regularly to discuss, track progress, and collaborate on projects that address some of the biggest challenges that DevRel professionals face today.
 		</p>
 
 		<ul class="list">
@@ -33,6 +33,11 @@
 			<li class="list-item">What tools and resources can help DevRel teams succeed?</li>
 			<li class="list-item">etc, ...</li>
 		</ul>
+
+		<p>We welcome participation from individuals across experience levels, as well as organizations, eager to jump in and contribute to the goals of the working groups and achieve success for the role Developer Relations plays in the industry.
+			
+			
+		</p>
 
 		<div class="section-divider"></div>
 
@@ -45,10 +50,10 @@
 			<li class="list-item">Working groups are formed on a rolling basis.</li>
 			<li class="list-item">Each group is time-bound, with clearly scoped objectives.</li>
 			<li class="list-item">
-				Contributors participate asynchronously and collaboratively through GitHub and community
+				Contributors participate asynchronously through GitHub and collaboratively during community
 				calls.
 			</li>
-			<li class="list-item">Outputs are openly published and maintained as living resources.</li>
+			<li class="list-item">Outputs are openly published and maintained as living resources and projects.</li>
 		</ul>
 
 
@@ -58,7 +63,7 @@
 				<h3 class="box-header">Sourcing</h3>
 				<img src="{DownloadIcon}" alt="Download Icon" class="icon-left" />
 				<p class="box-description">
-					Some groups curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency is achieved through proven and trustworthy guides.
+					Some groups will curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency is achieved through proven and trustworthy guides.
 				</p>
 				<a href="/learn/what-is-devrel" class="box-cta">LEARNING RESOURCES</a>
 			</div>
