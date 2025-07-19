@@ -9,6 +9,7 @@
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
   let activeDropdown = $state(null);
+  let activeAccordion = $state(null);
   let mediaQuery;
   
   function toggleMenu() {
@@ -34,9 +35,18 @@
     activeDropdown = null;
   }
   
+  function toggleAccordion(section) {
+    if (activeAccordion === section) {
+      activeAccordion = null;
+    } else {
+      activeAccordion = section;
+    }
+  }
+  
   function closeAll() {
     isMenuOpen = false;
     activeDropdown = null;
+    activeAccordion = null;
   }
   
   $effect(() => {
@@ -86,8 +96,13 @@
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('about')} 
             onmouseleave={hideDropdown}>
-          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'about'}>About</a>
-          <div class="dropdown" class:active={activeDropdown === 'about'}>
+          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'about'} onclick={(e) => {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              toggleAccordion('about');
+            }
+          }}>About</a>
+          <div class="dropdown" class:active={activeDropdown === 'about'} class:accordion-open={activeAccordion === 'about'}>
             <div class="dropdown-content">
               <div class="dropdown-section">
                 <h3 class="menu-header">About the DevRel Foundation</h3>
@@ -107,34 +122,25 @@
                   <a href="/about/working-groups" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Working Groups</span>
-                      <span class="item-description">Working groups drive sourcing and innovation to benefit the DevRel community.
-                        
-                      </span>
+                      <span class="item-description">Working groups drive sourcing and innovation to benefit the DevRel community.</span>
                     </div>
                   </a>
                   <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item">
                       <span class="item-title">Charter ↗</span>
-                      <span class="item-description">The scope, principles and operating guidelines for the foundation.
-                      </span>
+                      <span class="item-description">The scope, principles and operating guidelines for the foundation.</span>
                     </div>
                   </a>
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Additional Resources</h3>
-                <div class="dropdown-items">
                   <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
+                    <div class="dropdown-item">
                       <span class="item-title">Code of Conduct ↗</span>
+                      <span class="item-description">Our community standards and guidelines.</span>
                     </div>
                   </a>
                   <a href="/contact" onclick={closeAll}>
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={MailIcon} alt="Get in Touch" class="social-icon" />
-                        Contact
-                      </span>
+                    <div class="dropdown-item">
+                      <span class="item-title">Contact</span>
+                      <span class="item-description">Get in touch with our team.</span>
                     </div>
                   </a>
                 </div>
@@ -146,8 +152,13 @@
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('learn')} 
             onmouseleave={hideDropdown}>
-          <a href="/learn/what-is-devrel" class="nav-link" class:active={activeDropdown === 'learn'}>Learn</a>
-          <div class="dropdown" class:active={activeDropdown === 'learn'}>
+          <a href="/learn/what-is-devrel" class="nav-link" class:active={activeDropdown === 'learn'} onclick={(e) => {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              toggleAccordion('learn');
+            }
+          }}>Learn</a>
+          <div class="dropdown" class:active={activeDropdown === 'learn'} class:accordion-open={activeAccordion === 'learn'}>
             <div class="dropdown-content">
               <div class="dropdown-section">
                 <h3 class="menu-header">Learn About DevRel</h3>
@@ -172,8 +183,13 @@
         <li class="nav-item dropdown-container" 
             onmouseenter={() => showDropdown('projects')} 
             onmouseleave={hideDropdown}>
-          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'projects'}>Projects</a>
-          <div class="dropdown" class:active={activeDropdown === 'projects'}>
+          <a href="/projects" class="nav-link" class:active={activeDropdown === 'projects'} onclick={(e) => {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              toggleAccordion('projects');
+            }
+          }}>Projects</a>
+          <div class="dropdown" class:active={activeDropdown === 'projects'} class:accordion-open={activeAccordion === 'projects'}>
             <div class="dropdown-content">
               <div class="dropdown-section">
                 <h3 class="menu-header">Get Involved</h3>
@@ -608,28 +624,46 @@
 
     .dropdown {
       position: static;
-      opacity: 1;
-      visibility: visible;
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
       transform: none;
       box-shadow: none;
       border: none;
       border-top: none;
       background: var(--color-background-secondary-1);
+      margin-top: 0;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown.accordion-open {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
       margin-top: var(--space-xs);
     }
     
     .dropdown-content {
       padding: var(--space-s);
       grid-template-columns: 1fr;
-      gap: var(--space-m);
+      gap: 0;
     }
     
-    .dropdown-section h3 {
-      font-size: 0.9rem;
+    .dropdown-section:not(:first-child) {
+      display: none;
     }
 
-    .dropdown-items {
-      gap: var(--space-2xs);
+    .item-description {
+      display: none;
+    }
+
+    .dropdown-item {
+      padding: var(--space-2xs);
+    }
+
+    .menu-header {
+      display: none;
     }
   }
 </style>
