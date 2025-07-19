@@ -110,7 +110,7 @@
                   <a href="/about/mission" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Mission</span>
-                      <span class="item-description">Our vision and goals for the Developer Relations community.</span>
+                      <span class="item-description">Our vision and goals for the community.</span>
                     </div>
                   </a>
                   <a href="/about/steering-committee" onclick={closeAll}>
@@ -122,27 +122,37 @@
                   <a href="/about/working-groups" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Working Groups</span>
-                      <span class="item-description">Working groups drive sourcing and innovation to benefit the DevRel community.</span>
+                      <span class="item-description">Working groups drive sourcing and innovation.</span>
                     </div>
                   </a>
+                </div>
+              </div>  
+
+              <div class="dropdown-section">
+                <h3 class="menu-header">Additional Resources</h3>
+                <div class="dropdown-items">
+
+
+
                   <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item">
                       <span class="item-title">Charter ↗</span>
-                      <span class="item-description">The scope, principles and operating guidelines for the foundation.</span>
+                      <span class="item-description">The scope, principles and operating guidelines.</span>
                     </div>
                   </a>
                   <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item">
                       <span class="item-title">Code of Conduct ↗</span>
-                      <span class="item-description">Our community standards and guidelines.</span>
+                      <span class="item-description">Our community standards.</span>
                     </div>
                   </a>
                   <a href="/contact" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Contact</span>
-                      <span class="item-description">Get in touch with our team.</span>
+                      <span class="item-description">Get in touch with us.</span>
                     </div>
                   </a>
+
                 </div>
               </div>
             </div>
