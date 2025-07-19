@@ -95,10 +95,10 @@
 
 			<BioSteeringCommittee
 				name="Aditya Oberai"
-				title="Sourcing Working Group"
+				title="Resource Sourcing"
 				term="2027"
 				accountabilities="
-					Curates existing community expertise through sourcing and advocacy initiatives.
+					Curates existing community expertise and resources by sourcing and advocacy of individual contributor initiatives.
 					"
 				bio="Aditya is a Developer Advocate at Appwrite and an avid tech community and open-source enthusiast. He has spent the last 6 years empowering tech communities and is currently an active Microsoft MVP and DigitalOcean Wavemaker. Aditya has been awarded Best Developer Relations Professional of the Year at the CMX Community Industry Awards 2024 and was a core organizer of DevRelCon Bengaluru 2024."
 				linkedin="https://www.linkedin.com/in/jaysondelancey/"

@@ -200,6 +200,9 @@
     color: var(--color-text);
     margin-bottom: var(--space-s);
     line-height: 1.4;
+    min-height: calc(var(--step--1) * 1.4 * 6);
+    display: flex;
+    align-items: flex-start;
   }
   
   .social-links {
