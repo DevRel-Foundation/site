@@ -110,7 +110,7 @@
                   <a href="/about/mission" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Mission</span>
-                      <span class="item-description">Our vision and goals for the developer relations community.</span>
+                      <span class="item-description">Our vision and goals for the Developer Relations community.</span>
                     </div>
                   </a>
                   <a href="/about/steering-committee" onclick={closeAll}>

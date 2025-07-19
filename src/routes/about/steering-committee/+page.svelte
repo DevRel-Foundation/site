@@ -70,7 +70,7 @@
 				accountabilities="
 					Develops community engagement strategy, coordinating outreach and relationships with other commmunities.
 					"
-				bio="Wesley Faulkner is a podcaster, public speaker, advocate for social change, and developer relations professional. He has worked for companies like AMD, Atlassian, Dell, IBM, and MongoDB. Wesley co-hosts two podcasts: Community Pulse, which explores the challenges and opportunities of community building in Developer Relations, and Radical Respect, which features conversations with Kim Scott on creating more inclusive and equitable workplaces."
+				bio="Wesley Faulkner is a podcaster, public speaker, advocate for social change, and Developer Relations professional. He has worked for companies like AMD, Atlassian, Dell, IBM, and MongoDB. Wesley co-hosts two podcasts: Community Pulse, which explores the challenges and opportunities of community building in Developer Relations, and Radical Respect, which features conversations with Kim Scott on creating more inclusive and equitable workplaces."
 				linkedin="https://www.linkedin.com/in/wesley83/"
 				github="https://github.com/wesley83"
 				discord="@wesleyf83"
