@@ -4,7 +4,6 @@
 	const img_ana = '/images/steering-committee/ana_j.jpg';
 	const img_jon = '/images/steering-committee/jon_l.jpg';
 	const img_kat = '/images/steering-committee/katie_m.jpg';
-	const img_phil = '/images/steering-committee/phil_l.jpg';
 	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 	const img_jayson = '/images/steering-committee/jayson_d.jpg';
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
