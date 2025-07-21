@@ -15,7 +15,7 @@
 			The mission of the <strong>Developer Relations Foundation</strong> (DRF) is to elevate the professional practices of Developer Relations and increase the effectiveness of the function within organizations.
 		</p>
 		<p>
-			Developer Relations is a critical discipline that bridges the gap between technology providers and developer communities. It encompasses a range of activities including community engagement, technical support, education, evangelism and advocacy that enable the successful adoption of technology.
+			Developer Relations is a critical discipline that bridges the gap between technology providers and developer communities. It encompasses a range of activities, including community engagement, technical support, education, evangelism, and advocacy, that enable the successful adoption of technology.
 		</p>
 			
 		<p>
@@ -38,7 +38,7 @@
 
 		<ul class="list">
 			<li class="list-item">
-				Recommending the structure and organization of Developer Relations with career support for people in the practice seeking professional growth such as cross-functional collaboration, job descriptions, career ladders, and hiring rubrics.
+				Recommending the structure and organization of Developer Relations with career support for people in the practice seeking professional growth, such as cross-functional collaboration, job descriptions, career ladders, and hiring rubrics.
 			</li>
 			<li class="list-item">
 				Defining the practice and programs with common terminology, metrics, and reporting systems for tracking results.
@@ -51,7 +51,7 @@
 		<h2>Governance</h2>
 
 		<p>
-			The DevRel Foundation's Steering Committeee oversees the Foundation's activities according to its Charter. The work is organized into <a href="/about/working-groups">Working Groups</a> that focus on sourcing and innovating on best practices in Developer Relations through peer-reviewed resources and materials.
+			The DevRel Foundation's Steering Committee oversees the Foundation's activities according to its Charter. The work is organized into <a href="/about/working-groups">Working Groups</a> that focus on sourcing and innovating on best practices in Developer Relations through peer-reviewed resources and materials.
 		</p>
 
 		<p>

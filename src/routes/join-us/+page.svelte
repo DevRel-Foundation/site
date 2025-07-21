@@ -19,7 +19,7 @@
 			Working under the Linux Foundation, the DevRel Foundation serves as a focal point for best practices in technology adoption by software developers and communities. Our initiatives are collaborative and community-driven to drive innovation and impactful value into the global Developer Relations ecosystem.
 		</p>
 		<p>
-			Whether you're a seasoned DevRel professional, just starting your journey, or simply interested in learning more about the field, there's a place for you in this foundation.
+			Whether you're a seasoned DevRel professional, just starting your journey, or simply interested in learning more about the field, this foundation has a place for you.
 		</p>
 		
 		<div class="u-grid u-grid-3">
@@ -28,7 +28,7 @@
 				<h3 class="box-header">Getting Started</h3>
 				<p class="box-question">Need help navigating your DevRel role?</p>
 				<p class="box-description">
-					Join our community to connect with peers, share experiences, and access project resources that can help you build your DevRel skills and knowledge.
+					Join our community to connect with peers, share experiences, and access project resources to help you build your DevRel skills and knowledge.
 				</p>
 				<a href="#join" class="box-cta">JOIN THE COMMUNITY</a>
 			</div>
@@ -72,7 +72,7 @@
 
 				<ul class="benefit-list">
 					<li class="benefit-item"><div><strong>Inclusive</strong></div>
-						Historically, DevRel has been fragmented across companies and communities with no central authority or resource to unify efforts. The foundation welcomes all individuals regardless of job title, organization or role.
+						Historically, DevRel has been fragmented across companies and communities with no central authority or resource to unify efforts. The foundation welcomes all individuals regardless of job title, organization, or role.
 					</li>
 					<li class="benefit-item"><div><strong>Neutral</strong></div>
 						Projects are managed by the community for the community, with contributions reviewed and accepted based on merit. This ensures that the foundation remains impartial and focused on direction based on community value, not a particular vendor's interests.
@@ -91,7 +91,7 @@
 	<section class="container-content">
 		<h2>Why join the DevRel Foundation?</h2>
 		<p>
-			There are personal and professional benefis to joining the DevRel Foundation. Whether you are a newcomer to the field or an experienced professional, there are opportunities for you to grow, learn, and contribute.
+			There are personal and professional benefits to joining the DevRel Foundation. Whether you are a newcomer to the field or an experienced professional, there are opportunities for you to grow, learn, and contribute.
 		</p>
 
 		<div class="two-column-layout">
@@ -107,7 +107,7 @@
 						Gain visibility in the DevRel community, build your professional network, and access opportunities that can accelerate your career progression. Working group contributions are excellent portfolio pieces. Connect with experienced DevRel professionals who can offer guidance, share insights, and help you navigate challenges. Find mentors and become one for others.
 					</li>
 					<li class="benefit-item"><div><strong>Practical Resources</strong></div>
-						 Access exclusive resources, workshops, and knowledge sharing sessions. Learn from real-world case studies and pragmatic tools and knowledge to help you impress your team and organization through greater impact.
+						 Access exclusive resources, workshops, and knowledge-sharing sessions. Learn from real-world case studies, pragmatic tools, and knowledge to help impress your team and organization through greater impact.
 					</li>
 				</ul>
 
@@ -132,10 +132,10 @@
 
 			<a href="https://lists.dev-rel.org/g/community/join" class="cta-button" target="_blank">Step 2. Sign-up for the Mailing List</a>
 			<p>
-				The <a href="https://lists.dev-rel.org/g/community/join">mailing lists</a> are the primary asynchronous communication channel for the community. You can subscribe to the mailing lists to receive updates, announcements, and discussions related to the foundation's activities.
+				The <a href="https://lists.dev-rel.org/g/community/join">mailing lists</a> are the primary asynchronous communication channel for the community. You can subscribe to the mailing lists to receive updates, announcements, and discussions about the foundation's activities.
 			</p>
 			<p>
-				Working groups often have additional mailing lists to subscribe for project updates and calendar invites for working group sessions.
+				Working groups often have additional mailing lists to subscribe to for project updates and calendar invites for working group sessions.
 			</p>
 
 			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 3. Explore the GitHub Repositories</a>
@@ -155,7 +155,7 @@
 		<div class="steps">
 			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 4. Make a Contribution</a>
 			<p>
-				To contribute to a project, start by familiarizing yourself with the project's goals and guidelines. Engage with the community to understand their needs and how you can help. Then create issues or pull requests of the projects you are interested in. Join the <a href="/about/working-groups">working groups</a> to collaborate with other contributors.
+				To contribute to a project, start by familiarizing yourself with the project's goals and guidelines. Engage with the community to understand their needs and how you can help. Then create issues or pull requests for the projects you are interested in. Join the <a href="/about/working-groups">working groups</a> to collaborate with other contributors.
 			</p>
 		</div>
 		<div class="two-column-layout">

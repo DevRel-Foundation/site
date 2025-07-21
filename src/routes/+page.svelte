@@ -86,7 +86,7 @@
 			<img src={TreeIcon} alt="Tree" />
 			<h3 class="content-box-heading">The Projects</h3>
 			<p>
-				We source and innovate on the knowledge, systems and best practices needed to achieve technology adoption.
+				We source and innovate on the knowledge, systems, and best practices needed to achieve technology adoption.
 			</p>
 			<button class="content-button" on:click={handleProjectClick}>Explore</button>
 		</div>
