@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>About - Developer Relations Foundation</title>
+	<title>Steering Committee | About | Developer Relations Foundation</title>
 </svelte:head>
 
 <div class="container container-content">
@@ -40,7 +40,7 @@
 
 			<BioSteeringCommittee
 				name="Katie Miller"
-				title="Communications Strategy"
+				title="Communications"
 				accountabilities="
 					Coordinates outbound public relations, social media, and community communications. Manages volunteer recruitment
 					and onboarding process.
@@ -70,7 +70,7 @@
 				accountabilities="
 					Develops community engagement strategy, coordinating outreach and relationships with other commmunities.
 					"
-				bio="Wesley Faulkner is a podcaster, public speaker, advocate for social change, and developer relations professional. He has worked for companies like AMD, Atlassian, Dell, IBM, and MongoDB. Wesley co-hosts two podcasts: Community Pulse, which explores the challenges and opportunities of community building in Developer Relations, and Radical Respect, which features conversations with Kim Scott on creating more inclusive and equitable workplaces."
+				bio="Wesley Faulkner is a podcaster, public speaker, advocate for social change, and Developer Relations professional. He has worked for companies like AMD, Atlassian, Dell, IBM, and MongoDB. Wesley co-hosts two podcasts: Community Pulse, which explores the challenges and opportunities of community building in Developer Relations, and Radical Respect, which features conversations with Kim Scott on creating more inclusive and equitable workplaces."
 				linkedin="https://www.linkedin.com/in/wesley83/"
 				github="https://github.com/wesley83"
 				discord="@wesleyf83"
@@ -79,12 +79,12 @@
 
 			<BioSteeringCommittee
 				name="Jayson DeLancey"
-				title="Technology Innovation Strategy"
+				title="Technology Innovation"
 				term="2027"
 				accountabilities="
-					Innovates on new engineering projects, tool development, and advises working group on open-source best practices. 
+					Innovates on new engineering projects, tool development, and advises on technical strategy for working groups and new open-source development practices.
 					"
-				bio="Jayson serves as Head of Developer Relations for Semgrep. Since studying Information & Decision Systems at Carnegie Mellon, he's undertaken a career-long pursuit to understand how people adopt and use technology. He is passionate about improving the developer experience regardless of industry, role or technical community having worked for Dolby, HERE, General Electric, Rackspace, Dreamworks, and MathWorks."
+				bio="Jayson serves as Head of Developer Relations for Semgrep. Since studying at Carnegie Mellon, he's undertaken a career-long pursuit to understand how people build, adopt and use technology. He is passionate about improving the developer experience regardless of industry, role or technical community having worked for Dolby, HERE, General Electric, Rackspace, Dreamworks, and MathWorks."
 				linkedin="https://www.linkedin.com/in/jaysondelancey/"
 				twitter="https://x.com/jaysondelancey"
 				bluesky="https://bsky.app/profile/delancey.dev"
@@ -95,10 +95,10 @@
 
 			<BioSteeringCommittee
 				name="Aditya Oberai"
-				title="Working Groups"
+				title="Resource Sourcing"
 				term="2027"
 				accountabilities="
-					Supports working groups through community sourcing and advocacy initiatives including event engagements.
+					Curates existing community expertise and resources by sourcing and advocacy of individual contributor initiatives.
 					"
 				bio="Aditya is a Developer Advocate at Appwrite and an avid tech community and open-source enthusiast. He has spent the last 6 years empowering tech communities and is currently an active Microsoft MVP and DigitalOcean Wavemaker. Aditya has been awarded Best Developer Relations Professional of the Year at the CMX Community Industry Awards 2024 and was a core organizer of DevRelCon Bengaluru 2024."
 				linkedin="https://www.linkedin.com/in/jaysondelancey/"
