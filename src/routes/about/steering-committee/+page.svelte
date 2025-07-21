@@ -101,8 +101,10 @@
 					Curates existing community expertise and resources by sourcing and advocacy of individual contributor initiatives.
 					"
 				bio="Aditya is a Developer Advocate at Appwrite and an avid tech community and open-source enthusiast. He has spent the last 6 years empowering tech communities and is currently an active Microsoft MVP and DigitalOcean Wavemaker. Aditya has been awarded Best Developer Relations Professional of the Year at the CMX Community Industry Awards 2024 and was a core organizer of DevRelCon Bengaluru 2024."
-				linkedin="https://www.linkedin.com/in/jaysondelancey/"
-				github="https://github.com/j12y"
+				linkedin="https://www.linkedin.com/in/adityaoberai1/"
+				twitter="https://x.com/adityaoberai1"
+				bluesky="https://bsky.app/profile/oberai.dev"
+				github="https://github.com/adityaoberai"
 				discord="@adityaoberai1"
 				headshot={img_aditya}
 			/>

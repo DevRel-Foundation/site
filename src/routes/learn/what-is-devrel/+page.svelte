@@ -4,9 +4,9 @@
     "Wesley Faulkner",
     "Stacey Kruczek",
     "Jonathan LeBlanc",
-	"Aditya Oberoi",
+	  "Aditya Oberai",
     "Phil Leggetter",
-	"Ana Jimenez Santamaria",
+	  "Ana Jimenez Santamaria",
     "Katie Miller"
   ];
 
