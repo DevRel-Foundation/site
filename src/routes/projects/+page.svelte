@@ -54,7 +54,7 @@
 	<section>
 		<h1>Projects</h1>
 		<p>
-			<strong>Projects are the output of Developer Relations Foundation working group initiatives to source and innovate on best practices.</strong> These open-source initiatives gather knowledge, open-data, and other resources that advance the effectiveness of Developer Relations activities and tactics.
+			<strong>Projects are the output of the Developer Relations Foundation working group initiatives to source and innovate on best practices.</strong> These open-source initiatives gather knowledge, open-data, and other resources that advance the effectiveness of Developer Relations activities and tactics.
 		</p>
 
 		<h2>Explore</h2>
@@ -108,7 +108,7 @@
 			{:else if selectedFilter === 'sandbox'}
 				<p>Sandbox projects are early experiments and proof of concepts. Make an impact by providing early feedback on these initiatives.</p>
 			{:else if selectedFilter === 'incubation'}
-				<p>Incubating projects have efforts underway and are showing early signs of value. These projects are best for early adopters who want to be on the cutting edge of Developer Relations practices even if there are some bumps along the way.</p>
+				<p>Incubating projects have efforts underway and are showing early signs of value. These projects are best for early adopters who want to be on the cutting edge of Developer Relations practices, even if there are some bumps along the way.</p>
 			{:else}
 				<p>
 					Projects are maintained in the <a href="https://github.com/orgs/DevRel-Foundation/repositories" target="_blank" rel="noopener noreferrer">
@@ -151,7 +151,7 @@
 		</p>
 
 		<p>
-			To propose new projects or give feedback, attend a working group call and start the conversation.
+			To propose new projects or give feedback, attend a working group call, and start the conversation.
 		</p>
 
 		<button class="cta" on:click={handleJoinClick}>Join Us</button>

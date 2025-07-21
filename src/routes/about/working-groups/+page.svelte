@@ -22,8 +22,8 @@
 		<p class="box-question">Working groups are open to everyone!</p>
 
 		<p>
-			Participating in working groups and projects is the best way to immerse yourself into
-			the DevRel community. Working groups meet regularly to discuss, track progress, and collaborate on projects that address some of the biggest challenges that DevRel professionals face today.
+			Participating in working groups and projects is the best way to immerse yourself in
+			the DevRel community. Working groups meet regularly to discuss, track progress, and collaborate on projects addressing some of the biggest challenges DevRel professionals face today.
 		</p>
 
 		<ul class="list">
@@ -43,7 +43,7 @@
 
 		<h2>How It Works</h2>
 		<p>
-			Each working group is overseen by a group of volunteer managers who are passionate about the topic and committed to driving progress. These group managers are responsible for setting the agenda and ensuring that the group stays on track to meet its goals. A liaison is appointed to facilitate communication between the working group, steering committee and the broader community.
+			Each working group is overseen by volunteer managers passionate about the topic and committed to driving progress. These group managers are responsible for setting the agenda and ensuring the group stays on track to meet its goals. A liaison is appointed to facilitate communication between the working group, steering committee, and the broader community.
 		</p>
 
 		<ul class="list">
@@ -63,7 +63,7 @@
 				<h3 class="box-header">Sourcing</h3>
 				<img src="{DownloadIcon}" alt="Download Icon" class="icon-left" />
 				<p class="box-description">
-					Some groups will curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency is achieved through proven and trustworthy guides.
+					Some groups will curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency are achieved through proven and trustworthy guides.
 				</p>
 				<a href="/learn/what-is-devrel" class="box-cta">LEARNING RESOURCES</a>
 			</div>

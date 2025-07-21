@@ -4,9 +4,9 @@
     "Wesley Faulkner",
     "Stacey Kruczek",
     "Jonathan LeBlanc",
-	"Aditya Oberoi",
+	  "Aditya Oberai",
     "Phil Leggetter",
-	"Ana Jimenez Santamaria",
+	  "Ana Jimenez Santamaria",
     "Katie Miller"
   ];
 
@@ -48,13 +48,13 @@
 
 
 	<p>
-		Definitions on this page are synthesis of the collective knowledge and experiences of the Developer Relations community.
+		Definitions on this page are a synthesis of the collective knowledge and experiences of the Developer Relations community.
 	</p>
 
     <div class="section-divider"></div>
 
     <p>
-      The DevRel Foundation definitions are endorsed by a growing list of professional in the field to align on the core principles and practices of Developer Relations. This is a living document and we welcome contributions to future iterations.
+      The DevRel Foundation definitions are endorsed by a growing list of professionals in the field to align on the core principles and practices of Developer Relations. This is a living document, and we welcome contributions to future iterations.
     </p>
 
 

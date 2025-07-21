@@ -4,7 +4,6 @@
 	const img_ana = '/images/steering-committee/ana_j.jpg';
 	const img_jon = '/images/steering-committee/jon_l.jpg';
 	const img_kat = '/images/steering-committee/katie_m.jpg';
-	const img_phil = '/images/steering-committee/phil_l.jpg';
 	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 	const img_jayson = '/images/steering-committee/jayson_d.jpg';
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
@@ -29,7 +28,7 @@
 				name="Jonathan LeBlanc"
 				title="Governance and Formation"
 				accountabilities="
-					Oversees the creation and maintenance of governing documentation and project plans (e.g. charter, code of conduct, etc.).
+					Oversees the creation and maintenance of governing documentation and project plans (e.g., charter, code of conduct, etc.).
 					"
 				bio="Jonathan LeBlanc is an Emmy award-winning software engineer for pioneering live streaming video services, author of O'Reilly books 'Identity and Data Security for Web Development' and 'Programming Social Applications', and former board member of the OAuth, OpenID, and OpenSocial specification groups. Currently the VP and GM of Platform at TraceLink, he spent his career architecting platform, product, and devrel organizations globally."
 				linkedin="https://www.linkedin.com/in/jcleblanc/"
@@ -45,7 +44,7 @@
 					Coordinates outbound public relations, social media, and community communications. Manages volunteer recruitment
 					and onboarding process.
 					"
-				bio="Katie Miller is a Developer Marketing leader who has built and managed developer programs and marketing initiatives for Slack, Asana, and Google. While her career has taken some interesting twists and turns, at its core has been a commitment to creating a better world by empowering people through knowledge and connection. She serves in leadership roles on multiple non-profit boards and is passionate about community building and governance."
+				bio="Katie Miller is a Developer Marketing leader who has built and managed developer programs and marketing initiatives for Slack, Asana, and Google. While her career has taken some interesting twists and turns, at its core, she has been committed to creating a better world by empowering people through knowledge and connection. She serves in leadership roles on multiple non-profit boards and is passionate about community building and governance."
 				linkedin="https://www.linkedin.com/in/kmillrunner/"
 				github="https://github.com/katiewaz1977"
 				discord="@katiemillersheher_91737"
@@ -68,7 +67,7 @@
 				name="Wesley Faulkner"
 				title="Community Strategy"
 				accountabilities="
-					Develops community engagement strategy, coordinating outreach and relationships with other commmunities.
+					Develops community engagement strategy, coordinating outreach and relationships with other communities.
 					"
 				bio="Wesley Faulkner is a podcaster, public speaker, advocate for social change, and Developer Relations professional. He has worked for companies like AMD, Atlassian, Dell, IBM, and MongoDB. Wesley co-hosts two podcasts: Community Pulse, which explores the challenges and opportunities of community building in Developer Relations, and Radical Respect, which features conversations with Kim Scott on creating more inclusive and equitable workplaces."
 				linkedin="https://www.linkedin.com/in/wesley83/"
@@ -84,7 +83,7 @@
 				accountabilities="
 					Innovates on new engineering projects, tool development, and advises on technical strategy for working groups and new open-source development practices.
 					"
-				bio="Jayson serves as Head of Developer Relations for Semgrep. Since studying at Carnegie Mellon, he's undertaken a career-long pursuit to understand how people build, adopt and use technology. He is passionate about improving the developer experience regardless of industry, role or technical community having worked for Dolby, HERE, General Electric, Rackspace, Dreamworks, and MathWorks."
+				bio="Jayson serves as Head of Developer Relations for Semgrep. Since studying at Carnegie Mellon, he's undertaken a career-long pursuit to understand how people build, adopt, and use technology. He is passionate about improving the developer experience regardless of industry, role, or technical community, having worked for Dolby, HERE, General Electric, Rackspace, Dreamworks, and MathWorks."
 				linkedin="https://www.linkedin.com/in/jaysondelancey/"
 				twitter="https://x.com/jaysondelancey"
 				bluesky="https://bsky.app/profile/delancey.dev"
@@ -101,8 +100,10 @@
 					Curates existing community expertise and resources by sourcing and advocacy of individual contributor initiatives.
 					"
 				bio="Aditya is a Developer Advocate at Appwrite and an avid tech community and open-source enthusiast. He has spent the last 6 years empowering tech communities and is currently an active Microsoft MVP and DigitalOcean Wavemaker. Aditya has been awarded Best Developer Relations Professional of the Year at the CMX Community Industry Awards 2024 and was a core organizer of DevRelCon Bengaluru 2024."
-				linkedin="https://www.linkedin.com/in/jaysondelancey/"
-				github="https://github.com/j12y"
+				linkedin="https://www.linkedin.com/in/adityaoberai1/"
+				twitter="https://x.com/adityaoberai1"
+				bluesky="https://bsky.app/profile/oberai.dev"
+				github="https://github.com/adityaoberai"
 				discord="@adityaoberai1"
 				headshot={img_aditya}
 			/>
@@ -122,7 +123,7 @@
 				title="Project Manager"
 				accountabilities="
 					Collaborates with Linux Foundation projects and teams while representing the DevRel Foundation. Manages
-					resources including GitHub, Netlify, PCC, etc.
+					resources, including GitHub, Netlify, PCC, etc.
 					"
 				bio="Ana Jiménez works as a Senior Project Manager at the Linux Foundation, supporting an open source community spread across four continents with over 3,000 practitioners. She serves as Project Manager for the TODO Group and DevRel Foundation and leads the strategy for the PyTorch Foundation Outreach Program, developing educational materials and initiatives to promote the adoption of the open source machine learning framework."
 				linkedin="https://www.linkedin.com/in/ana-jimenez-santamaria/"
