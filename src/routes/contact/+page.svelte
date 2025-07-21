@@ -6,15 +6,14 @@
   const emailContacts = [
     { label: "General", email: "info@dev-rel.org" },
     { label: "Steering Committee", email: "steering-committee@dev-rel.org" },
-    { label: "Code of Conduct", email: "coonduct@dev-rel.org" }
+    { label: "Code of Conduct", email: "conduct@dev-rel.org" }
   ];
 
-  const quickLinks = [
-    { label: "LFX Project Control Center Documentation", url: "https://docs.linuxfoundation.org/lfx/" },
-    { label: "LFX Project Control Center Support", url: "https://lfx.linuxfoundation.org/services/request" },
-    { label: "Foundation Charter", url: "https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" },
-    { label: "Report an Issue for This Website", url: "https://github.com/DevRel-Foundation/site/issues" },
-	{ label: "Join Developer Relations Foundation", url: "./join-us" }
+  const gettingHelp = [
+    { label: "LFX Project Control Center Support (Meetings)", url: "https://lfx.linuxfoundation.org/services/request" },
+    { label: "Report a Website Issue", url: "https://github.com/DevRel-Foundation/site/issues" },
+    { label: "Give Feedback on Discord (Chat)", url: "https://discord.gg/kfJkJ3Xd" },
+    { label: "Give Feedback on GitHub Discussions (Forum)", url: "https://github.com/DevRel-Foundation/governance/discussions" },
   ];
 </script>
 
@@ -40,10 +39,10 @@
     </div>
 
     <div class="section">
-      <h2>Quick Links</h2>
+      <h2>Getting Help</h2>
       <div class="card">
         <ul class="contact-list">
-          {#each quickLinks as link}
+          {#each gettingHelp as link}
             <li><a href={link.url} target="_blank">{link.label}</a></li>
           {/each}
         </ul>
