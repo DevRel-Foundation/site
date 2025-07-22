@@ -9,23 +9,30 @@
 	<section class="mission-section">
 		<h1 id="about">Developer Relations Foundation</h1>
 
-		<h2>Accelerating Technology Adoption</h2>
-
+		<h2>Mission</h2>
 		<p>
-			The mission of the <strong>Developer Relations Foundation</strong> (DRF) is to elevate the professional practices of Developer Relations and increase the effectiveness of the function within organizations.
+			The mission of the DevRel Foundation is to elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
 		</p>
+
+	</section>
+</div>
+
+<section class="devrel-callout">
+	<div class="callout-content">
+		<h2>DevRel: Accelerating Technology Adoption</h2>
 		<p>
 			Developer Relations is a critical discipline that bridges the gap between technology providers and developer communities. It encompasses a range of activities, including community engagement, technical support, education, evangelism, and advocacy, that enable the successful adoption of technology.
 		</p>
-			
-		<p>
-		<strong>Learn more:</strong> <a href="/learn/what-is-devrel" class="link">What is Developer Relations?</a>
-		</p>
+		<a href="/learn/what-is-devrel" class="callout-cta">Learn About Developer Relations →</a>
+	</div>
+</section>
 
-		<h2>Our Vision</h2>
+<div class="container container-content">
+	<section class="mission-section">
+		<h2>Vision</h2>
 
 		<p>
-			Our vision is to establish the DevRel Foundation as a credible, central force in advancing the practices of Developer Relations, elevating its value to businesses and organizations. We aim to elevate foundational standards and foster a vibrant, accessible community that actively shapes and grows the discipline.
+			Our vision is to establish the DevRel Foundation (DRF) as a credible, central force in advancing the practices of Developer Relations, elevating its value to businesses and organizations. We aim to elevate foundational standards and foster a vibrant, accessible community that actively shapes and grows the discipline.
 		</p>
 
 		<p>
@@ -36,17 +43,25 @@
 			To support the mission, we plan to collaboratively develop assets, including definitions, frameworks, and the creation and codification of other artifacts that aid the success of Developer Relations practitioners around the world. 
 		</p>
 
+		<p>This includes activities like:</p>
+
 		<ul class="list">
 			<li class="list-item">
-				Recommending the structure and organization of Developer Relations with career support for people in the practice seeking professional growth, such as cross-functional collaboration, job descriptions, career ladders, and hiring rubrics.
+				Recommending an organizational structure and roles for new Developer Relations programs.
+
 			</li>
 			<li class="list-item">
-				Defining the practice and programs with common terminology, metrics, and reporting systems for tracking results.
+				Helping provide career support resources for job seekers, hiring team guidance, interview plans, and managing continued professional growth.
 			</li>
 			<li class="list-item">
-				Resources and tools for community management and building engagement, including playbooks, templates, and guides.
+				Defining practices and programs with common terminology, metrics, playbooks, and reporting systems for tracking results.
+			</li>
+			<li class="list-item">
+				Resources and tools for community management when building engagement, including playbooks, templates, and guides.
 			</li>
 		</ul>
+
+		<p>and much more.</p>
 
 		<h2>Governance</h2>
 
@@ -88,5 +103,70 @@
  .list-item {
 	margin-bottom: var(--space-xs);
  }
+
+  .devrel-callout {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+					  url('/images/headway-F2KRf_QfCqw-unsplash.jpg');
+    background-size: cover;
+    background-position: center 50%;
+    margin: var(--space-m) 0;
+    padding: var(--space-l) var(--space-s);
+    color: white;
+    text-align: center;
+  }
+
+  .callout-content {
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+  }
+
+  .callout-content h2 {
+    font-size: var(--step-3);
+    margin-top: 0;
+    margin-bottom: var(--space-m);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .callout-content p {
+    font-size: var(--step-0);
+    line-height: 1.6;
+    max-width: 60ch;
+    margin: 0 auto var(--space-l);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .callout-cta {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-text);
+    padding: var(--space-s) var(--space-l);
+    border-radius: var(--radius-s);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .callout-cta:hover {
+    background-color: var(--color-mint);
+    color: var(--color-mint-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .devrel-callout {
+      padding: var(--space-l) var(--space-m);
+    }
+
+    .callout-content h2 {
+      font-size: var(--step-2);
+    }
+
+    .callout-content p {
+      font-size: var(--step--1);
+    }
+  }
 
 </style>
