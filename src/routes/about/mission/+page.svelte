@@ -21,7 +21,8 @@
 	<div class="callout-content">
 		<h2>DevRel: Accelerating Technology Adoption</h2>
 		<p>
-			Developer Relations is a critical discipline that bridges the gap between technology providers and developer communities. It encompasses a range of activities, including community engagement, technical support, education, evangelism, and advocacy, that enable the successful adoption of technology.
+
+			Developer Relations is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s technology.
 		</p>
 		<a href="/learn/what-is-devrel" class="callout-cta">Learn About Developer Relations →</a>
 	</div>
