@@ -11,7 +11,7 @@
 
 		<h2>Mission</h2>
 		<p>
-			The mission of the DevRel Foundation is to elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
+			To elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
 		</p>
 
 	</section>
