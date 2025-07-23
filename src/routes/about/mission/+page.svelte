@@ -63,23 +63,21 @@
 
 		<p>and much more.</p>
 
-		<h2>Governance</h2>
-
-		<p>
-			The DevRel Foundation's Steering Committee oversees the Foundation's activities according to its Charter. The work is organized into <a href="/about/working-groups">Working Groups</a> that focus on sourcing and innovating on best practices in Developer Relations through peer-reviewed resources and materials.
-		</p>
-
-		<p>
-		<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our Charter</a>
-		</p>
-
-
-
 	</section>
-
-
-
 </div>
+
+<section class="governance-callout">
+<div class="container container-content">
+	<section class="mission-section">
+		<h2>Governance</h2>
+		<p>
+			The DevRel Foundation's Steering Committee oversees the Foundation's activities according to its Charter. The work is organized into <a href="/about/working-groups" class="link">Working Groups</a> that focus on sourcing and innovating best practices in Developer Relations through peer-reviewed resources and materials.
+		</p>
+		<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our Charter</a>
+	</section>
+</div>
+</section>
+
 
 <style>
   .container {
@@ -155,6 +153,38 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
 
+  .governance-callout {
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(135deg, var(--color-mint-dark), #1a4a3a);
+    background-size: 60px 60px, 80px 80px, 40px 40px, 100% 100%;
+    margin: var(--space-s) 0;
+	padding: var(--space-3xs) var(--space-3xs);
+    color: white;
+    text-align: left;
+  }
+
+  .governance-callout .callout-content h2 {
+    font-size: var(--step-2);
+    margin-top: 0;
+    margin-bottom: var(--space-s);
+    color: white;
+  }
+
+  .governance-callout .callout-content p {
+    font-size: var(--step-0);
+    line-height: 1.6;
+    margin-bottom: var(--space-s);
+    color: white;
+  }
+
+  .governance-callout .link {
+    color: var(--color-mint);
+    text-decoration: underline;
+  }
+
   @media (max-width: 768px) {
     .devrel-callout {
       padding: var(--space-l) var(--space-m);
@@ -166,6 +196,24 @@
 
     .callout-content p {
       font-size: var(--step--1);
+    }
+
+    .governance-callout {
+      padding: var(--space-l) var(--space-m);
+    }
+
+    .governance-callout .callout-content h2 {
+      font-size: var(--step-2);
+    }
+
+    .governance-callout .callout-content p {
+      font-size: var(--step--1);
+    }
+
+    .governance-links {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-s);
     }
   }
 
