@@ -11,6 +11,7 @@
   let activeDropdown = $state(null);
   let activeAccordion = $state(null);
   let mediaQuery;
+  let isMobile = $state(false);
   
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
@@ -74,6 +75,21 @@
       }
     }
   });
+  
+  $effect(() => {
+    if (typeof window !== 'undefined') {
+      const checkMobile = () => {
+        isMobile = window.innerWidth <= 768;
+      };
+      
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      
+      return () => {
+        window.removeEventListener('resize', checkMobile);
+      };
+    }
+  });
 </script>
 
 <nav class="nav">
@@ -94,10 +110,10 @@
 
 
         <li class="nav-item dropdown-container" 
-            onmouseenter={() => showDropdown('about')} 
-            onmouseleave={hideDropdown}>
+            onmouseenter={() => !isMobile && showDropdown('about')} 
+            onmouseleave={() => !isMobile && hideDropdown()}>
           <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'about'} onclick={(e) => {
-            if (window.innerWidth <= 768) {
+            if (isMobile) {
               e.preventDefault();
               toggleAccordion('about');
             }
@@ -160,10 +176,10 @@
         </li>
 
         <li class="nav-item dropdown-container" 
-            onmouseenter={() => showDropdown('learn')} 
-            onmouseleave={hideDropdown}>
+            onmouseenter={() => !isMobile && showDropdown('learn')} 
+            onmouseleave={() => !isMobile && hideDropdown()}>
           <a href="/learn/what-is-devrel" class="nav-link" class:active={activeDropdown === 'learn'} onclick={(e) => {
-            if (window.innerWidth <= 768) {
+            if (isMobile) {
               e.preventDefault();
               toggleAccordion('learn');
             }
@@ -191,10 +207,10 @@
         </li>
 
         <li class="nav-item dropdown-container" 
-            onmouseenter={() => showDropdown('projects')} 
-            onmouseleave={hideDropdown}>
+            onmouseenter={() => !isMobile && showDropdown('projects')} 
+            onmouseleave={() => !isMobile && hideDropdown()}>
           <a href="/projects" class="nav-link" class:active={activeDropdown === 'projects'} onclick={(e) => {
-            if (window.innerWidth <= 768) {
+            if (isMobile) {
               e.preventDefault();
               toggleAccordion('projects');
             }
