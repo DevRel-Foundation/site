@@ -77,7 +77,7 @@
 			<img src={PlantIcon} alt="Plant" />
 			<h3 class="content-box-heading">Our Mission</h3>
 			<p>
-				We aspire to elevate the community of professionals and organizations building effective Developer Relations programs.
+				To elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
 			</p>
 			<button class="content-button" on:click={handleMissionClick}>Learn</button>
 		</div>
