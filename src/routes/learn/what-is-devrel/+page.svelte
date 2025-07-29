@@ -33,7 +33,7 @@
 		<h1>What is Developer Relations?</h1>
 
 		<p>
-			<strong>Developer Relations</strong> is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s technology.
+			<strong>Developer Relations</strong> is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
 		</p>
 
 
@@ -53,6 +53,7 @@
 
     <div class="section-divider"></div>
 
+	<!--
     <p>
       The DevRel Foundation definitions are endorsed by a growing list of professionals in the field to align on the core principles and practices of Developer Relations. This is a living document, and we welcome contributions to future iterations.
     </p>
@@ -67,6 +68,8 @@
 				</div>
 			{/each}
 		</div>
+	
+	-->
 
     <div class="contribute-button-container">
       <a href="/join-us" target="_blank" class="contribute-button">
