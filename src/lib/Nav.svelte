@@ -207,6 +207,40 @@
         </li>
 
         <li class="nav-item dropdown-container" 
+            onmouseenter={() => !isMobile && showDropdown('community')} 
+            onmouseleave={() => !isMobile && hideDropdown()}>
+          <a href="/community/blog" class="nav-link" class:active={activeDropdown === 'community'} onclick={(e) => {
+            if (isMobile) {
+              e.preventDefault();
+              toggleAccordion('community');
+            }
+          }}>Community</a>
+          <div class="dropdown" class:active={activeDropdown === 'community'} class:accordion-open={activeAccordion === 'community'}>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <h3 class="menu-header">Resources</h3>
+                <div class="dropdown-items">
+                  <a href="/community/blog" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">Blog</span>
+                      <span class="item-description">News and updates.</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-section">
+                <h3 class="menu-header"> </h3>
+                <div class="dropdown-items">
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+	
+
+
+        <li class="nav-item dropdown-container" 
             onmouseenter={() => !isMobile && showDropdown('projects')} 
             onmouseleave={() => !isMobile && hideDropdown()}>
           <a href="/projects" class="nav-link" class:active={activeDropdown === 'projects'} onclick={(e) => {
