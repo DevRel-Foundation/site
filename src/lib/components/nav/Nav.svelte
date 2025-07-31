@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header"></h3>
+                <h3 class="menu-header">&nbsp;</h3>
                 <div class="dropdown-items">
                 </div>
               </div>
