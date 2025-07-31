@@ -11,7 +11,7 @@
 <div class="container container-content">
   <header class="category-header">
     <h1>{category}</h1>
-    <p><a href="/community/blog">← Back to all posts</a></p>
+    <p><a href="/blog">← Back to all posts</a></p>
   </header>
   
   {#if posts.length > 0}
@@ -29,7 +29,7 @@
             </time>
           </div>
           
-          <h2><a href="/community/blog/{post.slug}">{post.title}</a></h2>
+          <h2><a href="/blog/{post.slug}">{post.title}</a></h2>
           
           {#if post.excerpt}
             <p class="excerpt">{post.excerpt}</p>
@@ -41,7 +41,7 @@
             {/if}
           </div>
           
-          <a href="/community/blog/{post.slug}" class="read-more">Read More →</a>
+          <a href="/blog/{post.slug}" class="read-more">Read More →</a>
         </article>
       {/each}
     </div>
@@ -49,7 +49,7 @@
     <div class="empty-state">
       <h2>No posts in this category yet</h2>
       <p>There are currently no blog posts in the "{category}" category.</p>
-      <a href="/community/blog" class="back-link">View all posts</a>
+      <a href="/blog" class="back-link">View all posts</a>
     </div>
   {/if}
 </div>

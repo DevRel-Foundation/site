@@ -42,7 +42,7 @@
 <article class="blog-post">
   <header class="post-header">
     <div class="post-meta">
-      <a href="/community/blog/category/{category}" class="category-tag">{category}</a>
+      <a href="/blog/category/{category}" class="category-tag">{category}</a>
       <time datetime={date}>{new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { 
         year: 'numeric', 
         month: 'long', 

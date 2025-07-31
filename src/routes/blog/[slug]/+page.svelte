@@ -12,7 +12,7 @@
   onMount(async () => {
     try {
       // Dynamically import the markdown content
-      const module = await import(`../../../../blog/${post.slug}.md`);
+      const module = await import(`../../../blog/${post.slug}.md`);
       ContentComponent = module.default;
     } catch (err) {
       console.error('Failed to load blog content:', err);
@@ -42,7 +42,7 @@
 </svelte:head>
 
 <div class="blog-navigation">
-  <a href="/community/blog/category/{post.category || 'all'}" class="back-to-category">
+  <a href="/blog/category/{post.category || 'all'}" class="back-to-category">
     ← {post.category || 'all'}
   </a>
 </div>

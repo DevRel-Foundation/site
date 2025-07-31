@@ -16,11 +16,11 @@
     <p>Insights, tutorials, and thoughts on Developer Relations from our community.</p>
     
     <nav class="category-nav">
-      <a href="/community/blog" class="category-link {!$page.url.pathname.includes('/category/') ? 'active' : ''}">
+      <a href="/blog" class="category-link {!$page.url.pathname.includes('/category/') ? 'active' : ''}">
         all 
       </a>
       {#each categories as category}
-        <a href="/community/blog/category/{category}" class="category-link">
+        <a href="/blog/category/{category}" class="category-link">
           {category}
         </a>
       {/each}
@@ -32,7 +32,7 @@
       <article class="post-card">
         <div class="post-meta">
           {#if post.category}
-          <a href="/community/blog/category/{post.category}" class="category-tag">{post.category}</a>
+          <a href="/blog/category/{post.category}" class="category-tag">{post.category}</a>
           {/if}
           <time datetime={post.date}>
             {new Date(post.date + 'T12:00:00').toLocaleDateString('en-US', { 
@@ -44,7 +44,7 @@
           </time>
         </div>
         
-        <h2><a href="/community/blog/{post.slug}">{post.title}</a></h2>
+        <h2><a href="/blog/{post.slug}">{post.title}</a></h2>
         
         {#if post.excerpt}
           <p class="excerpt">{post.excerpt}</p>
@@ -59,7 +59,7 @@
           {/if}
         </div>
         
-        <a href="/community/blog/{post.slug}" class="read-more">Read More →</a>
+        <a href="/blog/{post.slug}" class="read-more">Read More →</a>
       </article>
     {/each}
   </div>

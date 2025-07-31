@@ -209,7 +209,7 @@
         <li class="nav-item dropdown-container" 
             onmouseenter={() => !isMobile && showDropdown('community')} 
             onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/community/blog" class="nav-link" class:active={activeDropdown === 'community'} onclick={(e) => {
+          <a href="/blog" class="nav-link" class:active={activeDropdown === 'community'} onclick={(e) => {
             if (isMobile) {
               e.preventDefault();
               toggleAccordion('community');
@@ -220,7 +220,7 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">Resources</h3>
                 <div class="dropdown-items">
-                  <a href="/community/blog" onclick={closeAll}>
+                  <a href="/blog" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Blog</span>
                       <span class="item-description">News and updates.</span>

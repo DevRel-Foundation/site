@@ -3,9 +3,9 @@ import { redirect } from '@sveltejs/kit';
 // Centralized redirect configuration
 const redirects = [
   {
-    // Redirect /community/blog/category/all to /community/blog
-    from: /^\/community\/blog\/category\/all\/?$/,
-    to: '/community/blog',
+    // Redirect /blog/category/all to /blog
+    from: /^\/blog\/category\/all\/?$/,
+    to: '/blog',
     status: 302
   },
   // Add more redirects here as needed

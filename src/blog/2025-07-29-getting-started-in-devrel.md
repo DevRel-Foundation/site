@@ -1,10 +1,13 @@
 ---
-title: "Getting Started with Developer Relations"
-excerpt: "An introduction to the fundamentals of Developer Relations and how to build successful developer communities."
+title: "TEST - Getting Started with Developer Relations"
+excerpt: "TEST - An introduction to the fundamentals of Developer Relations and how to build successful developer communities."
 author: "DevRel Foundation"
 date: "2025-07-29"
 tags: ["devrel", "community", "getting-started"]
 ---
+
+TODO: REMOVE TEST 
+Serving as lorem ipsum to test formatting on a few types of markdown.
 
 Developer Relations is more than just evangelism or support—it's about building genuine relationships with developer communities that create mutual value.
 
