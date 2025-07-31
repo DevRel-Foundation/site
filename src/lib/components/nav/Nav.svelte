@@ -319,12 +319,6 @@
         {/if}
       </button>
       
-      <!--
-      <a href="https://discord.gg/kfJkJ3Xd" target="_blank" rel="noopener noreferrer" class="discord-link" aria-label="Join our Discord">
-        <img src={DiscordIcon} alt="Discord" />
-      </a>
-       -->
-      
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
       </button>
@@ -621,8 +615,7 @@
   }
   
   .theme-toggle:hover,
-  .menu-toggle:hover,
-  .discord-link:hover {
+  .menu-toggle:hover {
     background-color: var(--color-background-secondary-1);
   }
   
@@ -631,15 +624,6 @@
     width: 1.5rem;
     height: 1.5rem;
     filter: var(--icon-filter);
-  }
-  
-  .discord-link img {
-    filter: var(--icon-filter);
-  }
-
-  .discord-link {
-    padding: var(--space-xs);
-    border-radius: var(--radius-s);
   }
   
   .menu-toggle {
