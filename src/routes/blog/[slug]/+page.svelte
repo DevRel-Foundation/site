@@ -1,5 +1,5 @@
 <script>
-  import BlogPost from '$lib/BlogPost.svelte';
+  import BlogPost from '$lib/components/page/blog/BlogPost.svelte';
   import { onMount } from 'svelte';
   
   const { data } = $props();

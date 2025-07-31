@@ -1,4 +1,4 @@
-import { getBlogPosts, getCategories } from '$lib/blog.js';
+import { getBlogPosts, getCategories } from '$lib/server/blog.js';
 
 export async function load() {
   const posts = await getBlogPosts();

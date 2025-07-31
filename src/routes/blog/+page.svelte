@@ -12,8 +12,8 @@
 
 <div class="container container-content">
   <header class="blog-header">
-    <h1>Developer Blog</h1>
-    <p>Insights, tutorials, and thoughts on Developer Relations from our community.</p>
+    <h1>Developer Relations Blog</h1>
+    <p>Insights, tutorials, and thoughts on Developer Relations from the DevRel Foundation.</p>
     
     <nav class="category-nav">
       <a href="/blog" class="category-link {!$page.url.pathname.includes('/category/') ? 'active' : ''}">

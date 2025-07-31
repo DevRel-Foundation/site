@@ -1,4 +1,4 @@
-import { getBlogPost } from '$lib/blog.js';
+import { getBlogPost } from '$lib/server/blog.js';
 import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {

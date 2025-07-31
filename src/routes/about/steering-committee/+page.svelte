@@ -1,5 +1,5 @@
 <script>
-	import BioSteeringCommittee from '$lib/BioSteeringCommittee.svelte';
+	import BioSteeringCommittee from '$lib/components/page/bios/BioSteeringCommittee.svelte';
 	const img_wes = '/images/steering-committee/wes_f.jpg';
 	const img_ana = '/images/steering-committee/ana_j.jpg';
 	const img_jon = '/images/steering-committee/jon_l.jpg';
@@ -94,10 +94,10 @@
 
 			<BioSteeringCommittee
 				name="Aditya Oberai"
-				title="Resource Sourcing"
+				title="Sourcing"
 				term="2027"
 				accountabilities="
-					Curates existing community expertise and resources by sourcing and advocacy of individual contributor initiatives.
+					Curates community expertise and resources by sourcing and then advocating for individual contributor initiatives.
 					"
 				bio="Aditya is a Developer Advocate at Appwrite and an avid tech community and open-source enthusiast. He has spent the last 6 years empowering tech communities and is currently an active Microsoft MVP and DigitalOcean Wavemaker. Aditya has been awarded Best Developer Relations Professional of the Year at the CMX Community Industry Awards 2024 and was a core organizer of DevRelCon Bengaluru 2024."
 				linkedin="https://www.linkedin.com/in/adityaoberai1/"
@@ -112,7 +112,7 @@
 		<div class="container">
 			<h2 id="steering-committee">Foundation Staff</h2>
 			<p>
-				The Linux Foundation Staff provide guidance and expertise to support our mission.
+				Linux Foundation Staff provide guidance and expertise to support our mission.
 			</p>
 		</div>
 

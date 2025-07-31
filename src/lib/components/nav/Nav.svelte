@@ -145,7 +145,7 @@
               </div>  
 
               <div class="dropdown-section">
-                <h3 class="menu-header">Additional Resources</h3>
+                <h3 class="menu-header">&nbsp;</h3>
                 <div class="dropdown-items">
 
 
@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header"> </h3>
+                <h3 class="menu-header"></h3>
                 <div class="dropdown-items">
                 </div>
               </div>
@@ -218,7 +218,7 @@
           <div class="dropdown" class:active={activeDropdown === 'community'} class:accordion-open={activeAccordion === 'community'}>
             <div class="dropdown-content">
               <div class="dropdown-section">
-                <h3 class="menu-header">Resources</h3>
+                <h3 class="menu-header">The DevRel Community</h3>
                 <div class="dropdown-items">
                   <a href="/blog" onclick={closeAll}>
                     <div class="dropdown-item">
@@ -229,8 +229,16 @@
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header"> </h3>
+                <h3 class="menu-header">Community Resources</h3>
                 <div class="dropdown-items">
+                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
+                        Discord ↗
+                      </span>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -270,21 +278,13 @@
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header">Additional Resources</h3>
+                <h3 class="menu-header">Project Resources</h3>
                 <div class="dropdown-items">
                   <a href="https://github.com/devrel-foundation/" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item-brief">
                       <span class="item-title">
                         <img src={GitHubIcon} alt="Explore our GitHub" class="social-icon" />
                         GitHub ↗
-                      </span>
-                    </div>
-                  </a>
-                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
-                        Discord Community ↗
                       </span>
                     </div>
                   </a>

@@ -1,4 +1,4 @@
-import { getBlogPostsByCategory, getCategories } from '$lib/blog.js';
+import { getBlogPostsByCategory, getCategories } from '$lib/server/blog.js';
 import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {
