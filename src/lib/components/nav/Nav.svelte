@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header"></h3>
+                <h3 class="menu-header">&nbsp;</h3>
                 <div class="dropdown-items">
                 </div>
               </div>
@@ -318,12 +318,6 @@
           <img src={HalfMoonIcon} alt="Dark mode" />
         {/if}
       </button>
-      
-      <!--
-      <a href="https://discord.gg/kfJkJ3Xd" target="_blank" rel="noopener noreferrer" class="discord-link" aria-label="Join our Discord">
-        <img src={DiscordIcon} alt="Discord" />
-      </a>
-       -->
       
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
@@ -621,8 +615,7 @@
   }
   
   .theme-toggle:hover,
-  .menu-toggle:hover,
-  .discord-link:hover {
+  .menu-toggle:hover {
     background-color: var(--color-background-secondary-1);
   }
   
@@ -633,13 +626,8 @@
     filter: var(--icon-filter);
   }
   
-  .discord-link img {
+  img {
     filter: var(--icon-filter);
-  }
-
-  .discord-link {
-    padding: var(--space-xs);
-    border-radius: var(--radius-s);
   }
   
   .menu-toggle {
