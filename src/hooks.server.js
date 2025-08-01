@@ -8,12 +8,18 @@ const redirects = [
     to: '/blog',
     status: 302
   },
-  // Add more redirects here as needed
-  // {
-  //   from: /^\/old-path\/?$/,
-  //   to: '/new-path',
-  //   status: 301
-  // }
+  { 
+    // Redirect /about to /about/steering-committee
+    from: /^\/about\/?$/,
+    to: '/about/mission',
+    status: 302
+  },
+  { 
+    // Redirect /learn to /learn/what-is-devrel
+    from: /^\/learn\/?$/,
+    to: '/learn/what-is-devrel',
+    status: 302
+  },
 ];
 
 /** @type {import('@sveltejs/kit').Handle} */
