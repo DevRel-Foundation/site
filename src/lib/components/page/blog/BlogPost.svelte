@@ -4,6 +4,7 @@
   import TwitterIcon from 'iconoir/icons/x.svg';
   import LinkedInIcon from 'iconoir/icons/linkedin.svg';
   import LinkIcon from 'iconoir/icons/link.svg';
+  import FacebookIcon from 'iconoir/icons/facebook.svg';
   
   const { 
     title, 
@@ -13,7 +14,8 @@
     category = 'all',
     tags = [],
     readingTime = '',
-    slug
+    slug,
+    image
   } = $props();
   
   let showShareMenu = $state(false);
@@ -25,7 +27,6 @@
   
   function copyLink() {
     navigator.clipboard.writeText($page.url.href);
-    showShareMenu = false;
   }
   
   function shareTwitter() {
@@ -37,6 +38,17 @@
   function shareLinkedIn() {
     const url = encodeURIComponent($page.url.href);
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+  }
+  
+  function shareFacebook() {
+    const url = encodeURIComponent($page.url.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+  }
+  
+  function shareBluesky() {
+    const url = encodeURIComponent($page.url.href);
+    const text = encodeURIComponent(title);
+    window.open(`https://bsky.app/intent/compose?text=${text} ${url}`, '_blank');
   }
 
   // Parse authors and fetch GitHub data
@@ -55,13 +67,14 @@
                 username,
                 name: userData.name || userData.login || username,
                 avatar: userData.avatar_url,
-                url: userData.html_url
+                url: userData.html_url,
+                bio: userData.bio
               };
             }
           } catch (error) {
             console.error('Failed to fetch GitHub user:', error);
           }
-          return { type: 'github', username, name: username, avatar: null, url: `https://github.com/${username}` };
+          return { type: 'github', username, name: username, avatar: null, url: `https://github.com/${username}`, bio: null };
         }
         return { type: 'text', name: authorName };
       });
@@ -71,9 +84,10 @@
   });
 </script>
 
-<article class="blog-post">
-  <header class="post-header">
+<div class="blog-header-wrapper">
+  <header class="blog-header">
     <div class="post-meta">
+      <a href="/blog" class="blog-title">BLOG</a> | 
       <a href="/blog/category/{category}" class="category-tag">{category}</a>
       <time datetime={date}>{new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { 
         year: 'numeric', 
@@ -86,87 +100,141 @@
       {/if}
     </div>
     
-    <h1>{title}</h1>
-    
-    {#if excerpt}
-      <p class="excerpt">{excerpt}</p>
-    {/if}
-    
-    <div class="post-actions">
-      <div class="author-info">
-        {#if githubUsers.length > 0}
-          <div class="authors">
-            <span class="by-text">By</span>
-            {#each githubUsers as user, index}
-              {#if user.type === 'github'}
-                <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
-                  {#if user.avatar}
-                    <img src={user.avatar} alt={user.name} class="author-avatar" />
-                  {/if}
-                  {user.name}
-                </a>
-              {:else}
-                <span class="text-author">{user.name}</span>
-              {/if}
-              {#if index < githubUsers.length - 1}
-                <span class="author-separator">, </span>
-              {/if}
-            {/each}
-          </div>
-        {/if}
+    <h1 class="main-title">{title}</h1>
+
+    <div class="header-content">
+      <div class="image-section">
+        <div class="post-image">
+          <img src={image || '/images/blog/devrel-foundation-blog.png'} alt={title} />
+        </div>
+        
+        <div class="share-icons">
+          <button onclick={shareLinkedIn} class="share-icon-button" aria-label="Share on LinkedIn">
+            <img src={LinkedInIcon} alt="Share on LinkedIn" class="social-icon" />
+          </button>
+          <button onclick={shareFacebook} class="share-icon-button" aria-label="Share on Facebook">
+            <img src={FacebookIcon} alt="Share on Facebook" class="social-icon" />
+          </button>
+          <button onclick={shareBluesky} class="share-icon-button" aria-label="Share on Bluesky">
+
+              <svg class="social-icon" viewBox="0 0 512 452" fill="none" stroke="currentColor" stroke-width="40" aria-label="Bluesky">
+                <path d="M111 30.4c58.7 44.2 121.8 133.9 145 182 23.2-48.1 86.3-137.7 145-182 42.4-31.9 111-56.6 111 22 0 15.7-9 131.8-14.2 150.6-18.3 65.5-84.9 82.2-144.1 72.1 103.5 17.7 129.9 76.2 73 134.8-108 111.2-155.3-27.9-167.4-63.6-3.5-10.3-3-10.5-6.6 0-12.1 35.6-59.3 174.8-167.4 63.6-56.9-58.6-30.6-117.1 73-134.8-59.2 10.1-125.8-6.6-144.1-72.1C9 184.2 0 68.1 0 52.4c0-78.5 68.6-53.9 111-22z"/>
+              </svg>
+
+          </button>
+          <button onclick={shareTwitter} class="share-icon-button" aria-label="Share on X/Twitter">
+            <img src={TwitterIcon} alt="Share on X" class="social-icon" />
+          </button>
+          <button onclick={copyLink} class="share-icon-button" aria-label="Copy link">
+            <img src={LinkIcon} alt="Copy link" class="social-icon" />
+          </button>
+        </div>
       </div>
       
-      <div class="share-container">
-        <button class="share-button" onclick={toggleShareMenu} aria-label="Share post">
-          <img src={ShareIcon} alt="Share" class="share-icon" />
-        </button>
+      <div class="title-section">
         
-        {#if showShareMenu}
-          <div class="share-menu">
-            <button onclick={shareTwitter} class="share-option">
-              <img src={TwitterIcon} alt="Twitter" class="social-icon" />
-              Twitter
-            </button>
-            <button onclick={shareLinkedIn} class="share-option">
-              <img src={LinkedInIcon} alt="LinkedIn" class="social-icon" />
-              LinkedIn
-            </button>
-            <button onclick={copyLink} class="share-option">
-              <img src={LinkIcon} alt="Copy link" class="social-icon" />
-              Copy Link
-            </button>
-          </div>
+        {#if excerpt}
+          <p class="excerpt">{excerpt}</p>
         {/if}
+        
+        <div class="post-actions">
+          <div class="author-info">
+            {#if githubUsers.length > 0}
+              <div class="authors">
+                <div class="author-line">
+
+                  {#each githubUsers as user, index}
+                    {#if user.type === 'github'}
+                      <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
+                        {#if user.avatar}
+                          <img src={user.avatar} alt={user.name} class="author-avatar" />
+                        {/if}
+                        {user.name}
+                      </a>
+
+
+
+                    {:else}
+                      <span class="text-author">{user.name}</span>
+                    {/if}
+                    {#if index < githubUsers.length - 1}
+                      <span class="author-separator">, </span>
+                    {/if}
+                  {/each}
+                </div>
+                
+                {#each githubUsers as user}
+                  {#if user.type === 'github' && user.bio}
+                    <div class="author-bio">
+                      {#each user.bio.split('\n') as bioLine}
+                        <p class="author-bio">{bioLine}</p>
+                      {/each}
+                    </div>
+                  {/if}
+                {/each}
+              </div>
+            {/if}
+          </div>
+        </div>
       </div>
     </div>
   </header>
-  
+</div>
+
+
+<article class="blog-post">
   <div class="post-content">
     <slot />
-  </div>
-  
-  {#if tags.length > 0}
-    <footer class="post-footer">
-      <div class="tags">
+
+    {#if tags.length > 0}
+      <div class="meta-tags">
         {#each tags as tag}
-          <span class="tag">{tag}</span>
+          <a href="/blog/tag/{tag}"><span class="meta-tag">#{tag}</span></a>&nbsp; &nbsp; 
         {/each}
       </div>
-    </footer>
-  {/if}
+    {/if}
+
+  </div>
 </article>
 
 <style>
+  .blog-header-wrapper {
+    background-color: var(--color-background-secondary-1);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding: var(--space-l) 0;
+  }
+  
+  .blog-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-l);
+  }
+  
+  .header-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-m);
+    align-items: start;
+    margin-top: var(--space-s);
+  }
+  
+  .post-image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: var(--radius-m);
+  }
+  
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
   .blog-post {
     max-width: 800px;
     margin: 0 auto;
     padding: var(--space-l);
-  }
-  
-  .post-header {
-    margin-bottom: var(--space-xl);
-    border-bottom: 1px solid var(--color-background-secondary-2);
-    padding-bottom: var(--space-l);
   }
   
   .post-meta {
@@ -178,8 +246,22 @@
     color: var(--color-text-secondary);
   }
   
+  .blog-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  
+  .blog-title:hover {
+    color: var(--color-mint-dark);
+  }
+  
   .category-tag {
-    background-color: var(--color-mint);
+    background-color: var(--color-mint-dark);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);
@@ -188,10 +270,12 @@
     font-size: var(--step--2);
   }
   
-  .post-header h1 {
-    margin: 0 0 var(--space-m) 0;
+  .main-title {
+    margin: 0 0 var(--space-2xs) 0;
     font-size: var(--step-3);
     line-height: 1.2;
+    word-break: break-word;
+    hyphens: auto;
   }
   
   .excerpt {
@@ -199,6 +283,7 @@
     color: var(--color-text-secondary);
     line-height: 1.6;
     margin-bottom: var(--space-m);
+    margin-top: 0;
   }
   
   .post-actions {
@@ -209,104 +294,67 @@
   
   .authors {
     display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+  
+  .author-line {
+    display: flex;
     align-items: center;
     gap: var(--space-2xs);
     flex-wrap: wrap;
   }
   
-  .by-text {
-    font-size: var(--step--1);
+  .author-bio {
     color: var(--color-text-secondary);
-  }
-  
-  .github-author {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    text-decoration: none;
-    color: var(--color-link);
-    font-size: var(--step--1);
-    transition: opacity 0.2s ease;
-  }
-  
-  .github-author:hover {
     opacity: 0.8;
-  }
-  
-  .author-avatar {
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    border: 1px solid var(--color-background-secondary-2);
-  }
-  
-  .text-author {
+    line-height: 1.4;
+    max-width: 50ch;
     font-size: var(--step--1);
     color: var(--color-text-secondary);
   }
   
-  .author-separator {
-    font-size: var(--step--1);
-    color: var(--color-text-secondary);
+  .author-bio p {
+    margin: 0;
+    margin-bottom: var(--space-3xs);
   }
   
-  .share-container {
-    position: relative;
+  .author-bio p:last-child {
+    margin-bottom: 0;
   }
   
-  .share-button {
+  .image-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+  
+  .share-icons {
+    display: flex;
+    gap: var(--space-2xs);
+    justify-content: center;
+  }
+  
+  .share-icon-button {
     background: none;
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-s);
     padding: var(--space-2xs);
     cursor: pointer;
     transition: all 0.2s ease;
-  }
-  
-  .share-button:hover {
-    background-color: var(--color-background-secondary-1);
-  }
-  
-  .share-icon {
-    width: 1rem;
-    height: 1rem;
-    filter: var(--icon-filter);
-  }
-  
-  .share-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: var(--color-background);
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: var(--space-2xs);
-    min-width: 120px;
-    z-index: 10;
-  }
-  
-  .share-option {
     display: flex;
     align-items: center;
-    gap: var(--space-2xs);
-    width: 100%;
-    padding: var(--space-2xs) var(--space-xs);
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    border-radius: var(--radius-s);
-    transition: background-color 0.2s ease;
+    justify-content: center;
   }
   
-  .share-option:hover {
-    background-color: var(--color-background-secondary-1);
+  .share-icon-button:hover {
+    background-color: var(--color-background-secondary-2);
+    border-color: var(--color-mint-dark);
   }
   
   .social-icon {
-    width: 0.875rem;
-    height: 0.875rem;
+    width: 1rem;
+    height: 1rem;
     filter: var(--icon-filter);
   }
   
@@ -377,11 +425,6 @@
     margin-bottom: 0;
   }
   
-  .post-footer {
-    border-top: 1px solid var(--color-background-secondary-2);
-    padding-top: var(--space-m);
-  }
-  
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -396,7 +439,51 @@
     font-size: var(--step--2);
   }
   
+  .github-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    text-decoration: none;
+    color: var(--color-link);
+    font-size: var(--step--1);
+    transition: opacity 0.2s ease;
+  }
+  
+  .github-author:hover {
+    opacity: 0.8;
+  }
+  
+  .author-avatar {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-background-secondary-2);
+  }
+  
+  .text-author {
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+  }
+  
+  .author-separator {
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+  }
+  
   @media (max-width: 768px) {
+    .blog-header {
+      padding: 0 var(--space-m);
+    }
+    
+    .header-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+    }
+    
+    .post-image {
+      aspect-ratio: 16/9;
+    }
+    
     .blog-post {
       padding: var(--space-m);
     }

@@ -41,12 +41,6 @@
   <meta name="twitter:description" content={post.excerpt || post.title} />
 </svelte:head>
 
-<div class="blog-navigation">
-  <a href="/blog/category/{post.category || 'all'}" class="back-to-category">
-    ← {post.category || 'all'}
-  </a>
-</div>
-
 {#if loading}
   <div class="loading">Loading...</div>
 {:else if error}
