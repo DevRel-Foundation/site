@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { onMount } from 'svelte';
   import ShareIcon from 'iconoir/icons/share-android.svg';
   import TwitterIcon from 'iconoir/icons/x.svg';
   import LinkedInIcon from 'iconoir/icons/linkedin.svg';
@@ -51,8 +52,8 @@
     window.open(`https://bsky.app/intent/compose?text=${text} ${url}`, '_blank');
   }
 
-  // Parse authors and fetch GitHub data
-  $effect(async () => {
+  // Parse authors and fetch GitHub data on client side only
+  onMount(async () => {
     if (author) {
       const authors = author.split(',').map(a => a.trim());
       const userPromises = authors.map(async (authorName) => {

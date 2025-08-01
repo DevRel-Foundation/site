@@ -90,12 +90,6 @@
     margin-bottom: var(--space-s);
   }
   
-  .footer-column p {
-    color: var(--color-text);
-    font-size: var(--step-0);
-    margin-bottom: var(--space-xs);
-  }
-  
   .footer-column a {
     color: var(--color-link);
     text-decoration: none;

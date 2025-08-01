@@ -56,41 +56,16 @@
 {/if}
 
 <style>
-  .blog-navigation {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-m) var(--space-l) 0;
-  }
-  
-  .back-to-category {
-    display: inline-block;
-    background-color: var(--color-background-secondary-1);
-    color: var(--color-text-secondary);
-    padding: var(--space-2xs) var(--space-s);
-    border-radius: var(--radius-s);
-    text-decoration: none;
-    font-size: var(--step--1);
-    transition: all 0.2s ease;
-    border: 1px solid var(--color-background-secondary-2);
-  }
-  
-  .back-to-category:hover {
-    background-color: var(--color-mint);
-    color: var(--color-background);
-    border-color: var(--color-mint);
-  }
-  
   .loading, .error {
-    text-align: center;
-    padding: var(--space-xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    font-size: var(--step-0);
     color: var(--color-text-secondary);
-    max-width: 800px;
-    margin: 0 auto;
   }
   
-  @media (max-width: 768px) {
-    .blog-navigation {
-      padding: var(--space-m) var(--space-m) 0;
-    }
+  .error {
+    color: var(--color-error, #dc2626);
   }
 </style>

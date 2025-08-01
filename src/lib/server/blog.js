@@ -60,7 +60,16 @@ export function getBlogPostContent(slug) {
 
 export async function getBlogPostsByCategory(category) {
   const posts = await getBlogPosts();
-  return posts.filter(post => post.category === category);
+  
+  if (category === 'all') {
+    return posts;
+  }
+  
+  const filtered = posts.filter(post => {
+    return post.category === category;
+  });
+  
+  return filtered;
 }
 
 export function calculateReadingTime(content) {

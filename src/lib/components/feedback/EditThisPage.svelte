@@ -82,20 +82,6 @@
     opacity: 0.5;
   }
   
-  .edit-meta {
-    font-size: var(--step--1);
-    color: var(--color-text-secondary);
-  }
-  
-  .edit-meta a {
-    color: var(--color-link);
-    text-decoration: none;
-  }
-  
-  .edit-meta a:hover {
-    text-decoration: underline;
-  }
-  
   @media (max-width: 768px) {
     .edit-links {
       flex-direction: column;

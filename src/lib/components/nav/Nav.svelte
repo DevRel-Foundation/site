@@ -145,7 +145,7 @@
               </div>  
 
               <div class="dropdown-section">
-                <h3 class="menu-header">&nbsp;</h3>
+                <h3 class="menu-header">Resources</h3>
                 <div class="dropdown-items">
 
 
@@ -297,11 +297,6 @@
 
 
 
-
-
-        <!-- <li><a href="/projects" onclick={closeAll}>Community</a></li> --> 
-        <!-- <li><a href="/working-groups" onclick={closeAll}>Working groups</a></li> --> 
-        <!-- <li><a href="/contact" onclick={closeAll}>Contact</a></li> --> 
       </ul>
 
 
@@ -309,7 +304,6 @@
       <button class="cta" onclick={closeAll}>
         <a href="/join-us">Join</a>
       </button>
-
       
       <button class="theme-toggle" onclick={toggleDarkMode} aria-label="Toggle dark mode">
         {#if isDarkMode}
