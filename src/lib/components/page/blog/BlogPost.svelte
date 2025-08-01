@@ -470,6 +470,28 @@
     color: var(--color-text-secondary);
   }
   
+  .meta-tags {
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    margin-top: var(--space-l);
+  }
+  
+  .meta-tags a {
+    text-decoration: none;
+  }
+  
+  .meta-tag {
+    font-weight: 700;
+    color: var(--color-text);
+    font-size: var(--step--1);
+    transition: color 0.2s ease;
+  }
+  
+  .meta-tags a:hover .meta-tag {
+    color: var(--color-mint-dark);
+  }
+  
   @media (max-width: 768px) {
     .blog-header {
       padding: 0 var(--space-m);

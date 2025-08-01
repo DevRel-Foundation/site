@@ -4,7 +4,7 @@ excerpt: "TEST - A plan to learn the fundamentals of Developer Relations and how
 author: "@j12y"
 date: "2025-07-29"
 category: "announce"
-tags: ["devrel", "community", "getting-started"]
+tags: ["devrel", "community"]
 ---
 
 TODO: REMOVE TEST 

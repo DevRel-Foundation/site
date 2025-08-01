@@ -3,7 +3,7 @@ title: "TEST - Getting Started with Developer Relations"
 excerpt: "TEST - An introduction to the fundamentals of Developer Relations and how to build successful developer communities."
 author: "DevRel Foundation"
 date: "2025-07-29"
-tags: ["devrel", "community", "getting-started"]
+tags: ["community", "getting-started"]
 ---
 
 TODO: REMOVE TEST 
