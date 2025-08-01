@@ -17,6 +17,7 @@
   } = $props();
   
   let showShareMenu = $state(false);
+  let githubUsers = $state([]);
   
   function toggleShareMenu() {
     showShareMenu = !showShareMenu;
@@ -37,6 +38,37 @@
     const url = encodeURIComponent($page.url.href);
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
   }
+
+  // Parse authors and fetch GitHub data
+  $effect(async () => {
+    if (author) {
+      const authors = author.split(',').map(a => a.trim());
+      const userPromises = authors.map(async (authorName) => {
+        if (authorName.startsWith('@')) {
+          const username = authorName.slice(1);
+          try {
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            if (response.ok) {
+              const userData = await response.json();
+              return {
+                type: 'github',
+                username,
+                name: userData.name || userData.login || username,
+                avatar: userData.avatar_url,
+                url: userData.html_url
+              };
+            }
+          } catch (error) {
+            console.error('Failed to fetch GitHub user:', error);
+          }
+          return { type: 'github', username, name: username, avatar: null, url: `https://github.com/${username}` };
+        }
+        return { type: 'text', name: authorName };
+      });
+      
+      githubUsers = await Promise.all(userPromises);
+    }
+  });
 </script>
 
 <article class="blog-post">
@@ -62,8 +94,25 @@
     
     <div class="post-actions">
       <div class="author-info">
-        {#if author}
-          <span class="author">By {author}</span>
+        {#if githubUsers.length > 0}
+          <div class="authors">
+            <span class="by-text">By</span>
+            {#each githubUsers as user, index}
+              {#if user.type === 'github'}
+                <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
+                  {#if user.avatar}
+                    <img src={user.avatar} alt={user.name} class="author-avatar" />
+                  {/if}
+                  {user.name}
+                </a>
+              {:else}
+                <span class="text-author">{user.name}</span>
+              {/if}
+              {#if index < githubUsers.length - 1}
+                <span class="author-separator">, </span>
+              {/if}
+            {/each}
+          </div>
         {/if}
       </div>
       
@@ -158,7 +207,45 @@
     align-items: center;
   }
   
-  .author {
+  .authors {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    flex-wrap: wrap;
+  }
+  
+  .by-text {
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+  }
+  
+  .github-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    text-decoration: none;
+    color: var(--color-link);
+    font-size: var(--step--1);
+    transition: opacity 0.2s ease;
+  }
+  
+  .github-author:hover {
+    opacity: 0.8;
+  }
+  
+  .author-avatar {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-background-secondary-2);
+  }
+  
+  .text-author {
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+  }
+  
+  .author-separator {
     font-size: var(--step--1);
     color: var(--color-text-secondary);
   }
