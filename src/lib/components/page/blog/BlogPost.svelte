@@ -367,7 +367,7 @@
   .post-content :global(h1),
   .post-content :global(h2),
   .post-content :global(h3) {
-    margin-top: var(--space-xl);
+    margin-top: var(--space-l);
     margin-bottom: var(--space-m);
     line-height: 1.3;
   }
@@ -391,8 +391,8 @@
   }
   
   .post-content :global(code) {
-    background-color: var(--color-background-secondary-1);
-    color: var(--color-link);
+    background-color: var(--color-mint-dark);
+    color: var(--color-mint);
     padding: 0.125em 0.25em;
     border-radius: var(--radius-s);
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -400,18 +400,47 @@
   }
   
   .post-content :global(pre) {
-    background-color: var(--color-background-secondary-1);
+    background-color: var(--color-mint-dark);
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-s);
-    padding: var(--space-m);
+    padding: var(--space-s);
     overflow-x: auto;
-    margin: var(--space-m) 0;
+    margin: var(--space-s) 0;
   }
   
   .post-content :global(pre code) {
     background: none;
     padding: 0;
-    color: var(--color-text);
+    color: var(--color-mint);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  }
+  
+  /* JSON syntax highlighting */
+  .post-content :global(pre code .token.property) {
+    color: var(--color-mint);
+  }
+  
+  .post-content :global(pre code .token.string) {
+    color: #fbbf24; /* yellow-400 */
+  }
+  
+  .post-content :global(pre code .token.number),
+  .post-content :global(pre code .token.boolean) {
+    color: var(--color-mint);
+  }
+  
+  .post-content :global(pre code .token.punctuation) {
+    color: rgba(var(--color-mint-rgb), 0.7);
+  }
+  
+  .post-content :global(pre code .token.comment) {
+    color: rgba(var(--color-mint-rgb), 0.6);
+    font-style: italic;
+  }
+  
+  .post-content :global(pre code .token.keyword) {
+    color: var(--color-mint);
+    font-weight: 600;
   }
   
   .post-content :global(blockquote) {
@@ -424,6 +453,40 @@
   
   .post-content :global(blockquote p) {
     margin-bottom: 0;
+  }
+  
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-top: var(--space-s);
+    margin-bottom: var(--space-m);
+    font-size: var(--step-0);
+  }
+  
+  .post-content :global(ul.contains-task-list) {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .post-content :global(li.task-list-item) {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .post-content :global(li.task-list-item input[type="checkbox"]) {
+    margin-right: var(--space-2xs);
+  }
+  
+  .post-content :global(li.task-list-item input[type="checkbox"]:checked) {
+    appearance: none;
+    width: auto;
+    height: auto;
+    margin-right: var(--space-2xs);
+  }
+  
+  .post-content :global(li.task-list-item input[type="checkbox"]:checked::before) {
+    content: "✅";
+    font-size: 1em;
   }
   
   .tags {
