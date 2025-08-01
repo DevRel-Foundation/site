@@ -5,6 +5,7 @@ author: "@devrel-foundation"
 date: "2024-09-16"
 category: "announce"
 tags: ["foundation"]
+image: "/images/blog/devrel-foundation-governance.png"
 ---
 
 This milestone marks our intent to form as the Developer Relations Foundation. Our [mission](/about/mission) is to elevate the professional practice of developer relations and increase awareness of it as a driver of business value. Through the guidance and support of the Linux Foundation we can make strides to accomplish our shared vision.
