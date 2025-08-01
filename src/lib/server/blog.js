@@ -23,7 +23,16 @@ export async function getBlogPosts() {
 }
 
 export function getCategories() {
-  return ['announce', 'early-ic', 'pro-lead', 'exec'];
+  return {
+    categories: ['announce', 'early-ic', 'pro-lead', 'exec'],
+    descriptions: {
+      all: "Elevating the professional practice of Developer Relations",
+      announce: "Announcements and updates from the DevRel Foundation",
+      'early-ic': "Resources and insights for early-career Developer Relations professionals",
+      'pro-lead': "Advanced strategies and leadership perspectives for experienced practitioners",
+      exec: "Executive-level insights on the business value of Developer Relations strategy"
+    }
+  };
 }
 
 export async function getBlogPost(slug) {
