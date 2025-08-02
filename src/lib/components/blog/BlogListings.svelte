@@ -4,9 +4,9 @@
   
   let githubUsersCache = $state({});
   
-  const { posts } = $props();
+  const { posts = [] } = $props();
   
-  // Function to fetch GitHub user data
+  // Function to fetch GitHub user data - only called on client side
   async function fetchGithubUsers(author) {
     if (!author || githubUsersCache[author]) return githubUsersCache[author] || [];
     
@@ -41,39 +41,56 @@
   
   // Pre-fetch author data for all posts on mount
   onMount(async () => {
-    const uniqueAuthors = [...new Set(posts.map(post => post.author).filter(Boolean))];
-    
-    for (const author of uniqueAuthors) {
-      if (!githubUsersCache[author]) {
-        await fetchGithubUsers(author);
+    if (posts && posts.length > 0) {
+      const uniqueAuthors = [...new Set(posts.map(post => post.author).filter(Boolean))];
+      
+      for (const author of uniqueAuthors) {
+        if (!githubUsersCache[author]) {
+          await fetchGithubUsers(author);
+        }
       }
     }
   });
 </script>
 
-<!-- ...existing template code... -->
-
-            {#if post.author}
-              {#if githubUsersCache[post.author]}
-                {#each githubUsersCache[post.author] as user, index}
-                  {#if user.type === 'github'}
-                    <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
-                      {#if user.avatar}
-                        <img src={user.avatar} alt={user.name} class="author-avatar" />
-                      {/if}
-                      {user.name}
-                    </a>
-                  {:else}
-                    <span class="text-author">{user.name}</span>
+{#if posts && posts.length > 0}
+  <div class="blog-listings">
+    {#each posts as post}
+      <article class="blog-listing">
+        <!-- ...existing post display code... -->
+        
+        {#if post.author}
+          {#if githubUsersCache[post.author]}
+            {#each githubUsersCache[post.author] as user, index}
+              {#if user.type === 'github'}
+                <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
+                  {#if user.avatar}
+                    <img src={user.avatar} alt={user.name} class="author-avatar" />
                   {/if}
-                  {#if index < githubUsersCache[post.author].length - 1}
-                    <span class="author-separator">, </span>
-                  {/if}
-                {/each}
+                  {user.name}
+                </a>
               {:else}
-                <span class="author">{post.author}</span>
+                <span class="text-author">{user.name}</span>
               {/if}
-            {/if}
+              {#if index < githubUsersCache[post.author].length - 1}
+                <span class="author-separator">, </span>
+              {/if}
+            {/each}
+          {:else}
+            <span class="author">{post.author}</span>
+          {/if}
+        {/if}
+        
+        <!-- ...existing code... -->
+      </article>
+    {/each}
+  </div>
+{:else}
+  <div class="empty-state">
+    <h2>No posts found</h2>
+    <p>There are currently no blog posts with this tag.</p>
+  </div>
+{/if}
 
-<!-- ...existing code... -->
+<!-- ...existing styles... -->
 ```
