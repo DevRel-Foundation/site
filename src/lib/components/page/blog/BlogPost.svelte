@@ -16,7 +16,8 @@
     tags = [],
     readingTime = '',
     slug,
-    image
+    image,
+    children
   } = $props();
   
   let showShareMenu = $state(false);
@@ -185,7 +186,7 @@
 
 <article class="blog-post">
   <div class="post-content">
-    <slot />
+    {@render children?.()}
 
     {#if tags.length > 0}
       <div class="meta-tags">
@@ -194,7 +195,6 @@
         {/each}
       </div>
     {/if}
-
   </div>
 </article>
 
@@ -487,20 +487,6 @@
   .post-content :global(li.task-list-item input[type="checkbox"]:checked::before) {
     content: "✅";
     font-size: 1em;
-  }
-  
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2xs);
-  }
-  
-  .tag {
-    background-color: var(--color-background-secondary-1);
-    color: var(--color-text-secondary);
-    padding: var(--space-3xs) var(--space-2xs);
-    border-radius: var(--radius-s);
-    font-size: var(--step--2);
   }
   
   .github-author {
