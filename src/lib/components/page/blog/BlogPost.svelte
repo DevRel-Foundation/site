@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { onMount } from 'svelte';
   import TwitterIcon from 'iconoir/icons/x.svg';
   import LinkedInIcon from 'iconoir/icons/linkedin.svg';
@@ -28,7 +28,7 @@
   }
   
   function copyLink() {
-    navigator.clipboard.writeText($page.url.href);
+    navigator.clipboard.writeText(page.url.href);
     showCopyConfirmation = true;
     setTimeout(() => {
       showCopyConfirmation = false;
@@ -36,25 +36,25 @@
   }
   
   function shareTwitter() {
-    const url = encodeURIComponent($page.url.href);
+    const url = encodeURIComponent(page.url.href);
     const text = encodeURIComponent(`${title}\n\n${excerpt || ''}\n\n`);
     window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
   }
   
   function shareLinkedIn() {
-    const url = encodeURIComponent($page.url.href);
+    const url = encodeURIComponent(page.url.href);
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
   }
   
   function shareFacebook() {
-    const url = encodeURIComponent($page.url.href);
+    const url = encodeURIComponent(page.url.href);
     const quote = encodeURIComponent(`${title}\n\n${excerpt || ''}`);
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
   }
   
   function shareBluesky() {
-    const url = encodeURIComponent($page.url.href);
-    const text = encodeURIComponent(`${title}\n\n${excerpt || ''}\n\n${$page.url.href}`);
+    const url = encodeURIComponent(page.url.href);
+    const text = encodeURIComponent(`${title}\n\n${excerpt || ''}\n\n${page.url.href}`);
     window.open(`https://bsky.app/intent/compose?text=${text}`, '_blank');
   }
 

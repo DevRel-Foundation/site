@@ -1,5 +1,5 @@
 <script>
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
   
   const { data } = $props();
@@ -25,7 +25,44 @@
 
 <svelte:head>
   <title>{category.toUpperCase()} | Blog | DevRel Foundation</title>
-  <meta name="description" content="Blog posts about {category} from the DevRel Foundation." />
+  <meta name="description" content="{categoryDescriptions[category] || categoryDescriptions.all}" />
+  
+  <!-- SEO Optimizations -->
+  <meta name="keywords" content="DevRel, Developer Relations, {category}, {posts.map(p => p.tags).flat().join(', ')}" />
+  <meta name="author" content="DevRel Foundation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={page.url.href} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:url" content={page.url.href} />
+  <meta property="og:title" content="{category.toUpperCase()} Posts | DevRel Foundation Blog" />
+  <meta property="og:description" content="{categoryDescriptions[category] || categoryDescriptions.all}" />
+  <meta property="og:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="DevRel Foundation" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={page.url.href} />
+  <meta name="twitter:title" content="{category.toUpperCase()} Posts | DevRel Foundation Blog" />
+  <meta name="twitter:description" content="{categoryDescriptions[category] || categoryDescriptions.all}" />
+  <meta name="twitter:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": `${category.toUpperCase()} Posts | DevRel Foundation`,
+      "description": categoryDescriptions[category] || categoryDescriptions.all,
+      "url": page.url.href,
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "DevRel Foundation Blog"
+      }
+    })}
+  </script>
 </svelte:head>
 
 {#key category}

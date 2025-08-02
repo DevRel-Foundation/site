@@ -1,5 +1,5 @@
 <script>
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
   
   const { data } = $props();
@@ -25,7 +25,58 @@
 
 <svelte:head>
   <title>Blog | DevRel Foundation</title>
-  <meta name="description" content="Insights, tutorials, and thoughts on Developer Relations from the DevRel Foundation community." />
+  <meta name="description" content="Elevating the professional practice of Developer Relations through insights, resources, and community collaboration." />
+  
+  <!-- SEO Optimizations -->
+  <meta name="keywords" content="DevRel, Developer Relations, Developer Advocacy, Community, Technical Writing, Developer Marketing" />
+  <meta name="author" content="DevRel Foundation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={page.url.href} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:url" content={page.url.href} />
+  <meta property="og:title" content="DevRel Foundation Blog" />
+  <meta property="og:description" content="Elevating the professional practice of Developer Relations through insights, resources, and community collaboration." />
+  <meta property="og:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="DevRel Foundation" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={page.url.href} />
+  <meta name="twitter:title" content="DevRel Foundation Blog" />
+  <meta name="twitter:description" content="Elevating the professional practice of Developer Relations through insights, resources, and community collaboration." />
+  <meta name="twitter:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
+  <meta name="twitter:site" content="@devrel_foundation" />
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "DevRel Foundation Blog",
+      "description": "Elevating the professional practice of Developer Relations through insights, resources, and community collaboration.",
+      "url": page.url.href,
+      "publisher": {
+        "@type": "Organization",
+        "name": "DevRel Foundation",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${page.url.origin}/images/devrel-foundation-logo.png`
+        },
+        "sameAs": [
+          "https://github.com/devrel-foundation",
+          "https://discord.gg/kfJkJ3Xd"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "general inquiry",
+          "email": "info@dev-rel.org"
+        }
+      }
+    })}
+  </script>
 </svelte:head>
 
 <div class="container container-content">
@@ -35,7 +86,7 @@
     
     <nav class="category-nav">
       <a href="/blog" 
-         class="category-link {!$page.url.pathname.includes('/category/') ? 'active' : ''}"
+         class="category-link {!page.url.pathname.includes('/category/') ? 'active' : ''}"
          onmouseenter={() => handleCategoryHover('all')}
          onmouseleave={handleCategoryLeave}>
         all 
