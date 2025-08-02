@@ -20,8 +20,34 @@
   } = $props();
   
   let showShareMenu = $state(false);
-  let githubUsers = $state([]);
+  let githubUsers = $state<Array<{
+    type: 'github' | 'text';
+    username?: string;
+    name: string;
+    avatar?: string | null;
+    url?: string;
+    bio?: string | null;
+  }>>([]);
   let showCopyConfirmation = $state(false);
+  
+  // Foundation representatives who don't need disclaimers
+  const foundationRepresentatives = [
+    '@j12y',
+    '@devrel-foundation',
+    '@anajsana',
+    '@wesley83',
+    '@jcleblanc',
+    '@kmillrunner',
+    '@ssk_14',
+    '@adityaoberai1'
+  ];
+  
+  // Check if author is a foundation representative
+  const isFoundationRepresentative = $derived(
+    author && foundationRepresentatives.some(rep => 
+      author.toLowerCase().includes(rep.toLowerCase())
+    )
+  );
   
   function toggleShareMenu() {
     showShareMenu = !showShareMenu;
@@ -61,8 +87,8 @@
   // Parse authors and fetch GitHub data on client side only
   onMount(async () => {
     if (author) {
-      const authors = author.split(',').map(a => a.trim());
-      const userPromises = authors.map(async (authorName) => {
+      const authors = author.split(',').map((a: string) => a.trim());
+      const userPromises = authors.map(async (authorName: string) => {
         if (authorName.startsWith('@')) {
           const username = authorName.slice(1);
           try {
@@ -70,7 +96,7 @@
             if (response.ok) {
               const userData = await response.json();
               return {
-                type: 'github',
+                type: 'github' as const,
                 username,
                 name: userData.name || userData.login || username,
                 avatar: userData.avatar_url,
@@ -81,9 +107,9 @@
           } catch (error) {
             console.error('Failed to fetch GitHub user:', error);
           }
-          return { type: 'github', username, name: username, avatar: null, url: `https://github.com/${username}`, bio: null };
+          return { type: 'github' as const, username, name: username, avatar: null, url: `https://github.com/${username}`, bio: null };
         }
-        return { type: 'text', name: authorName };
+        return { type: 'text' as const, name: authorName };
       });
       
       githubUsers = await Promise.all(userPromises);
@@ -193,7 +219,13 @@
 
 
 <article class="blog-post">
+  {#if !isFoundationRepresentative}
+    <div class="disclaimer">
+      <p><em>This blog post represents the viewpoint of its author(s) and does not necessarily reflect an official position or perspective of the DevRel Foundation or any subsidiary working group. Authors' current workplace or affiliated products, if mentioned, are disclosed for transparency.</em></p>
+    </div>
+  {/if}
   <div class="post-content">
+
     {@render children?.()}
 
     {#if tags.length > 0}
@@ -550,6 +582,21 @@
   
   .meta-tags a:hover .meta-tag {
     color: var(--color-mint-dark);
+  }
+  
+  .disclaimer {
+    background-color: var(--color-background-secondary-1);
+    border-left: 3px solid var(--color-mint-dark);
+    padding: var(--space-s);
+    margin: var(--space-l) 0;
+    border-radius: var(--radius-s);
+  }
+  
+  .disclaimer p {
+    margin: 0;
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
   }
   
   @media (max-width: 768px) {
