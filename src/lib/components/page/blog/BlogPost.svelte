@@ -29,6 +29,8 @@
     bio?: string | null;
   }>>([]);
   let showCopyConfirmation = $state(false);
+  let copiedAnchorId = $state<string | null>(null);
+  let anchorCopyTimeout: number;
   
   // Foundation representatives who don't need disclaimers
   const foundationRepresentatives = [
@@ -84,36 +86,128 @@
     window.open(`https://bsky.app/intent/compose?text=${text}`, '_blank');
   }
 
-  // Parse authors and fetch GitHub data on client side only
-  onMount(async () => {
-    if (author) {
-      const authors = author.split(',').map((a: string) => a.trim());
-      const userPromises = authors.map(async (authorName: string) => {
-        if (authorName.startsWith('@')) {
-          const username = authorName.slice(1);
-          try {
-            const response = await fetch(`https://api.github.com/users/${username}`);
-            if (response.ok) {
-              const userData = await response.json();
-              return {
-                type: 'github' as const,
-                username,
-                name: userData.name || userData.login || username,
-                avatar: userData.avatar_url,
-                url: userData.html_url,
-                bio: userData.bio
-              };
-            }
-          } catch (error) {
-            console.error('Failed to fetch GitHub user:', error);
-          }
-          return { type: 'github' as const, username, name: username, avatar: null, url: `https://github.com/${username}`, bio: null };
-        }
-        return { type: 'text' as const, name: authorName };
-      });
-      
-      githubUsers = await Promise.all(userPromises);
+  function copyAnchorLink(headingId: string) {
+    const url = `${$page.url.origin}${$page.url.pathname}#${headingId}`;
+    navigator.clipboard.writeText(url);
+    copiedAnchorId = headingId;
+    
+    // Clear any existing timeout
+    if (anchorCopyTimeout) {
+      clearTimeout(anchorCopyTimeout);
     }
+    
+    // Clear the confirmation after 2 seconds
+    anchorCopyTimeout = setTimeout(() => {
+      copiedAnchorId = null;
+    }, 2000);
+  }
+
+  function generateId(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .trim();
+  }
+
+  // Parse authors and fetch GitHub data on client side only
+  onMount(() => {
+    async function initializeComponent() {
+      if (author) {
+        const authors = author.split(',').map((a: string) => a.trim());
+        const userPromises = authors.map(async (authorName: string) => {
+          if (authorName.startsWith('@')) {
+            const username = authorName.slice(1);
+            try {
+              const response = await fetch(`https://api.github.com/users/${username}`);
+              if (response.ok) {
+                const userData = await response.json();
+                return {
+                  type: 'github' as const,
+                  username,
+                  name: userData.name || userData.login || username,
+                  avatar: userData.avatar_url,
+                  url: userData.html_url,
+                  bio: userData.bio
+                };
+              }
+            } catch (error) {
+              console.error('Failed to fetch GitHub user:', error);
+            }
+            return { type: 'github' as const, username, name: username, avatar: null, url: `https://github.com/${username}`, bio: null };
+          }
+          return { type: 'text' as const, name: authorName };
+        });
+        
+        githubUsers = await Promise.all(userPromises);
+      }
+
+      // Add anchor links to headings
+      const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3');
+      headings.forEach((heading) => {
+        const text = heading.textContent || '';
+        const id = generateId(text);
+        
+        // Set the heading ID if it doesn't already have one
+        if (!heading.id) {
+          heading.id = id;
+        }
+        
+        // Create anchor link container
+        const anchorContainer = document.createElement('span');
+        anchorContainer.className = 'heading-anchor';
+        anchorContainer.innerHTML = `
+          <svg class="anchor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <span class="copy-confirmation" style="opacity: 0;">Copied!</span>
+        `;
+        
+        // Add click handler
+        anchorContainer.addEventListener('click', (e) => {
+          e.preventDefault();
+          copyAnchorLink(heading.id);
+          
+          // Show confirmation for this specific anchor
+          const confirmation = anchorContainer.querySelector('.copy-confirmation');
+          if (confirmation) {
+            confirmation.style.opacity = '1';
+            setTimeout(() => {
+              confirmation.style.opacity = '0';
+            }, 2000);
+          }
+        });
+        
+        // Append the anchor to the heading
+        heading.appendChild(anchorContainer);
+      });
+    }
+
+    initializeComponent();
+
+    // Cleanup function
+    return () => {
+      if (anchorCopyTimeout) {
+        clearTimeout(anchorCopyTimeout);
+      }
+    };
+  });
+
+  // Effect to update copy confirmations
+  $effect(() => {
+    const confirmations = document.querySelectorAll('.copy-confirmation');
+    confirmations.forEach((confirmation, index) => {
+      const heading = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3')[index];
+      if (heading && copiedAnchorId === heading.id) {
+        confirmation.textContent = 'Copied!';
+        confirmation.classList.add('show');
+      } else {
+        confirmation.textContent = '';
+        confirmation.classList.remove('show');
+      }
+    });
   });
 </script>
 
@@ -642,5 +736,72 @@
     font-size: var(--step--2);
     white-space: nowrap;
     z-index: 10;
+  }
+
+  /* Heading anchor styles */
+  .post-content :global(h1),
+  .post-content :global(h2), 
+  .post-content :global(h3) {
+    position: relative;
+    scroll-margin-top: 5rem;
+  }
+
+  .post-content :global(.heading-anchor) {
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .post-content :global(h1:hover .heading-anchor),
+  .post-content :global(h2:hover .heading-anchor),
+  .post-content :global(h3:hover .heading-anchor) {
+    opacity: 1;
+  }
+
+  .post-content :global(.anchor-icon) {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .post-content :global(.heading-anchor:hover .anchor-icon) {
+    color: var(--color-mint-dark);
+  }
+
+  .post-content :global(.heading-anchor .copy-confirmation) {
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-mint-dark);
+    color: var(--color-background);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--radius-s);
+    font-size: var(--step--2);
+    white-space: nowrap;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .post-content :global(.heading-anchor .copy-confirmation.show) {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .post-content :global(.heading-anchor) {
+      position: static;
+      opacity: 1;
+      margin-left: var(--space-2xs);
+      display: inline-flex;
+    }
   }
 </style>
