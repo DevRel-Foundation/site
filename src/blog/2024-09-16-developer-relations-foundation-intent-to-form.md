@@ -14,7 +14,7 @@ From the post to the [Linux Foundation Blog](https://www.linuxfoundation.org/pre
 
 > "We are thrilled to support the Developer Relations Foundation. This unites the DevRel community to elevate the practice and drive innovation."
 >  
-> --Jim Zemlin, Executive Director of the Linux Foundation
+> -- **Jim Zemlin, Executive Director of the Linux Foundation**
 
 Read the full announcement: [Linux Foundation Announces Intent to Form Developer Relations Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-intent-to-form-developer-relations-foundation)
 
