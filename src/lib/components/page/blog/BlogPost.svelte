@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import ShareIcon from 'iconoir/icons/share-android.svg';
   import TwitterIcon from 'iconoir/icons/x.svg';
   import LinkedInIcon from 'iconoir/icons/linkedin.svg';
   import LinkIcon from 'iconoir/icons/link.svg';
@@ -22,6 +21,7 @@
   
   let showShareMenu = $state(false);
   let githubUsers = $state([]);
+  let showCopyConfirmation = $state(false);
   
   function toggleShareMenu() {
     showShareMenu = !showShareMenu;
@@ -29,11 +29,15 @@
   
   function copyLink() {
     navigator.clipboard.writeText($page.url.href);
+    showCopyConfirmation = true;
+    setTimeout(() => {
+      showCopyConfirmation = false;
+    }, 2000);
   }
   
   function shareTwitter() {
     const url = encodeURIComponent($page.url.href);
-    const text = encodeURIComponent(title);
+    const text = encodeURIComponent(`${title}\n\n${excerpt || ''}\n\n`);
     window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
   }
   
@@ -44,13 +48,14 @@
   
   function shareFacebook() {
     const url = encodeURIComponent($page.url.href);
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    const quote = encodeURIComponent(`${title}\n\n${excerpt || ''}`);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
   }
   
   function shareBluesky() {
     const url = encodeURIComponent($page.url.href);
-    const text = encodeURIComponent(title);
-    window.open(`https://bsky.app/intent/compose?text=${text} ${url}`, '_blank');
+    const text = encodeURIComponent(`${title}\n\n${excerpt || ''}\n\n${$page.url.href}`);
+    window.open(`https://bsky.app/intent/compose?text=${text}`, '_blank');
   }
 
   // Parse authors and fetch GitHub data on client side only
@@ -127,8 +132,11 @@
           <button onclick={shareTwitter} class="share-icon-button" aria-label="Share on X/Twitter">
             <img src={TwitterIcon} alt="Share on X" class="social-icon" />
           </button>
-          <button onclick={copyLink} class="share-icon-button" aria-label="Copy link">
+          <button onclick={copyLink} class="share-icon-button" aria-label="Copy link" title="Copy link to this post">
             <img src={LinkIcon} alt="Copy link" class="social-icon" />
+            {#if showCopyConfirmation}
+              <span class="copy-confirmation">Copied!</span>
+            {/if}
           </button>
         </div>
       </div>
@@ -346,6 +354,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
   
   .share-icon-button:hover {
@@ -571,5 +580,19 @@
       align-items: flex-start;
       gap: var(--space-s);
     }
+  }
+  
+  .copy-confirmation {
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-mint-dark);
+    color: var(--color-background);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--radius-s);
+    font-size: var(--step--2);
+    white-space: nowrap;
+    z-index: 10;
   }
 </style>
