@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
+  import ContributorCallout from '$lib/components/page/blog/ContributorCallout.svelte';
   
   const { data } = $props();
   const { posts, categories, categoryDescriptions } = data;
@@ -103,6 +104,8 @@
   </header>
   
   <BlogListings {posts} />
+  
+  <ContributorCallout />
 </div>
 
 <style>

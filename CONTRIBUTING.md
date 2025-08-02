@@ -9,9 +9,6 @@ Welcome to the DevRel Foundation website project! We're excited to have you cont
 - [Ways to Contribute](#ways-to-contribute)
 - [Blog Contribution Guidelines](#blog-contribution-guidelines)
 - [Development Setup](#development-setup)
-- [Submission Process](#submission-process)
-- [Review Process](#review-process)
-- [Content Guidelines](#content-guidelines)
 - [Support](#support)
 
 ## Getting Started
@@ -48,6 +45,7 @@ Contribute to the visual design and user experience of the site.
 
 ### 💻 Code Contributions
 Help develop new features, fix bugs, or improve the site's technical implementation.
+
 
 ## Blog Contribution Guidelines
 
@@ -121,43 +119,7 @@ tags: ["tag1", "tag2", "tag3"]
 - Include descriptive alt text for accessibility
 - Store images in `/static/images/blog/` directory
 
-## Development Setup
-
-To run the site locally for development:
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/DevRel-Foundation/site.git
-cd site
-```
-
-### 2. Install Dependencies
-```bash
-npm install
-```
-
-### 3. Start Development Server
-```bash
-npm run dev -- --open
-```
-
-The site will be available at `http://localhost:5173`
-
-### 4. Build for Production
-```bash
-npm run build
-```
-
-### 5. Preview Production Build
-```bash
-npm run preview
-```
-
-All PRs will get a Netlify preview and URL so that it can be shared and tested before merge.
-
-## Submission Process
-
-### For Blog Posts
+## Blog Submission Process
 
 1. **Fork the Repository**: Create a fork of the [site repository](https://github.com/DevRel-Foundation/site)
 
@@ -186,17 +148,7 @@ Corrections may be necessary, but understand that it can be a burden and we are 
    - Create a pull request against the main repository
    - Include a clear description of your contribution
 
-### For Other Contributions
-
-1. **Check Existing Issues**: Look for related issues or create a new one to discuss your contribution
-2. **Fork and Branch**: Create a descriptive branch for your changes
-3. **Make Changes**: Implement your contribution following our coding standards
-4. **Test**: Ensure all tests pass and the site builds correctly
-5. **Submit PR**: Create a pull request with a clear description
-
-## Review Process
-
-### Blog Post Review
+## Blog Review
 
 All blog posts go through a community review process:
 
@@ -260,19 +212,53 @@ We encourage cross-posting content to amplify diverse voices:
 - **Coordination**: Contact maintainers if you need a specific publication window
 - **Originality**: Content published elsewhere more than 7 days prior may be rejected
 
-## Disclaimer
+### Disclaimer
 
 All blog posts include the following disclaimer:
 
 *"This blog post represents the viewpoint of its author(s) and does not necessarily reflect an official position or perspective of the DevRel Foundation or any subsidiary working group. Authors' current workplace or affiliated products, if mentioned, are disclosed for transparency."*
 
-## Recognition
+## Development Contributions
 
-Contributors are recognized through:
-- Author attribution on published content
-- Contributor listings in our community resources
-- Social media promotion of published content
-- Speaking opportunities at foundation events
+1. **Check Existing Issues**: Look for related issues or create a new one to discuss your contribution
+2. **Fork and Branch**: Create a descriptive branch for your changes
+3. **Make Changes**: Implement your contribution following our coding standards
+4. **Test**: Ensure all tests pass and the site builds correctly
+5. **Submit PR**: Create a pull request with a clear description
+
+### Development Setup
+
+To run the site locally for development:
+
+#### 1. Clone the Repository
+```bash
+git clone https://github.com/DevRel-Foundation/site.git
+cd site
+```
+
+#### 2. Install Dependencies
+```bash
+npm install
+```
+
+#### 3. Start Development Server
+```bash
+npm run dev -- --open
+```
+
+The site will be available at `http://localhost:5173`
+
+#### 4. Build for Production
+```bash
+npm run build
+```
+
+#### 5. Preview Production Build
+```bash
+npm run preview
+```
+
+All PRs will get a Netlify preview and URL so that it can be shared and tested before merge.
 
 ## Support
 

@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
+  import ContributorCallout from '$lib/components/page/blog/ContributorCallout.svelte';
   
   const { data } = $props();
   const { posts, category, categoryDescriptions, categories } = data;
@@ -93,6 +94,8 @@
     
     {#if posts.length > 0}
       <BlogListings {posts} />
+      
+      <ContributorCallout />
     {:else}
       <div class="empty-state">
         <h2>Tell your story</h2>
