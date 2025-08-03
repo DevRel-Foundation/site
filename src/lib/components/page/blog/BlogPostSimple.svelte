@@ -31,11 +31,6 @@
   let showCopyConfirmation = $state(false);
   let copiedAnchorId = $state<string | null>(null);
   let anchorCopyTimeout: number;
-  let tocHeadings = $state<Array<{
-    id: string;
-    text: string;
-  }>>([]);
-  let activeHeadingId = $state<string | null>(null);
   
   // Foundation representatives who don't need disclaimers
   const foundationRepresentatives = [
@@ -118,8 +113,6 @@
 
   // Parse authors and fetch GitHub data on client side only
   onMount(() => {
-    let handleScroll: () => void;
-    
     async function initializeComponent() {
       if (author) {
         const authors = author.split(',').map((a: string) => a.trim());
@@ -150,10 +143,8 @@
         githubUsers = await Promise.all(userPromises);
       }
 
-      // Add anchor links to headings and collect H2s for TOC
+      // Add anchor links to headings
       const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3');
-      const h2Headings: Array<{ id: string; text: string }> = [];
-      
       headings.forEach((heading) => {
         const text = heading.textContent || '';
         const id = generateId(text);
@@ -161,11 +152,6 @@
         // Set the heading ID if it doesn't already have one
         if (!heading.id) {
           heading.id = id;
-        }
-        
-        // Collect H2 headings for table of contents
-        if (heading.tagName === 'H2') {
-          h2Headings.push({ id, text });
         }
         
         // Create anchor link container
@@ -197,59 +183,15 @@
         // Append the anchor to the heading
         heading.appendChild(anchorContainer);
       });
-      
-      // Update table of contents
-      tocHeadings = h2Headings;
     }
 
-    // Set up scroll listener for active heading tracking
-    let scrollTimeout: number;
-    handleScroll = () => {
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-      
-      scrollTimeout = setTimeout(() => {
-        const headingElements = document.querySelectorAll('.post-content h2');
-        let currentActiveId = null;
-        
-        // Find the heading that's currently in view
-        headingElements.forEach((heading) => {
-          const rect = heading.getBoundingClientRect();
-          // Consider a heading active if it's within the top 30% of the viewport
-          if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
-            currentActiveId = heading.id;
-          }
-        });
-        
-        // If no heading is in the top 30%, use the last heading that passed the top
-        if (!currentActiveId) {
-          let lastPassedId = null;
-          headingElements.forEach((heading) => {
-            const rect = heading.getBoundingClientRect();
-            if (rect.top <= window.innerHeight * 0.3) {
-              lastPassedId = heading.id;
-            }
-          });
-          currentActiveId = lastPassedId;
-        }
-        
-        activeHeadingId = currentActiveId;
-      }, 10); // Small throttle to improve performance
-    };
-
-    initializeComponent().then(() => {
-      // Add scroll listener after initialization
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial check
-    });
+    initializeComponent();
 
     // Cleanup function
     return () => {
       if (anchorCopyTimeout) {
         clearTimeout(anchorCopyTimeout);
       }
-      window.removeEventListener('scroll', handleScroll);
     };
   });
 
@@ -376,42 +318,16 @@
       <p><em>This blog post represents the viewpoint of its author(s) and does not necessarily reflect an official position or perspective of the DevRel Foundation or any subsidiary working group. Authors' current workplace or affiliated products, if mentioned, are disclosed for transparency.</em></p>
     </div>
   {/if}
-  
-  <div class="post-layout">
-    <div class="post-content">
-      {@render children?.()}
-    </div>
-    
-    {#if tags.length > 0 || tocHeadings.length > 0}
-      <aside class="post-sidebar">
-        {#if tocHeadings.length > 0}
-          <div class="sidebar-toc">
-            <h4 class="sidebar-title">Contents</h4>
-            <nav class="toc-nav">
-              {#each tocHeadings as heading}
-                <a 
-                  href="#{heading.id}" 
-                  class="toc-link"
-                  class:active={activeHeadingId === heading.id}
-                >
-                  {heading.text}
-                </a>
-              {/each}
-            </nav>
-          </div>
-        {/if}
-        
-        {#if tags.length > 0}
-          <div class="sidebar-tags">
-            <h4 class="sidebar-title">Topics</h4>
-            <div class="meta-tags">
-              {#each tags as tag}
-                <a href="/blog/tag/{tag}"><span class="meta-tag">#{tag}</span></a>
-              {/each}
-            </div>
-          </div>
-        {/if}
-      </aside>
+  <div class="post-content">
+
+    {@render children?.()}
+
+    {#if tags.length > 0}
+      <div class="meta-tags">
+        {#each tags as tag}
+          <a href="/blog/tag/{tag}"><span class="meta-tag">#{tag}</span></a>&nbsp; &nbsp; 
+        {/each}
+      </div>
     {/if}
   </div>
 </article>
@@ -422,7 +338,6 @@
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     padding: var(--space-l) 0;
-    overflow-x: hidden;
   }
   
   .blog-header {
@@ -452,75 +367,9 @@
   }
   
   .blog-post {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: var(--space-l);
-  }
-  
-  .post-layout {
-    display: grid;
-    grid-template-columns: 1fr 250px;
-    gap: var(--space-xl);
-    align-items: start;
-  }
-  
-  .post-content {
-    max-width: 800px;
-    line-height: 1.7;
-    margin-bottom: var(--space-xl);
-  }
-  
-  .post-sidebar {
-    position: sticky;
-    top: 6rem;
-    height: fit-content;
-  }
-  
-  .sidebar-tags {
-    padding: var(--space-m);
-  }
-  
-  .sidebar-toc {
-    padding: var(--space-m);
-    border-bottom: 1px solid var(--color-background-secondary-2);
-    margin-bottom: var(--space-m);
-  }
-  
-  .toc-nav {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-  
-  .toc-link {
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    font-size: var(--step--1);
-    line-height: 1.4;
-    padding: var(--space-3xs) 0;
-    border-left: 2px solid transparent;
-    padding-left: var(--space-2xs);
-    transition: all 0.2s ease;
-  }
-  
-  .toc-link:hover {
-    color: var(--color-mint-dark);
-    border-left-color: var(--color-mint-dark);
-  }
-  
-  .toc-link.active {
-    color: var(--color-text-secondary);
-    border-left-color: var(--color-mint);
-    font-weight: 600;
-  }
-  
-  .sidebar-title {
-    margin: 0 0 var(--space-s) 0;
-    font-size: var(--step--1);
-    font-weight: 600;
-    color: var(--color-text);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
   
   .post-meta {
@@ -645,6 +494,11 @@
     filter: var(--icon-filter);
   }
   
+  .post-content {
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+  }
+  
   .post-content :global(h1),
   .post-content :global(h2),
   .post-content :global(h3) {
@@ -687,8 +541,6 @@
     padding: var(--space-s);
     overflow-x: auto;
     margin: var(--space-s) 0;
-    max-width: 100%;
-    box-sizing: border-box;
   }
   
   .post-content :global(pre code) {
@@ -821,18 +673,9 @@
   
   .meta-tags {
     display: flex;
-    gap: var(--space-2xs);
+    gap: var(--space-s);
     flex-wrap: wrap;
-    margin-top: 0;
-  }
-  
-  .sidebar-tags .meta-tags {
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-  
-  .sidebar-tags .meta-tags a {
-    padding-left: var(--space-2xs);
+    margin-top: var(--space-l);
   }
   
   .meta-tags a {
@@ -866,12 +709,6 @@
   }
   
   @media (max-width: 768px) {
-    .blog-header-wrapper {
-      width: 100%;
-      margin-left: 0;
-      padding: var(--space-m) 0;
-    }
-    
     .blog-header {
       padding: 0 var(--space-m);
     }
@@ -887,68 +724,6 @@
     
     .blog-post {
       padding: var(--space-m);
-      overflow-x: hidden;
-    }
-    
-    .post-layout {
-      grid-template-columns: 1fr;
-      gap: var(--space-l);
-    }
-    
-    .post-content {
-      max-width: none;
-      overflow-x: hidden;
-      word-wrap: break-word;
-    }
-    
-    .post-content :global(img),
-    .post-content :global(table) {
-      max-width: 100%;
-      height: auto;
-      box-sizing: border-box;
-    }
-    
-    .post-sidebar {
-      position: static;
-      order: 1;
-    }
-    
-    .sidebar-tags {
-      padding: var(--space-s);
-    }
-    
-    .sidebar-toc {
-      padding: var(--space-s);
-      border-bottom: 1px solid var(--color-background-secondary-2);
-      margin-bottom: var(--space-s);
-    }
-    
-    .toc-nav {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: var(--space-2xs);
-    }
-    
-    .toc-link {
-      border-left: none;
-      padding-left: 0;
-      background-color: var(--color-background-secondary-1);
-      padding: var(--space-3xs) var(--space-2xs);
-      border-radius: var(--radius-s);
-      font-size: var(--step--2);
-    }
-    
-    .toc-link.active {
-      background-color: var(--color-mint-dark);
-      color: var(--color-background);
-      font-weight: 700;
-      margin-left: 0;
-    }
-    
-    .sidebar-tags .meta-tags {
-      flex-direction: row;
-      flex-wrap: wrap;
     }
     
     .post-meta {
