@@ -123,51 +123,54 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">About the DevRel Foundation</h3>
                 <div class="dropdown-items">
+
                   <a href="/about/mission" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Mission</span>
                       <span class="item-description">Our vision and goals for the community.</span>
                     </div>
                   </a>
+
                   <a href="/about/steering-committee" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Steering Committee</span>
                       <span class="item-description">Meet the leaders guiding the foundation.</span>
                     </div>
                   </a>
+
                   <a href="/about/working-groups" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Working Groups</span>
                       <span class="item-description">Working groups drive sourcing and innovation.</span>
                     </div>
                   </a>
-                </div>
-              </div>  
 
-              <div class="dropdown-section">
-                <h3 class="menu-header">Resources</h3>
-                <div class="dropdown-items">
-
-
-
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">Charter ↗</span>
-                      <span class="item-description">The scope, principles and operating guidelines.</span>
-                    </div>
-                  </a>
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">Code of Conduct ↗</span>
-                      <span class="item-description">Our community standards.</span>
-                    </div>
-                  </a>
                   <a href="/contact" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Contact</span>
                       <span class="item-description">Get in touch with us.</span>
                     </div>
                   </a>
+
+                </div>
+              </div>  
+
+              <div class="dropdown-section">
+                <h3 class="menu-header">Foundation Resources</h3>
+                <div class="dropdown-items">
+
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">Charter ↗</span>
+                    </div>
+                  </a>
+
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">Code of Conduct ↗</span>
+                    </div>
+                  </a>
+
 
                 </div>
               </div>
@@ -189,22 +192,47 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">Learn About DevRel</h3>
                 <div class="dropdown-items">
+
+                  <a href="/blog" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">DevRel Foundation Blog</span>
+                      <span class="item-description">The latest news and updates.</span>
+                    </div>
+                  </a>
+
                   <a href="/learn/what-is-devrel" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">What is Developer Relations?</span>
                       <span class="item-description">Defining this critical role in technology adoption.</span>
                     </div>
                   </a>
+
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header">&nbsp;</h3>
+                <h3 class="menu-header">Community Resources</h3>
                 <div class="dropdown-items">
+
+                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
+                        Discord ↗
+                      </span>
+                    </div>
+                  </a>
+
                 </div>
               </div>
             </div>
           </div>
         </li>
+
+
+
+
+        <!-- 
+        
 
         <li class="nav-item dropdown-container" 
             onmouseenter={() => !isMobile && showDropdown('community')} 
@@ -244,6 +272,7 @@
             </div>
           </div>
         </li>
+        -->
 
 	
 
