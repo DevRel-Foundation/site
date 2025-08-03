@@ -39,7 +39,7 @@
 <style>
   .edit-page-container {
     border-top: 1px solid var(--color-background-secondary-2);
-    margin-top: var(--space-xl);
+    margin-top: 0;
     padding-top: var(--space-s);
     padding-bottom: var(--space-s);
   }
