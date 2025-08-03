@@ -5,22 +5,22 @@
   
   const { posts } = $props();
   
-  // Load authors.json data once
+  // Load authors data from API endpoint
   async function loadAuthorsData() {
     if (authorsLoaded) return;
     
     try {
-      const response = await fetch('/src/authors/authors.json');
+      const response = await fetch('/api/authors');
       if (response.ok) {
         authorsData = await response.json();
       }
     } catch (error) {
-      console.error('Failed to load authors.json:', error);
+      console.error('Failed to load authors data:', error);
     }
     authorsLoaded = true;
   }
   
-  // Function to get author data from authors.json
+  // Function to get author data from API endpoint
   async function fetchGithubUsers(author) {
     if (!author || githubUsersCache[author]) return githubUsersCache[author] || [];
     

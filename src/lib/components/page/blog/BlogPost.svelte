@@ -124,15 +124,15 @@
       if (author) {
         const authors = author.split(',').map((a: string) => a.trim());
         
-        // Load authors.json data
+        // Load authors data from API endpoint
         let authorsData = {};
         try {
-          const response = await fetch('/src/authors/authors.json');
+          const response = await fetch('/api/authors');
           if (response.ok) {
             authorsData = await response.json();
           }
         } catch (error) {
-          console.error('Failed to load authors.json:', error);
+          console.error('Failed to load authors data:', error);
         }
         
         const userPromises = authors.map(async (authorName: string) => {
