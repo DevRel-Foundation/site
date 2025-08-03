@@ -1,54 +1,48 @@
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7d892d4f-83f3-49a0-b146-784ddbcdb4dc/deploy-status)](https://app.netlify.com/projects/drf-site/deploys)
 
-# DRF main website
+# Developer Relations Foundation Website
 
-The website is currently being developed; that includes this README.
+https://dev-rel.org
 
-Still to add:
-- Media kit
-- Proper [brand guide integration](https://github.com/DevRel-Foundation/drf-branding)
+## Quick Start
 
-## 🚀 Run and Modify the Site Locally
+See [development dependencies](./RUNBOOK.md#development-dependencies) for pre-requisites.
 
-Make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/)
-
-To run the site locally:
-
-### 1. Clone the repository
+### 1. Clone
 
 ```bash
 git clone https://github.com/DevRel-Foundation/site.git
 cd site
 ```
 
-### 2. Install dependencies
+### 2. Build
 
 ```bash
 npm install
-```
-
-### 3. Start the development server
-
-```bash
-npm run dev
-```
-To open it automatically in your default browser:
-
-```bash
 npm run dev -- --open
 ```
 
-## 🏗️ Building
+### 3. Staging 
 
-```bash
-npm run build
-```
+Deploy to [Staging](./RUNBOOK.md#stagingpreview-environment) environment by creating a PR for review.
 
-You can preview the production build with `npm run preview`.
+### 4. Production
 
-## Deployment
+Merge PR to `main` for [Production](./RUNBOOK.md#production-deployment) deployment.
 
-The site is deployed on Netlify.
+## License
+
+All material contributed to the DevRel Foundation is under [CC-BY-4.0 Licensing](https://creativecommons.org/licenses/by/4.0/deed.en).
+
+See the [License and Intellectual Property](https://github.com/DevRel-Foundation/.github/blob/main/profile/README.md#license-and-intellectual-property) statement for instructions on how to reuse and adapt content from this repository, discussions, and issues with proper attribution to the Developer Relations Foundation.
+
+## About the Website
+
+This project repository is maintained by the [Developer Relations Foundation](https://dev-rel.org).
+
+- [Contributing](./CONTRIBUTING.md) - instructions for contributing to the website (and blog)
+- [Report Issues](./RUNBOOK.md#-incident-response) - including escalation steps
+- [DevRel Foundation Brand Guidelines](https://github.com/DevRel-Foundation/drf-branding) - style guide
+
+If you still have additional questions or concerns, reach out to info (at) dev-rel.org
