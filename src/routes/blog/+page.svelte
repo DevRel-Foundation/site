@@ -28,6 +28,9 @@
   <title>Blog | DevRel Foundation</title>
   <meta name="description" content="Elevating the professional practice of Developer Relations through insights, resources, and community collaboration." />
   
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog" href="/blog/feed.xml" />
+  
   <!-- SEO Optimizations -->
   <meta name="keywords" content="DevRel, Developer Relations, Developer Advocacy, Community, Technical Writing, Developer Marketing" />
   <meta name="author" content="DevRel Foundation" />
@@ -100,6 +103,11 @@
           {category}
         </a>
       {/each}
+      <a href="/blog/feed.xml" class="rss-link" title="Subscribe to RSS feed" aria-label="Subscribe to RSS feed" data-sveltekit-reload>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248S0 22.546 0 20.752s1.456-3.248 3.252-3.248 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+        </svg>
+      </a>
     </nav>
   </header>
   
@@ -132,6 +140,7 @@
     justify-content: center;
     gap: var(--space-s);
     flex-wrap: wrap;
+    align-items: center;
   }
   
   .category-link {
@@ -149,5 +158,20 @@
     background-color: var(--color-mint-dark);
     color: var(--color-background);
     border-color: var(--color-mint-dark);
+  }
+  
+  .rss-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-mint-dark);
+    transition: all 0.2s ease;
+    padding: var(--space-2xs);
+  }
+  
+  .rss-link:hover {
+    color: var(--color-mint-dark);
+    opacity: 0.7;
   }
 </style>
