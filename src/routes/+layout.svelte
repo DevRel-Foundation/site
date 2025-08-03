@@ -10,7 +10,7 @@
 
 <main class="main">
   <slot />
-  <EditThisPage />
 </main>
 
 <Footer />
+<EditThisPage />

@@ -3,19 +3,21 @@
   import EditIcon from 'iconoir/icons/edit-pencil.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
   
+  // Accept currentPath as a prop, with fallback to page route
+  const { currentPath = $page.route?.id || '' } = $props();
+  
   const GITHUB_REPO = 'https://github.com/DevRel-Foundation/site';
   const GITHUB_EDIT_BASE = 'https://github.com/DevRel-Foundation/site/edit/main/src/routes';
   const GITHUB_ISSUES_BASE = 'https://github.com/DevRel-Foundation/site/issues/new';
   
-  // Get the current route and construct the file path
-  $: currentPath = $page.route?.id || '';
-  $: filePath = currentPath === '/' ? '/+page.svelte' : `${currentPath}/+page.svelte`;
-  $: editUrl = `${GITHUB_EDIT_BASE}${filePath}`;
+  // Get the file path based on the current path
+  const filePath = $derived(currentPath === '/' ? '/+page.svelte' : `${currentPath}/+page.svelte`);
+  const editUrl = $derived(`${GITHUB_EDIT_BASE}${filePath}`);
   
   // Create issue URL with pre-filled template
-  $: issueTitle = `Feedback: ${currentPath || '/'}`;
-  $: issueBody = `**Page:** ${$page.url.href}%0A%0A**Feedback:**%0A%0A**Suggested improvement:**%0A`;
-  $: issueUrl = `${GITHUB_ISSUES_BASE}?title=${encodeURIComponent(issueTitle)}&body=${issueBody}`;
+  const issueTitle = $derived(`Feedback: ${currentPath || '/'}`);
+  const issueBody = $derived(`**Page:** ${$page.url.href}%0A%0A**Feedback:**%0A%0A**Suggested improvement:**%0A`);
+  const issueUrl = $derived(`${GITHUB_ISSUES_BASE}?title=${encodeURIComponent(issueTitle)}&body=${issueBody}`);
 </script>
 
 <div class="edit-page-container">
