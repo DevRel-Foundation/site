@@ -8,7 +8,7 @@
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-m);
     padding: var(--space-l);
-    margin: var(--space-l) auto 0 auto;
+    margin: var(--space-m) auto var(--space-m) auto;
     max-width: 1400px;
     text-align: center;
   }
