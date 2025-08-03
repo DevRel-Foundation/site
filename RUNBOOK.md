@@ -22,6 +22,9 @@
   - Domain management and DNS
 - **PostHog**: Analytics tooling
   - Analytics, heatmaps, and session replay / error tracking
+  - Person properties tracking for newsletter signups
+  - GDPR-compliant cookie consent management
+  - User identification and event tracking
   - Managed by website account
 
 ### Development Dependencies
@@ -141,6 +144,13 @@ npm run preview
 - All user-generated content is reviewed before publishing
 - External dependencies reviewed
 - Security headers configured via `netlify.toml`
+
+### Privacy & GDPR Compliance
+- Cookie consent banner for analytics tracking
+- PostHog configured with opt-out by default
+- Privacy policy available at `/privacy`
+- User consent stored in localStorage
+- Analytics only activated after explicit consent
 
 ### Deployment Security
 - All deployments from trusted source (GitHub)

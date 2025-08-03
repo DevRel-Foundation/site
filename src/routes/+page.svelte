@@ -1,9 +1,11 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import { browser } from '$app/environment';
+  import { identifyWithConsent, trackWithConsent } from '$lib/utils/consent';
   
 	let email = '';
 
-	function handleNewsletterSubmit(event: SubmitEvent) {
+	async function handleNewsletterSubmit(event: SubmitEvent) {
 		event.preventDefault();
 		// Validate email before proceeding
 		if (!email || !isValidEmail(email)) {
@@ -11,10 +13,38 @@
 			return;
 		}
 		
-		// Handle newsletter signup
+		// Handle newsletter signup with PostHog tracking
 		console.log('Newsletter signup:', email);
+		
+		// Track with PostHog before redirecting
+		await trackNewsletterSignup(email);
+		
 		handleSubscribe(email);
 		email = '';
+	}
+
+	async function trackNewsletterSignup(emailAddress: string) {
+		if (browser) {
+			try {
+				// Use the consent utility for tracking
+				await identifyWithConsent(emailAddress, {
+					email: emailAddress,
+					newsletter_signup: true,
+					signup_source: 'homepage',
+					signup_timestamp: new Date().toISOString()
+				});
+				
+				await trackWithConsent('newsletter_signup', {
+					email: emailAddress,
+					source: 'homepage',
+					list: 'community'
+				});
+				
+				console.log('PostHog tracking completed for:', emailAddress);
+			} catch (error) {
+				console.error('PostHog tracking failed:', error);
+			}
+		}
 	}
 
 	function isValidEmail(email: string): boolean {
