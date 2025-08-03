@@ -1,5 +1,5 @@
 <div class="contributor-callout">
-    <a href="https://github.com/DevRel-Foundation/site/blob/main/CONTRIBUTING.md" class="contribute-button">Contribute to the Blog</a>
+    <a href="https://github.com/DevRel-Foundation/site/blob/main/CONTRIBUTING.md" target="_blank" class="contribute-button">Contribute to the Blog</a>
 </div>
 
 <style>

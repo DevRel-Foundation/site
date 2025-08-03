@@ -268,7 +268,7 @@
                       <span class="item-description">Find open-data, frameworks, and guides to support your program.</span>
                     </div>
                   </a>
-                  <a href="/join-us" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                  <a href="/join-us" onclick={closeAll} rel="noopener noreferrer">
                     <div class="dropdown-item">
                       <span class="item-title">Contribute</span>
                       <span class="item-description">Join the 400+ professionals who want to see DevRel thrive.

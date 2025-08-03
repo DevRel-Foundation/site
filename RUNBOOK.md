@@ -17,8 +17,12 @@
   - Build automation and deployment
   - CDN and edge functions
   - Form handling and serverless functions
-- **LFX PCC**: Linux Foundation project control center
+  - Managed by TODO LF team
+- **LFX PCC**: Linux Foundation Project Control Center
   - Domain management and DNS
+- **PostHog**: Analytics tooling
+  - Analytics, heatmaps, and session replay / error tracking
+  - Managed by website account
 
 ### Development Dependencies
 - **GitHub**: Source code repository and CI/CD
