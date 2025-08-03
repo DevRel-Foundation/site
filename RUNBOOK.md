@@ -6,7 +6,9 @@
 - **Repository**: https://github.com/DevRel-Foundation/site
 - **Framework**: SvelteKit 2.x with Svelte 5
 - **Hosting**: Netlify
-- **Emergency Contact**: steering-committee@dev-rel.org
+- **Technical Contact**: website @ dev-rel.org
+- **Business Contact**: info @ dev-rel.org
+- **Escalation**: steering-committee @ dev-rel.org
 
 ## 📋 Service Dependencies
 
@@ -101,7 +103,8 @@ npm run preview
 ## 🚨 Incident Response
 
 ### Emergency Contacts
-- **Primary**: steering-committee@dev-rel.org
+- **Primary**: website @ dev-rel.org
+- **Escalation**: steering-committee @ dev-rel.org
 - **GitHub Issues**: https://github.com/DevRel-Foundation/site/issues
 
 ### Common Issues & Solutions
@@ -204,9 +207,8 @@ npm run preview
 
 For operational issues, incidents, or questions about this runbook:
 
-- **Email**: steering-committee@dev-rel.org
+- **Email**: website @ dev-rel.org
 - **GitHub Issues**: https://github.com/DevRel-Foundation/site/issues
-- **Emergency**: Use GitHub issues with `urgent` label
 
 ---
 

@@ -45,4 +45,4 @@ This project repository is maintained by the [Developer Relations Foundation](ht
 - [Report Issues](./RUNBOOK.md#-incident-response) - including escalation steps
 - [DevRel Foundation Brand Guidelines](https://github.com/DevRel-Foundation/drf-branding) - style guide
 
-If you still have additional questions or concerns, reach out to info (at) dev-rel.org
+If you still have additional questions or concerns, reach out to website (at) dev-rel.org
