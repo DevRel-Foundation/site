@@ -610,19 +610,34 @@
   
   .post-content :global(li.task-list-item input[type="checkbox"]) {
     margin-right: var(--space-2xs);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: auto;
+    height: auto;
+    background: none;
+    border: none;
+    outline: none;
   }
   
   .post-content :global(li.task-list-item input[type="checkbox"]:checked) {
     appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     width: auto;
     height: auto;
     margin-right: var(--space-2xs);
+    background: none;
+    border: none;
+    outline: none;
   }
   
   .post-content :global(li.task-list-item input[type="checkbox"]:checked::before) {
     content: "✅";
     font-size: 1em;
-    margin-left: var(--space-s);
+    margin-left: 0;
+    display: inline-block;
+    line-height: 1;
   }
   
   .github-author {
@@ -712,8 +727,9 @@
     }
     
     .post-meta {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
       gap: var(--space-2xs);
     }
     
@@ -802,6 +818,13 @@
       opacity: 1;
       margin-left: var(--space-2xs);
       display: inline-flex;
+      align-items: center;
+      vertical-align: middle;
+    }
+    
+    .post-content :global(.anchor-icon) {
+      width: 0.875rem;
+      height: 0.875rem;
     }
   }
 </style>
