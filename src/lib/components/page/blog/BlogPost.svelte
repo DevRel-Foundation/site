@@ -116,33 +116,51 @@
       .trim();
   }
 
-  // Parse authors and fetch GitHub data on client side only
+  // Parse authors and load from authors.json
   onMount(() => {
     let handleScroll: () => void;
     
     async function initializeComponent() {
       if (author) {
         const authors = author.split(',').map((a: string) => a.trim());
+        
+        // Load authors.json data
+        let authorsData = {};
+        try {
+          const response = await fetch('/src/authors/authors.json');
+          if (response.ok) {
+            authorsData = await response.json();
+          }
+        } catch (error) {
+          console.error('Failed to load authors.json:', error);
+        }
+        
         const userPromises = authors.map(async (authorName: string) => {
           if (authorName.startsWith('@')) {
             const username = authorName.slice(1);
-            try {
-              const response = await fetch(`https://api.github.com/users/${username}`);
-              if (response.ok) {
-                const userData = await response.json();
-                return {
-                  type: 'github' as const,
-                  username,
-                  name: userData.name || userData.login || username,
-                  avatar: userData.avatar_url,
-                  url: userData.html_url,
-                  bio: userData.bio
-                };
-              }
-            } catch (error) {
-              console.error('Failed to fetch GitHub user:', error);
+            const authorKey = `@${username}`;
+            const authorData = authorsData[authorKey];
+            
+            if (authorData) {
+              return {
+                type: 'github' as const,
+                username,
+                name: authorData.name || username,
+                avatar: authorData.avatar,
+                url: authorData.url,
+                bio: authorData.bio
+              };
+            } else {
+              // Fallback for authors not in authors.json
+              return { 
+                type: 'github' as const, 
+                username, 
+                name: username, 
+                avatar: null, 
+                url: `https://github.com/${username}`, 
+                bio: null 
+              };
             }
-            return { type: 'github' as const, username, name: username, avatar: null, url: `https://github.com/${username}`, bio: null };
           }
           return { type: 'text' as const, name: authorName };
         });
@@ -333,15 +351,12 @@
 
                   {#each githubUsers as user, index}
                     {#if user.type === 'github'}
-                      <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
+                      <a href="/blog/author/{user.username}" class="github-author">
                         {#if user.avatar}
                           <img src={user.avatar} alt={user.name} class="author-avatar" />
                         {/if}
                         {user.name}
                       </a>
-
-
-
                     {:else}
                       <span class="text-author">{user.name}</span>
                     {/if}

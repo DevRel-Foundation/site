@@ -4,14 +4,15 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
+		"dev": "npm run sync-authors && vite dev",
+		"build": "npm run sync-authors && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"sync-authors": "node scripts/sync-authors.js"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -33,6 +34,7 @@
 		"vite": "^6.2.6"
 	},
 	"dependencies": {
+		"gray-matter": "^4.0.3",
 		"iconoir": "^7.11.0",
 		"posthog-js": "^1.258.5"
 	}

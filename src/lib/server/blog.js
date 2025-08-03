@@ -1,6 +1,8 @@
 import { dev } from '$app/environment';
+import matter from 'gray-matter';
 
 const blogPostsGlob = import.meta.glob('/src/blog/*.md', { eager: true });
+const authorsGlob = import.meta.glob('/src/authors/*.md', { eager: true, as: 'raw' });
 
 export async function getBlogPosts() {
   const posts = [];
@@ -78,4 +80,56 @@ export function calculateReadingTime(content) {
   const wordCount = textContent.split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / wordsPerMinute);
   return `${readingTime} min read`;
+}
+
+// Author-related functions
+export async function getAuthors() {
+  const authors = [];
+  
+  for (const path in authorsGlob) {
+    const authorContent = authorsGlob[path];
+    const username = path.split('/').pop()?.replace('.md', '');
+    
+    if (username && username !== 'README') {
+      const { data } = matter(authorContent);
+      authors.push({
+        ...data,
+        username
+      });
+    }
+  }
+  
+  return authors;
+}
+
+export async function getAuthor(username) {
+  const path = `/src/authors/${username}.md`;
+  const authorContent = authorsGlob[path];
+  
+  if (!authorContent) {
+    return null;
+  }
+  
+  const { data, content } = matter(authorContent);
+  return {
+    ...data,
+    username,
+    content
+  };
+}
+
+export async function getBlogPostsByAuthor(username) {
+  const posts = await getBlogPosts();
+  
+  const filtered = posts.filter(post => {
+    if (!post.author) return false;
+    
+    // Split multiple authors and check if the username matches any of them
+    const authors = post.author.split(',').map(a => a.trim());
+    return authors.some(author => 
+      author === `@${username}` || author === username
+    );
+  });
+  
+  return filtered;
 }

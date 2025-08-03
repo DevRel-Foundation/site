@@ -1,37 +1,55 @@
 <script>
   let githubUsersCache = $state({});
+  let authorsData = $state({});
+  let authorsLoaded = $state(false);
   
   const { posts } = $props();
   
-  // Function to fetch GitHub user data
+  // Load authors.json data once
+  async function loadAuthorsData() {
+    if (authorsLoaded) return;
+    
+    try {
+      const response = await fetch('/src/authors/authors.json');
+      if (response.ok) {
+        authorsData = await response.json();
+      }
+    } catch (error) {
+      console.error('Failed to load authors.json:', error);
+    }
+    authorsLoaded = true;
+  }
+  
+  // Function to get author data from authors.json
   async function fetchGithubUsers(author) {
     if (!author || githubUsersCache[author]) return githubUsersCache[author] || [];
     
+    // Ensure authors data is loaded
+    await loadAuthorsData();
+    
     const authors = author.split(',').map(a => a.trim());
-    const userPromises = authors.map(async (authorName) => {
+    const users = authors.map((authorName) => {
       if (authorName.startsWith('@')) {
         const username = authorName.slice(1);
-        try {
-          const response = await fetch(`https://api.github.com/users/${username}`);
-          if (response.ok) {
-            const userData = await response.json();
-            return {
-              type: 'github',
-              username,
-              name: userData.name || userData.login || username,
-              avatar: userData.avatar_url,
-              url: userData.html_url
-            };
-          }
-        } catch (error) {
-          console.error('Failed to fetch GitHub user:', error);
+        const authorKey = `@${username}`;
+        const authorData = authorsData[authorKey];
+        
+        if (authorData) {
+          return {
+            type: 'github',
+            username,
+            name: authorData.name || username,
+            avatar: authorData.avatar,
+            url: authorData.url
+          };
+        } else {
+          // If not in authors.json, treat as text
+          return { type: 'text', name: authorName };
         }
-        return { type: 'github', username, name: username, avatar: null, url: `https://github.com/${username}` };
       }
       return { type: 'text', name: authorName };
     });
     
-    const users = await Promise.all(userPromises);
     githubUsersCache[author] = users;
     return users;
   }
@@ -65,7 +83,7 @@
                 <div class="authors">
                   {#each githubUsers as user, index}
                     {#if user.type === 'github'}
-                      <a href={user.url} target="_blank" rel="noopener noreferrer" class="github-author">
+                      <a href="/blog/author/{user.username}" class="github-author">
                         {#if user.avatar}
                           <img src={user.avatar} alt={user.name} class="author-avatar" />
                         {/if}
