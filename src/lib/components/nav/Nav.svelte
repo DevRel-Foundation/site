@@ -127,21 +127,30 @@
                   <a href="/about/mission" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Mission</span>
-                      <span class="item-description">Our vision and goals for the community.</span>
+                      <span class="item-description">Our mission and vision.</span>
                     </div>
                   </a>
 
                   <a href="/about/steering-committee" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Steering Committee</span>
-                      <span class="item-description">Meet the leaders guiding the foundation.</span>
+                      <span class="item-description">Meet the leaders guiding the DevRel Foundation.</span>
                     </div>
                   </a>
 
                   <a href="/about/working-groups" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Working Groups</span>
-                      <span class="item-description">Working groups drive sourcing and innovation.</span>
+                      <span class="item-description">Working groups to drive sourcing and innovation.</span>
+                    </div>
+                  </a>
+
+                  <a href="/calendar" onclick={closeAll} rel="noopener noreferrer">
+                    <div class="dropdown-item">
+                      <span class="item-title">
+                        Community Calendar
+                      </span>
+                      <span class="item-description">Public community events.</span>
                     </div>
                   </a>
 
