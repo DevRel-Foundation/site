@@ -44,10 +44,14 @@ function parseICSData(icsData) {
         };
       })
       .filter(event => {
+        // For all events (recurring and non-recurring), include those from 2 weeks ago onwards
+        const twoWeeksAgo = new Date(currentTime);
+        twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+        
         // If there's an end date, use it for comparison
         // If no end date, use start date (include single-moment/all-day events)
         const eventDate = event.end || event.start;
-        return eventDate >= currentTime;
+        return eventDate >= twoWeeksAgo;
       });
 
     // Sort events by start date

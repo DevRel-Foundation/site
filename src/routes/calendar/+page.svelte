@@ -25,8 +25,8 @@
 	.calendar-page h1 {
 		margin: var(--space-s) 0;
 		padding: 0 var(--space-m);
-		font-size: var(--step-2);
+		font-size: var(--step-5);
 		color: var(--color-text);
-		text-align: centem;
+		text-align: center;
 	}
 </style> 

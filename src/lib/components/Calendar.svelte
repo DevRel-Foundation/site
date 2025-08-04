@@ -55,20 +55,9 @@
   });
   
 
-  // Filter events based on current view and date
+  // Show all events returned by the API (API already filters for 2 weeks past + future + recurring)
   const filteredEvents = $derived(() => {
-    if (!events.length) return [];
-    
-    const now = new Date();
-    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    
-    // Show upcoming events (next 90 days)
-    const next90Days = new Date(startOfToday);
-    next90Days.setDate(next90Days.getDate() + 90);
-    return events.filter(event => {
-        const eventDate = new Date(event.start);
-        return eventDate >= startOfToday && eventDate <= next90Days;
-    });
+    return events || [];
   });
   
   
@@ -117,6 +106,49 @@
     return result;
   }
   
+  function parseMarkdown(text: string): string {
+    if (!text) return '';
+    
+    // Simple markdown parser for basic features
+    let html = text
+      // Convert markdown links
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
+        }
+        return `<a href="${url}">${text}</a>`;
+      })
+      
+      // Convert plain URLs that start with https://
+      .replace(/(^|[^"'(>\]])https:\/\/[^\s<>)]+/g, (match, prefix) => {
+        const url = match.replace(prefix, '');
+        return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer">${url} ↗</a>`;
+      })
+      
+      // Process bold-wrapped headings BEFORE general bold/italic processing
+      .replace(/^\*### (.*?)\*$/gm, '<h3>$1</h3>')
+      .replace(/^\*## (.*?)\*$/gm, '<h2>$1</h2>')
+      .replace(/^\*# (.*?)\*$/gm, '<h2>$1</h2>')
+      
+      // Convert bold and italic
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      
+      // Convert regular headings
+      .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gm, '<h2>$1</h2>')
+      
+      // Convert line breaks to paragraphs
+      .split('\n\n')
+      .map(paragraph => paragraph.trim())
+      .filter(paragraph => paragraph.length > 0)
+      .map(paragraph => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
+      .join('');
+      
+    return html;
+  }
+  
 </script>
 
 <div class="calendar-container">
@@ -124,19 +156,25 @@
         <!-- Left column: Events list -->
         <div class="events-sidebar">
             <div class="sidebar-header">
-                <h2>Upcoming Events</h2>
+                <h2>Recent & Upcoming Events</h2>
             </div>
             <div class="events-list">
-                {#each filteredEvents() as event}
-                    <button 
-                        class="event-list-item" 
-                        class:selected={selectedEvent === event}
-                        onclick={() => selectedEvent = event}
-                    >
-                        <div class="event-date-compact">{formatEventDate(event)}</div>
-                        <h3 class="event-title-compact">{event.title}</h3>
-                    </button>
-                {/each}
+                {#if filteredEvents().length > 0}
+                    {#each filteredEvents() as event}
+                        <button 
+                            class="event-list-item" 
+                            class:selected={selectedEvent === event}
+                            onclick={() => selectedEvent = event}
+                        >
+                            <div class="event-date-compact">{formatEventDate(event)}</div>
+                            <h3 class="event-title-compact">{event.title}</h3>
+                        </button>
+                    {/each}
+                {:else}
+                    <div class="no-events-message">
+                        <p>No events available.</p>
+                    </div>
+                {/if}
             </div>
 
         </div>
@@ -160,7 +198,7 @@
                             </div>
                         {/if}
                         {#if selectedEvent.description}
-                            <p class="event-description">{selectedEvent.description}</p>
+                            <div class="event-description">{@html parseMarkdown(selectedEvent.description)}</div>
                         {/if}
                         {#if selectedEvent.isRecurring}
                             <div class="event-recurring">🔄 Recurring Event</div>
@@ -308,6 +346,18 @@
     gap: 0;
   }
   
+  .no-events-message {
+    padding: var(--space-m);
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+  
+  .no-events-message p {
+    margin: 0;
+    font-size: var(--step--1);
+  }
+  
   .event-item {
     padding: var(--space-m);
     border: 1px solid var(--color-background-secondary-2);
@@ -353,7 +403,46 @@
     margin: 0;
     color: var(--color-text-secondary);
     line-height: 1.6;
-    font-size: var(--step-0);
+    font-size: var(--step--1);
+  }
+  
+  .event-description :global(h2) {
+    font-size: var(--step--1);
+    color: var(--color-text);
+    margin: var(--space-s) 0 var(--space-xs) 0;
+    font-weight: 700;
+  }
+  
+  .event-description :global(h3) {
+    font-size: var(--step--2);
+    color: var(--color-text);
+    margin: var(--space-s) 0 var(--space-xs) 0;
+    font-weight: 600;
+  }
+  
+  .event-description :global(p) {
+    margin: 0 0 var(--space-s) 0;
+    line-height: 1.6;
+    font-size: var(--step--2);
+  }
+  
+  .event-description :global(a) {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .event-description :global(a:hover) {
+    text-decoration: underline;
+  }
+  
+  .event-description :global(strong) {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  
+  .event-description :global(em) {
+    font-style: italic;
   }
   
   .event-location {
