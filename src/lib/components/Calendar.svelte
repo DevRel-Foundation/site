@@ -177,6 +177,18 @@
                 {/if}
             </div>
 
+            <div class="subscribe-button">
+                <a href="https://lists.dev-rel.org/g/community/calendar" target="_blank" rel="noopener noreferrer" class="subscribe-link">
+                    <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    View Full Calendar
+                </a>
+            </div>
+
         </div>
 
         <!-- Right column: Event details -->
@@ -484,6 +496,41 @@
     background: var(--color-link);
     color: var(--color-background);
     text-decoration: none;
+  }
+  
+  .subscribe-button {
+    margin-top: var(--space-m);
+  }
+  
+  .subscribe-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    width: 100%;
+    text-align: left;
+    padding: var(--space-s);
+    border: 1px solid var(--color-background-secondary-2);
+    border-radius: var(--radius-s);
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--step--1);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .subscribe-link:hover {
+    background: var(--color-background-secondary-1);
+    border-color: var(--color-mint);
+    text-decoration: none;
+  }
+  
+  .calendar-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
   }
   
   
