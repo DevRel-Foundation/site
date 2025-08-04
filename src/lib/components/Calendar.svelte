@@ -20,6 +20,10 @@
   let userLocale = $state<string>('');
   let userTimezone = $state<string>('');
   
+  // Pagination state
+  let currentPage = $state(0);
+  const eventsPerPage = 10;
+  
   // Load events from API
   onMount(async () => {
     // Detect user's locale and timezone
@@ -59,6 +63,35 @@
   const filteredEvents = $derived(() => {
     return events || [];
   });
+  
+  // Pagination calculations
+  const totalPages = $derived(() => Math.ceil(filteredEvents().length / eventsPerPage));
+  const paginatedEvents = $derived(() => {
+    const start = currentPage * eventsPerPage;
+    const end = start + eventsPerPage;
+    return filteredEvents().slice(start, end);
+  });
+  
+  function goToPage(page: number) {
+    currentPage = Math.max(0, Math.min(page, totalPages() - 1));
+    // Auto-select first event on new page
+    const paginated = paginatedEvents();
+    if (paginated.length > 0) {
+      selectedEvent = paginated[0];
+    }
+  }
+  
+  function nextPage() {
+    if (currentPage < totalPages() - 1) {
+      goToPage(currentPage + 1);
+    }
+  }
+  
+  function prevPage() {
+    if (currentPage > 0) {
+      goToPage(currentPage - 1);
+    }
+  }
   
   
   function formatEventDate(event: CalendarEvent) {
@@ -130,9 +163,13 @@
       .replace(/^\*## (.*?)\*$/gm, '<h2>$1</h2>')
       .replace(/^\*# (.*?)\*$/gm, '<h2>$1</h2>')
       
-      // Convert bold and italic
+      // Convert list items (before bold/italic to avoid conflicts)
+      .replace(/^\* (.+)$/gm, '<li>$1</li>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      
+      // Convert bold and italic (with word boundaries to be safer)
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|\,|\])/g, '$1<em>$2</em>$3')
       
       // Convert regular headings
       .replace(/^### (.*$)/gm, '<h3>$1</h3>')
@@ -143,7 +180,14 @@
       .split('\n\n')
       .map(paragraph => paragraph.trim())
       .filter(paragraph => paragraph.length > 0)
-      .map(paragraph => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
+      .map(paragraph => {
+        // Check if this paragraph contains list items
+        if (paragraph.includes('<li>')) {
+          // Wrap consecutive list items in <ul> tags
+          return `<ul>${paragraph.replace(/\n/g, '')}</ul>`;
+        }
+        return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
+      })
       .join('');
       
     return html;
@@ -159,8 +203,8 @@
                 <h2>Recent & Upcoming Events</h2>
             </div>
             <div class="events-list">
-                {#if filteredEvents().length > 0}
-                    {#each filteredEvents() as event}
+                {#if paginatedEvents().length > 0}
+                    {#each paginatedEvents() as event}
                         <button 
                             class="event-list-item" 
                             class:selected={selectedEvent === event}
@@ -177,6 +221,34 @@
                 {/if}
             </div>
 
+            <!-- Pagination controls -->
+            {#if totalPages() > 1}
+                <div class="pagination">
+                    <button 
+                        class="pagination-btn" 
+                        onclick={prevPage}
+                        disabled={currentPage === 0}
+                        aria-label="Previous page"
+                    >
+                        ←
+                    </button>
+                    
+                    <div class="pagination-info">
+                        Page {currentPage + 1} of {totalPages()}
+                        <span class="events-count">({filteredEvents().length} events)</span>
+                    </div>
+                    
+                    <button 
+                        class="pagination-btn" 
+                        onclick={nextPage}
+                        disabled={currentPage >= totalPages() - 1}
+                        aria-label="Next page"
+                    >
+                        →
+                    </button>
+                </div>
+            {/if}
+
             <div class="subscribe-button">
                 <a href="https://lists.dev-rel.org/g/community/calendar" target="_blank" rel="noopener noreferrer" class="subscribe-link">
                     <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -185,7 +257,7 @@
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    View Full Calendar
+                    View Full Calendar and Subscribe
                 </a>
             </div>
 
@@ -457,6 +529,19 @@
     font-style: italic;
   }
   
+  .event-description :global(ul) {
+    margin: 0 0 var(--space-s) 0;
+    padding-left: var(--space-m);
+    list-style-type: disc;
+  }
+  
+  .event-description :global(li) {
+    margin: 0 0 var(--space-2xs) 0;
+    line-height: 1.6;
+    font-size: var(--step--2);
+    color: var(--color-text-secondary);
+  }
+  
   .event-location {
     font-size: var(--step--1);
     color: var(--color-text-secondary);
@@ -531,6 +616,55 @@
     width: 18px;
     height: 18px;
     flex-shrink: 0;
+  }
+  
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-s);
+    padding: var(--space-s);
+    border-top: 1px solid var(--color-background-secondary-2);
+    gap: var(--space-xs);
+  }
+  
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-background-secondary-2);
+    border-radius: var(--radius-xs);
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: var(--step--1);
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    background: var(--color-background-secondary-1);
+    border-color: var(--color-mint);
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination-info {
+    flex: 1;
+    text-align: center;
+    font-size: var(--step--2);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+  
+  .events-count {
+    font-size: var(--step--3);
+    opacity: 0.7;
   }
   
   
