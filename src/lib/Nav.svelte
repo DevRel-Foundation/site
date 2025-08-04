@@ -238,6 +238,13 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">Additional Resources</h3>
                 <div class="dropdown-items">
+                  <a href="/calendar" onclick={closeAll} rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        Community Calendar
+                      </span>
+                    </div>
+                  </a>
                   <a href="https://github.com/devrel-foundation/" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item-brief">
                       <span class="item-title">
