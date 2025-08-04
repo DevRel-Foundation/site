@@ -9,15 +9,23 @@
     location?: string;
     url?: string;
     allDay?: boolean;
+    isRecurring?: boolean;
   }
   
   let events = $state<CalendarEvent[]>([]);
   let loading = $state(true);
   let error = $state<string | null>(null);
   let currentDate = $state(new Date());
+  let selectedEvent = $state<CalendarEvent | null>(null);
+  let userLocale = $state<string>('');
+  let userTimezone = $state<string>('');
   
   // Load events from API
   onMount(async () => {
+    // Detect user's locale and timezone
+    userLocale = navigator.language || 'en-US';
+    userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
     try {
       const response = await fetch('/api/calendar');
       if (!response.ok) {
@@ -31,6 +39,14 @@
       
       events = data.events || [];
       loading = false;
+      
+      // Auto-select the first event if available
+      if (events.length > 0) {
+        const filtered = filteredEvents();
+        if (filtered.length > 0) {
+          selectedEvent = filtered[0];
+        }
+      }
     } catch (err) {
       console.error('Failed to load events:', err);
       error = err instanceof Error ? err.message : 'Unknown error occurred';
@@ -60,35 +76,41 @@
     const start = new Date(event.start);
     const end = event.end ? new Date(event.end) : null;
     
+    // Use user's locale for formatting, fallback to 'en-US'
+    const locale = userLocale || 'en-US';
+    
     if (event.allDay) {
-      return start.toLocaleDateString('en-US', {
+      return start.toLocaleDateString(locale, {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
+        timeZone: userTimezone || undefined
       });
     }
     
     const timeFormat: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: true
+      hour12: true,
+      timeZone: userTimezone || undefined
     };
     
     const dateFormat: Intl.DateTimeFormatOptions = {
       weekday: 'short',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
+      timeZone: userTimezone || undefined
     };
     
-    let result = start.toLocaleDateString('en-US', dateFormat) + ' at ' + start.toLocaleTimeString('en-US', timeFormat);
+    let result = start.toLocaleDateString(locale, dateFormat) + ' at ' + start.toLocaleTimeString(locale, timeFormat);
     
     if (end && !event.allDay) {
       const isSameDay = start.toDateString() === end.toDateString();
       if (isSameDay) {
-        result += ' - ' + end.toLocaleTimeString('en-US', timeFormat);
+        result += ' - ' + end.toLocaleTimeString(locale, timeFormat);
       } else {
-        result += ' - ' + end.toLocaleDateString('en-US', dateFormat) + ' at ' + end.toLocaleTimeString('en-US', timeFormat);
+        result += ' - ' + end.toLocaleDateString(locale, dateFormat) + ' at ' + end.toLocaleTimeString(locale, timeFormat);
       }
     }
     
@@ -97,35 +119,78 @@
   
 </script>
 
-
 <div class="calendar-container">
+    <div class="calendar-layout">
+        <!-- Left column: Events list -->
+        <div class="events-sidebar">
+            <div class="sidebar-header">
+                <h2>Upcoming Events</h2>
+            </div>
+            <div class="events-list">
+                {#each filteredEvents() as event}
+                    <button 
+                        class="event-list-item" 
+                        class:selected={selectedEvent === event}
+                        onclick={() => selectedEvent = event}
+                    >
+                        <div class="event-date-compact">{formatEventDate(event)}</div>
+                        <h3 class="event-title-compact">{event.title}</h3>
+                    </button>
+                {/each}
+            </div>
 
-    <div class="events-list">
-        {#each filteredEvents() as event}
-        <div class="event-item">
-            <h3 class="event-title">{event.title}</h3>
-            <div class="event-details">
-                <div class="event-date">{formatEventDate(event)}</div>
-                {#if event.location}
-                    <div class="event-location">📍 {event.location}</div>
-                {/if}
-                {#if event.description}
-                    <p class="event-description">{event.description}</p>
-                {/if}
-                {#if event.isRecurring}
-                    <div class="event-recurring">� Recurring Event</div>
-                {/if}
-                {#if event.url}
-                    <a href={event.url} target="_blank" rel="noopener noreferrer" class="event-link">
-                    View Details →
-                    </a>
-                {/if}
-                </div>
         </div>
-        {/each}
-    </div>
 
+        <!-- Right column: Event details -->
+        <div class="event-details-panel">
+            {#if selectedEvent}
+                <div class="event-item">
+                    <h3 class="event-title">{selectedEvent.title}</h3>
+                    <div class="event-details">
+                        {#if selectedEvent.location}
+                            <div class="event-location">
+                                {#if selectedEvent.location.startsWith('https')}
+                                    ↗
+                                    <a href={selectedEvent.location} target="_blank" rel="noopener noreferrer" class="location-link">
+                                        {selectedEvent.location}
+                                    </a>
+                                {:else}
+                                    {selectedEvent.location}
+                                {/if}
+                            </div>
+                        {/if}
+                        {#if selectedEvent.description}
+                            <p class="event-description">{selectedEvent.description}</p>
+                        {/if}
+                        {#if selectedEvent.isRecurring}
+                            <div class="event-recurring">🔄 Recurring Event</div>
+                        {/if}
+                        {#if selectedEvent.url}
+                            <a href={selectedEvent.url} target="_blank" rel="noopener noreferrer" class="event-link">
+                                View Details →
+                            </a>
+                        {/if}
+                    </div>
+                </div>
+            {:else}
+                <div class="no-selection">
+                    <p>Select an event from the list to view details</p>
+                </div>
+            {/if}
+
+            {#if userLocale && userTimezone}
+                <div class="locale-info">
+                    <div class="locale-display">{userTimezone}</div>
+                </div>
+            {/if}
+
+        </div>
+    </div>
 </div>
+
+
+
+
 
 
 
@@ -133,105 +198,118 @@
 <style>
   .calendar-container {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    height: calc(100vh - 80px);
+    margin: 0;
+    padding: var(--space-s) var(--space-xl);
+    box-sizing: border-box;
   }
-  
-  .loading, .error {
-    text-align: center;
-    padding: var(--space-xl);
-    color: var(--color-text-secondary);
+
+  .calendar-layout {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: var(--space-m);
+    height: 100%;
   }
-  
-  .error button {
-    margin-top: var(--space-s);
-    padding: var(--space-xs) var(--space-s);
-    background: var(--color-mint);
-    color: var(--color-background);
-    border: none;
-    border-radius: var(--radius-s);
-    cursor: pointer;
+
+  .events-sidebar {
+    border-right: 1px solid var(--color-background-secondary-2);
+    padding-right: var(--space-s);
+    min-width: 0;
+    overflow: hidden;
   }
-  
-  .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-m);
-    flex-wrap: wrap;
-    gap: var(--space-s);
-  }
-  
-  .view-controls {
-    display: flex;
-    gap: var(--space-2xs);
-  }
-  
-  .view-btn {
-    padding: var(--space-xs) var(--space-s);
-    border: 1px solid var(--color-background-secondary-2);
-    background: var(--color-background);
-    color: var(--color-text);
-    border-radius: var(--radius-s);
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .view-btn:hover {
-    background: var(--color-background-secondary-1);
-  }
-  
-  .view-btn.active {
-    background: var(--color-mint);
-    color: var(--color-background);
-    border-color: var(--color-mint);
-  }
-  
-  .navigation {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-  
-  .nav-btn, .today-btn {
-    padding: var(--space-xs) var(--space-s);
-    border: 1px solid var(--color-background-secondary-2);
-    background: var(--color-background);
-    color: var(--color-text);
-    border-radius: var(--radius-s);
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .nav-btn:hover, .today-btn:hover {
-    background: var(--color-background-secondary-1);
-  }
-  
-  .calendar-title h2 {
-    margin: 0 0 var(--space-m) 0;
+
+  .events-sidebar h2 {
+    margin: 0 0 var(--space-s) 0;
     font-size: var(--step-1);
     color: var(--color-text);
   }
-  
-  /* Agenda View */
-  .agenda-view {
-    min-height: 400px;
+
+  .sidebar-header {
+    margin-bottom: var(--space-s);
   }
-  
-  .no-events {
-    text-align: center;
-    padding: var(--space-xl);
+
+  .locale-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    margin-top: var(--space-xs);
+  }
+
+  .locale-display {
+    font-size: var(--step--2);
     color: var(--color-text-secondary);
+    font-weight: 500;
+    background: var(--color-background-secondary-1);
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-xs);
+    width: fit-content;
   }
+
+  .event-list-item {
+    width: 100%;
+    text-align: left;
+    padding: var(--space-s);
+    border: 1px solid var(--color-background-secondary-2);
+    border-radius: var(--radius-s);
+    background: var(--color-background);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: var(--space-xs);
+  }
+
+  .event-list-item:hover {
+    background: var(--color-background-secondary-1);
+    border-color: var(--color-mint);
+  }
+
+  .event-list-item.selected {
+    background: var(--color-mint-dark);
+    color: var(--color-background);
+    border-color: var(--color-mint-dark);
+  }
+
+  .event-date-compact {
+    font-size: var(--step--2);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xs);
+    font-weight: 400;
+  }
+
+  .event-list-item.selected .event-date-compact {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .event-title-compact {
+    font-weight: 600;
+    font-size: var(--step--1);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .event-details-panel {
+    padding-left: var(--space-s);
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .no-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+  
   
   .events-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-l);
+    gap: 0;
   }
   
   .event-item {
-    padding: var(--space-l);
+    padding: var(--space-m);
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-s);
     background: var(--color-background);
@@ -244,6 +322,15 @@
     color: var(--color-text);
     font-weight: 700;
     line-height: 1.3;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    background-image: linear-gradient(to right, var(--color-mint-dark), var(--color-mint), rgba(var(--color-mint-rgb, 0, 255, 127), 0.3), transparent);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    padding-bottom: var(--space-2xs);
+    display: block;
+    width: 100%;
   }
   
   .event-details {
@@ -275,6 +362,16 @@
     font-weight: 500;
   }
   
+  .location-link {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .location-link:hover {
+    text-decoration: underline;
+  }
+  
   .event-recurring {
     font-size: var(--step--1);
     color: var(--color-mint);
@@ -300,137 +397,22 @@
     text-decoration: none;
   }
   
-  /* Week View */
-  .week-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
-    overflow: hidden;
-  }
-  
-  .week-day-header {
-    padding: var(--space-s);
-    background: var(--color-background-secondary-1);
-    text-align: center;
-    font-weight: 600;
-    border-right: 1px solid var(--color-background-secondary-2);
-  }
-  
-  .week-day-header:last-child {
-    border-right: none;
-  }
-  
-  .week-day {
-    min-height: 120px;
-    padding: var(--space-xs);
-    border-right: 1px solid var(--color-background-secondary-2);
-    border-top: 1px solid var(--color-background-secondary-2);
-  }
-  
-  .week-day:last-child {
-    border-right: none;
-  }
-  
-  .week-day.today {
-    background: color-mix(in srgb, var(--color-mint), transparent 90%);
-  }
-  
-  /* Month View */
-  .month-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
-    overflow: hidden;
-  }
-  
-  .month-day-header {
-    padding: var(--space-s);
-    background: var(--color-background-secondary-1);
-    text-align: center;
-    font-weight: 600;
-    border-right: 1px solid var(--color-background-secondary-2);
-  }
-  
-  .month-day-header:last-child {
-    border-right: none;
-  }
-  
-  .month-day {
-    min-height: 100px;
-    padding: var(--space-2xs);
-    border-right: 1px solid var(--color-background-secondary-2);
-    border-top: 1px solid var(--color-background-secondary-2);
-  }
-  
-  .month-day:last-child {
-    border-right: none;
-  }
-  
-  .month-day.other-month {
-    opacity: 0.5;
-  }
-  
-  .month-day.today {
-    background: color-mix(in srgb, var(--color-mint), transparent 90%);
-  }
-  
-  .day-number {
-    font-weight: 600;
-    margin-bottom: var(--space-3xs);
-  }
-  
-  .day-events {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4xs);
-  }
-  
-  .mini-event {
-    font-size: var(--step--2);
-    padding: var(--space-4xs);
-    background: var(--color-mint);
-    color: var(--color-background);
-    border-radius: var(--radius-xs);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .more-events {
-    font-size: var(--step--2);
-    color: var(--color-text-secondary);
-    text-align: center;
-    padding: var(--space-4xs);
-  }
   
   @media (max-width: 768px) {
-    .calendar-header {
-      flex-direction: column;
-      align-items: stretch;
+    .calendar-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-s);
     }
     
-    .view-controls {
-      justify-content: center;
+    .events-sidebar {
+      border-right: none;
+      border-bottom: 1px solid var(--color-background-secondary-2);
+      padding-right: 0;
+      padding-bottom: var(--space-s);
     }
     
-    .navigation {
-      justify-content: center;
-    }
-    
-    .month-grid,
-    .week-grid {
-      font-size: var(--step--1);
-    }
-    
-    .month-day,
-    .week-day {
-      min-height: 80px;
-    }
-    
-    .mini-event {
-      font-size: var(--step--3);
+    .event-details-panel {
+      padding-left: 0;
     }
   }
 </style>
