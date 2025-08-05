@@ -296,7 +296,7 @@
 	.content-box-heading {
 		font-size: var(--step-3);
 		line-height: 1;
-		color: var(--color-mint-dark);
+		color: var(--color-text);
 		margin-bottom: var(--space-s);
 		margin-top: 0;
 	}
@@ -335,14 +335,14 @@
 	}
 
 	.newsletter-content h2 {
-		color: var(--color-text);
+		color: var(--color-mint-dark);
 		margin-top: 0;
 		margin-bottom: var(--space-xs);
 		font-size: var(--step-3);
 	}
 
 	.newsletter-content p {
-		color: var(--color-text);
+		color: var(--color-mint-dark);
 		margin-bottom: var(--space-s);
 		font-size: var(--step-0);
 	}
@@ -359,15 +359,15 @@
 		padding: var(--space-2xs);
 		border: var(--border-thickness) solid var(--color-background-secondary-1);
 		border-radius: var(--radius-s);
-		background-color: var(--color-background);
-		color: var(--color-text);
+		background-color: var(--color-offwhite);
+		color: var(--color-mint-dark);
 		box-sizing: border-box;
 	}
 
 	.newsletter-form button {
 		padding: var(--space-xs) var(--space-m);
-		background-color: var(--color-link);
-		color: var(--color-background);
+		background-color: var(--color-emerald-dark);
+		color: var(--color-offwhite);
 		border: none;
 		border-radius: var(--radius-s);
 		cursor: pointer;
