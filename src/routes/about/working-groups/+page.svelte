@@ -59,7 +59,7 @@
 
 		<div class="u-grid u-grid-3">
 			
-			<div class="content-box dark">
+			<div class="content-box">
 				<h3 class="box-header">Sourcing</h3>
 				<img src="{DownloadIcon}" alt="Download Icon" class="icon-left" />
 				<p class="box-description">
@@ -68,7 +68,7 @@
 				<a href="/learn/what-is-devrel" class="box-cta">LEARNING RESOURCES</a>
 			</div>
 
-			<div class="content-box dark">
+			<div class="content-box">
 				<h3 class="box-header">Innovation</h3>
 				<img src="{StrategyIcon}" alt="Strategy Icon" class="icon-left" />
 				<p class="box-description">
@@ -77,7 +77,7 @@
 				<a href="/projects" class="box-cta">EXPLORE PROJECTS</a>
 			</div>
 
-			<div class="content-box dark">
+			<div class="content-box">
 				<h3 class="box-header">Calls</h3>
 				<img src="{HeadsetIcon}" alt="Headset Icon" class="icon-left" />
 				<p class="box-description">
@@ -167,16 +167,6 @@
 		min-height: 300px;
 	}
 
-	.box-header {
-		font-size: var(--step-2);
-		font-weight: 700;
-		margin: calc(var(--space-s) * -1) calc(var(--space-s) * -1) var(--space-xs) calc(var(--space-s) * -1);
-		padding: var(--space-xs) var(--space-xs);
-		border-radius: var(--radius-s) var(--radius-s) 0 0;
-		text-align: center;
-		color: var(--color-dark);
-	}
-
 	.box-question {
 		font-size: var(--step-0);
 		font-weight: 900;
@@ -209,8 +199,19 @@
 		color: var(--color-mint-dark);
 	}
 
+	.box-header {
+		font-size: var(--step-2);
+		font-weight: 700;
+		margin: calc(var(--space-s) * -1) calc(var(--space-s) * -1) var(--space-xs) calc(var(--space-s) * -1);
+		padding: var(--space-xs) var(--space-xs);
+		border-radius: var(--radius-s) var(--radius-s) 0 0;
+		text-align: center;
+		background-color: var(--color-background-dark);
+		color: var(--color-text-dark);
+	}
+
 	.dark .box-header {
-		background-color: var(--color-mint-dark);
+		background-color: var(--color-background);
 		color: var(--color-mint);
 	}
 

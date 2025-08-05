@@ -40,32 +40,52 @@
   --grid-column-min: clamp(1rem, 0.8rem + 1vw, 1.618rem);
   --grid-column-max: clamp(3.09rem, 2.5rem + 3vw, 5rem);
 
-  --color-background: hsl(48, 100%, 98%);
-  --color-text: hsl(0, 0%, 32%);
-  --color-background-secondary-1: hsl(48, 61.8%, 94%);
-  --color-background-secondary-2: hsl(48, 13%, 92%);
 
-  /* Brand accent colors */
+  /* Brand color accents */
   --color-mint: hsl(90, 65%, 81%);
-  --color-blue: hsl(193, 100%, 92%);
-  --color-teal: hsl(168, 85%, 91%);
-  --color-gold: hsl(41.9, 100%, 91.6%);
-  --color-accent-text: var(--color-mint);
-  --color-link: hsl(140, 38.2%, 18%);
-  --color-logo-text: hsl(168, 63%, 14%);
-
-  --color-background-dark: hsl(42, 10%, 10%);
-  --color-text-dark: hsl(48, 20%, 90%);
-  --color-background-secondary-1-dark: hsl(42, 16.2%, 16%);
-  --color-background-secondary-2-dark: hsl(42, 10%, 20%);
-
   --color-mint-dark: hsl(90, 95%, 8%);
-  --color-blue-dark: hsl(193, 72%, 14%);
-  --color-teal-dark: hsl(168, 63%, 14%);
+  --color-blue: hsl(193, 100%, 92%);
+  --color-blue-dark: hsl(192, 100%, 9%);
+  --color-gold: hsl(41.9, 100%, 91.6%);
   --color-gold-dark: hsl(41.7, 74.5%, 21.6%);
-  --color-accent-text-dark: var(--color-mint-dark);
-  --color-link-dark: hsl(90, 65%, 81%);
+  --color-sage: hsl(120, 20%, 80%);
+  --color-sage-dark: hsl(120, 20%, 20%);
+  --color-emerald: hsl(140, 60%, 40%);
+  --color-emerald-dark: hsl(140, 60%, 20%);
+  --color-olive: hsl(90, 30%, 60%); 
+  --color-olive-dark: hsl(90, 30%, 25%);
+  --color-cream: hsl(48, 61.8%, 94%);
+  --color-cream-dark: hsl(42, 32%, 24%);
+  --color-offwhite: hsl(48, 100%, 98%);
+  --color-offwhite-dark: hsl(192, 32%, 22%);
+  --color-offwhite-gray: hsl(0, 0%, 32%); */
+  --color-offwhite-cream: hsl(48, 61%, 90%); */
+
+  /* Not using these colors */
+  --color-seafoam: hsl(160, 50%, 80%); 
+  --color-seafoam-dark: hsl(160, 50%, 30%);
+  --color-teal: hsl(168, 85%, 91%);
+  --color-teal-dark: hsl(168, 63%, 14%);
+
+
+  /* Brand color usage */
+  --color-background: var(--color-offwhite);
+  --color-background-dark: var(--color-blue-dark);
+  --color-background-secondary-1: var(--color-cream);
+  --color-background-secondary-1-dark: var(--color-offwhite-dark);
+  --color-background-secondary-2: var(--color-gold);
+  --color-background-secondary-2-dark: var(--color-mint-dark);
+
+  --color-text: var(--color-mint-dark);
+  --color-text-dark: var(--color-offwhite);
+  --color-accent-text: var(--color-mint);
+  --color-accent-text-dark: var(--color-sage);
+  --color-link: var(--color-emerald-dark);
+  --color-link-dark: var(--color-cream);
+  --color-logo-text: var(--color-blue-dark);
   --color-logo-text-dark: var(--color-mint);
+
+
 
   --icon-filter: invert(0.2) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.2);
 
@@ -230,10 +250,6 @@ body.dark-mode {
   --color-text: var(--color-text-dark);
   --color-background-secondary-1: var(--color-background-secondary-1-dark);
   --color-background-secondary-2: var(--color-background-secondary-2-dark);
-  --color-mint: var(--color-mint-dark);
-  --color-blue: var(--color-blue-dark);
-  --color-teal: var(--color-teal-dark);
-  --color-gold: var(--color-gold-dark);
   --color-accent-text: var(--color-accent-text-dark);
   --color-link: var(--color-link-dark);
   --color-logo-text: var(--color-logo-text-dark);
