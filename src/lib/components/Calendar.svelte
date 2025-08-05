@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  const { eventId } = $props<{ eventId?: string }>();
   
   interface CalendarEvent {
+    id: string;
     title: string;
     start: string;
     end?: string;
@@ -19,6 +21,10 @@
   let selectedEvent = $state<CalendarEvent | null>(null);
   let userLocale = $state<string>('');
   let userTimezone = $state<string>('');
+
+  // Copy state
+  let copied = $state(false);
+  let copyTimeout: number | null = null;
   
   // Pagination state
   let currentPage = $state(0);
@@ -43,8 +49,28 @@
       
       events = data.events || [];
       loading = false;
-      
-      // Auto-select the first event if available
+
+      // Helper to get simplified ID
+      function getSimpleId(id: string) {
+        return id.split('@')[0];
+      }
+
+      // Use eventId prop if provided
+      let initialId = eventId;
+      if (!initialId) {
+        // Fallback: try to get from URL (for direct browser navigation)
+        const match = window.location.pathname.match(/\/calendar\/event\/([^/]+)/);
+        initialId = match ? decodeURIComponent(match[1]) : undefined;
+      }
+
+      if (initialId && events.length > 0) {
+        const eventFromUrl = events.find(e => getSimpleId(e.id) === initialId);
+        if (eventFromUrl) {
+          selectedEvent = eventFromUrl;
+          return;
+        }
+      }
+      // Auto-select first event if available
       if (events.length > 0) {
         const filtered = filteredEvents();
         if (filtered.length > 0) {
@@ -77,7 +103,7 @@
     // Auto-select first event on new page
     const paginated = paginatedEvents();
     if (paginated.length > 0) {
-      selectedEvent = paginated[0];
+      selectEvent(paginated[0]);
     }
   }
   
@@ -93,8 +119,23 @@
     }
   }
   
+  // Copy the event link to the user's clipboard
+  function copyPageUrl() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        copied = true;
+        if (copyTimeout) clearTimeout(copyTimeout);
+        copyTimeout = window.setTimeout(() => {
+          copied = false;
+        }, 1200);
+      })
+      .catch(err => {
+        console.error('Failed to copy page url:', err);
+      });
+  }
   
-  function formatEventDate(event: CalendarEvent) {
+  function formatEventDate(event: CalendarEvent, year: false) {
     const start = new Date(event.start);
     const end = event.end ? new Date(event.end) : null;
     
@@ -124,6 +165,12 @@
       day: 'numeric',
       timeZone: userTimezone || undefined
     };
+
+    if (year) {
+      dateFormat.year = 'numeric';
+    } else {
+      dateFormat.year = undefined;
+    }
     
     let result = start.toLocaleDateString(locale, dateFormat) + ' at ' + start.toLocaleTimeString(locale, timeFormat);
     
@@ -193,6 +240,22 @@
     return html;
   }
   
+  function selectEvent(event: CalendarEvent) {
+    selectedEvent = event;
+    updateURLWithEvent(event);
+  }
+
+  function updateURLWithEvent(event: CalendarEvent | null) {
+    if (!event) {
+      window.history.replaceState({}, '', '/calendar');
+      return;
+    }
+    // Use simplified ID for URL
+    const simpleId = event.id.split('@')[0];
+    const encodedId = encodeURIComponent(simpleId);
+    window.history.replaceState({}, '', `/calendar/event/${encodedId}`);
+  }
+  
 </script>
 
 <div class="calendar-container">
@@ -208,7 +271,7 @@
                         <button 
                             class="event-list-item" 
                             class:selected={selectedEvent === event}
-                            onclick={() => selectedEvent = event}
+                            onclick={() => selectEvent(event)}
                         >
                             <div class="event-date-compact">{formatEventDate(event)}</div>
                             <h3 class="event-title-compact">{event.title}</h3>
@@ -267,7 +330,23 @@
         <div class="event-details-panel">
             {#if selectedEvent}
                 <div class="event-item">
-                    <h3 class="event-title">{selectedEvent.title}</h3>
+
+                    <div class="event-title-copy-wrap">
+                        <button class="copy-link-btn" title="Copy event link" onclick={copyPageUrl} aria-label="Copy event link">
+
+                            <svg class="anchor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+
+                            {#if copied}
+                                <span class="copy-confirmation">Copied!</span>
+                            {/if}
+                        </button>
+                        <h3 class="event-title">{selectedEvent.title}</h3>
+                    </div>
+                    <div class="event-date-detail">{formatEventDate(selectedEvent, true)}</div>
+
                     <div class="event-details">
                         {#if selectedEvent.location}
                             <div class="event-location">
@@ -473,15 +552,6 @@
     gap: var(--space-s);
   }
   
-  .event-date {
-    font-size: var(--step-0);
-    color: var(--color-text-secondary);
-    font-weight: 600;
-    padding: var(--space-2xs) var(--space-xs);
-    background: var(--color-background-secondary-1);
-    border-radius: var(--radius-xs);
-    width: fit-content;
-  }
   
   .event-description {
     margin: 0;
@@ -667,6 +737,65 @@
     opacity: 0.7;
   }
   
+  .event-title-copy-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  position: relative;
+}
+
+.copy-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--color-link);
+  opacity: 0;
+  position: absolute;
+  left: -28px;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+.event-title-copy-wrap:hover .copy-link-btn,
+.copy-link-btn:focus {
+  opacity: 1;
+}
+
+.copy-link-btn svg {
+  width: 18px;
+  top: 42%;
+  transform: translateY(-42%);
+  height: 14px;
+  display: block;
+}
+
+.copy-confirmation {
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-mint-dark);
+    color: var(--color-background);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--radius-s);
+    font-size: var(--step--2);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.anchor-icon {
+    opacity: 1;
+}
+
+.event-date-detail {
+  font-size: var(--step--2);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+  font-weight: 400;
+}
+
   
   @media (max-width: 768px) {
     .calendar-layout {
