@@ -1,7 +1,11 @@
 <script lang="ts">
+  import { page } from '$app/state';
+  import { browser } from '$app/environment';
+  import { identifyWithConsent, trackWithConsent } from '$lib/utils/consent';
+  
 	let email = '';
 
-	function handleNewsletterSubmit(event: SubmitEvent) {
+	async function handleNewsletterSubmit(event: SubmitEvent) {
 		event.preventDefault();
 		// Validate email before proceeding
 		if (!email || !isValidEmail(email)) {
@@ -9,10 +13,38 @@
 			return;
 		}
 		
-		// Handle newsletter signup
+		// Handle newsletter signup with PostHog tracking
 		console.log('Newsletter signup:', email);
+		
+		// Track with PostHog before redirecting
+		await trackNewsletterSignup(email);
+		
 		handleSubscribe(email);
 		email = '';
+	}
+
+	async function trackNewsletterSignup(emailAddress: string) {
+		if (browser) {
+			try {
+				// Use the consent utility for tracking
+				await identifyWithConsent(emailAddress, {
+					email: emailAddress,
+					newsletter_signup: true,
+					signup_source: 'homepage',
+					signup_timestamp: new Date().toISOString()
+				});
+				
+				await trackWithConsent('newsletter_signup', {
+					email: emailAddress,
+					source: 'homepage',
+					list: 'community'
+				});
+				
+				console.log('PostHog tracking completed for:', emailAddress);
+			} catch (error) {
+				console.error('PostHog tracking failed:', error);
+			}
+		}
 	}
 
 	function isValidEmail(email: string): boolean {
@@ -53,7 +85,53 @@
 </script>
 
 <svelte:head>
-	<title>Developer Relations Foundation</title>
+  <title>Developer Relations Foundation</title>
+  <meta name="description" content="The DevRel Foundation is dedicated to elevating the professional practice of Developer Relations through open-source resources, community collaboration, and industry standards." />
+  
+  <!-- SEO Optimizations -->
+  <meta name="keywords" content="DevRel Foundation, Developer Relations, Developer Advocacy, Community Building, Open Source, Professional Development, DevRel Tools, DevRel Best Practices" />
+  <meta name="author" content="DevRel Foundation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={page.url.href} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={page.url.href} />
+  <meta property="og:title" content="Developer Relations Foundation" />
+  <meta property="og:description" content="The DevRel Foundation is dedicated to elevating the professional practice of Developer Relations through open-source resources, community collaboration, and industry standards." />
+  <meta property="og:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="DevRel Foundation" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={page.url.href} />
+  <meta name="twitter:title" content="The Developer Relations Foundation" />
+  <meta name="twitter:description" content="The DevRel Foundation is dedicated to elevating the professional practice of Developer Relations through open-source resources, community collaboration, and industry standards." />
+  <meta name="twitter:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DevRel Foundation",
+      "description": "The DevRel Foundation is dedicated to elevating the professional practice of Developer Relations through open-source resources, community collaboration, and industry standards.",
+      "url": page.url.href,
+      "logo": `${page.url.origin}/images/devrel-foundation-logo.png`,
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://github.com/devrel-foundation",
+        "https://discord.gg/kfJkJ3Xd"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "general inquiry",
+        "email": "info@dev-rel.org"
+      }
+    })}
+  </script>
 </svelte:head>
 
 <div class="container">

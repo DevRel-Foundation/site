@@ -123,51 +123,63 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">About the DevRel Foundation</h3>
                 <div class="dropdown-items">
+
                   <a href="/about/mission" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Mission</span>
-                      <span class="item-description">Our vision and goals for the community.</span>
+                      <span class="item-description">Our mission and vision.</span>
                     </div>
                   </a>
+
                   <a href="/about/steering-committee" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Steering Committee</span>
-                      <span class="item-description">Meet the leaders guiding the foundation.</span>
+                      <span class="item-description">Meet the leaders guiding the DevRel Foundation.</span>
                     </div>
                   </a>
+
                   <a href="/about/working-groups" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Working Groups</span>
-                      <span class="item-description">Working groups drive sourcing and innovation.</span>
+                      <span class="item-description">Working groups to drive sourcing and innovation.</span>
                     </div>
                   </a>
-                </div>
-              </div>  
 
-              <div class="dropdown-section">
-                <h3 class="menu-header">Additional Resources</h3>
-                <div class="dropdown-items">
-
-
-
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                  <a href="/calendar" onclick={closeAll} rel="noopener noreferrer">
                     <div class="dropdown-item">
-                      <span class="item-title">Charter ↗</span>
-                      <span class="item-description">The scope, principles and operating guidelines.</span>
+                      <span class="item-title">
+                        Community Calendar
+                      </span>
+                      <span class="item-description">Public community events.</span>
                     </div>
                   </a>
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">Code of Conduct ↗</span>
-                      <span class="item-description">Our community standards.</span>
-                    </div>
-                  </a>
+
                   <a href="/contact" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">Contact</span>
                       <span class="item-description">Get in touch with us.</span>
                     </div>
                   </a>
+
+                </div>
+              </div>  
+
+              <div class="dropdown-section">
+                <h3 class="menu-header">Foundation Resources</h3>
+                <div class="dropdown-items">
+
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">Charter ↗</span>
+                    </div>
+                  </a>
+
+                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">Code of Conduct ↗</span>
+                    </div>
+                  </a>
+
 
                 </div>
               </div>
@@ -189,22 +201,90 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">Learn About DevRel</h3>
                 <div class="dropdown-items">
+
+                  <a href="/blog" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">DevRel Foundation Blog</span>
+                      <span class="item-description">The latest news and updates.</span>
+                    </div>
+                  </a>
+
                   <a href="/learn/what-is-devrel" onclick={closeAll}>
                     <div class="dropdown-item">
                       <span class="item-title">What is Developer Relations?</span>
                       <span class="item-description">Defining this critical role in technology adoption.</span>
                     </div>
                   </a>
+
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header"> </h3>
+                <h3 class="menu-header">Community Resources</h3>
                 <div class="dropdown-items">
+
+                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
+                        Discord ↗
+                      </span>
+                    </div>
+                  </a>
+
                 </div>
               </div>
             </div>
           </div>
         </li>
+
+
+
+
+        <!-- 
+        
+
+        <li class="nav-item dropdown-container" 
+            onmouseenter={() => !isMobile && showDropdown('community')} 
+            onmouseleave={() => !isMobile && hideDropdown()}>
+          <a href="/blog" class="nav-link" class:active={activeDropdown === 'community'} onclick={(e) => {
+            if (isMobile) {
+              e.preventDefault();
+              toggleAccordion('community');
+            }
+          }}>Community</a>
+          <div class="dropdown" class:active={activeDropdown === 'community'} class:accordion-open={activeAccordion === 'community'}>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <h3 class="menu-header">The DevRel Community</h3>
+                <div class="dropdown-items">
+                  <a href="/blog" onclick={closeAll}>
+                    <div class="dropdown-item">
+                      <span class="item-title">Blog</span>
+                      <span class="item-description">News and updates.</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-section">
+                <h3 class="menu-header">Community Resources</h3>
+                <div class="dropdown-items">
+                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                    <div class="dropdown-item-brief">
+                      <span class="item-title">
+                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
+                        Discord ↗
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        -->
+
+	
+
 
         <li class="nav-item dropdown-container" 
             onmouseenter={() => !isMobile && showDropdown('projects')} 
@@ -226,7 +306,7 @@
                       <span class="item-description">Find open-data, frameworks, and guides to support your program.</span>
                     </div>
                   </a>
-                  <a href="/join-us" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                  <a href="/join-us" onclick={closeAll} rel="noopener noreferrer">
                     <div class="dropdown-item">
                       <span class="item-title">Contribute</span>
                       <span class="item-description">Join the 400+ professionals who want to see DevRel thrive.
@@ -236,28 +316,13 @@
                 </div>
               </div>
               <div class="dropdown-section">
-                <h3 class="menu-header">Additional Resources</h3>
+                <h3 class="menu-header">Project Resources</h3>
                 <div class="dropdown-items">
-                  <a href="/calendar" onclick={closeAll} rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        Community Calendar
-                      </span>
-                    </div>
-                  </a>
                   <a href="https://github.com/devrel-foundation/" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item-brief">
                       <span class="item-title">
                         <img src={GitHubIcon} alt="Explore our GitHub" class="social-icon" />
                         GitHub ↗
-                      </span>
-                    </div>
-                  </a>
-                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
-                        Discord Community ↗
                       </span>
                     </div>
                   </a>
@@ -270,11 +335,6 @@
 
 
 
-
-
-        <!-- <li><a href="/projects" onclick={closeAll}>Community</a></li> --> 
-        <!-- <li><a href="/working-groups" onclick={closeAll}>Working groups</a></li> --> 
-        <!-- <li><a href="/contact" onclick={closeAll}>Contact</a></li> --> 
       </ul>
 
 
@@ -282,7 +342,6 @@
       <button class="cta" onclick={closeAll}>
         <a href="/join-us">Join</a>
       </button>
-
       
       <button class="theme-toggle" onclick={toggleDarkMode} aria-label="Toggle dark mode">
         {#if isDarkMode}
@@ -291,12 +350,6 @@
           <img src={HalfMoonIcon} alt="Dark mode" />
         {/if}
       </button>
-      
-      <!--
-      <a href="https://discord.gg/kfJkJ3Xd" target="_blank" rel="noopener noreferrer" class="discord-link" aria-label="Join our Discord">
-        <img src={DiscordIcon} alt="Discord" />
-      </a>
-       -->
       
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
@@ -594,8 +647,7 @@
   }
   
   .theme-toggle:hover,
-  .menu-toggle:hover,
-  .discord-link:hover {
+  .menu-toggle:hover {
     background-color: var(--color-background-secondary-1);
   }
   
@@ -604,15 +656,6 @@
     width: 1.5rem;
     height: 1.5rem;
     filter: var(--icon-filter);
-  }
-  
-  .discord-link img {
-    filter: var(--icon-filter);
-  }
-
-  .discord-link {
-    padding: var(--space-xs);
-    border-radius: var(--radius-s);
   }
   
   .menu-toggle {

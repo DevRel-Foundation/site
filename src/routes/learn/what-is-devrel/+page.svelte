@@ -72,7 +72,7 @@
 	-->
 
     <div class="contribute-button-container">
-      <a href="/join-us" target="_blank" class="contribute-button">
+      <a href="/join-us" class="contribute-button">
         Contribute to or endorse these definitions →
       </a>
     </div>

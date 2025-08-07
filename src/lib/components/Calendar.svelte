@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  const { eventId } = $props<{ eventId?: string }>();
   
   interface CalendarEvent {
+    id: string;
     title: string;
     start: string;
     end?: string;
@@ -19,6 +21,14 @@
   let selectedEvent = $state<CalendarEvent | null>(null);
   let userLocale = $state<string>('');
   let userTimezone = $state<string>('');
+
+  // Copy state
+  let copied = $state(false);
+  let copyTimeout: number | null = null;
+  
+  // Pagination state
+  let currentPage = $state(0);
+  const eventsPerPage = 10;
   
   // Load events from API
   onMount(async () => {
@@ -39,8 +49,28 @@
       
       events = data.events || [];
       loading = false;
-      
-      // Auto-select the first event if available
+
+      // Helper to get simplified ID
+      function getSimpleId(id: string) {
+        return id.split('@')[0];
+      }
+
+      // Use eventId prop if provided
+      let initialId = eventId;
+      if (!initialId) {
+        // Fallback: try to get from URL (for direct browser navigation)
+        const match = window.location.pathname.match(/\/calendar\/event\/([^/]+)/);
+        initialId = match ? decodeURIComponent(match[1]) : undefined;
+      }
+
+      if (initialId && events.length > 0) {
+        const eventFromUrl = events.find(e => getSimpleId(e.id) === initialId);
+        if (eventFromUrl) {
+          selectedEvent = eventFromUrl;
+          return;
+        }
+      }
+      // Auto-select first event if available
       if (events.length > 0) {
         const filtered = filteredEvents();
         if (filtered.length > 0) {
@@ -60,8 +90,52 @@
     return events || [];
   });
   
+  // Pagination calculations
+  const totalPages = $derived(() => Math.ceil(filteredEvents().length / eventsPerPage));
+  const paginatedEvents = $derived(() => {
+    const start = currentPage * eventsPerPage;
+    const end = start + eventsPerPage;
+    return filteredEvents().slice(start, end);
+  });
   
-  function formatEventDate(event: CalendarEvent) {
+  function goToPage(page: number) {
+    currentPage = Math.max(0, Math.min(page, totalPages() - 1));
+    // Auto-select first event on new page
+    const paginated = paginatedEvents();
+    if (paginated.length > 0) {
+      selectEvent(paginated[0]);
+    }
+  }
+  
+  function nextPage() {
+    if (currentPage < totalPages() - 1) {
+      goToPage(currentPage + 1);
+    }
+  }
+  
+  function prevPage() {
+    if (currentPage > 0) {
+      goToPage(currentPage - 1);
+    }
+  }
+  
+  // Copy the event link to the user's clipboard
+  function copyPageUrl() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        copied = true;
+        if (copyTimeout) clearTimeout(copyTimeout);
+        copyTimeout = window.setTimeout(() => {
+          copied = false;
+        }, 1200);
+      })
+      .catch(err => {
+        console.error('Failed to copy page url:', err);
+      });
+  }
+  
+  function formatEventDate(event: CalendarEvent, year: false) {
     const start = new Date(event.start);
     const end = event.end ? new Date(event.end) : null;
     
@@ -91,6 +165,12 @@
       day: 'numeric',
       timeZone: userTimezone || undefined
     };
+
+    if (year) {
+      dateFormat.year = 'numeric';
+    } else {
+      dateFormat.year = undefined;
+    }
     
     let result = start.toLocaleDateString(locale, dateFormat) + ' at ' + start.toLocaleTimeString(locale, timeFormat);
     
@@ -130,9 +210,13 @@
       .replace(/^\*## (.*?)\*$/gm, '<h2>$1</h2>')
       .replace(/^\*# (.*?)\*$/gm, '<h2>$1</h2>')
       
-      // Convert bold and italic
+      // Convert list items (before bold/italic to avoid conflicts)
+      .replace(/^\* (.+)$/gm, '<li>$1</li>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      
+      // Convert bold and italic (with word boundaries to be safer)
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|\,|\])/g, '$1<em>$2</em>$3')
       
       // Convert regular headings
       .replace(/^### (.*$)/gm, '<h3>$1</h3>')
@@ -143,10 +227,33 @@
       .split('\n\n')
       .map(paragraph => paragraph.trim())
       .filter(paragraph => paragraph.length > 0)
-      .map(paragraph => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
+      .map(paragraph => {
+        // Check if this paragraph contains list items
+        if (paragraph.includes('<li>')) {
+          // Wrap consecutive list items in <ul> tags
+          return `<ul>${paragraph.replace(/\n/g, '')}</ul>`;
+        }
+        return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
+      })
       .join('');
       
     return html;
+  }
+  
+  function selectEvent(event: CalendarEvent) {
+    selectedEvent = event;
+    updateURLWithEvent(event);
+  }
+
+  function updateURLWithEvent(event: CalendarEvent | null) {
+    if (!event) {
+      window.history.replaceState({}, '', '/calendar');
+      return;
+    }
+    // Use simplified ID for URL
+    const simpleId = event.id.split('@')[0];
+    const encodedId = encodeURIComponent(simpleId);
+    window.history.replaceState({}, '', `/calendar/event/${encodedId}`);
   }
   
 </script>
@@ -159,12 +266,12 @@
                 <h2>Recent & Upcoming Events</h2>
             </div>
             <div class="events-list">
-                {#if filteredEvents().length > 0}
-                    {#each filteredEvents() as event}
+                {#if paginatedEvents().length > 0}
+                    {#each paginatedEvents() as event}
                         <button 
                             class="event-list-item" 
                             class:selected={selectedEvent === event}
-                            onclick={() => selectedEvent = event}
+                            onclick={() => selectEvent(event)}
                         >
                             <div class="event-date-compact">{formatEventDate(event)}</div>
                             <h3 class="event-title-compact">{event.title}</h3>
@@ -177,6 +284,34 @@
                 {/if}
             </div>
 
+            <!-- Pagination controls -->
+            {#if totalPages() > 1}
+                <div class="pagination">
+                    <button 
+                        class="pagination-btn" 
+                        onclick={prevPage}
+                        disabled={currentPage === 0}
+                        aria-label="Previous page"
+                    >
+                        ←
+                    </button>
+                    
+                    <div class="pagination-info">
+                        Page {currentPage + 1} of {totalPages()}
+                        <span class="events-count">({filteredEvents().length} events)</span>
+                    </div>
+                    
+                    <button 
+                        class="pagination-btn" 
+                        onclick={nextPage}
+                        disabled={currentPage >= totalPages() - 1}
+                        aria-label="Next page"
+                    >
+                        →
+                    </button>
+                </div>
+            {/if}
+
             <div class="subscribe-button">
                 <a href="https://lists.dev-rel.org/g/community/calendar" target="_blank" rel="noopener noreferrer" class="subscribe-link">
                     <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -185,7 +320,7 @@
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    View Full Calendar
+                    View Full Calendar and Subscribe
                 </a>
             </div>
 
@@ -195,7 +330,23 @@
         <div class="event-details-panel">
             {#if selectedEvent}
                 <div class="event-item">
-                    <h3 class="event-title">{selectedEvent.title}</h3>
+
+                    <div class="event-title-copy-wrap">
+                        <button class="copy-link-btn" title="Copy event link" onclick={copyPageUrl} aria-label="Copy event link">
+
+                            <svg class="anchor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+
+                            {#if copied}
+                                <span class="copy-confirmation">Copied!</span>
+                            {/if}
+                        </button>
+                        <h3 class="event-title">{selectedEvent.title}</h3>
+                    </div>
+                    <div class="event-date-detail">{formatEventDate(selectedEvent, true)}</div>
+
                     <div class="event-details">
                         {#if selectedEvent.location}
                             <div class="event-location">
@@ -401,15 +552,6 @@
     gap: var(--space-s);
   }
   
-  .event-date {
-    font-size: var(--step-0);
-    color: var(--color-text-secondary);
-    font-weight: 600;
-    padding: var(--space-2xs) var(--space-xs);
-    background: var(--color-background-secondary-1);
-    border-radius: var(--radius-xs);
-    width: fit-content;
-  }
   
   .event-description {
     margin: 0;
@@ -455,6 +597,19 @@
   
   .event-description :global(em) {
     font-style: italic;
+  }
+  
+  .event-description :global(ul) {
+    margin: 0 0 var(--space-s) 0;
+    padding-left: var(--space-m);
+    list-style-type: disc;
+  }
+  
+  .event-description :global(li) {
+    margin: 0 0 var(--space-2xs) 0;
+    line-height: 1.6;
+    font-size: var(--step--2);
+    color: var(--color-text-secondary);
   }
   
   .event-location {
@@ -533,6 +688,114 @@
     flex-shrink: 0;
   }
   
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-s);
+    padding: var(--space-s);
+    border-top: 1px solid var(--color-background-secondary-2);
+    gap: var(--space-xs);
+  }
+  
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-background-secondary-2);
+    border-radius: var(--radius-xs);
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: var(--step--1);
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    background: var(--color-background-secondary-1);
+    border-color: var(--color-mint);
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination-info {
+    flex: 1;
+    text-align: center;
+    font-size: var(--step--2);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+  
+  .events-count {
+    font-size: var(--step--3);
+    opacity: 0.7;
+  }
+  
+  .event-title-copy-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  position: relative;
+}
+
+.copy-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--color-link);
+  opacity: 0;
+  position: absolute;
+  left: -28px;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+.event-title-copy-wrap:hover .copy-link-btn,
+.copy-link-btn:focus {
+  opacity: 1;
+}
+
+.copy-link-btn svg {
+  width: 18px;
+  top: 42%;
+  transform: translateY(-42%);
+  height: 14px;
+  display: block;
+}
+
+.copy-confirmation {
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-mint-dark);
+    color: var(--color-background);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--radius-s);
+    font-size: var(--step--2);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.anchor-icon {
+    opacity: 1;
+}
+
+.event-date-detail {
+  font-size: var(--step--2);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+  font-weight: 400;
+}
+
   
   @media (max-width: 768px) {
     .calendar-layout {
