@@ -222,7 +222,7 @@
                 <h3 class="menu-header">Community Resources</h3>
                 <div class="dropdown-items">
 
-                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                  <a href="https://discord.gg/G7CSTKZcuT" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item-brief">
                       <span class="item-title">
                         <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
@@ -268,7 +268,7 @@
               <div class="dropdown-section">
                 <h3 class="menu-header">Community Resources</h3>
                 <div class="dropdown-items">
-                  <a href="https://discord.gg/kfJkJ3Xd" onclick={closeAll} target="_blank" rel="noopener noreferrer">
+                  <a href="https://discord.gg/G7CSTKZcuT" onclick={closeAll} target="_blank" rel="noopener noreferrer">
                     <div class="dropdown-item-brief">
                       <span class="item-title">
                         <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />

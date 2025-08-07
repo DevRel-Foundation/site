@@ -264,7 +264,7 @@ All PRs will get a Netlify preview and URL so that it can be shared and tested b
 
 Need help with your contribution?
 
-- **Discord**: Join our [community Discord](https://discord.gg/kfJkJ3Xd) for real-time support
+- **Discord**: Join our [community Discord](https://discord.gg/G7CSTKZcuT) for real-time support
 - **GitHub Issues**: Create an issue for technical problems
 - **Mailing List**: Subscribe to [community@dev-rel.org](https://lists.dev-rel.org/g/community) for announcements
 - **Working Groups**: Attend [working group meetings](https://github.com/DevRel-Foundation/site/blob/main/src/routes/about/working-groups/+page.svelte) for collaborative discussions
@@ -274,7 +274,7 @@ Need help with your contribution?
 If you have questions about contributing or need clarification on any guidelines:
 
 1. Search existing [GitHub Issues](https://github.com/DevRel-Foundation/site/issues)
-2. Ask in our [Discord community](https://discord.gg/kfJkJ3Xd)
+2. Ask in our [Discord community](https://discord.gg/G7CSTKZcuT)
 3. Contact us at [info@dev-rel.org](mailto:info@dev-rel.org)
 
 ---

@@ -125,9 +125,9 @@
 		</p>
 
 		<div class="steps">
-			<a href="https://discord.gg/kfJkJ3Xd" class="cta-button" target="_blank">Step 1. Join the Discord Community</a>
+			<a href="https://discord.gg/G7CSTKZcuT" class="cta-button" target="_blank">Step 1. Join the Discord Community</a>
 			<p>
-				The foundation's <a href="https://discord.gg/kfJkJ3Xd">Discord server</a> is the primary synchronous communication channel for community participants. Here, you can connect with other DevRel professionals, ask questions, share experiences, and stay updated on activities.
+				The foundation's <a href="https://discord.gg/G7CSTKZcuT">Discord server</a> is the primary synchronous communication channel for community participants. Here, you can connect with other DevRel professionals, ask questions, share experiences, and stay updated on activities.
 			</p>
 
 			<a href="https://lists.dev-rel.org/g/community/join" class="cta-button" target="_blank">Step 2. Sign-up for the Mailing List</a>

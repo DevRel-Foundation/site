@@ -71,7 +71,7 @@
         },
         "sameAs": [
           "https://github.com/devrel-foundation",
-          "https://discord.gg/kfJkJ3Xd"
+          "https://discord.gg/G7CSTKZcuT"
         ],
         "contactPoint": {
           "@type": "ContactPoint",

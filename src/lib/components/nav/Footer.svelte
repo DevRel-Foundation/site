@@ -27,7 +27,7 @@
     <div class="footer-column">
       <h2>Find Us</h2>
       <div class="social-icons">
-        <a href="https://discord.gg/kfJkJ3Xd" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+        <a href="https://discord.gg/G7CSTKZcuT" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
           <img src={DiscordIcon} alt="Discord" />
         </a>
         <a href="https://linkedin.com/company/devrel-foundation" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
