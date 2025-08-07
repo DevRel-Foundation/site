@@ -123,7 +123,7 @@
       "foundingDate": "2024",
       "sameAs": [
         "https://github.com/devrel-foundation",
-        "https://discord.gg/kfJkJ3Xd"
+        "https://discord.gg/G7CSTKZcuT"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -173,7 +173,7 @@
 			<img src={NetworkIcon} alt="Network" />
 			<h3 class="content-box-heading">Join Us</h3>
 			<p>
-				Partner with us on <a href="https://discord.gg/kfJkJ3Xd">Discord</a> and <a href="https://github.com/DevRel-Foundation">GitHub</a> to share your voice and collaborate with peers.
+				Partner with us on <a href="https://discord.gg/G7CSTKZcuT">Discord</a> and <a href="https://github.com/DevRel-Foundation">GitHub</a> to share your voice and collaborate with peers.
 			</p>
 			<button class="content-button" on:click={handleJoinClick}>Get Involved</button>
 		</div>

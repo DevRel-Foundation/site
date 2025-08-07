@@ -12,7 +12,7 @@
   const gettingHelp = [
     { label: "LFX Project Control Center Support (Meetings)", url: "https://lfx.linuxfoundation.org/services/request" },
     { label: "Report a Website Issue", url: "https://github.com/DevRel-Foundation/site/issues" },
-    { label: "Give Feedback on Discord (Chat)", url: "https://discord.gg/kfJkJ3Xd" },
+    { label: "Give Feedback on Discord (Chat)", url: "https://discord.gg/G7CSTKZcuT" },
     { label: "Give Feedback on GitHub Discussions (Forum)", url: "https://github.com/DevRel-Foundation/governance/discussions" },
   ];
 </script>

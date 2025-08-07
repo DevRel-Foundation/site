@@ -108,7 +108,7 @@
 		</p>
 
 		<p>
-		<a href="https://discord.gg/kfJkJ3Xd">
+		<a href="https://discord.gg/G7CSTKZcuT">
 			<img src={DiscordIcon} alt="Lets Chat" class="social-icon" /> #resource-aggregation
 		</a>
 		</p>
