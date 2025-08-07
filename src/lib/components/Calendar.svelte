@@ -438,7 +438,7 @@
 
   .locale-display {
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-weight: 500;
     background: var(--color-background-secondary-1);
     padding: var(--space-2xs) var(--space-xs);
@@ -464,14 +464,14 @@
   }
 
   .event-list-item.selected {
-    background: var(--color-mint-dark);
-    color: var(--color-background);
+    background: var(--color-background-dark);
+    color: var(--color-text-dark);
     border-color: var(--color-mint-dark);
   }
 
   .event-date-compact {
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     margin-bottom: var(--space-2xs);
     font-weight: 400;
   }
@@ -498,7 +498,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-style: italic;
   }
   
@@ -512,7 +512,7 @@
   .no-events-message {
     padding: var(--space-m);
     text-align: center;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-style: italic;
   }
   
@@ -555,7 +555,7 @@
   
   .event-description {
     margin: 0;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     line-height: 1.6;
     font-size: var(--step--1);
   }
@@ -609,12 +609,12 @@
     margin: 0 0 var(--space-2xs) 0;
     line-height: 1.6;
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
   }
   
   .event-location {
     font-size: var(--step--1);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-weight: 500;
   }
   
@@ -728,7 +728,7 @@
     flex: 1;
     text-align: center;
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-weight: 500;
   }
   
@@ -791,7 +791,7 @@
 
 .event-date-detail {
   font-size: var(--step--2);
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   margin-bottom: var(--space-xs);
   font-weight: 400;
 }

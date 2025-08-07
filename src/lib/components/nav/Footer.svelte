@@ -21,7 +21,7 @@
       <h2>Resources</h2>
       <a href="/blog">Blog</a>
       <a href="/projects">Projects</a>
-      <a href="https://github.com/DevRel-Foundation/drf-branding" target="_blank" rel="noopener noreferrer">Brand Guidelines ↗</a>
+      <a href="/brand">Brand Guide</a>
     </div>
 
     <div class="footer-column">

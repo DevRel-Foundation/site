@@ -362,7 +362,7 @@
 
   .cta {
     background-color: var(--color-mint);
-    color: var(--color-text-inverse);
+    color: var(--color-mint-dark);
     padding: var(--space-xs) var(--space-s);
     text-decoration: none;
     border-radius: var(--radius-s);
