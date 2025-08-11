@@ -257,6 +257,19 @@ body.dark-mode {
   --pattern-color: hsla(48, 20%, 90%, 0.1);
 }
 
+body.dark-mode .callout-cta {
+  background-color: var(--color-emerald-dark);
+  background-color: color-mix(in srgb, var(--color-emerald-dark) 88%, transparent);
+}
+
+body.dark-mode .filter-menu .filter-btn {
+  color: var(--color-mint);
+}
+body.dark-mode .filter-menu .filter-btn:hover {
+  background-color: var(--color-mint);
+  color: var(--color-emerald-dark);
+}
+
 body {
   margin: 0;
   padding: 0;
