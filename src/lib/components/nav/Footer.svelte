@@ -48,7 +48,7 @@
   <div class="legal-notice">
     <hr />
     <p>
-      Copyright © 2024 The Linux Foundation® .
+      Copyright © 2025 The Linux Foundation® .
       
       <br />
 
