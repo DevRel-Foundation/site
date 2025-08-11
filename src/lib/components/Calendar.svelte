@@ -241,8 +241,19 @@
   }
   
   function selectEvent(event: CalendarEvent) {
-    selectedEvent = event;
-    updateURLWithEvent(event);
+    // If the same event is clicked again, deselect it
+    if (selectedEvent === event) {
+      selectedEvent = null;
+      updateURLWithEvent(null);
+    } else {
+      selectedEvent = event;
+      updateURLWithEvent(event);
+    }
+  }
+
+  function deselectEvent() {
+    selectedEvent = null;
+    updateURLWithEvent(null);
   }
 
   function updateURLWithEvent(event: CalendarEvent | null) {
@@ -271,6 +282,7 @@
                         <button 
                             class="event-list-item" 
                             class:selected={selectedEvent === event}
+                            class:hidden={selectedEvent && selectedEvent !== event}
                             onclick={() => selectEvent(event)}
                         >
                             <div class="event-date-compact">{formatEventDate(event)}</div>
@@ -312,7 +324,7 @@
                 </div>
             {/if}
 
-            <div class="subscribe-button">
+            <div class="subscribe-button" class:hidden={selectedEvent}>
                 <a href="https://lists.dev-rel.org/g/community/calendar" target="_blank" rel="noopener noreferrer" class="subscribe-link">
                     <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -330,7 +342,6 @@
         <div class="event-details-panel">
             {#if selectedEvent}
                 <div class="event-item">
-
                     <div class="event-title-copy-wrap">
                         <button class="copy-link-btn" title="Copy event link" onclick={copyPageUrl} aria-label="Copy event link">
 
@@ -798,6 +809,10 @@
 
   
   @media (max-width: 768px) {
+    .calendar-container {
+      padding: var(--space-s);
+    }
+    
     .calendar-layout {
       grid-template-columns: 1fr;
       gap: var(--space-s);
@@ -810,8 +825,27 @@
       padding-bottom: var(--space-s);
     }
     
+    .event-list-item {
+      width: 100%;
+      padding: var(--space-s);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .event-list-item.hidden {
+      display: none;
+    }
+    
+    .subscribe-button.hidden {
+      display: none;
+    }
+    
     .event-details-panel {
       padding-left: 0;
+      display: none;
+    }
+    
+    .event-details-panel:has(.event-item) {
+      display: block;
     }
   }
 </style>
