@@ -245,22 +245,22 @@
 		font-weight: 700;
 		text-decoration: none;
 		color: var(--color-text);
-		border-bottom: 3px solid var(--color-mint);
+		border-bottom: 3px solid var(--color-accent-text);
 		padding-bottom: var(--space-3xs);
 		margin-top: auto;
 		transition: all 0.2s ease;
 	}
 
 	.box-cta:hover {
-		border-bottom-color: var(--color-background-secondary-2);
-		color: var(--color-background-secondary-2);
+		border-bottom-color: var(--color-accent-text);
+		color: var(--color-secondary-2-dark);
 	}
 
 	.cta-button {
 		display: inline-block;
 		padding: var(--space-s) var(--space-l);
-		background-color: var(--color-accent-text);
-		color: var(--color-background);
+		background-color: var(--color-button-background);
+		color: var(--color-button-text);
 		border-radius: var(--radius-s);
 		text-decoration: none;
 		font-weight: 600;
@@ -270,7 +270,7 @@
 	}
 
 	.cta-button:hover {
-		background-color: var(--color-accent-text);
+		background-color: var(--color-button-background);
 	}
 
 	p {
