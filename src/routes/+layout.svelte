@@ -76,7 +76,7 @@
         ">
           <div style="flex: 1; min-width: 300px;">
             <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
-              We use cookies and analytics to improve your experience and understand how you use our site. 
+              We use cookies and analytics to improve the user experience for how the site is used. 
               Your privacy is important to us.
               <a href="/privacy" style="color: var(--color-mint, #79bf44); text-decoration: underline;">
                 Learn more

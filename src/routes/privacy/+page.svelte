@@ -16,18 +16,18 @@
   <div class="content">
     <section>
       <h2>Information We Collect</h2>
-      <p>We collect information to provide better services to our users and community members:</p>
+      <p>We collect information to provide better services to our community members:</p>
       <ul>
-        <li><strong>Analytics Data:</strong> We use PostHog to collect anonymized usage analytics, including page views, interactions, and performance metrics</li>
-        <li><strong>Email Addresses:</strong> When you subscribe to our mailing list, we collect your email address</li>
-        <li><strong>Cookies:</strong> We use essential cookies for site functionality and analytics cookies (with your consent)</li>
+        <li><strong>Analytics Data:</strong> We use PostHog to collect anonymized usage analytics, including page views, interactions, and performance metrics to understand interest in projects and resources</li>
+        <li><strong>Email Addresses:</strong> When you subscribe to our mailing list, we collect your email address for delivery calendar invites to working group calls and community announcements</li>
+        <li><strong>Cookies:</strong> We use essential cookies for site functionality and analytics (with your consent)</li>
       </ul>
     </section>
 
     <section>
       <h2>How We Use Your Information</h2>
       <ul>
-        <li><strong>Analytics:</strong> To understand how our site is used and improve user experience</li>
+        <li><strong>Analytics:</strong> To understand how our site is used in order to improve user experience</li>
         <li><strong>Communications:</strong> To send you updates about the DevRel Foundation (only if you subscribe)</li>
         <li><strong>Site Functionality:</strong> To ensure our website works properly and securely</li>
       </ul>
@@ -37,9 +37,9 @@
       <h2>Your Rights and Choices</h2>
       <p>You have control over your personal information:</p>
       <ul>
-        <li><strong>Cookie Consent:</strong> You can accept or reject analytics cookies via our consent banner</li>
-        <li><strong>Mailing List:</strong> You can unsubscribe from our mailing list at any time</li>
-        <li><strong>Data Access:</strong> You can request access to your personal data by contacting us</li>
+        <li><strong>Cookie Consent:</strong> You can accept or reject cookies from the consent banner</li>
+        <li><strong>Mailing List:</strong> You can unsubscribe from our mailing list at any time by visiting https://lists.dev-rel.org</li>
+        <li><strong>Data Access:</strong> You can request access to personal data by contacting us at website@dev-rel.org</li>
         <li><strong>Data Deletion:</strong> You can request deletion of your personal data</li>
       </ul>
     </section>
@@ -67,7 +67,7 @@
 
     <section>
       <h2>Cookie Policy</h2>
-      <p>We use cookies to enhance your experience:</p>
+      <p>We use cookies to enhance user experience:</p>
       <ul>
         <li><strong>Essential Cookies:</strong> Required for basic site functionality (these cannot be disabled)</li>
         <li><strong>Analytics Cookies:</strong> Help us understand how you use our site (these require your consent)</li>
@@ -122,7 +122,7 @@
 
   .content h2 {
     font-size: var(--step-2);
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     margin-bottom: var(--space-m);
     border-bottom: 2px solid var(--color-background-secondary-2);
     padding-bottom: var(--space-xs);
@@ -146,12 +146,12 @@
   }
 
   .content a {
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     text-decoration: underline;
   }
 
   .content a:hover {
-    color: var(--color-mint);
+    color: var(--color-text-accent);
   }
 
   .content strong {
