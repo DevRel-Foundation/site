@@ -216,6 +216,7 @@
     height: 24px;
     opacity: 0.7;
     transition: opacity 0.2s ease;
+    color: var(--color-cream-dark);
     filter: var(--icon-filter);
   }
   

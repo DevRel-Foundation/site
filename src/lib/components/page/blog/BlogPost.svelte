@@ -519,13 +519,13 @@
   }
   
   .toc-link:hover {
-    color: var(--color-mint-dark);
-    border-left-color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
+    border-left-color: var(--color-background-secondary-2-dark);
   }
   
   .toc-link.active {
     color: var(--color-text-secondary);
-    border-left-color: var(--color-mint);
+    border-left-color: var(--color-background-secondary-2-dark);
     font-weight: 600;
   }
   
@@ -558,11 +558,11 @@
   }
   
   .blog-title:hover {
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
   }
   
   .category-tag {
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-background-secondary-2-dark);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);
@@ -651,7 +651,7 @@
   
   .share-icon-button:hover {
     background-color: var(--color-background-secondary-2);
-    border-color: var(--color-mint-dark);
+    border-color: var(--color-background-secondary-2-dark);
   }
   
   .social-icon {
@@ -687,8 +687,8 @@
   }
   
   .post-content :global(code) {
-    background-color: var(--color-mint-dark);
-    color: var(--color-mint);
+    background-color: var(--color-background-secondary-2-dark);
+    color: var(--color-background-secondary-2);
     padding: 0.125em 0.25em;
     border-radius: var(--radius-s);
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -696,7 +696,7 @@
   }
   
   .post-content :global(pre) {
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-code-background);
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-s);
     padding: var(--space-s);
@@ -709,13 +709,13 @@
   .post-content :global(pre code) {
     background: none;
     padding: 0;
-    color: var(--color-mint);
+    color: var(--color-accent-text-dark);
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   }
   
   /* JSON syntax highlighting */
   .post-content :global(pre code .token.property) {
-    color: var(--color-mint);
+    color: var(--color-accent-text-dark);
   }
   
   .post-content :global(pre code .token.string) {
@@ -724,25 +724,25 @@
   
   .post-content :global(pre code .token.number),
   .post-content :global(pre code .token.boolean) {
-    color: var(--color-mint);
+    color: var(--color-accent-text);
   }
   
   .post-content :global(pre code .token.punctuation) {
-    color: rgba(var(--color-mint-rgb), 0.7);
+    color: rgba(var(--color-accent-text-rgb), 0.7);
   }
   
   .post-content :global(pre code .token.comment) {
-    color: rgba(var(--color-mint-rgb), 0.6);
+    color: rgba(var(--color-accent-text-rgb), 0.6);
     font-style: italic;
   }
   
   .post-content :global(pre code .token.keyword) {
-    color: var(--color-mint);
+    color: var(--color-accent-text);
     font-weight: 600;
   }
   
   .post-content :global(blockquote) {
-    border-left: 4px solid var(--color-mint);
+    border-left: 4px solid var(--color-accent-text);
     background-color: var(--color-background-secondary-1);
     padding: var(--space-m);
     margin: var(--space-m) 0;
@@ -862,12 +862,12 @@
   }
   
   .meta-tags a:hover .meta-tag {
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
   }
   
   .disclaimer {
     background-color: var(--color-background-secondary-1);
-    border-left: 3px solid var(--color-mint-dark);
+    border-left: 3px solid var(--color-background-secondary-2-dark);
     padding: var(--space-s);
     margin: var(--space-l) 0;
     border-radius: var(--radius-s);
@@ -948,14 +948,14 @@
     .toc-link {
       border-left: none;
       padding-left: 0;
-      background-color: var(--color-background-secondary-1);
+      background-color: var(--color-background-secondary-1-dark);
       padding: var(--space-3xs) var(--space-2xs);
       border-radius: var(--radius-s);
       font-size: var(--step--2);
     }
     
     .toc-link.active {
-      background-color: var(--color-mint-dark);
+      background-color: var(--color-background-secondary-2-dark);
       color: var(--color-background);
       font-weight: 700;
       margin-left: 0;
@@ -985,7 +985,7 @@
     top: -2rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-background-secondary-2-dark);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);
@@ -1029,7 +1029,7 @@
   }
 
   .post-content :global(.heading-anchor:hover .anchor-icon) {
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
   }
 
   .post-content :global(.heading-anchor .copy-confirmation) {
@@ -1037,7 +1037,7 @@
     top: -2.5rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-background-secondary-2-dark);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);

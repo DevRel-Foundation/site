@@ -20,6 +20,12 @@ const redirects = [
     to: '/learn/what-is-devrel',
     status: 302
   },
+  {
+    // Redirect /join-us to /join
+    from: /^\/join-us\/?$/,
+    to: '/join',
+    status: 302
+  }
 ];
 
 /** @type {import('@sveltejs/kit').Handle} */

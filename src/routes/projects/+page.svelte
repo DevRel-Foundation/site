@@ -173,31 +173,31 @@
 		padding: 0.75em;
 		padding-left: 3em;;
 		padding-right: 3em;;
-		background: color-mix(in srgb, var(--color-mint) 35%, black 65%);
+		background: var(--color-button-background);
 		border: none;
 		cursor: pointer;
 		border-radius: 4px;
 		font-weight: 500;
 		transition: all 0.2s ease;
-		color: var(--color-mint);
+		color: var(--color-button-text);
 		display: block;
 	}
 
 	.cta:hover {
-		background-color: var(--color-mint-dark);
+		background-color: var(--color-button-background);
 		transform: translateY(-1px);
-		color: var(--color-mint);
+		color: var(--color-button-text);
 		text-decoration: underline;
 	}
 
 	.cta:focus {
-		outline: 2px solid var(--color-mint-dark);
+		outline: 2px solid var(--color-button-background);
 		outline-offset: 2px;
 	}
 
 	.cta:active {
 		transform: translateY(0);
-		background-color: var(--color-mint-dark);
+		background-color: var(--color-button-background);
 	}
 
 	.cta:disabled {
@@ -236,14 +236,14 @@
 		left: 0.75rem;
 		width: 1rem;
 		height: 1rem;
-		color: var(--color-mint-dark);
+		color: var(--color-background-secondary-2-dark);
 		pointer-events: none;
 		z-index: 1;
 	}
 
 	.search-input {
 		padding: 0.5rem 1rem 0.5rem 2.5rem;
-		border: 2px solid var(--color-mint);
+		border: 2px solid var(--color-accent-text);
 		border-radius: 4px;
 		font-size: 1rem;
 		min-width: 200px;
@@ -252,7 +252,7 @@
 
 	.search-input:focus {
 		outline: none;
-		border-color: var(--color-mint-dark);
+		border-color: var(--color-background-secondary-2-dark);
 	}
 
 	.projects-grid {
@@ -289,7 +289,7 @@
 	}
 
 	.learn-more {
-		color: var(--color-mint-dark);
+		color: var(--color-background-secondary-2-dark);
 		text-decoration: none;
 		font-weight: 500;
 		transition: color 0.2s ease;
@@ -314,9 +314,9 @@
 
 	.filter-btn {
 		padding: 0.5rem 1rem;
-		border: 2px solid var(--color-mint);
+		border: 2px solid var(--color-accent-text);
 		background: transparent;
-		color: var(--color-mint-dark);
+		color: var(--color-background-secondary-2-dark);
 		cursor: pointer;
 		border-radius: 4px;
 		font-weight: 500;
@@ -324,18 +324,18 @@
 	}
 
 	.filter-btn:hover:not(.active) {
-		background-color: var(--color-mint-dark);
-		color: var(--color-mint);
+		background-color: var(--color-background-secondary-2-dark);
+		color: var(--color-background);
 	}
 
 	.filter-btn.active {
-		background-color: var(--color-mint) !important;
-		color: var(--color-dark) !important;
+		background-color: var(--color-accent-text) !important;
+		color: var(--color-mint-dark) !important;
 	}
 
 	.filter-btn:not(.active) {
 		background: transparent;
-		color: var(--color-mint-dark);
+		color: var(--color-background-secondary-2-dark);
 	}
 
 	.description {
@@ -348,6 +348,22 @@
 		display: -webkit-box;
 		-webkit-line-clamp: 4;
 		-webkit-box-orient: vertical;
+	}
+
+	body.dark-mode { 
+	}
+
+	body.dark-mode .callout-cta {
+		background-color: var(--color-link);
+		background-color: color-mix(in srgb, var(--color-link) 88%, transparent);
+	}
+
+	body.dark-mode .filter-menu .filter-btn {
+		color: var(--color-accent-text);
+	}
+	body.dark-mode .filter-menu .filter-btn:hover {
+		background-color: var(--color-accent-text);
+		color: var(--color-link);
 	}
 
 </style>

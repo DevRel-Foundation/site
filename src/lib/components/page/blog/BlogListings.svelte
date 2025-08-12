@@ -187,7 +187,7 @@
   }
   
   .category-tag {
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-background-secondary-2-dark);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);
