@@ -1,6 +1,5 @@
 <script lang="ts">
 
-  import RocketIcon from 'iconoir/icons/rocket.svg';
   import MagnetIcon from 'iconoir/icons/magnet.svg';
   import GiftIcon from 'iconoir/icons/gift.svg';
   import MegaphoneIcon from 'iconoir/icons/megaphone.svg';
@@ -53,37 +52,6 @@
 			</div>
 
 		</div>
-	</section>
-
-	<div class="section-divider"></div>
-
-	<section class="container-content">
-		<h2>Why a DevRel Foundation?</h2>
-		<p>
-			The purpose of having a foundation is to create an impartial community-driven entity that can provide resources, support, and governance for the Developer Relations community.
-		</p>
-
-		<div class="two-column-layout">
-			<div class="icon-column">
-				<img src="{RocketIcon}" alt="Rocket Icon" class="icon-left" />
-			</div>
-			<div class="text-column">
-
-
-				<ul class="benefit-list">
-					<li class="benefit-item"><div><strong>Inclusive</strong></div>
-						Historically, DevRel has been fragmented across companies and communities with no central authority or resource to unify efforts. The foundation welcomes all individuals regardless of job title, organization, or role.
-					</li>
-					<li class="benefit-item"><div><strong>Neutral</strong></div>
-						Projects are managed by the community for the community, with contributions reviewed and accepted based on merit. This ensures that the foundation remains impartial and focused on direction based on community value, not a particular vendor's interests.
-					</li>
-					<li class="benefit-item"><div><strong>Continuity</strong></div>
-						Governance managed with a public charter, steering committee, and working groups ensures that the foundation can continue to operate and evolve over time, even as individual contributors come and go.
-					</li>
-				</ul>
-
-			</div>
-		</div>	
 	</section>
 
 	<div class="section-divider"></div>
@@ -207,10 +175,6 @@
 
 	</section>
 
-
-
-
-
 </div>
 
 <style>
@@ -230,7 +194,7 @@
 	}
 
 	.hero .content-box {
-		background-color: var(--color-background);
+		background-color: var(--color-background-secondary-1);
 		border: var(--border-thickness) solid var(--color-background-secondary-2);
 	}
 
@@ -241,22 +205,23 @@
 		padding: var(--space-xs) var(--space-xs);
 		border-radius: var(--radius-s) var(--radius-s) 0 0;
 		text-align: center;
-		color: var(--color-dark);
+		background-color: var(--color-background-dark);
+		color: var(--color-text-dark);
 	}
 
 	.members .box-header {
-		background-color: var(--color-mint-dark);
-		color: var(--color-mint);
+		background-color: var(--color-background-dark);
+		color: var(--color-text-dark);
 	}
 
 	.contributors .box-header {
-		background-color: var(--color-mint-dark);
-		color: var(--color-mint);
+		background-color: var(--color-background-dark);
+		color: var(--color-text-dark);
 	}
 
 	.end-users .box-header {
-		background-color: var(--color-mint-dark);
-		color: var(--color-mint);
+		background-color: var(--color-background-dark);
+		color: var(--color-text-dark);
 	}
 
 	.box-question {
@@ -287,14 +252,14 @@
 	}
 
 	.box-cta:hover {
-		border-bottom-color: var(--color-mint-dark);
-		color: var(--color-mint-dark);
+		border-bottom-color: var(--color-background-secondary-2);
+		color: var(--color-background-secondary-2);
 	}
 
 	.cta-button {
 		display: inline-block;
 		padding: var(--space-s) var(--space-l);
-		background-color: var(--color-link);
+		background-color: var(--color-accent-text);
 		color: var(--color-background);
 		border-radius: var(--radius-s);
 		text-decoration: none;
@@ -305,7 +270,7 @@
 	}
 
 	.cta-button:hover {
-		background-color: var(--color-text);
+		background-color: var(--color-accent-text);
 	}
 
 	p {
