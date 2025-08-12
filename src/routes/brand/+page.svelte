@@ -1,9 +1,8 @@
 
 <div class="container container-content">
-<p>
-    <a href="https://github.com/DevRel-Foundation/drf-branding" target="_blank" rel="noopener noreferrer">Brand Assets ↗</a>
-</p>
-<h2>Brand Color Accents</h2>
+
+
+<h2>Colors</h2>
 <p>This is the brand color palette for the DevRel Foundation. It includes all the primary and secondary colors used throughout the website.</p>
 
 <table class="brand-colors-table">
@@ -93,7 +92,7 @@
   </tbody>
 </table>
 
-<h2>Brand Color Usage</h2>
+<h3>Usage</h3>
 <p>Semantic use of the brand colors.</p>
 
 <table class="brand-colors-table">
@@ -182,6 +181,40 @@
     </tr>
   </tbody>
 </table>
+
+<h2>Logos</h2>
+<p>
+    Find <a href="https://github.com/DevRel-Foundation/drf-branding" target="_blank" rel="noopener noreferrer">Brand Assets ↗</a> in the GitHub repository.
+</p>
+
+<table class="brand-colors-table">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo-dark-text.svg" alt="logo-dark-text.svg" width="300"/>
+        logo-dark-text.svg
+      </td>
+      <td style="background: var(--color-blue-dark);">
+        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo-light-text.svg" alt="logo-light-text.svg" width="300"/>
+        <span style="color: var(--color-text-dark);">logo-light-text.svg</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo.svg" alt="logo.svg" width="75"/>
+        logo.svg
+      </td>
+      <td style="background: var(--color-blue-dark);">
+        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo-gray.png" alt="logo-gray.png" width="300"/>
+        <span style="color: var(--color-text-dark);">logo-gray.png</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 </div>
 

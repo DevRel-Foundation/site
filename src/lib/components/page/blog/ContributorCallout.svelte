@@ -15,7 +15,7 @@
   
   .contribute-button {
     display: inline-block;
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-background-secondary-2-dark);
     color: var(--color-background);
     padding: var(--space-s) var(--space-l);
     border-radius: var(--radius-s);
@@ -26,7 +26,7 @@
   }
   
   .contribute-button:hover {
-    background-color: color-mix(in srgb, var(--color-mint-dark) 85%, var(--color-mint) 15%);
+    background-color: color-mix(in srgb, var(--color-background-secondary-2-dark) 85%, var(--color-logo-text-dark) 15%);
     transform: translateY(-1px);
   }
 </style>
