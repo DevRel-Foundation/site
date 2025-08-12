@@ -136,8 +136,8 @@
 
   .callout-cta {
     display: inline-block;
-    background-color: white;
-    color: var(--color-text);
+    background-color: var(--color-button-background-dark);
+    color: var(--color-button-text-dark);
     padding: var(--space-s) var(--space-l);
     border-radius: var(--radius-s);
     text-decoration: none;
@@ -147,8 +147,8 @@
   }
 
   .callout-cta:hover {
-    background-color: var(--color-mint);
-    color: var(--color-mint-dark);
+    background-color: var(--color-button-background-dark);
+    color: var(--color-button-text-dark);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
@@ -158,11 +158,11 @@
       radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
       radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
       radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(135deg, var(--color-mint-dark), #1a4a3a);
+      linear-gradient(135deg, var(--color-button-background), var(--color-button-background));
     background-size: 60px 60px, 80px 80px, 40px 40px, 100% 100%;
     margin: var(--space-s) 0;
 	padding: var(--space-3xs) var(--space-3xs);
-    color: white;
+    color: var(--color-text-dark);
     text-align: left;
   }
 
@@ -181,7 +181,7 @@
   }
 
   .governance-callout .link {
-    color: var(--color-mint);
+    color: var(--color-link-dark);
     text-decoration: underline;
   }
 

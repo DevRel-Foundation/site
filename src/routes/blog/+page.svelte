@@ -145,19 +145,19 @@
   
   .category-link {
     padding: var(--space-2xs) var(--space-s);
-    border: 1px solid var(--color-mint-dark);
+    border: 1px solid var(--color-background-secondary-2-dark);
     border-radius: var(--radius-s);
     text-decoration: none;
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     transition: all 0.2s ease;
     text-transform: uppercase;
   }
   
   .category-link:hover,
   .category-link.active {
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-background-secondary-2-dark);
     color: var(--color-background);
-    border-color: var(--color-mint-dark);
+    border-color: var(--color-background-secondary-2-dark);
   }
   
   .rss-link {
@@ -165,13 +165,13 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     transition: all 0.2s ease;
     padding: var(--space-2xs);
   }
   
   .rss-link:hover {
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     opacity: 0.7;
   }
 </style>

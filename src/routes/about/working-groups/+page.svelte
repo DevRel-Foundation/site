@@ -188,15 +188,15 @@
 		font-weight: 700;
 		text-decoration: none;
 		color: var(--color-text);
-		border-bottom: 3px solid var(--color-mint);
+		border-bottom: 3px solid var(--color-accent-text);
 		padding-bottom: var(--space-3xs);
 		margin-top: auto;
 		transition: all 0.2s ease;
 	}
 
 	.box-cta:hover {
-		border-bottom-color: var(--color-mint-dark);
-		color: var(--color-mint-dark);
+		border-bottom-color: var(--color-accent-text);
+		color: var(--color-secondary-2-dark);
 	}
 
 	.box-header {

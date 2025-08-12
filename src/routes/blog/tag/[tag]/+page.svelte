@@ -76,13 +76,13 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     transition: all 0.2s ease;
     padding: var(--space-2xs);
   }
   
   .rss-link:hover {
-    color: var(--color-mint-dark);
+    color: var(--color-background-secondary-2-dark);
     opacity: 0.7;
   }
   
