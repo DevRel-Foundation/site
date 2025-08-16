@@ -30,21 +30,21 @@
   <tbody>
     <tr>
       <td style="background: var(--color-offwhite);">
-        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo-dark-text.svg" alt="logo-dark-text.svg" width="300"/>
+        <img src="/images/brand/logo-dark-text.svg" alt="logo-dark-text.svg" width="300"/>
         logo-dark-text.svg
       </td>
       <td style="background: var(--color-blue-dark);">
-        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo-light-text.svg" alt="logo-light-text.svg" width="300"/>
+        <img src="/images/brand/logo-light-text.svg" alt="logo-light-text.svg" width="300"/>
         <span style="color: var(--color-text-dark);">logo-light-text.svg</span>
       </td>
     </tr>
     <tr>
       <td style="background: var(--color-offwhite);">
-        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo.svg" alt="logo.svg" width="75"/>
+        <img src="/images/brand/logo.svg" alt="logo.svg" width="75"/>
         logo.svg
       </td>
       <td style="background: var(--color-blue-dark);">
-        <img src="https://raw.githubusercontent.com/DevRel-Foundation/drf-branding/dev/j12y/organize/assets/logos/logo-gray.png" alt="logo-gray.png" width="300"/>
+        <img src="/images/brand/logo-gray.png" alt="logo-gray.png" width="300"/>
         <span style="color: var(--color-text-dark);">logo-gray.png</span>
       </td>
     </tr>
