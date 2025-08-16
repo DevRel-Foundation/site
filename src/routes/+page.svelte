@@ -360,7 +360,7 @@
 		border: var(--border-thickness) solid var(--color-background-secondary-1);
 		border-radius: var(--radius-s);
 		background-color: var(--color-offwhite);
-		color: var(--color-background-secondary-2-dark);
+		color: var(--color-mint-dark);
 		box-sizing: border-box;
 	}
 
