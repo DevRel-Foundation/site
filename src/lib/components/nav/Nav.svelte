@@ -698,20 +698,22 @@
       gap: 0;
     }
     
-    .dropdown-section:not(:first-child) {
-      display: none;
-    }
-
-    .item-description {
-      display: none;
-    }
-
-    .dropdown-item {
-      padding: var(--space-2xs);
-    }
-
-    .menu-header {
-      display: none;
-    }
+  @media (max-width: 768px) {
+  .dropdown-section:not(:first-child) {
+    display: block;
   }
+
+  .item-description {
+    display: block;
+  }
+
+  .menu-header {
+    display: block;
+  }
+}
+
+
+
+  }
+
 </style>
