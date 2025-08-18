@@ -92,7 +92,30 @@
 		<div> <a name="groups"></a> </div>
 
 
-		<h2>Resources Working Group</h2>
+		<h2>Active Working Groups</h2>
+
+		<h3>Community Engagement and Support</h3>
+		<p>The Community Engagement and Support Working Group documents standardized approaches and frameworks that help organizations to build, nurture, and scale developer communities.</p>
+
+		<p>
+		<a href="https://github.com/DevRel-Foundation/wg-community-engagement-support">
+			<img src={GitHubIcon} alt="Learn More" class="social-icon" /> wg-community-engagement-support
+		</a>
+
+		</p>
+		<p>
+		<a href="https://lists.dev-rel.org/g/wg-community-engagement-support">
+			<img src={MailIcon} alt="Subscribe" class="social-icon" /> wg-community-engagement-support@lists.dev-rel.org
+		</a>
+		</p>
+
+		<p>
+		<a href="https://discord.gg/G7CSTKZcuT">
+			<img src={DiscordIcon} alt="Lets Chat" class="social-icon" /> #community-engage-support
+		</a>
+		</p>
+
+		<h3>Resources</h3>
 		<p>The Resources Working Group innovates on building open-data tools such as the Persona Library, Tools Catalog, and Events Directory to support DevRel activities.</p>
 
 		<p>
