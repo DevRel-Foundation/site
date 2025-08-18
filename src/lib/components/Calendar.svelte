@@ -508,7 +508,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: max-content;
     color: var(--color-text-secondary);
     font-style: italic;
   }
@@ -811,10 +811,12 @@
   @media (max-width: 768px) {
     .calendar-container {
       padding: var(--space-s);
+      height: auto;
     }
     
     .calendar-layout {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: var(--space-s);
     }
     

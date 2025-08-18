@@ -29,4 +29,11 @@
 		color: var(--color-text);
 		text-align: center;
 	}
+
+	@media (max-width: 768px) {
+		.calendar-page {
+			min-height: 100vh;
+			height: auto;
+		}
+	}
 </style> 
