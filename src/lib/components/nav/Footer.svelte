@@ -21,7 +21,7 @@
       <h2>Resources</h2>
       <a href="/blog">Blog</a>
       <a href="/projects">Projects</a>
-      <a href="https://github.com/DevRel-Foundation/drf-branding" target="_blank" rel="noopener noreferrer">Brand Guidelines ↗</a>
+      <a href="/brand">Brand Guide</a>
     </div>
 
     <div class="footer-column">
@@ -48,7 +48,7 @@
   <div class="legal-notice">
     <hr />
     <p>
-      Copyright © 2024 The Linux Foundation® .
+      Copyright © 2025 The Linux Foundation® .
       
       <br />
 

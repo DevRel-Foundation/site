@@ -449,7 +449,7 @@
 
   .locale-display {
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-weight: 500;
     background: var(--color-background-secondary-1);
     padding: var(--space-2xs) var(--space-xs);
@@ -471,31 +471,36 @@
 
   .event-list-item:hover {
     background: var(--color-background-secondary-1);
-    border-color: var(--color-mint);
+    border-color: var(--color-accent-text);
   }
 
   .event-list-item.selected {
-    background: var(--color-mint-dark);
-    color: var(--color-background);
-    border-color: var(--color-mint-dark);
+    background: var(--color-background-dark);
+    color: var(--color-text);
+    border-color: var(--color-accent-text);
   }
 
   .event-date-compact {
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     margin-bottom: var(--space-2xs);
     font-weight: 400;
   }
 
   .event-list-item.selected .event-date-compact {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-dark);
   }
 
   .event-title-compact {
     font-weight: 600;
     font-size: var(--step--1);
+    color: var(--color-text);
     margin: 0;
     line-height: 1.3;
+  }
+
+  .event-list-item.selected .event-title-compact {
+    color: var(--color-text-dark);
   }
 
   .event-details-panel {
@@ -509,7 +514,7 @@
     align-items: center;
     justify-content: center;
     height: max-content;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-style: italic;
   }
   
@@ -523,7 +528,7 @@
   .no-events-message {
     padding: var(--space-m);
     text-align: center;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-style: italic;
   }
   
@@ -566,7 +571,7 @@
   
   .event-description {
     margin: 0;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     line-height: 1.6;
     font-size: var(--step--1);
   }
@@ -620,12 +625,12 @@
     margin: 0 0 var(--space-2xs) 0;
     line-height: 1.6;
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
   }
   
   .event-location {
     font-size: var(--step--1);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-weight: 500;
   }
   
@@ -739,7 +744,7 @@
     flex: 1;
     text-align: center;
     font-size: var(--step--2);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
     font-weight: 500;
   }
   
@@ -802,7 +807,7 @@
 
 .event-date-detail {
   font-size: var(--step--2);
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   margin-bottom: var(--space-xs);
   font-weight: 400;
 }

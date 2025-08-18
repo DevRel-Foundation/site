@@ -5,7 +5,7 @@ name: DevRel Foundation
 avatar: 'https://avatars.githubusercontent.com/u/165706382?v=4'
 bio: ''
 company: ''
-updated: '2025-08-04'
+updated: '2025-08-05'
 website: 'https://dev-rel.org'
 ---
 

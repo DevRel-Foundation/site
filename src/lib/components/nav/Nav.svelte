@@ -4,7 +4,7 @@
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
-  import MailIcon from 'iconoir/icons/mail.svg';
+  import CallToActionButton from '$lib/components/ui/cta/CallToActionButton.svelte';
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
@@ -331,17 +331,12 @@
             </div>
           </div>
         </li>
-
-
-
-
       </ul>
 
+      <div class="cta">
+        <CallToActionButton />
+      </div>
 
-
-      <button class="cta" onclick={closeAll}>
-        <a href="/join-us">Join</a>
-      </button>
       
       <button class="theme-toggle" onclick={toggleDarkMode} aria-label="Toggle dark mode">
         {#if isDarkMode}
@@ -361,31 +356,8 @@
 <style>
 
   .cta {
-    background-color: var(--color-mint);
-    color: var(--color-text-inverse);
-    padding: var(--space-xs) var(--space-s);
-    text-decoration: none;
-    border-radius: var(--radius-s);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-left: var(--space-l);
-    }
-
-    .cta a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .cta:hover {
-    background-color: color-mix(in srgb, var(--color-mint), black 10%);
   }
-
 
   .nav {
     background-color: var(--color-background);
@@ -726,20 +698,22 @@
       gap: 0;
     }
     
-    .dropdown-section:not(:first-child) {
-      display: none;
-    }
-
-    .item-description {
-      display: none;
-    }
-
-    .dropdown-item {
-      padding: var(--space-2xs);
-    }
-
-    .menu-header {
-      display: none;
-    }
+  @media (max-width: 768px) {
+  .dropdown-section:not(:first-child) {
+    display: block;
   }
+
+  .item-description {
+    display: block;
+  }
+
+  .menu-header {
+    display: block;
+  }
+}
+
+
+
+  }
+
 </style>

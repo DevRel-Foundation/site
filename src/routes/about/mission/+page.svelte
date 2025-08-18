@@ -1,4 +1,6 @@
 <script>
+  import RocketIcon from 'iconoir/icons/rocket.svg';
+
 </script>
 
 <svelte:head>
@@ -66,6 +68,37 @@
 	</section>
 </div>
 
+<div class="container container-content">
+	<section class="container-content">
+		<h2>Why a DevRel Foundation?</h2>
+		<p>
+			The purpose of having a foundation is to create an impartial community-driven entity that can provide resources, support, and governance for the Developer Relations community.
+		</p>
+
+		<div class="two-column-layout">
+			<div class="icon-column">
+				<img src="{RocketIcon}" alt="Rocket Icon" class="icon-left" />
+			</div>
+			<div class="text-column">
+
+				<ul class="benefit-list">
+					<li class="benefit-item"><div><strong>Inclusive</strong></div>
+						Historically, DevRel has been fragmented across companies and communities with no central authority or resource to unify efforts. The foundation welcomes all individuals regardless of job title, organization, or role.
+					</li>
+					<li class="benefit-item"><div><strong>Neutral</strong></div>
+						Projects are managed by the community for the community, with contributions reviewed and accepted based on merit. This ensures that the foundation remains impartial and focused on direction based on community value, not a particular vendor's interests.
+					</li>
+					<li class="benefit-item"><div><strong>Continuity</strong></div>
+						Governance managed with a public charter, steering committee, and working groups ensures that the foundation can continue to operate and evolve over time, even as individual contributors come and go.
+					</li>
+				</ul>
+
+			</div>
+		</div>	
+	</section>
+</div>
+
+
 <section class="governance-callout">
 <div class="container container-content">
 	<section class="mission-section">
@@ -77,6 +110,9 @@
 	</section>
 </div>
 </section>
+
+
+
 
 
 <style>
@@ -136,8 +172,8 @@
 
   .callout-cta {
     display: inline-block;
-    background-color: white;
-    color: var(--color-text);
+    background-color: var(--color-button-background-dark);
+    color: var(--color-button-text-dark);
     padding: var(--space-s) var(--space-l);
     border-radius: var(--radius-s);
     text-decoration: none;
@@ -147,8 +183,8 @@
   }
 
   .callout-cta:hover {
-    background-color: var(--color-mint);
-    color: var(--color-mint-dark);
+    background-color: var(--color-button-background-dark);
+    color: var(--color-button-text-dark);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
@@ -158,30 +194,16 @@
       radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
       radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
       radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(135deg, var(--color-mint-dark), #1a4a3a);
+      linear-gradient(135deg, var(--color-button-background), var(--color-button-background));
     background-size: 60px 60px, 80px 80px, 40px 40px, 100% 100%;
     margin: var(--space-s) 0;
 	padding: var(--space-3xs) var(--space-3xs);
-    color: white;
+    color: var(--color-text-dark);
     text-align: left;
   }
 
-  .governance-callout .callout-content h2 {
-    font-size: var(--step-2);
-    margin-top: 0;
-    margin-bottom: var(--space-s);
-    color: white;
-  }
-
-  .governance-callout .callout-content p {
-    font-size: var(--step-0);
-    line-height: 1.6;
-    margin-bottom: var(--space-s);
-    color: white;
-  }
-
   .governance-callout .link {
-    color: var(--color-mint);
+    color: var(--color-link-dark);
     text-decoration: underline;
   }
 
@@ -210,11 +232,36 @@
       font-size: var(--step--1);
     }
 
-    .governance-links {
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-s);
-    }
   }
+
+	.two-column-layout {
+		display: grid;
+		grid-template-columns: 1fr 5fr;
+		gap: var(--space-l);
+		align-items: center;
+	}
+
+	.icon-column {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		min-height: 200px;
+	}
+
+	.text-column {
+		flex: 1;
+    font-size: var(--step-0);
+	}
+
+	.icon-left {
+		height: auto;
+		max-width: min(50vw, 250px);
+		width: 50%;
+		flex-shrink: 0;
+		filter: var(--icon-filter);
+		stroke-width: 1;
+		opacity: 0.8;
+	}
 
 </style>
