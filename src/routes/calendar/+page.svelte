@@ -10,7 +10,8 @@
 <style>
 	.calendar-page {
 		width: 100vw;
-		height: 100vh;
+		min-height: 100vh;
+		height: auto;
 		margin: var(--space-m) auto;
 		padding: 0;
 		position: relative;
