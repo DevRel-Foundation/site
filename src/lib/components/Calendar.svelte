@@ -410,7 +410,7 @@
 <style>
   .calendar-container {
     width: 100%;
-    height: calc(100vh - 80px);
+    height: auto;
     margin: 0;
     padding: var(--space-s) var(--space-xl);
     box-sizing: border-box;
@@ -816,7 +816,6 @@
   @media (max-width: 768px) {
     .calendar-container {
       padding: var(--space-s);
-      height: auto;
     }
     
     .calendar-layout {
