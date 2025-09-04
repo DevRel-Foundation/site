@@ -669,7 +669,11 @@
     .nav-link.active::after {
       display: none;
     }
-
+    .nav-menu.open { 
+      max-height:calc(100dvh - 4rem);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
     .dropdown {
       position: static;
       opacity: 0;
