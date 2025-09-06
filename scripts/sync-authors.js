@@ -179,14 +179,13 @@ async function updateAuthorFile(username, githubData, forceUpdate = false) {
   try {
     const content = await readFile(authorPath, 'utf-8');
     const { data: frontmatter, content: markdownContent } = matter(content);
-    
-    // Update GitHub-sourced data
+
+    // Prepare updated frontmatter (without changing updated yet)
     const updated = {
       ...frontmatter,
-      avatar: githubData?.avatar_url || frontmatter.avatar,
-      updated: new Date().toISOString().split('T')[0]
+      avatar: githubData?.avatar_url || frontmatter.avatar
     };
-    
+
     if (forceUpdate) {
       // Force update mode - overwrite with GitHub data
       console.log(`🔄 Force updating ${username} with fresh GitHub data...`);
@@ -196,27 +195,34 @@ async function updateAuthorFile(username, githubData, forceUpdate = false) {
       updated.company = githubData?.company || '';
     } else {
       // Normal mode - preserve local edits, only fill in missing data
-      // Update name if it's still the default or if GitHub has a better one
       if (!frontmatter.name || frontmatter.name === username) {
         updated.name = githubData?.name || githubData?.login || username;
       }
-      
-      // Update bio if it's still the default
       if (frontmatter.bio === 'Developer and contributor to the DevRel Foundation' && githubData?.bio) {
         updated.bio = githubData.bio;
       }
-      
-      // Update website if empty and GitHub has one
       if (!frontmatter.website && githubData?.blog) {
         updated.website = githubData.blog;
       }
-      
-      // Update company if empty and GitHub has one
       if (!frontmatter.company && githubData?.company) {
         updated.company = githubData.company;
       }
     }
-    
+
+    // Only update the 'updated' field if any other field has changed
+    let changed = false;
+    for (const key of Object.keys(updated)) {
+      if (key !== 'updated' && updated[key] !== frontmatter[key]) {
+        changed = true;
+        break;
+      }
+    }
+    if (changed) {
+      updated.updated = new Date().toISOString().split('T')[0];
+    } else {
+      updated.updated = frontmatter.updated;
+    }
+
     const newContent = matter.stringify(markdownContent, updated);
     await writeFile(authorPath, newContent);
     console.log(`🔄 Updated author file for ${username}${forceUpdate ? ' (forced)' : ''}`);
