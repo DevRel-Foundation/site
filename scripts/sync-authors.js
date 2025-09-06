@@ -180,6 +180,12 @@ async function updateAuthorFile(username, githubData, forceUpdate = false) {
     const content = await readFile(authorPath, 'utf-8');
     const { data: frontmatter, content: markdownContent } = matter(content);
 
+    // If skipUpdate is true, skip updating this author
+    if (frontmatter.skipUpdate == true) {
+      console.log(`⏭️  Skipping update for ${username} (skipUpdate is true)`);
+      return;
+    }
+
     // Prepare updated frontmatter (without changing updated yet)
     const updated = {
       ...frontmatter,
