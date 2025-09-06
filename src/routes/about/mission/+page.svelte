@@ -34,23 +34,14 @@
 		<h2>Vision</h2>
 
 		<p>
-			Our vision is to establish the DevRel Foundation (DRF) as a credible, central force in advancing the practices of Developer Relations, elevating its value to businesses and organizations. We aim to elevate foundational standards and foster a vibrant, accessible community that actively shapes and grows the discipline.
+			Our vision is to establish the <strong>DevRel Foundation (DRF)</strong> as a credible, central force in advancing the practices of Developer Relations, elevating its value to businesses and organizations. We aim to elevate foundational standards and foster a vibrant, accessible community that actively shapes and grows the discipline.
 		</p>
 
-		<p>
-			To bring this vision to life, the DRF will serve as a formally established entity that anchors the community's collective efforts. We will provide a centralized, open-access hub for high-quality materials, frameworks, and guidance, sourced from proven individual contributions and driven by focused innovation.
-		</p>
-
-		<p>
-			To support the mission, we plan to collaboratively develop assets, including definitions, frameworks, and the creation and codification of other artifacts that aid the success of Developer Relations practitioners around the world. 
-		</p>
-
-		<p>This includes activities like:</p>
+		<p>Activities to achieve this vision include things like:</p>
 
 		<ul class="list">
 			<li class="list-item">
 				Recommending an organizational structure and roles for new Developer Relations programs.
-
 			</li>
 			<li class="list-item">
 				Helping provide career support resources for job seekers, hiring team guidance, interview plans, and managing continued professional growth.
@@ -61,18 +52,51 @@
 			<li class="list-item">
 				Resources and tools for community management when building engagement, including playbooks, templates, and guides.
 			</li>
+			<li class="list-item">
+				and much more.
+			</li>
 		</ul>
 
-		<p>and much more.</p>
+
+		<p>
+			To bring this vision to life, the DRF is chartered to serve as a formally established entity that anchors the community's collective efforts through our charter. We provide a centralized, open-access hub for high-quality materials, frameworks, and guidance, sourced from proven individual contributions and driven by focused innovation.
+		</p>
+
+
+
+		<h2>Charter</h2>
+
+		<p>
+			The purpose of having a charter for the Developer Relations Foundation is to help people understand our mission and scope. The DevRel Foundation <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank">Charter</a> is a living document, allowing the community to propose changes and updates as the DevRel Foundation evolves.
+		</p>
+
+		<p>
+			 The Developer Relations Foundation is a community-driven project, with no funding involved. The <a href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Governance Playbook</a> documents how the Developer Relations Foundation operates and is structured. While the general Charter provides an overview of the project's structure and governance, this document covers specific operational details that ensure smooth participation and collaboration. It includes documentation on the DRF community structure, roles, and responsibilities, communication channels, regular meetings, and processes to submit new proposals and start or continue discussions.
+		</p>
 
 	</section>
 </div>
 
+<section class="governance-callout">
+<div class="container container-content">
+	<section class="mission-section">
+		<h2>Governance Playbook</h2>
+		<p>
+			The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">Working Groups</a> that focus on sourcing and innovating best practices  through peer-reviewed resources and materials.
+		</p>
+
+		<p>
+			<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our Charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
+		</p>
+	</section>
+</div>
+</section>
+
 <div class="container container-content">
 	<section class="container-content">
-		<h2>Why a DevRel Foundation?</h2>
+		<h2>Why Do We Need a DevRel Foundation?</h2>
 		<p>
-			The purpose of having a foundation is to create an impartial community-driven entity that can provide resources, support, and governance for the Developer Relations community.
+			The major benefit of a foundation is that it promotes participatory governance, preventing any single company from monopolizing a collaborative project. Specifically, a foundation ensures:
 		</p>
 
 		<div class="two-column-layout">
@@ -82,37 +106,65 @@
 			<div class="text-column">
 
 				<ul class="benefit-list">
-					<li class="benefit-item"><div><strong>Inclusive</strong></div>
-						Historically, DevRel has been fragmented across companies and communities with no central authority or resource to unify efforts. The foundation welcomes all individuals regardless of job title, organization, or role.
-					</li>
 					<li class="benefit-item"><div><strong>Neutral</strong></div>
-						Projects are managed by the community for the community, with contributions reviewed and accepted based on merit. This ensures that the foundation remains impartial and focused on direction based on community value, not a particular vendor's interests.
+						Projects are managed by the community for the community, with contributions reviewed and accepted based on merit. Contributions to 
+						content and direction should be accepted based on community value
+						regardless of their impact on any particular vendor.
 					</li>
 					<li class="benefit-item"><div><strong>Continuity</strong></div>
-						Governance managed with a public charter, steering committee, and working groups ensures that the foundation can continue to operate and evolve over time, even as individual contributors come and go.
+						Governance managed with a public charter, steering committee, and working groups ensures that the foundation can continue to operate and evolve over time, even as individual contributors come and go. Further, the resources can be used without fearing sudden changes
+						in licensing or availability.
+					</li>
+					<li class="benefit-item"><div><strong>Inclusive</strong></div>
+						Historically, DevRel has been fragmented across companies and communities with no central authority or resource to unify efforts. The DevRel Foundation welcomes all individuals regardless of job title, organization, or role.
 					</li>
 				</ul>
-
 			</div>
 		</div>	
-	</section>
-</div>
 
-
-<section class="governance-callout">
-<div class="container container-content">
-	<section class="mission-section">
-		<h2>Governance</h2>
+		<br/>
 		<p>
-			The DevRel Foundation's Steering Committee oversees the Foundation's activities according to its Charter. The work is organized into <a href="/about/working-groups" class="link">Working Groups</a> that focus on sourcing and innovating best practices in Developer Relations through peer-reviewed resources and materials.
+			A foundation aims to be a trusted, credible, and expert resource, similar to professional bodies in other fields, providing training, certification, continuing education, and advocacy.
 		</p>
-		<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our Charter</a>
+
 	</section>
-</div>
-</section>
+</div>  
 
+<div class="container container-content">
+	<section class="container-content">
+		<h2>Why the Linux Foundation?</h2>
+		<p>
+			This collaborative project has been hosted as a community project, with no funding involved. This means taking advantage of the governance structure, project management staff, and back-end resources that the Linux Foundation (LF) provides to all hosted projects under an unfunded model, to ensure long-term sustainability. Developer Relations Foundation is part of the LF project series, as a <a href="https://donorbox.org/nonprofit-blog/501c3-vs-501c6" target="_blank" rel="noopener noreferrer">non-profit 501(c)(6)</a>.
+		</p>
+		<p>
+			The major benefit of hosting with the LF is that it offers recognized global credibility. Specifically, the LF ensures:
+		</p>
 
+		<div class="text-column">
+		<ul class="benefit-list">
+			<li class="benefit-item"><div><strong>DevRel Value Outside DevRel</strong></div>
+				Being part of a renowned and large open source foundation like the Linux Foundation enhances the project's credibility within the DevRel community and among external stakeholders and decision-makers. This recognition elevates DevRel's visibility and perceived value as a profession, demonstrating its importance and impact beyond industry peers.
+			</li>
+			<li class="benefit-item"><div><strong>Level Playing Field</strong></div>
+				Ensuring that no single company in the ecosystem can exert undue control over the project by owning the trademark.
+			</li>
+			<li class="benefit-item"><div><strong>Licensing Integrity</strong></div>
+				Protecting the licensing integrity of the collaborative project, as detailed in this blog post: <a href="https://www.linuxfoundation.org/blog/how-open-source-foundations-protect-the-licensing-integrity-of-open-source-projects">How Open Source Foundations Protect the Licensing Integrity of Open Source Projects</a>.
+			</li>
 
+		</ul>
+		</div>
+
+		<br/>
+
+		<p>
+			The LF allows individual contributors to retain copyright ownership of their contributions while providing an open source license, reflected through the Developer Certificate of Origin sign-off process.
+		</p>
+		<p>
+			We also chose the LF to avoid reinventing the wheel. Creating something new requires tools, infrastructure, and, ideally, a lightweight process to get started and make the initiative resilient. 
+		</p>
+	</section>
+</div>  
 
 
 <style>
