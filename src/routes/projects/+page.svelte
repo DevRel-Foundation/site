@@ -23,6 +23,18 @@
 			description: "Directory of developer events, conferences, and meetups to engage with community strategies.",
 			status: "sandbox",
 			learnMoreUrl: "https://github.com/devrel-foundation/events-directory"
+		},
+		{
+			title: "Metrics Index",
+			description: "Index of metrics and KPIs for measuring the performance and impact of DevRel initiatives.",
+			status: "sandbox",
+			learnMoreUrl: "https://github.com/devrel-foundation/metrics-index"
+		},
+		{
+			title: "DevRel Maturity Model",
+			description: "Framework for assessing the maturity of the organization and structure in executing DevRel tactics and programs.",
+			status: "sandbox",
+			learnMoreUrl: "https://github.com/devrel-foundation/devrel-maturity-model"
 		}
 	];
 
