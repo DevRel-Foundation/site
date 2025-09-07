@@ -17,9 +17,19 @@
 
 <main class="container">
 	<div class="container-content">
-		<h1>DevRel Working Groups</h1>
+		<h1>DevRel Foundation Working Groups</h1>
 
-		<p class="box-question">Working groups are open to everyone!</p>
+
+		<h2>What are Working Groups?</h2>
+
+		<p>
+
+		   Working groups are volunteer-led teams within the Developer Relations Foundation that focus on specific DevRel topics or challenges. They collaborate to create open-source resources, best practices, and frameworks to support the DevRel community.
+
+		</p>
+
+
+		<p class="question">Working groups are public and open for anybody to join!</p>
 
 		<p>
 			Participating in working groups and projects is the best way to immerse yourself in
@@ -42,18 +52,19 @@
 		<div class="section-divider"></div>
 
 		<h2>How It Works</h2>
+
+
+
 		<p>
-			Each working group is overseen by volunteer managers passionate about the topic and committed to driving progress. These group managers are responsible for setting the agenda and ensuring the group stays on track to meet its goals. A liaison is appointed to facilitate communication between the working group, steering committee, and the broader community.
+			A <strong>Working Group Manager</strong> is a leadership position within working groups responsible for keeping the group focused, organized, and moving forward. They help create an environment where all working group participants can share ideas, co-create meaningful outputs, and make an impact in the DevRel ecosystem. Working Group Managers are appointed by the Steering Committee and act as a liaison between the working group and the overall community.
 		</p>
 
 		<ul class="list">
 			<li class="list-item">Working groups are formed on a rolling basis.</li>
-			<li class="list-item">Each group is time-bound, with clearly scoped objectives.</li>
-			<li class="list-item">
-				Contributors participate asynchronously through GitHub and collaboratively during community
-				calls.
+			<li class="list-item">Each working group should have clearly scoped objectives.</li>
+			<li class="list-item">Contributors can participate asynchronously through GitHub or collaboratively during working group calls.
 			</li>
-			<li class="list-item">Outputs are openly published and maintained as living resources and projects.</li>
+			<li class="list-item">Outputs are openly published and maintained as living project resources.</li>
 		</ul>
 
 
@@ -190,7 +201,7 @@
 		min-height: 300px;
 	}
 
-	.box-question {
+	.question {
 		font-size: var(--step-0);
 		font-weight: 900;
 		margin: 0 0 var(--space-s) 0;

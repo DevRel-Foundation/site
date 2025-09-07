@@ -18,7 +18,7 @@
 		<div class="container">
 			<h2 id="steering-committee">Steering Committee</h2>
 			<p>
-				The Steering Committee provides oversight and continuity for the Developer Relations Foundation (DRF) and its initiatives.
+				The <strong>Steering Committee</strong> provides expectations, timelines, tools, and regular oversight and continuity for <a href="/about/working-groups" class="link">working groups</a> and the Developer Relations Foundation (DRF) and its initiatives.
 			</p>
 		</div>
 

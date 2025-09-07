@@ -14,7 +14,7 @@
     <li><a href="#colors">Colors</a></li>
     <li><a href="#usage">Color Usage</a></li>
     <li><a href="#usage">Typography</a></li>
-    <li><a href="#ip">License and Intellectual Property</a></li>
+    <li><a href="/terms">Terms of Use</a></li>
   </ul>
 </nav>
 
@@ -217,46 +217,6 @@
 </table>
 
 <h2 id="usage">Typography</h2>
-
-
-
-  <h2 id="ip">License and Intellectual Property</h2>
-
-  <p>
-    All documentation is made available by the Developer Relations Foundation under the 
-    <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
-      Creative Commons Attribution 4.0 International License
-    </a>.
-  </p>
-
-  <p>
-    This means that anyone contributing to or using this documentation—including managers, working groups, and users—must follow the terms of this license. In simple terms:
-  </p>
-
-  <ul>
-    <li>You are free to share and adapt the content (copy, redistribute, remix, transform)</li>
-    <li>But <strong>you must give proper credit to the Developer Relations Foundation</strong></li>
-    <li>You also need to indicate if changes were made</li>
-  </ul>
-
-  <br/>
-  <p><b>How to reference if reusing the content as-is (without modifications):</b></p>
-  <blockquote>
-    This documentation includes material from the Developer Relations Foundation, available under the 
-    <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
-      Creative Commons Attribution 4.0 International License
-    </a>.
-  </blockquote>
-
-  <br/>
-  <p><b>How to reference adapting or modifying the content:</b></p>
-  <blockquote>
-    This documentation is adapted from materials originally created by the Developer Relations Foundation, available under the 
-    <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
-      Creative Commons Attribution 4.0 International License
-    </a>. Changes have been made from the original.
-  </blockquote>
-
 
 
 </div>
