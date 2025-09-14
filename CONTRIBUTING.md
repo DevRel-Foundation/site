@@ -1,6 +1,8 @@
 # Contributing to the DevRel Foundation Site
 
-Welcome to the DevRel Foundation website project! We're excited to have you contribute to our mission.
+Welcome to the DevRel Foundation.
+
+We're excited to have you contribute to our mission.
 
 ## Table of Contents
 
@@ -13,14 +15,13 @@ Welcome to the DevRel Foundation website project! We're excited to have you cont
 
 ## Getting Started
 
-The DevRel Foundation website serves as the central hub for our community, hosting resources, blog content, and information about our working groups and projects. All contributions should align with our mission to provide valuable, vendor-neutral resources for the Developer Relations community.
+The DevRel Foundation website serves as the central hub for information about our community, hosting resources, blog content, and wayfinding to our working groups and projects. All contributions should align with our mission to provide valuable, vendor-neutral resources for the Developer Relations community.
 
 ### Prerequisites
 
 Before contributing, please ensure you have:
 - A [GitHub account](https://github.com/signup)
 - Basic familiarity with Git and GitHub workflows
-- Node.js and npm installed (for development contributions)
 
 ## Code of Conduct
 
@@ -28,24 +29,26 @@ All contributors are expected to adhere to the [DevRel Foundation Code of Conduc
 
 ## Ways to Contribute
 
-### 🖊️ Blog Posts
-Share insights, tutorials, and perspectives on Developer Relations topics that benefit our community.
+### Blog Posts
 
-### 🐛 Bug Reports
-Found an issue with the website? Report it through our [GitHub Issues](https://github.com/DevRel-Foundation/site/issues).
+Share insights, tutorials, and perspectives on Developer Relations Foundation topics that highlight the value that the community and resources provide.
 
-### ✨ Feature Requests
-Suggest new features or improvements to enhance the site's functionality.
+See more details below about contributing blog posts because we are looking for blog posts that support the mission of the foundation. A good litmus test for the content we seek is that it references something created for the DevRel Foundation.
 
-### 📝 Documentation
-Help improve our documentation, guides, and resources.
+### Bug Reports
+Found an issue with the website? Report it through a [GitHub Issue](https://github.com/DevRel-Foundation/site/issues) to make sure we're aware.
 
-### 🎨 Design & UX
+### Feature Requests
+Suggest new features or improvements to enhance the site's functionality. This is a volunteer project so should set expectations accordingly. Reporting an issue is still helpful to understand what is valuable, building it is divine if you have the skill and time.
+
+### Documentation
+Help improve our documentation, guides, and resources. If you are confused by anything you encounter, that is likely a good opportunity to ask questions and then improve upon it for everybody who comes along later.
+
+### Design & UX
 Contribute to the visual design and user experience of the site.
 
-### 💻 Code Contributions
+### Code Contributions
 Help develop new features, fix bugs, or improve the site's technical implementation.
-
 
 ## Blog Contribution Guidelines
 
@@ -56,23 +59,22 @@ Here's what you need to know:
 ### Content We Welcome
 
 Blog posts should:
-- ✅ Focus on Developer Relations best practices, frameworks, or insights
-- ✅ Be applicable to our [community personas](https://github.com/DevRel-Foundation/persona-library) 
-- ✅ Provide practical value to DevRel professionals as a resource
-- ✅ Share knowledge about foundation resources and projects
-- ✅ Present vendor-neutral perspectives and solutions
-- ✅ Include original insights, case studies, or research
+- ✅ Focus on Developer Relations Foundation best practices, frameworks, or insights.
+- ✅ Be applicable to our [community personas](https://github.com/DevRel-Foundation/persona-library/blob/main/data/sets/dev-rel.org/DEVREL-FOUNDATION.md).
+- ✅ Provide practical value to DevRel professionals as a resource. We want solutions not just questions and opinions.
+- ✅ Share knowledge about DevRel and Linux Foundation resources and projects. Consider making your contribution to a project first before writing a blog post about it.
+- ✅ Present vendor-neutral perspectives and solutions.
+- ✅ Include original insights, case studies, or research.
 
 ### Content We Don't Publish
 
 We will not publish:
-- ❌ Direct promotional content or sales pitches
-- ❌ Job postings or recruitment content
-- ❌ Backlink farming or SEO-focused content
-- ❌ Promoted events without broader community value
-- ❌ Content primarily advertising third-party commercial products
-- ❌ Personal opinions without broader applicability or incorporation into foundation resources
-- ❌ Content that violates our Code of Conduct
+- ❌ Job postings or recruitment content unless it is about a DevRel Foundation resource.
+- ❌ Backlink farming or SEO-focused content.
+- ❌ Promoted events without broader community value.
+- ❌ Content primarily advertising third-party commercial products.
+- ❌ Personal opinions without broader applicability or incorporation into foundation resources.
+- ❌ Content that violates our Code of Conduct.
 
 ### Blog Post Structure
 
