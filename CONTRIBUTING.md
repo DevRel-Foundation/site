@@ -205,6 +205,22 @@ If changes are requested:
 - Avoid inflammatory or divisive language
 - Focus on practical solutions and shared learning
 
+### Examples
+
+Here are a few examples to add clarity to the framing for stories we're looking for.
+
+**OK**: These are the five metrics that I think every developer program should track...
+
+**Better**: The DRF working group agreed that the top five metrics from the Metrics Index that every developer program should track...
+
+**OK**: We had a birds of a feather at this really cool event and discussed some of the biggest challenges in devrel today...
+
+**Better**: After a birds of a feather discussion, we've improved the Persona Library to highlight some of the key learnings on strategies to reach developer communities in collaboration with sales and marketing teams better...
+
+**OK**: Create videos that developers actually want to watch
+
+**Better**: The DRF Tools Catalog Tutorials has a new entry for YouTube aimed at helping create compelling content. Here are some of the top tips and then review the full tutorial for a deeper dive in how to create that content...
+
 ## Cross-Posting Policy
 
 We encourage cross-posting content to amplify diverse voices:
