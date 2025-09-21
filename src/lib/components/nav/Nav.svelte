@@ -4,7 +4,7 @@
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
-  import CallToActionButton from '$lib/components/ui/cta/CallToActionButton.svelte';
+  import CallToActionButton from '$lib/components/ui/molecules/JoinNavButton.svelte';
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
