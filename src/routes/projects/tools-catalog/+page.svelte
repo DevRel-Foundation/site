@@ -1,22 +1,18 @@
+
 <script lang="ts">
-  import ToolsFilter from '$lib/components/ui/organisms/tools-catalog/ToolsFilter.svelte';
+	import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
+  import BlogCarousel from '$lib/components/ui/molecules/BlogCarousel.svelte';
   
-  export let data;
-  
-  $: categories = data?.categories || [];
-  $: labels = data?.labels || [];
-
-  let filters = { category: null, label: null };
-
-  function handleFilterChange(newFilters) {
-    filters = newFilters;
-    // trigger filtering logic here
-  }
+  const { data } = $props();
+  const relatedPosts = $derived(() => data?.relatedPosts || []);
 </script>
 
-<ToolsFilter
-  {categories}
-  {labels}
-  onFilterChange={handleFilterChange}
-/>
+<InfoPage 
+  title="Tools Catalog" 
+  description="Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done." >
 
+    <p><a href="https://github.com/DevRel-Foundation/tools-catalog" target="_blank" rel="noopener noreferrer">View the Tools Catalog on GitHub</a></p>
+
+    <BlogCarousel posts={relatedPosts()} />
+
+</InfoPage>

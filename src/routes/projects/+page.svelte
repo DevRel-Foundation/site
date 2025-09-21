@@ -10,7 +10,7 @@
 			title: "Tools Catalog",
 			description: "Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done.",
 			status: "incubation",
-			learnMoreUrl: "https://github.com/devrel-foundation/tools-catalog"
+			learnMoreUrl: "/projects/tools-catalog"
 		},
 		{
 			title: "Persona Library",
@@ -134,9 +134,15 @@
 				<div class="project-card">
 					<h3>{project.title}</h3>
 					<p class="description">{project.description}</p>
-					<button class="cta" on:click={() => window.open(project.learnMoreUrl, '_blank')}>
-						Learn more →
-					</button>
+					{#if project.learnMoreUrl.startsWith('http')}
+						<button class="cta" on:click={() => window.open(project.learnMoreUrl, '_blank')}>
+							Learn more →
+						</button>
+					{:else}
+						<button class="cta" on:click={() => goto(project.learnMoreUrl)}>
+							Learn more →
+						</button>
+					{/if}
 				</div>
 			{:else}
 				<div class="no-projects">

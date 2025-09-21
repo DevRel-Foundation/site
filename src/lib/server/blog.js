@@ -118,6 +118,19 @@ export async function getAuthor(username) {
   };
 }
 
+export async function getBlogPostsByTag(tag) {
+  const posts = await getBlogPosts();
+  
+  const filtered = posts.filter(post => {
+    if (!post.tags) return false;
+    
+    // Check if the tag exists in the post's tags array
+    return post.tags.includes(tag);
+  });
+  
+  return filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
 export async function getBlogPostsByAuthor(username) {
   const posts = await getBlogPosts();
   
