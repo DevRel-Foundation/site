@@ -31,6 +31,16 @@ We are doing this work in the open. The Foundation is establishing working group
 
 Everything we create is open. Use it as is or fork and improve it. The point is not to publish a perfect document, but to develop shared scaffolding that teams can build on.
 
+<iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/G1lRQCIMUG4" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+    picture-in-picture" 
+    allowfullscreen />
+
 ## Your questions answered
 
 ### How do we secure more investment for DevRel?
