@@ -1,11 +1,19 @@
 {
+  "@Cruzn65": {
+    "username": "Cruzn65",
+    "name": "Stacey Kruczek ",
+    "bio": "",
+    "avatar": "https://avatars.githubusercontent.com/u/117698411?v=4",
+    "url": "https://github.com/Cruzn65",
+    "updated": "2025-09-22T10:46:48.395Z"
+  },
   "@anajsana": {
     "username": "anajsana",
     "name": "Ana Jimenez Santamaria",
     "bio": "Senior Project Manager, Linux Foundation",
     "avatar": "https://avatars.githubusercontent.com/u/43671777?v=4",
     "url": "https://github.com/anajsana",
-    "updated": "2025-09-06T16:44:57.658Z"
+    "updated": "2025-09-22T10:46:48.395Z"
   },
   "@devrel-foundation": {
     "username": "devrel-foundation",
@@ -13,7 +21,7 @@
     "bio": "",
     "avatar": "https://avatars.githubusercontent.com/u/165706382?v=4",
     "url": "https://github.com/devrel-foundation",
-    "updated": "2025-09-06T16:44:57.658Z"
+    "updated": "2025-09-22T10:46:48.395Z"
   },
   "@j12y": {
     "username": "j12y",
@@ -21,6 +29,14 @@
     "bio": "Head of Security Advocacy, Semgrep\r\nSteering Committee, DevRel Foundation",
     "avatar": "https://avatars.githubusercontent.com/u/4029277?v=4",
     "url": "https://github.com/j12y",
-    "updated": "2025-09-06T16:44:57.658Z"
+    "updated": "2025-09-22T10:46:48.395Z"
+  },
+  "@mplacona": {
+    "username": "mplacona",
+    "name": "Marcos Placona",
+    "bio": "Founder @ DevRel Bridge & LinkIntel\r\nGroup Manager, DevRel Foundation",
+    "avatar": "https://avatars.githubusercontent.com/u/221627?v=4",
+    "url": "https://github.com/mplacona",
+    "updated": "2025-09-22T10:46:48.395Z"
   }
 }
