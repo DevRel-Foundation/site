@@ -3,8 +3,8 @@ title: "What We Learned at OSS Europe: A Plan for Measurable DevRel"
 excerpt: "How the DevRel Foundation drives measurable outcomes, standard metrics, and practical frameworks for Developer Relations teams and leaders."
 author: "@mplacona, @Cruzn65"
 date: "2025-09-19"
-category: "community"
-tags: ["foundation", "events"]
+category: "announce"
+tags: ["community", "events"]
 ---
 
 At Open-Source Summit Europe 2025 in Amsterdam, we hosted an Ask Me Anything with leaders from our community and the Linux Foundation. The goal was simple. Surface your biggest questions about DevRel and show practical ways the Foundation can help. 
@@ -17,7 +17,7 @@ This post outlines the purpose of the DevRel Foundation, our plans for assistanc
 
 Too often, DevRel gets judged by how busy it looks rather than the value it creates. Conference talks. Tweets. Swag. Meetups. These can be useful, but they are not outcomes on their own. Executives care about activation, adoption, retention, and revenue influence, while practitioners focus on unblocking developers and reducing time to value. We need a shared language that connects both perspectives.
 
-The DevRel Foundation exists to build that shared language and the standards that sit behind it. Our focus is on common definitions, practical frameworks, and open resources that any team can adopt. When we say activation, we should mean the same thing. When we say first value, we should measure it consistently. When we report results, they should map to business goals the same way as the product or sales team do
+The DevRel Foundation exists to build that shared language and the standards that sit behind it. Our focus is on common definitions, practical frameworks, and open resources that any team can adopt. When we say activation, we should mean the same thing. When we say first value, we should measure it consistently. When we report results, they should map to business goals the same way as the product or sales team do.
 
 This is not about gatekeeping. It is about clarity. With clarity, teams can choose the right activities for their goals, stop focusing on those that do not move the needle, and make better cases for investment.
 
@@ -57,7 +57,8 @@ Revenue is an outcome of successful journeys. DevRel can shorten and strengthen 
 * **Instrument the handoffs.** Track how DevRel content and support reduce common blockers in proofs of concept. Track time from the first question to unblock. Track how often a successful proof of concept moves to a trial or purchase.  
 * **Capture stories and systematize them.** When you help a team move from evaluation to purchase faster, write the play. Which persona? Which blockers? Which content or support solved it? Turn that into a repeatable motion that anyone in your company can use.
 
-The Metrics working group is rebooting to publish examples you can adapt. Expect templates for funnel definitions, example dashboards, and sample reports that map DevRel outcomes to pipeline stages and customer health.
+
+The [Metrics Index Project](https://github.com/DevRel-Foundation/wg-resource-aggregation?tab=readme-ov-file#working-group-projects) aggregates metrics you can adopt and adapt. Expect templates for funnel definitions, example dashboards, and sample reports that map DevRel outcomes to pipeline stages and customer health.
 
 ### What are the most common challenges?
 
@@ -67,7 +68,7 @@ We heard three over and over again.
 * **Silos and access.** Teams do not have access to product analytics or cannot connect community signals to product data. The remedy is cross-functional alignment and a minimum shared instrumentation plan. Start small. Agree on the few events and labels everyone will use.  
 * **Unsustainable motions.** Travel-heavy schedules burn people out and waste money. Replace a portion of travel with scalable digital programs, local community partners, and content that compounds over time. When you do travel, tie every trip to a measurable goal.
 
-The Foundation will publish playbooks to facilitate cross-functional collaboration and promote sustainable operating models. These will include checklists, templates for shared dashboards, and example rhythms for data reviews involving product, marketing, and sales teams.
+The Foundation is working on a [DevRel Maturity Model](https://github.com/DevRel-Foundation/wg-resource-aggregation?tab=readme-ov-file#working-group-projects) to publish playbooks for facilitating cross-function collaboration and promote sustainable operating models. These will include checklists, templates for shared dashboards, and example rhythms for data reviews involving product, marketing, and sales teams.
 
 ### Which skills matter most now?
 
@@ -78,7 +79,7 @@ This is where the craft of DevRel meets the discipline of product.
 * **Technical advocacy or strong routing to technical owners.** You do not need to be the deepest expert in every stack. You do need to get developers unblocked quickly. Either do it yourself or build the internal routing that makes it happen.  
 * **Data literacy.** You do not need to be a data scientist. You do need to choose the right metrics, interpret what they mean, and tell a clear business story. Learn enough SQL or analytics tooling to answer basic questions yourself. Pair with data partners for the rest.
 
-These skills are learnable. The Foundation will gather examples and training paths you can use to level up your team.
+These skills are learnable. The [Resources Working Group](https://github.com/DevRel-Foundation/wg-resource-aggregation) will gather examples and training paths into a [Career Manual](https://github.com/DevRel-Foundation/wg-resource-aggregation) you can use to level up your team.
 
 ## How you can participate
 
@@ -88,7 +89,6 @@ Foundations are only as strong as the people who shape them. Here is how to plug
 2. [**Explore working groups**](https://dev-rel.org/about/working-groups)**.** Pick one that fits your skills and goals. Personas, metrics, community operations, or another area you care about.  
 3. **Contribute to the [Persona Library](https://github.com/DevRel-Foundation/persona-library) and [Metrics efforts](https://github.com/DevRel-Foundation/metrics-index).** Bring your real-world examples. If your team already uses a persona or a metric definition that works, contribute it so others can adapt it.  
 4. **Share challenges and wins from your org.** We will not publish anything without your consent, but your experience can become a pattern others can use.  
-5. **Pilot a playbook.** Take one of the early frameworks, put it to work for a quarter, and share what you learned. We will iterate together.
 
 You do not need permission to start. If you see a gap, propose a contribution. If you have a question, ask it in public. If you can help another team avoid a month of trial and error, share your approach.
 
