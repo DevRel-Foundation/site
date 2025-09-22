@@ -1,7 +1,7 @@
 ---
 title: "What We Learned at OSS Europe: A Plan for Measurable DevRel"
 excerpt: "How the DevRel Foundation drives measurable outcomes, standard metrics, and practical frameworks for Developer Relations teams and leaders."
-author: "@mplacona"
+author: "@mplacona, @Cruzn65"
 date: "2025-09-19"
 category: "community"
 tags: ["foundation", "events"]
