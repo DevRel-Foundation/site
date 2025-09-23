@@ -1,8 +1,10 @@
 ---
-title: "Getting Started with the DRF Contributor Path"
-date: 2025-09-23
-author: "anajsana"
-tags: ["contribution", "leadership"]
+title: "Getting Started with the DRF Contributor Ladder"
+author: "@anajsana"
+date: "2025-09-23"
+category: "early-ic"
+tags: ["contribution"]
+image: "/images/blog/devrel-foundation-governance.png"
 ---
 
 The mission of the DevRel Foundation (DRF) is to elevate the professional practice of developer relations and increase awareness of it as a driver of business value. Whether you’re just discovering DRF or already active in the community, 
