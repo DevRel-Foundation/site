@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with the DRF Contributor Path"
 date: 2025-09-23
-author: "anajs"
+author: "anajsana"
 tags: ["contribution", "leadership"]
 ---
 
