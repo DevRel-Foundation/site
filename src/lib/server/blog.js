@@ -2,7 +2,8 @@ import { dev } from '$app/environment';
 import matter from 'gray-matter';
 
 const blogPostsGlob = import.meta.glob('/src/blog/*.md', { eager: true });
-const authorsGlob = import.meta.glob('/src/authors/*.md', { eager: true, as: 'raw' });
+const authorsGlob = import.meta.glob('/src/authors/*.md', { query: '?raw', import: 'default' });
+  
 
 export async function getBlogPosts() {
   const posts = [];

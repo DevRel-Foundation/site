@@ -19,7 +19,8 @@
 
 <style>
 .contact-box {
-  background: var(--color-background-secondary-2-dark);
+  background: var(--color-button-background);
+  border: 2px solid var(--color-mint-dark);
   color: var(--color-text-dark, #FAFAF0);
   border-radius: var(--radius-l, 1rem);
   --icon-filter: invert(1);
@@ -50,5 +51,10 @@
   width: 1.2em;
   height: 1.2em;
   vertical-align: middle;
+}
+
+:global(.dark-mode) .contact-box,
+:global([dark-theme="dark-mode"]) .contact-box {
+  --icon-filter: invert(0);
 }
 </style>

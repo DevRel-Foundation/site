@@ -149,6 +149,9 @@
     overflow: hidden;
     border-radius: var(--radius-s);
     align-self: start;
+
+    border: 1px solid var(--color-mint);
+    border-radius: 8px;
   }
   
   .post-image img {

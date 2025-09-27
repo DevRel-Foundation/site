@@ -26,15 +26,12 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--color-background-secondary-2-dark, #111); /* dark circle */
-    color: inherit; /* ensure icon inherits text color if using inline SVG */
+    background: var(--color-button-background, #111); /* dark circle */
+    color: var(--color-text-dark);
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     cursor: pointer;
-  }
-
-  .icon-wrap a {
-    text-decoration: none;
+    --icon-filter: invert(1);
   }
 
   /* sizing for big variant (adjust via --icon-big-size) */
@@ -42,16 +39,22 @@
     width: var(--icon-big-size, 4rem);
     height: var(--icon-big-size, 4rem);
     margin-top: var(--space-xs);
-    --icon-filter: invert(1);
   }
 
   /* inner image sizing and filter inheritance */
   .social-icon-inner {
     width: 60%;
     height: 60%;
-    filter: var(--icon-filter);
+    color: var(--color-text-dark);
     display: block;
     object-fit: contain;
+
+    filter: var(--icon-filter) !important;
+    fill: currentColor !important;
+  }
+  :global(.dark-mode) .icon-wrap,
+  :global([dark-theme="dark-mode"]) .icon-wrap {
+    --icon-filter: invert(0);
   }
 
   /* hover/active effects: raise + glow */
@@ -66,7 +69,7 @@
 
   /* ensure regular link styles */
   .social-link {
-    color: inherit;
+    color: inherit; /* ensure icon inherits text color if using inline SVG */
     text-decoration: none;
     display: inline-flex;
     align-items: center;

@@ -457,7 +457,9 @@
   .post-image {
     aspect-ratio: 16/9;
     overflow: hidden;
-    border-radius: var(--radius-m);
+
+    border: 1px solid var(--color-mint);
+    border-radius: 8px;
   }
   
   .post-image img {

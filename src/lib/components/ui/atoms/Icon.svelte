@@ -35,17 +35,6 @@
 		margin-right: var(--space-2xs);
 	}
 
-	.social-icon-big {
-	  width: 8rem;
-	  height: 8rem;
-	  fill: currentColor; /* inherit */
-	  filter: var(--icon-filter);
-	  display: inline;
-	  vertical-align: middle;
-	  margin-left: var(--space-2xs);
-	}
-
-
 	.social-link {
 		color: inherit; /* match parent */
 		text-decoration: none;

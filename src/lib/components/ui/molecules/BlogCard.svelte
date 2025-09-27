@@ -41,8 +41,11 @@
     width: 100%;
     height: 200px;
     overflow: hidden;
+    border: 1px solid var(--color-mint);
     border-radius: 8px;
     margin-bottom: var(--space-s);
+    box-shadow: 0 0 0 0 var(--color-mint), 2px 2px 2px 0 var(--color-mint);
+    transition: box-shadow 0.2s;
   }
 
   .blog-card-image img {

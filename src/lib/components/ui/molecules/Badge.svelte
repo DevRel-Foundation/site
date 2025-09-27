@@ -23,17 +23,4 @@
   border: 1px solid transparent;
   cursor: default;
 }
-
-
-/* dark-mode flip (prefers-color-scheme or your theme class) */
-@media (prefers-color-scheme: dark) {
-  .badge--incubating {
-    background: var(--badge-incubating-bg-dark, #381256);
-    color: var(--badge-incubating-fg-dark, #FFF);
-    border-color: var(--badge-incubating-border-dark, rgba(255,255,255,0.06));
-  }
-}
-
-/* optional compact spacing when used inline with icons/buttons */
-.badge--small { padding: 0.0625rem 0.4rem; font-size: calc(var(--step--2, 0.78rem) - 0.05rem); }
 </style>

@@ -41,14 +41,4 @@
     }
   }
 
-  /* Handle single post */
-  .blog-carousel-grid:has(:only-child) {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-  }
-
-  /* Handle two posts */
-  .blog-carousel-grid:has(:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, 1fr);
-  }
 </style>

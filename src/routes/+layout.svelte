@@ -2,13 +2,14 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  
+
   import '../reset.css';
   import '../app.css';
   import Nav from '$lib/components/nav/Nav.svelte';
   import Footer from '$lib/components/nav/Footer.svelte';
   import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
 
+  let { children } = $props();
   let posthog: any = null;
 
   // Initialize PostHog on client side
@@ -145,7 +146,7 @@
 <Nav />
 
 <main class="main">
-  <slot />
+  {@render children()}
 </main>
 
 <Footer />
