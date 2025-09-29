@@ -1,5 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { getJobCategories } from '$lib/server/tools-catalog/schema-reader';
+import { getJobCategories } from '$lib/server/projects/tools-catalog/schema-reader';
 
 export const GET: RequestHandler = async () => {
   try {

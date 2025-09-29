@@ -2,6 +2,7 @@
 <script lang="ts">
 	import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
   import BlogCarousel from '$lib/components/ui/molecules/BlogStrip.svelte';
+  import ToolsCatalogDescription from '$lib/components/ui/atoms/ToolsCatalogDescription.svelte';
 
   import ResourcesWorkingGroupContact from '$lib/components/ui/molecules/ResourcesWorkingGroupContact.svelte';
   import SourceCodeIcon from '$lib/components/ui/molecules/icons/SourceCodeIcon.svelte';
@@ -16,13 +17,13 @@
 <InfoPage 
   title="Tools Catalog" 
   description="Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done."
+  breadcrumbs={[{label:"Projects", link: "/projects"}]}
    >
 
   <div class="content-grid">
     <div class="left-column">
-        <p>
-          The <strong>DevRel Foundation Tools Catalog</strong> is more than a just a list. It is an open data repository and schema for collecting physical and digital tools of interest to the Developer Relations community. Tools are created so they can be explored by jobs to be done with a knowledge base of evaluation criteria and learning resources for applying the tool to the task.
-        </p>
+
+        <ToolsCatalogDescription />
 
         <div>&nbsp;</div>
 

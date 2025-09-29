@@ -3,7 +3,7 @@
 
   export let title = '';
   export let description = '';
-  export let badges = ''; // comma-separated string of badge labels
+  export let breadcrumbs = []; // array of strings or dictionaries with links
 </script>
 
 <svelte:head>
@@ -12,16 +12,26 @@
 </svelte:head>
 
 <div class="container container-content">
+  {#if typeof breadcrumbs === 'string'}
+    {#each breadcrumbs.split(',') as badge}
+      <Badge label={badge.trim()} />
+    {/each}
+  {:else if Array.isArray(breadcrumbs)}
+    {#each breadcrumbs as badge}
+      <Badge label={badge.label ?? badge} link={badge.link} />
+    {/each}
+  {/if}
   <section>
-    <h1>{title}
-    {#if badges}
-        {#each badges.split(',') as badge}
-          <Badge label={badge.trim()} />
-        {/each}
-    {/if}
-    </h1>
+    <h1 class="info-title">{title}</h1>
     
     <slot/>
 
   </section>
 </div>
+
+<style>
+.info-title {
+  margin-top: var(--space-s); /* or 0, or your preferred small value */
+  margin-bottom: var(--space-l); /* or 0, or your preferred small value */
+}
+</style>
