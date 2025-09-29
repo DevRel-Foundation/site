@@ -63,7 +63,7 @@
       <br />
 
       <a href="/privacy">Privacy Policy</a> • 
-      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a>
+      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a> • <a href="/terms">Terms of Use</a>
     </p>
   </div>
 </footer> 

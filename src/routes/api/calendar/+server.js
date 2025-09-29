@@ -1,41 +1,149 @@
 import { json } from '@sveltejs/kit';
 import ICAL from 'ical.js';
 
-// Cache configuration
+// Calendar cache stores parsed event data from the ICS calendar feed from groups.io in memory to reduce network requests. The cache is refreshed every 8 hours or when explicitly invalidated. 
+/** @type {any} */
 let cachedEvents = null;
 let cacheTimestamp = 0;
 const CACHE_DURATION = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
 
-// We will use the community calendar as the master source for all devrel foundation events
+// We use the community calendar as the source for devrel foundation events
 const CALENDAR_URL = 'https://lists.dev-rel.org/g/community/ics/13789427/807196765/feed.ics';
 
 /**
- * Parse ICS data and return formatted events
+ * Parse .ics cal data and return formatted events
  * @param {string} icsData - Raw ICS calendar data
  * @param {boolean} skipFiltering - If true, return all events without date filtering
- * @returns {Array} Array of formatted event objects
+ * @returns {any[]} Array of formatted event objects
  */
 function parseICSData(icsData, skipFiltering = false) {
   try {
-    // Preprocess the ICS data to fix common malformed date issues
+
+    // The event dates may not include a timestamp so to make it easier to 
+    // parse datetime later we can append the time to be midnight. For example,
+    // turn DSTART:20250901 into DSTART:20250901T000000Z
     const cleanedIcsData = icsData
-      // Fix malformed date-time values like "DTSTART:20250901" -> "DTSTART:20250901T000000Z"
       .replace(/(DTSTART|DTEND):(\d{8})$/gm, '$1:$2T000000Z')
-    
+
+
     const jcalData = ICAL.parse(cleanedIcsData);
     const comp = new ICAL.Component(jcalData);
     const currentTime = new Date();
     
-    const events = comp.getAllSubcomponents('vevent')
-      .map(vevent => {
-        try {
-          const event = new ICAL.Event(vevent);
+    // Calculate date range for recurring events (include 2 months into future)
+    const futureLimit = new Date(currentTime);
+    futureLimit.setMonth(futureLimit.getMonth() + 2);
+    
+    // Collect all events and their exceptions
+    /** @type {any[]} */
+    const allEvents = [];
+    /** @type {Map<string, Set<string>>} */
+    const exceptions = new Map(); // Map of parent UID -> Set of exception dates
+    
+    // First pass: collect all vevents and identify exceptions
+    comp.getAllSubcomponents('vevent').forEach(vevent => {
+      try {
+        const event = new ICAL.Event(vevent);
+        const recurrenceId = event.component.getFirstPropertyValue('recurrence-id');
+        
+        if (recurrenceId) {
+          // This is an exception/modification to a recurring event
+          const parentUid = event.uid;
+          if (!exceptions.has(parentUid)) {
+            exceptions.set(parentUid, new Set());
+          }
           
-          // Check for recurrence data
-          const rrule = event.component.getFirstPropertyValue('rrule');
-          const isRecurring = !!rrule;
+          // Convert recurrence-id to a comparable date string
+          let exceptionDate;
+          try {
+            if (typeof recurrenceId === 'object' && recurrenceId && 'isDate' in recurrenceId && recurrenceId.isDate) {
+              exceptionDate = `${recurrenceId.year}-${String(recurrenceId.month).padStart(2, '0')}-${String(recurrenceId.day).padStart(2, '0')}`;
+            } else if (typeof recurrenceId === 'object' && recurrenceId && 'toJSDate' in recurrenceId) {
+              exceptionDate = recurrenceId.toJSDate().toISOString().split('T')[0];
+            } else {
+              // Fallback for string or other types
+              exceptionDate = String(recurrenceId).split('T')[0];
+            }
+          } catch (err) {
+            console.warn('Error parsing recurrence-id:', err);
+            exceptionDate = String(recurrenceId).split('T')[0];
+          }
           
-          // Validate dates before processing
+          exceptions.get(parentUid)?.add(exceptionDate);
+          
+          // If this exception has STATUS:CANCELLED, don't add it as a new event
+          const status = event.component.getFirstPropertyValue('status');
+          if (status && typeof status === 'string' && status.toLowerCase() === 'cancelled') {
+            return; // Skip cancelled exceptions
+          }
+        }
+        
+        allEvents.push({ vevent, event, isException: !!recurrenceId });
+      } catch (error) {
+        console.warn('Error processing vevent:', error);
+      }
+    });
+    
+    // Second pass: process events and expand recurring ones
+    /** @type {any[]} */
+    const processedEvents = [];
+    
+    allEvents.forEach(({ vevent, event, isException }) => {
+      try {
+        // Check for recurrence data
+        const rrule = event.component.getFirstPropertyValue('rrule');
+        const isRecurring = !!rrule && !isException;
+        
+        if (isRecurring) {
+          // Expand recurring event
+          const iterator = event.iterator();
+          const eventExceptions = exceptions.get(event.uid) || new Set();
+          
+          let occurrence;
+          let count = 0;
+          const maxOccurrences = 50; // Safety limit
+          
+          while ((occurrence = iterator.next()) && count < maxOccurrences) {
+            const occurrenceDate = occurrence.toJSDate();
+            
+            // Stop if we're too far in the future
+            if (occurrenceDate > futureLimit) {
+              break;
+            }
+            
+            // Check if this occurrence is cancelled
+            const occurrenceDateStr = occurrenceDate.toISOString().split('T')[0];
+            if (eventExceptions.has(occurrenceDateStr)) {
+              continue; // Skip cancelled instances
+            }
+            
+            // Calculate end date for this occurrence
+            let endDate = null;
+            if (event.endDate) {
+              const duration = event.endDate.toJSDate().getTime() - event.startDate.toJSDate().getTime();
+              endDate = new Date(occurrenceDate.getTime() + duration);
+            }
+            
+            processedEvents.push({
+              id: `${event.uid}-${occurrenceDate.getTime()}`,
+              title: event.summary,
+              description: event.description || '',
+              start: occurrenceDate,
+              end: endDate,
+              location: event.location || '',
+              url: event.component.getFirstPropertyValue('url') || '',
+              allDay: event.startDate.isDate,
+              timezone: event.startDate.zone ? event.startDate.zone.tzid : 'UTC',
+              isRecurring: true,
+              recurrenceRule: rrule ? rrule.toString() : null,
+              parentId: event.uid,
+              recurrenceId: null
+            });
+            
+            count++;
+          }
+        } else {
+          // Non-recurring event or exception event
           let startDate, endDate;
           
           try {
@@ -68,7 +176,7 @@ function parseICSData(icsData, skipFiltering = false) {
               startDateRaw: event.startDate?.toString(),
               endDateRaw: event.endDate?.toString()
             });
-            return null;
+            return;
           }
           
           if (!startDate || isNaN(startDate.getTime())) {
@@ -78,10 +186,10 @@ function parseICSData(icsData, skipFiltering = false) {
               startDateRaw: event.startDate?.toString(),
               endDateRaw: event.endDate?.toString()
             });
-            return null;
+            return;
           }
           
-          return {
+          processedEvents.push({
             id: event.uid,
             title: event.summary,
             description: event.description || '',
@@ -89,27 +197,27 @@ function parseICSData(icsData, skipFiltering = false) {
             end: endDate || null,
             location: event.location || '',
             url: event.component.getFirstPropertyValue('url') || '',
-            allDay: event.startDate.isDate, // true if it's an all-day event
+            allDay: event.startDate.isDate,
             timezone: event.startDate.zone ? event.startDate.zone.tzid : 'UTC',
-            isRecurring: isRecurring,
-            recurrenceRule: rrule ? rrule.toString() : null,
+            isRecurring: false,
+            recurrenceRule: null,
+            parentId: null,
             recurrenceId: event.component.getFirstPropertyValue('recurrence-id') || null
-          };
-        } catch (eventError) {
-          const errorMessage = eventError instanceof Error ? eventError.message : 'Unknown error';
-          console.warn('Skipping malformed event:', {
-            error: errorMessage,
-            veventData: vevent?.toString?.() || 'Unable to serialize vevent'
           });
-          return null;
         }
-      })
-      .filter(event => event !== null); // Remove null events (malformed ones)
+      } catch (eventError) {
+        const errorMessage = eventError instanceof Error ? eventError.message : 'Unknown error';
+        console.warn('Skipping malformed event:', {
+          error: errorMessage,
+          veventData: vevent?.toString?.() || 'Unable to serialize vevent'
+        });
+      }
+    });
 
     // Apply date filtering only if not skipping
     if (!skipFiltering) {
-      const filteredEvents = events.filter(event => {
-        // For all events (recurring and non-recurring), include those from 2 weeks ago onwards
+      const filteredEvents = processedEvents.filter(event => {
+        // For all events, include those from 2 weeks ago onwards
         const twoWeeksAgo = new Date(currentTime);
         twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
         
@@ -124,7 +232,7 @@ function parseICSData(icsData, skipFiltering = false) {
     }
 
     // Sort all events by start date (no filtering)
-    return events.sort((a, b) => a.start.getTime() - b.start.getTime());
+    return processedEvents.sort((a, b) => a.start.getTime() - b.start.getTime());
   } catch (error) {
     console.error('Error parsing ICS data:', error);
     throw new Error('Failed to parse calendar data');
@@ -134,7 +242,7 @@ function parseICSData(icsData, skipFiltering = false) {
 /**
  * Fetch fresh calendar data from the external source
  * @param {boolean} skipFiltering - If true, return all events without date filtering
- * @returns {Promise<Array>} Array of formatted events
+ * @returns {Promise<any[]>} Array of formatted events
  */
 async function fetchFreshCalendarData(skipFiltering = false) {
   try {
@@ -165,10 +273,15 @@ async function fetchFreshCalendarData(skipFiltering = false) {
 
 /**
  * GET /api/calendar
- * Returns cached or fresh calendar events
+ * 
+ * Returns structured list of events for easier processing. The data originates
+ * from lists.dev-rel.org community calendar and is refreshed on demand but will
+ * cache the results.
+ * 
  * Query parameters:
- * - all: if "true", returns all events without date filtering
- * - invalidate: if "true", bypasses cache and fetches fresh data
+ * - all: if "true", returns all events without any filtering (past events, limited recurrences)
+ * - invalidate: if "true", bypasses cache and fetches fresh data from groups.io
+ * @param {any} param0
  */
 export async function GET({ url }) {
   const now = Date.now();

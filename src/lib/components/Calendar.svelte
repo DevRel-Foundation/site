@@ -646,7 +646,7 @@
   
   .event-recurring {
     font-size: var(--step--1);
-    color: var(--color-mint);
+    color: var(--color-text);
     font-weight: 500;
   }
   
