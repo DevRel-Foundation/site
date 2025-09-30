@@ -4,7 +4,7 @@ import * as indexer from '$lib/server/projects/tools-catalog/tools-index-reader'
 
 export const GET: RequestHandler = async () => {
   try {
-    const tools = await indexer.get_tools_list();
+    const tools = await indexer.get_tools();
     const count = await indexer.get_total_tools_count();
 
     let data = {
