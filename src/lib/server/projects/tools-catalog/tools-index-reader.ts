@@ -19,6 +19,11 @@ export async function get_tools_index() {
   return toolsCache;
 }
 
+export async function get_tools_list() {
+    const tools = await get_tools_index();
+    return tools.processed;
+}
+
 export async function get_total_tools_count() {
     const tools = await get_tools_index();
     return tools.total;
