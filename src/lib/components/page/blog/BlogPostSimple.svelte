@@ -41,7 +41,7 @@
     '@jcleblanc',
     '@kmillrunner',
     '@ssk_14',
-    '@adityaoberai1'
+    '@adityaoberai'
   ];
   
   // Check if author is a foundation representative
