@@ -67,6 +67,7 @@
    * @param category
    */
   async function fetchCategory(category: string): Promise<any> {
+    if (!browser) return {}; // should only be a user triggered action, not ssr
     try {
       const res = await fetch(`/api/tools-catalog/categories/${encodeURIComponent(category)}`);
       if (res.ok) {
@@ -84,6 +85,7 @@
    * @param outcome
    */
   async function fetchLabel(label: string): Promise<any> {
+    if (!browser) return {}; // should only be a user triggered action, not ssr
     try {
       const res = await fetch(`/api/tools-catalog/labels/${encodeURIComponent(label)}`);
       if (res.ok) {
@@ -102,6 +104,7 @@
    * @param outcome
    */
   async function fetchOutcome(outcome: string): Promise<any> {
+    if (!browser) return {}; // should only be a user triggered action, not ssr
     try {
       const res = await fetch(`/api/tools-catalog/outcomes/${encodeURIComponent(outcome)}`);
       if (res.ok) {
@@ -222,9 +225,8 @@
 <InfoPage title="Tools Catalog Explorer" 
   description="Browse and filter tools in the DevRel Foundation Tools Catalog by job category and label. Find the right tools for your Developer Relations needs."
   breadcrumbs={[{label:"About | Tools Catalog", link: "/projects/tools-catalog"}]}
+  wide={true}
   >
-
-    <ToolsCatalogDescription />
 
     <SectionDivider />
 
@@ -240,28 +242,17 @@
       onFilterChange={handleFilterChange}
     />
 
-    <p class="description"> {categoryDescription} </p>
-    <p class="description"> {outcomeDescription} </p>
+    <p class="description"><b>{categoryDescription ? `Job Category: ` : ''}</b>{categoryDescription}</p>
+    <p class="description"><b>{outcomeDescription ? `Outcome: ` : ''}</b>{outcomeDescription}</p>
 
     <SectionDivider />
 
-    <p>Found { Object.keys(filteredTools).length } matching tool(s).</p>
-
-    <p>Filtered = {#each Object.values(filteredTools) as tool, i}{tool.name} ({i}) {/each}</p>
-    <p>Selected = {selectedTool}</p>
-
-
-
-<!-- 
 
     <ToolsExplorer 
       tools={filteredTools}
       {selectedTool}
       onToolSelect={handleToolSelect}
     />
-
--->
-
 
 </InfoPage>
 
