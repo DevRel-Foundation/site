@@ -4,16 +4,23 @@
 
   export let tools: any = {};
   export let selectedTool: any = null;
-  export let onToolSelect: (toolId: string) => void = () => {};
+  export let selectedToolData: any = null;
+  export let onToolSelect: (tool: string) => void = () => {};
 
-  let currentPage = 1;
-  const itemsPerPage = 10;
+  let currentPage = 0;
+  const itemsPerPage = 5;
 
-  $: selectedToolId = selectedTool?.id || null;
   $: tools = tools || {};
+  $: selectedTool = selectedTool || Object.keys(tools)[0];
+  $: {
+    const toolKeys = Object.keys(tools);
+    if (!toolKeys.includes(selectedTool)) {
+        selectedTool = toolKeys[0];
+    }
+  }
 
-  function handleToolSelect(toolId: string) {
-    onToolSelect(toolId);
+  function handleToolSelect(tool: string) {
+    onToolSelect(tool);
   }
 
   function handlePageChange(page: number) {
@@ -21,12 +28,11 @@
   }
 </script>
 
-
 <div class="tools-explorer">
   <div class="tools-list-column">
     <ToolsList 
       {tools}
-      {selectedToolId}
+      {selectedTool}
       currentPage={currentPage}
       {itemsPerPage}
       onToolSelect={handleToolSelect}
@@ -35,12 +41,9 @@
   </div>
   
   <div class="tool-details-column">
-    Details later...
-    <!--
     <ToolDetails 
-      tool={selectedTool}
+      tool={selectedToolData}
     />
-     -->
   </div>
 </div>
 
@@ -50,6 +53,8 @@
 
 <style>
   .tools-explorer {
+    width: 90vw;
+    max-width: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-l);
@@ -67,6 +72,8 @@
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-m);
     overflow: hidden;
+    margin-bottom: var(--space-l);
+    margin-top: var(--space-m);
   }
 
   @media (max-width: 1024px) {

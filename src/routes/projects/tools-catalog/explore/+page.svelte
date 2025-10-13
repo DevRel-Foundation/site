@@ -4,7 +4,6 @@
   import { browser } from '$app/environment';
 
   import ToolsFilter from '$lib/components/ui/organisms/projects/ToolsFilter.svelte';
-  import ToolsCatalogDescription from '$lib/components/ui/atoms/ToolsCatalogDescription.svelte';
 	import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
   import SectionDivider from '$lib/components/ui/atoms/SectionDivider.svelte';
   import ToolsExplorer from '$lib/components/ui/organisms/ToolsExplorer.svelte';
@@ -22,44 +21,30 @@
   $: selectedLabel = page.url.searchParams.get('label');
   $: selectedCategory = page.url.searchParams.get('category');
   $: selectedOutcome = page.url.searchParams.get('outcome');
-  $: selectedToolId = page.url.searchParams.get('tool');
+  $: selectedTool = page.url.searchParams.get('tool');
 
   // Get filter descriptions for selected items
   $: filteredTools = allTools;
   $: categoryDescription = '';
   $: outcomeDescription = '';
 
-
   // Track current filters
   let filters: { category: string | null; label: string | null; outcome: string | null } = { category: null, label: null, outcome: null };
 
+  // Track currently selected tool
   let selectedTool: any = null;
-
-  // Filter tools based on selected filters
-  /*.filter(tool => {
-    if (selectedLabel && (!tool.labels || !tool.labels.includes(selectedLabel))) {
-      return false;
-    }
-    if (selectedCategory && (!tool.categories || !tool.categories.includes(selectedCategory))) {
-      return false;
-    }
-    if (selectedOutcome && (!tool.outcomes || !tool.outcomes.includes(selectedOutcome))) {
-      return false;
-    }
-    return true;
-  });
-  */
-
+  let selectedToolData: any = null;
 
   // Load selected tool from URL parameter
-  $: if (selectedToolId && Object.keys(allTools).length > 0) {
-    const tool = allTools.find((t: any) => t.id === selectedToolId);
-    if (tool && (!selectedTool || selectedTool.id !== tool.id)) {
+  $: if (selectedTool && Object.keys(allTools).length > 0) {
+    const tool = allTools.find((t: any) => t.id === selectedTool);
+    if (tool && (!selectedTool || selectedTool !== tool.id)) {
       // If we found a basic tool but need details, fetch them
       handleToolSelect(tool.id);
     }
-  } else if (!selectedToolId) {
-    selectedTool = null;
+  } else if (!selectedTool) {
+    selectedTool = Object.keys(filteredTools)[0];
+    handleToolSelect(selectedTool);
   }
 
   /**
@@ -203,18 +188,19 @@
     }
   }
 
-  async function handleToolSelect(toolId: string) {
+  async function handleToolSelect(tool: string) {
+    selectedTool = tool
     try {
       // Fetch detailed tool data
-      const response = await fetch(`/api/tools-catalog/tools/${toolId}`);
+      const response = await fetch(`/api/tools-catalog/tools/${tool}`);
       if (response.ok) {
         const data = await response.json();
-        selectedTool = data.result;
+        selectedToolData = data.result;
         
         // Update URL to include selected tool
-        const params = new URLSearchParams($page.url.searchParams);
-        params.set('tool', toolId);
-  goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
+        const params = new URLSearchParams(page.url.searchParams);
+        params.set('tool', tool);
+        goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
       }
     } catch (err) {
       console.error('Error loading tool details:', err);
@@ -245,12 +231,14 @@
     <p class="description"><b>{categoryDescription ? `Job Category: ` : ''}</b>{categoryDescription}</p>
     <p class="description"><b>{outcomeDescription ? `Outcome: ` : ''}</b>{outcomeDescription}</p>
 
-    <SectionDivider />
+    <p>Matched {Object.keys(filteredTools).length} out of {data.count} tools.</p>
 
+    <SectionDivider />
 
     <ToolsExplorer 
       tools={filteredTools}
       {selectedTool}
+      {selectedToolData}
       onToolSelect={handleToolSelect}
     />
 

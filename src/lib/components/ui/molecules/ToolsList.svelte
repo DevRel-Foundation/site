@@ -2,20 +2,23 @@
   import ToolCard from '../atoms/ToolCard.svelte';
   import Pagination from '../atoms/Pagination.svelte';
 
-  export let tools: any[] = [];
-  export let selectedToolId: string | null = null;
+  export let tools: any = {};
+  export let selectedTool: string | null = null;
 
-  export let onToolSelect: (toolId: string) => void = () => {};
+  export let onToolSelect: (tool: string) => void = () => {};
   export let onPageChange: (page: number) => void = () => {};
   export let currentPage: number = 0;
   export let itemsPerPage: number = 10;
 
-  $: tools = tools || [];
+  $: tools = tools || {};
   $: totalPages = Math.ceil(Object.keys(tools).length / itemsPerPage);
-  $: paginatedTools = Object.keys(tools)
-  .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
-  .map(key => tools[key]);
-  
+  $: currentPage = Math.min(currentPage, Math.max(totalPages - 1, 0));
+
+  $: paginatedTools = Object.fromEntries(
+    Object.keys(tools)
+        .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+        .map(key => [key, tools[key]])
+    ); 
 
   function handlePageChange(page: number) {
     onPageChange(page);
@@ -23,14 +26,6 @@
 </script>
 
 <div class="tool-list">
-  <div class="tool-list-header">
-    <h2 class="tool-list-title">Tools ({Object.keys(tools).length})</h2>
-    <Pagination 
-        {currentPage}
-        {totalPages}
-        onPageChange={handlePageChange}
-    />
-  </div>
   
   {#if Object.keys(tools).length === 0}
     <div class="empty-state">
@@ -39,10 +34,11 @@
   {:else}
 
     <div class="tool-cards">
-      {#each Object.entries(paginatedTools) as [key, tool] (tool)}
+      {#each Object.entries(paginatedTools) as [key, tool] (key)}
         <ToolCard 
           {tool}
-          isSelected={selectedToolId === key}
+          {key}
+          isSelected={selectedTool === key}
           onSelect={onToolSelect}
         />
       {/each}

@@ -1,18 +1,20 @@
 <script lang="ts">
   export let tool: any;
+  export let key: string;
   export let isSelected: boolean = false;
-  export let onSelect: (toolId: string) => void = () => {};
+  export let onSelect: (key: string) => void = () => {};
 </script>
+
 
 <div 
   class="tool-card" 
   class:selected={isSelected}
   role="button"
   tabindex="0"
-  on:click={() => onSelect(tool.id)}
-  on:keydown={(e) => e.key === 'Enter' && onSelect(tool.id)}
+  on:click={() => onSelect(key)}
+  on:keydown={(e) => e.key === 'Enter' && onSelect(key)}
 >
-  <h3 class="tool-name">{tool.name || tool.id}</h3>
+  <h3 class="tool-name">{tool.name || key}</h3>
   <p class="tool-description">{tool.description || ''}</p>
   {#if tool.labels && tool.labels.length > 0}
     <div class="tool-labels">
