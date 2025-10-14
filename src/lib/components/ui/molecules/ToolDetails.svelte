@@ -1,29 +1,9 @@
 <script lang="ts">
-  import PropertyItem from '../atoms/PropertyItem.svelte';
-	import SectionDivider from '../atoms/SectionDivider.svelte';
+  import PropertyItem from '../atoms/ToolPropertyItem.svelte';
+  import SectionDivider from '../atoms/SectionDivider.svelte';
 
   export let tool: any = null;
-  export let filterDescription: string = '';
-
-  // TODO: customize display of properties a bit more
-  // Convert tool object to property list
-  $: properties = tool ? Object.entries(tool)
-    .filter(([key, value]) => key !== 'id') // Don't show ID as it's redundant
-    .map(([key, value]) => ({
-      key,
-      label: formatLabel(key),
-      value
-    })) : [];
-
-  function formatLabel(key: string): string {
-    // Convert camelCase/snake_case to Title Case
-    return key
-      .replace(/([A-Z])/g, ' $1')
-      .replace(/_/g, ' ')
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ');
-  }
+  $: tool = tool || null;
 
   function copyToolUrl() {
     if (tool?.id) {
@@ -38,13 +18,7 @@
   {#if !tool}
     <div class="empty-state">
       <h2>Select a Tool</h2>
-      <p>Choose a tool from the list to view its details.</p>
-      {#if filterDescription}
-        <div class="filter-description">
-          <h3>Filter Information</h3>
-          <p>{filterDescription}</p>
-        </div>
-      {/if}
+      <p>Choose a tool from the list to view additional details.</p>
     </div>
   {:else}
     <div class="tool-details-header">
@@ -59,19 +33,29 @@
 
     <div class="tool-properties">
       <dl class="properties-list">
-        {#each properties as property (property.key)}
-          <PropertyItem {property} />
-        {/each}
+          <PropertyItem label="URL" format="url" value={tool.url} />
+          <PropertyItem label="Job Categories" value={tool.jobs ? tool.jobs.categories : []} />
+          <PropertyItem label="Outcomes" value={tool.jobs ? tool.jobs.outcomes : []} />
+          <PropertyItem label="Motivations" value={tool.jobs ? tool.jobs.motivations : []} />
+          <PropertyItem label="Scenarios" value={tool.jobs ? tool.jobs.scenarios : []} />
+          <PropertyItem label="Labels" value={tool.labels} />
+
+
+
+
+
+
+
+          <!--
+          <PropertyItem property={{ key: "url", label: "URL", value: tool.url }} />
+          <PropertyItem property={{ key: "labels", label: "Labels", value: tool.labels }} />
+          -->
       </dl>
     </div>
 
-    {#if filterDescription}
-      <div class="filter-description">
-        <h3>Filter Information</h3>
-        <p>{filterDescription}</p>
-      </div>
-    {/if}
   {/if}
+
+  <!--
     <button 
     class="share-btn"
     on:click={copyToolUrl}
@@ -79,6 +63,7 @@
     >
     Share 🔗
     </button>
+  -->
 </div>
 
 <style>

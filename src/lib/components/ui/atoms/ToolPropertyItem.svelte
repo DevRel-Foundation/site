@@ -1,32 +1,43 @@
 <script lang="ts">
-  export let property: { key: string; label: string; value: any };
+    export let format = '';
+    export let label = '';
+    export let value = '';
+
+    $: format = format || '';
+    $: label = label || '';
+    $: value = value || '';
 </script>
 
+
+
+
 <div class="property-item">
-  <dt class="property-label">{property.label}</dt>
+  <dt class="property-label">{label}</dt>
   <dd class="property-value">
-    {#if Array.isArray(property.value)}
-      {#if property.value.length > 0}
+
+
+    {#if Array.isArray(value)}
+      {#if value.length > 0}
         <ul class="property-list">
-          {#each property.value as item}
+          {#each value as item}
             <li>{item}</li>
           {/each}
         </ul>
       {:else}
-        <span class="property-empty">None</span>
+        <span class="property-empty">--</span>
       {/if}
-    {:else if typeof property.value === 'object' && property.value !== null}
-      <pre class="property-object">{JSON.stringify(property.value, null, 2)}</pre>
-    {:else if property.value}
-      {#if property.key === 'url' || property.key === 'homepage' || property.key === 'repository'}
-        <a href={property.value} target="_blank" rel="noopener noreferrer" class="property-link">
-          {property.value}
+    {:else if typeof value === 'object' && value !== null}
+      <pre class="property-object">{JSON.stringify(value, null, 2)}</pre>
+    {:else if value}
+      {#if format === 'url' }
+        <a href={value} target="_blank" rel="noopener noreferrer" class="property-link">
+          {value}
         </a>
       {:else}
-        <span class="property-text">{property.value}</span>
+        <span class="property-text">{value}</span>
       {/if}
     {:else}
-      <span class="property-empty">Not specified</span>
+      <span class="property-empty">--</span>
     {/if}
   </dd>
 </div>

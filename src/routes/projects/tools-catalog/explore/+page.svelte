@@ -8,6 +8,8 @@
   import SectionDivider from '$lib/components/ui/atoms/SectionDivider.svelte';
   import ToolsExplorer from '$lib/components/ui/organisms/ToolsExplorer.svelte';
 
+  let filters: { category: string | null; label: string | null; outcome: string | null } = { category: null, label: null, outcome: null };
+
   // Uses /api/tools-catalog to initialize page data
   export let data: any;
   $: allTools = data?.tools || {};
@@ -22,29 +24,29 @@
   $: selectedCategory = page.url.searchParams.get('category');
   $: selectedOutcome = page.url.searchParams.get('outcome');
   $: selectedTool = page.url.searchParams.get('tool');
+  $: selectedToolData = selectedTool ? allTools[selectedTool] : null;
 
   // Get filter descriptions for selected items
   $: filteredTools = allTools;
   $: categoryDescription = '';
   $: outcomeDescription = '';
 
-  // Track current filters
-  let filters: { category: string | null; label: string | null; outcome: string | null } = { category: null, label: null, outcome: null };
-
-  // Track currently selected tool
-  let selectedTool: any = null;
-  let selectedToolData: any = null;
-
   // Load selected tool from URL parameter
-  $: if (selectedTool && Object.keys(allTools).length > 0) {
-    const tool = allTools.find((t: any) => t.id === selectedTool);
-    if (tool && (!selectedTool || selectedTool !== tool.id)) {
-      // If we found a basic tool but need details, fetch them
-      handleToolSelect(tool.id);
-    }
+  $: if (selectedTool) {
+      handleToolSelect(selectedTool);
   } else if (!selectedTool) {
+    // Select first item from the filtered list by default
     selectedTool = Object.keys(filteredTools)[0];
     handleToolSelect(selectedTool);
+  }
+
+  // Update selected tool after a filter change
+  $: {
+    const toolKeys = Object.keys(filteredTools);
+    if (toolKeys.length > 0 && (!selectedTool || !filteredTools[selectedTool])) {
+      selectedTool = toolKeys[0];
+      handleToolSelect(selectedTool);
+    }
   }
 
   /**
@@ -188,10 +190,15 @@
     }
   }
 
+  /**
+   * Handle when a specific tool is selected, fetch and display its details.
+   * @param tool
+   */
   async function handleToolSelect(tool: string) {
     selectedTool = tool
     try {
       // Fetch detailed tool data
+      if (!browser) return {}; // should only be a user triggered action, not ssr
       const response = await fetch(`/api/tools-catalog/tools/${tool}`);
       if (response.ok) {
         const data = await response.json();
