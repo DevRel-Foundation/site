@@ -202,6 +202,7 @@
       const response = await fetch(`/api/tools-catalog/tools/${tool}`);
       if (response.ok) {
         const data = await response.json();
+        data.result.id = tool;
         selectedToolData = data.result;
         
         // Update URL to include selected tool
