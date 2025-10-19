@@ -8,7 +8,7 @@
   import SectionDivider from '$lib/components/ui/atoms/SectionDivider.svelte';
   import ToolsExplorer from '$lib/components/ui/organisms/projects/ToolsExplorer.svelte';
 
-  let filters: { category: string | null; label: string | null; outcome: string | null } = { category: null, label: null, outcome: null };
+  let filters: { category: string | null; label: string | null; outcome: string | null; search: string } = { category: null, label: null, outcome: null, search: '' };
 
   // Uses /api/tools-catalog to initialize page data
   export let data: any;
@@ -24,6 +24,7 @@
   $: selectedCategory = page.url.searchParams.get('category');
   $: selectedOutcome = page.url.searchParams.get('outcome');
   $: selectedTool = page.url.searchParams.get('tool');
+  $: searchText = page.url.searchParams.get('search') || '';
   $: selectedToolData = selectedTool ? allTools[selectedTool] : null;
 
   // Get filter descriptions for selected items
@@ -102,7 +103,28 @@
       console.error('Error fetching outcome description:', err);
     }
     return '';
-  } 
+  }
+
+  /**
+   * Filter tools by search text (name or description)
+   * @param tools - Object of tools to filter
+   * @param searchText - Text to search for
+   * @returns Filtered tools object
+   */
+  function filterToolsBySearch(tools: any, searchText: string): any {
+    if (!searchText || searchText.trim() === '') {
+      return tools;
+    }
+
+    const searchLower = searchText.toLowerCase().trim();
+    const filteredEntries = Object.entries(tools).filter(([id, tool]: [string, any]) => {
+      const name = (tool.name || '').toLowerCase();
+      const description = (tool.description || '').toLowerCase();
+      return name.includes(searchLower) || description.includes(searchLower);
+    });
+
+    return Object.fromEntries(filteredEntries);
+  }
 
 
   /**
@@ -113,9 +135,10 @@
     const isCategoryReset = filters.category && !newFilters.category;
     const isLabelReset = filters.label && !newFilters.label;
     const isOutcomeReset = filters.outcome && !newFilters.outcome;
+    const isSearchReset = filters.search && !newFilters.search;
 
     // If any filter was reset, start from all tools
-    if (isCategoryReset || isLabelReset || isOutcomeReset) { 
+    if (isCategoryReset || isLabelReset || isOutcomeReset || isSearchReset) { 
       filteredTools = allTools;
     }
 
@@ -136,8 +159,8 @@
 
       filteredTools = Object.fromEntries(
         category.categories.tools
-          .filter(id => filteredTools.hasOwnProperty(id))
-          .map(id => [id, filteredTools[id]])
+          .filter((id: any) => filteredTools.hasOwnProperty(id))
+          .map((id: any) => [id, filteredTools[id]])
       );
     } else {
       // Reset category state to clear selection
@@ -155,8 +178,8 @@
       let label = await fetchLabel(filters.label);
       filteredTools = Object.fromEntries(
         label.result.tools
-          .filter(id => filteredTools.hasOwnProperty(id))
-          .map(id => [id, filteredTools[id]])
+          .filter((id: any) => filteredTools.hasOwnProperty(id))
+          .map((id: any) => [id, filteredTools[id]])
       );
     } else {
       // Reset label state to clear selection
@@ -175,13 +198,19 @@
 
       filteredTools = Object.fromEntries(
         outcome.outcomes.tools
-          .filter(id => filteredTools.hasOwnProperty(id))
-          .map(id => [id, filteredTools[id]])
+          .filter((id: any) => filteredTools.hasOwnProperty(id))
+          .map((id: any) => [id, filteredTools[id]])
       );
     } else {
       // Reset category state to clear selection
       outcomeDescription = '';
       selectedOutcome = null;
+    }
+
+    // Apply search filter to the already filtered tools
+    if (typeof filters.search === 'string' && filters.search.trim() !== '') {
+      params.set('search', filters.search);
+      filteredTools = filterToolsBySearch(filteredTools, filters.search);
     }
 
     // Update the URL for filters
@@ -228,11 +257,10 @@
       {categories}
       {labels}
       {outcomes}
-      {motivations}
-      {situations}
       {selectedLabel}
       {selectedCategory}
       {selectedOutcome}
+      {searchText}
       onFilterChange={handleFilterChange}
     />
 
