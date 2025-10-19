@@ -10,10 +10,8 @@ export async function get_tools_index() {
   const now = Date.now();
   if (!toolsCache || now - lastFetch > CACHE_TTL) {
     const res = await fetch(TOOLS_INDEX_URL);
-    console.log(res);
     if (!res.ok) throw new Error('Failed to fetch tools index');
     toolsCache = await res.json();
-    console.log(toolsCache);
     lastFetch = now;
   }
   return toolsCache;

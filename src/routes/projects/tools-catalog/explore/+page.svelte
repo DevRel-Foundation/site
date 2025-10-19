@@ -127,11 +127,98 @@
   }
 
 
-  /**
+
+   /**
    * Handles changes to the filter selections.
    * @param newFilters
    */
   async function handleFilterChange(newFilters: any) {
+    filters = newFilters;
+
+    // Add any selections to query params
+    const params = new URLSearchParams();
+
+    // Start from all tools for progressive filtering
+    let nextTools = allTools;
+
+    // Category filter
+    if (typeof filters.category === 'string' && filters.category.trim() !== '') {
+      selectedCategory = filters.category;
+      params.set('category', filters.category);
+
+      let category = await fetchCategory(filters.category);
+      categoryDescription = category.categories?.description || '';
+
+      if (Array.isArray(category.categories?.tools)) {
+        nextTools = Object.fromEntries(
+          category.categories.tools
+            .filter((id: any) => nextTools.hasOwnProperty(id))
+            .map((id: any) => [id, nextTools[id]])
+        );
+      }
+    } else {
+      categoryDescription = '';
+      selectedCategory = null;
+    }
+
+    // Label filter
+    if (typeof filters.label === 'string' && filters.label.trim() !== '') {
+      selectedLabel = filters.label;
+      params.set('label', filters.label);
+
+      let label = await fetchLabel(filters.label);
+      if (Array.isArray(label.result?.tools)) {
+        nextTools = Object.fromEntries(
+          label.result.tools
+            .filter((id: any) => nextTools.hasOwnProperty(id))
+            .map((id: any) => [id, nextTools[id]])
+        );
+      }
+    } else {
+      selectedLabel = null;
+    }
+
+    // Outcome filter
+    if (typeof filters.outcome === 'string' && filters.outcome.trim() !== '') {
+      selectedOutcome = filters.outcome;
+      params.set('outcome', filters.outcome);
+
+      let outcome = await fetchOutcome(filters.outcome);
+      outcomeDescription = outcome.outcomes?.description || '';
+
+      if (Array.isArray(outcome.outcomes?.tools)) {
+        nextTools = Object.fromEntries(
+          outcome.outcomes.tools
+            .filter((id: any) => nextTools.hasOwnProperty(id))
+            .map((id: any) => [id, nextTools[id]])
+        );
+      }
+    } else {
+      outcomeDescription = '';
+      selectedOutcome = null;
+    }
+
+    // Search filter
+    if (typeof filters.search === 'string' && filters.search.trim() !== '') {
+      params.set('search', filters.search);
+      nextTools = filterToolsBySearch(nextTools, filters.search);
+    }
+
+    // Update filteredTools once, after all filters
+    filteredTools = nextTools;
+
+    // Update the URL for filters
+    if (browser) {
+      goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
+    }
+  }
+
+
+  /**
+   * Handles changes to the filter selections.
+   * @param newFilters
+   */
+  async function handleFilterChangeOLD(newFilters: any) {
     const isCategoryReset = filters.category && !newFilters.category;
     const isLabelReset = filters.label && !newFilters.label;
     const isOutcomeReset = filters.outcome && !newFilters.outcome;
@@ -175,9 +262,10 @@
       params.set('label', filters.label);
 
       // Filter tools for the label
-      let label = await fetchLabel(filters.label);
+      let label = {result: []};
+      label = await fetchLabel(filters.label);
       filteredTools = Object.fromEntries(
-        label.result.tools
+        label.result?.tools
           .filter((id: any) => filteredTools.hasOwnProperty(id))
           .map((id: any) => [id, filteredTools[id]])
       );

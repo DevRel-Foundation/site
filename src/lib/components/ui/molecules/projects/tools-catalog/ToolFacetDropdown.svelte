@@ -14,7 +14,7 @@
   <label class="facet-label">
     {label}
     {#if help}
-      <InfoTooltip class="facet-help" label="" href="" alt={help} />
+      <InfoTooltip label="" href="" alt={help} />
     {/if}
   </label>
   <DropdownMenu
@@ -41,8 +41,5 @@
   color: var(--color-text);
   margin-bottom: 0.1em;
 }
-.facet-help {
-  color: var(--color-text-secondary);
-  vertical-align: text-top;
-}
+
 </style>

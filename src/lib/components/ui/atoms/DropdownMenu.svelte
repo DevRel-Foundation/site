@@ -17,20 +17,26 @@
   }
 </script>
 
-<div class="dropdown" tabIndex={0} on:blur={() => open = false}>
+<div class="dropdown" on:blur={() => open = false}>
   <button
     class="dropdown-trigger"
     type="button"
     aria-haspopup="listbox"
     aria-expanded={open}
-    on:click={() => open = !open
-    }
+    on:click={() => open = !open}
   >
     {selected
       ? options.find(o => o.value === selected)?.label
       : placeholder}
     {#if selected}
-      <span class="dropdown-clear" on:click={clearSelection} aria-label="Clear selection">✕</span>
+      <span
+        class="dropdown-clear"
+        role="button"
+        tabindex="0"
+        aria-label="Clear selection"
+        on:click|stopPropagation={clearSelection}
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && clearSelection(e)}
+      >✕</span>
     {:else}
       <span class="dropdown-arrow">▼</span>
     {/if}
@@ -42,7 +48,9 @@
           class="dropdown-item"
           role="option"
           aria-selected={selected?.toLowerCase() === option.value.toLowerCase()}
+          tabindex="0"
           on:click={() => selectOption(option)}
+          on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && selectOption(option)}
         >
           {option.label}
         </li>
@@ -52,12 +60,15 @@
 </div>
 
 <style>
+
 .dropdown {
   position: relative;
-  display: inline-block;
-  min-width: 200px;
+  display: block;
+  width: 100%;
+  min-width: 0;
   font-family: var(--font-sans, inherit);
 }
+
 .dropdown-trigger {
   width: 100%;
   background: var(--color-background-secondary-1);
@@ -72,6 +83,7 @@
   align-items: center;
   justify-content: space-between;
   transition: border-color 0.2s;
+  flex: 1;
 }
 .dropdown-trigger:focus {
   outline: 2px solid var(--color-mint);
@@ -91,6 +103,7 @@
   padding: 2px;
   border-radius: 3px;
   transition: background-color 0.15s, color 0.15s;
+  align-self: center;
 }
 
 .dropdown-clear:hover {
@@ -127,11 +140,10 @@
   transition: background 0.15s;
 }
 
-.dropdown-item[aria-selected=\"true\"],
+.dropdown-item[aria-selected="true"],
 .dropdown-item:hover {
   background: var(--color-background-secondary-2);
   color: var(--color-button-background);
 }
-
 
 </style>

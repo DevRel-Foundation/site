@@ -69,12 +69,6 @@
     border-color: var(--color-mint);
   }
 
-  .search-icon {
-    margin-right: var(--space-xs);
-    color: var(--color-text-muted);
-    flex-shrink: 0;
-  }
-
   .search-field {
     flex: 1;
     background: none;

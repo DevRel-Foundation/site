@@ -58,19 +58,6 @@
     flex-direction: column;
   }
 
-  .tool-list-header {
-    padding: var(--space-s) 0;
-    border-bottom: 1px solid var(--color-background-secondary-2);
-    margin-bottom: var(--space-m);
-  }
-
-  .tool-list-title {
-    margin: 0;
-    font-size: var(--step-1);
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
   .tool-cards {
     flex: 1;
     overflow-y: auto;
