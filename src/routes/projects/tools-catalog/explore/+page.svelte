@@ -267,7 +267,7 @@
     <p class="description"><b>{categoryDescription ? `Job Category: ` : ''}</b>{categoryDescription}</p>
     <p class="description"><b>{outcomeDescription ? `Outcome: ` : ''}</b>{outcomeDescription}</p>
 
-    <p>Matched {Object.keys(filteredTools).length} out of {data.count} tools.</p>
+    <p>Matched {Object.keys(filteredTools).length} out of {data.count} devrel tools.</p>
 
     <SectionDivider />
 

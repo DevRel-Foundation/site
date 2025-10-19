@@ -73,14 +73,131 @@
             </dl>
           </div>
         {:else if activeTab === 'evaluation'}
-          <div class="tab-placeholder">
-            <h3>Evaluation</h3>
-            <p>Tool evaluation criteria and metrics will be displayed here.</p>
+          <div class="evaluation-content">
+            {#if tool.evaluation && tool.evaluation.length > 0}
+              <div class="evaluation-list">
+                {#each tool.evaluation as evaluation, index}
+                  <div class="evaluation-item">
+                    <div class="evaluation-header">
+                      <h4 class="evaluation-source">
+                        {evaluation.team.toUpperCase() === 'N/A' ? 'Anonymous DevRel Team' : evaluation.team}
+                      </h4>
+                      {#if evaluation.decision}
+                        <span class="decision-badge {evaluation.decision}">{evaluation.decision}</span>
+                      {/if}
+                    </div>
+                    
+                    <div class="evaluation-meta">
+                      {#if evaluation.pricing}
+                        <div class="meta-item">
+                          <strong>Pricing:</strong> {evaluation.pricing}
+                        </div>
+                      {/if}
+                      {#if evaluation.compatibility}
+                        <div class="meta-item">
+                          <strong>Compatibility:</strong> {evaluation.compatibility}
+                        </div>
+                      {/if}
+                      {#if evaluation.customizability}
+                        <div class="meta-item">
+                          <strong>Customizability:</strong> {evaluation.customizability.join(', ')}
+                        </div>
+                      {/if}
+                    </div>
+
+                    {#if evaluation.notes && evaluation.notes.length > 0}
+                      <div class="evaluation-notes">
+                        {#each evaluation.notes as note}
+                          <p>{note}</p>
+                        {/each}
+                      </div>
+                    {/if}
+                  </div>
+                  {#if index < tool.evaluation.length - 1}
+                    <hr class="evaluation-divider">
+                  {/if}
+                {/each}
+              </div>
+            {:else}
+              <div class="tab-placeholder">
+                <h3>Evaluation</h3>
+                <p>No evaluation data available for this tool.</p>
+              </div>
+            {/if}
           </div>
         {:else if activeTab === 'learn'}
-          <div class="tab-placeholder">
-            <h3>Learn</h3>
-            <p>Learning resources and documentation will be displayed here.</p>
+          <div class="learning-content">
+            {#if tool.learning}
+              <div class="learning-sections">
+                <!-- Setup Section -->
+                {#if tool.learning.setup && tool.learning.setup.length > 0}
+                  <div class="learning-section">
+                    <h3>Setup</h3>
+                    <ul class="learning-list">
+                      {#each tool.learning.setup as item}
+                        {#if item.type === 'article'}
+                          <li class="learning-item">
+                            <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
+                              {item.title}
+                            </a>
+                          </li>
+                        {/if}
+                      {/each}
+                    </ul>
+                  </div>
+                {/if}
+
+                <!-- Getting Started Section -->
+                {#if tool.learning['getting-started'] && tool.learning['getting-started'].length > 0}
+                  <div class="learning-section">
+                    <h3>Getting Started</h3>
+                    <ul class="learning-list">
+                      {#each tool.learning['getting-started'] as item}
+                        {#if item.type === 'article'}
+                          <li class="learning-item">
+                            <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
+                              {item.title}
+                            </a>
+                          </li>
+                        {/if}
+                      {/each}
+                    </ul>
+                  </div>
+                {/if}
+
+                <!-- Advanced Section -->
+                {#if tool.learning.advanced && tool.learning.advanced.length > 0}
+                  <div class="learning-section">
+                    <h3>Advanced</h3>
+                    <ul class="learning-list">
+                      {#each tool.learning.advanced as item}
+                        {#if item.type === 'article'}
+                          <li class="learning-item">
+                            <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
+                              {item.title}
+                            </a>
+                          </li>
+                        {/if}
+                      {/each}
+                    </ul>
+                  </div>
+                {/if}
+
+                {#if (!tool.learning.setup || tool.learning.setup.length === 0) && 
+                     (!tool.learning['getting-started'] || tool.learning['getting-started'].length === 0) && 
+                     (!tool.learning.advanced || tool.learning.advanced.length === 0)}
+                  <div class="tab-placeholder">
+                    <h3>Learn</h3>
+                    <p>No learning resources available for this tool.</p>
+                  </div>
+                {/if}
+              </div>
+            {:else}
+              <div class="tab-placeholder">
+                <h3>Learn</h3>
+                <p>No learning resources available for this tool.</p>
+              </div>
+            {/if}
           </div>
         {/if}
       </div>
@@ -276,6 +393,167 @@
 
   .properties-list {
     margin: 0;
+  }
+
+  /* Evaluation Tab Styles */
+  .evaluation-content {
+    padding: var(--space-m);
+  }
+
+  .evaluation-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  .evaluation-item {
+    border-radius: var(--radius-s);
+    border: 1px solid var(--color-button-background);
+    padding: var(--space-m);
+  }
+
+  .evaluation-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    margin-bottom: var(--space-s);
+  }
+
+  .evaluation-source {
+    margin: 0;
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--color-text);
+    flex: 1;
+  }
+
+  .decision-badge {
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-s);
+    font-size: var(--step--1);
+    font-weight: 500;
+    text-transform: lowercase;
+  }
+
+  .decision-badge.considering {
+    background: var(--color-mint);
+    color: var(--color-mint-dark)
+  }
+
+  .decision-badge.approved {
+    background: #D1FAE5;
+    color: #065F46;
+  }
+
+  .decision-badge.rejected {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  .decision-badge.using {
+    background: var(--color-mint);
+    color: var(--color-text-dark);
+  }
+
+  .evaluation-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-m);
+    margin-bottom: var(--space-s);
+    font-size: var(--step--1);
+  }
+
+  .meta-item {
+    color: var(--color-text);
+  }
+
+  .meta-item strong {
+    color: var(--color-text);
+  }
+
+  .evaluation-notes {
+    border-top: 1px solid var(--color-background-secondary-1);
+    padding-top: var(--space-s);
+    margin-top: var(--space-s);
+  }
+
+  .evaluation-notes p {
+    margin: 0 0 var(--space-xs) 0;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .evaluation-notes p:last-child {
+    margin-bottom: 0;
+  }
+
+  .evaluation-divider {
+    border: none;
+    border-top: 1px solid var(--color-background-secondary-2);
+    margin: var(--space-l) 0;
+  }
+
+  /* Learning Tab Styles */
+  .learning-content {
+    padding: var(--space-m);
+  }
+
+  .learning-sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+  }
+
+  .learning-section {
+    border-radius: var(--radius-s);
+    padding: var(--space-m);
+  }
+
+  .learning-section h3 {
+    margin: 0 0 var(--space-m) 0;
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--color-text);
+    padding-bottom: var(--space-xs);
+  }
+
+  .learning-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .learning-item {
+    position: relative;
+    padding-left: var(--space-m);
+  }
+
+  .learning-item::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-button-background);
+    font-weight: bold;
+  }
+
+  .learning-link {
+    color: var(--color-link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+
+  .learning-link:hover {
+    color: var(--color-link);
+    border-bottom-color: var(--color-link);
+  }
+
+  .learning-link:visited {
+    opacity: 0.8;
   }
 
   .toast {

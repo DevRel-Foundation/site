@@ -1,6 +1,6 @@
 <script lang="ts">
   import FacetDropdown from '$lib/components/ui/molecules/projects/tools-catalog/ToolFacetDropdown.svelte';
-  import SearchInput from '$lib/components/ui/atoms/SearchInput.svelte';
+  import SearchInput from '$lib/components/ui/atoms/ToolSearch.svelte';
 
   export let categories: { label: string; value: string }[] = [];
   export let labels: { label: string; value: string }[] = [];
