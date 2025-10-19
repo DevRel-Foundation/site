@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ToolsList from '$lib/components/ui/molecules/ToolsList.svelte';
-  import ToolDetails from '$lib/components/ui/molecules/ToolDetails.svelte';
+  import ToolsList from '$lib/components/ui/molecules/projects/tools-catalog/ToolsList.svelte';
+  import ToolDetails from '$lib/components/ui/molecules/projects/tools-catalog/ToolDetails.svelte';
 
   export let tools: any = {};
   export let selectedTool: any = null;

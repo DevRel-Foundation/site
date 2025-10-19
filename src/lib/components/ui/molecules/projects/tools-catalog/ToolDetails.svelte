@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PropertyItem from '../atoms/ToolPropertyItem.svelte';
-  import SectionDivider from '../atoms/SectionDivider.svelte';
+  import PropertyItem from '../../../atoms/ToolPropertyItem.svelte';
+  import SectionDivider from '../../../atoms/SectionDivider.svelte';
 
   export let tool: any = null;
   $: tool = tool || null;
@@ -108,21 +108,22 @@
       </button>
       {#if tool?.id}
       <a 
-        class="tab edit-tab"
+        class="tab"
         href={getEditUrl(tool)}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Edit
+        Edit ↗
+
       </a>
       {:else}
       <a 
-        class="tab edit-tab"
+        class="tab"
         href="https://github.com/devrel-foundation/tools-catalog"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Edit
+        Edit ↗
       </a>
 
       {/if}
@@ -235,7 +236,7 @@
   }
 
   .tab:hover {
-    background: var(--color-background-secondary-2);
+    background: var(--color-button-background-dark);
     color: var(--color-text);
     opacity: 0.72;
   }
@@ -246,14 +247,12 @@
     border-top: 2px solid var(--color-mint-dark);
   }
 
-  .tab.edit-tab {
-    background: var(--color-background-secondary-2);
+  .tab.active:hover {
+    background: var(--color-background-secondary-1);
     color: var(--color-text);
-  }
-
-  .tab.edit-tab:hover {
-    background: var(--color-mint);
-    color: var(--color-text-dark);
+    border-top: 0px solid var(--color-background-secondary-1);
+    opacity: 1.0;
+    cursor: default;
   }
 
   .share-btn {
@@ -270,7 +269,7 @@
   }
 
   .share-btn:hover {
-    background: var(--color-button-background-hover);
+    background: var(--color-button-background-dark);
     color: var(--color-text);
     transform: translateY(-1px);
   }

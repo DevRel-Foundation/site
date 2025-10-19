@@ -40,14 +40,14 @@
   }
 
   .tool-card:hover {
-    border-color: var(--color-mint);
+    border-color: var(--color-button-background);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .tool-card.selected {
-    border-color: var(--color-mint);
+    border-color: var(--color-button-background);
     background: var(--color-background-secondary-2);
-    box-shadow: 0 0 0 2px var(--color-mint);
+    box-shadow: 0 0 0 1px var(--color-mint);
   }
 
   .tool-name {

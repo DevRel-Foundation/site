@@ -1,6 +1,6 @@
 <script>
   import BlogCard from './BlogCard.svelte';
-  import SectionDivider from '../atoms/SectionDivider.svelte';
+  import SectionDivider from '../../atoms/SectionDivider.svelte';
 
   const { posts, title = 'Related Blog Posts', maxPosts = 3 } = $props();
 </script>

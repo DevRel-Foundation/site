@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FacetDropdown from '$lib/components/ui/molecules/ToolFacetDropdown.svelte';
+  import FacetDropdown from '$lib/components/ui/molecules/projects/tools-catalog/ToolFacetDropdown.svelte';
 
   export let categories: { label: string; value: string }[] = [];
   export let labels: { label: string; value: string }[] = [];

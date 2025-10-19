@@ -54,9 +54,9 @@
   }
 
   .pagination-btn:hover:not(:disabled) {
-    background: var(--color-mint);
-    border-color: var(--color-mint);
-    color: var(--color-text-dark);
+    background: var(--color-button-background-dark);
+    border-color: var(--color-button-background);
+    color: var(--color-text);
   }
 
   .pagination-btn:disabled {

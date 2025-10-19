@@ -6,7 +6,7 @@
   import ToolsFilter from '$lib/components/ui/organisms/projects/ToolsFilter.svelte';
 	import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
   import SectionDivider from '$lib/components/ui/atoms/SectionDivider.svelte';
-  import ToolsExplorer from '$lib/components/ui/organisms/ToolsExplorer.svelte';
+  import ToolsExplorer from '$lib/components/ui/organisms/projects/ToolsExplorer.svelte';
 
   let filters: { category: string | null; label: string | null; outcome: string | null } = { category: null, label: null, outcome: null };
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ToolCard from '../atoms/ToolCard.svelte';
-  import Pagination from '../atoms/Pagination.svelte';
+  import ToolCard from '../../../atoms/ToolCard.svelte';
+  import Pagination from '../../../atoms/Pagination.svelte';
 
   export let tools: any = {};
   export let selectedTool: string | null = null;
