@@ -20,7 +20,7 @@ In this article, you'll learn how to set up and manage [GitHub Discussions](/pro
 > 
 > <br/>
 > 
-> Additional contributions to [this article](https://github.com/devrel-foundation/site/src/blog/2025/10/tools-catalog-github-discussions.md) were made by: 
+> Additional contributions to [this article](https://github.com/DevRel-Foundation/site/blob/main/src/blog/2025/10/tools-catalog-github-discussions.md) were made by: 
 > 
 > <br/>
 > 
