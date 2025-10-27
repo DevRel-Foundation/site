@@ -12,8 +12,16 @@
   
   onMount(async () => {
     try {
-      // Dynamically import the markdown content
-      const module = await import(`../../../blog/${post.slug}.md`);
+      // Get all possible .md files in blog and subfolders
+      const modules = import.meta.glob('../../../blog/**/*.md');
+      // Find the matching key
+      const match = Object.keys(modules).find(
+        (key) =>
+          key.endsWith(`${post.slug}.md`) // matches both flat and nested
+      );
+      if (!match) throw new Error('Markdown file not found for slug: ' + post.slug);
+      const module = await modules[match]();
+
       ContentComponent = module.default;
     } catch (err) {
       console.error('Failed to load blog content:', err);

@@ -306,18 +306,6 @@
 		line-height: 1.5;
 	}
 
-	.learn-more {
-		color: var(--color-background-secondary-2-dark);
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.2s ease;
-	}
-
-	.learn-more:hover {
-		color: var(--color-link-light);
-		text-decoration: underline;
-	}
-
 	.no-projects {
 		grid-column: 1 / -1;
 		text-align: center;
@@ -366,22 +354,6 @@
 		display: -webkit-box;
 		-webkit-line-clamp: 4;
 		-webkit-box-orient: vertical;
-	}
-
-	body.dark-mode { 
-	}
-
-	body.dark-mode .callout-cta {
-		background-color: var(--color-link);
-		background-color: color-mix(in srgb, var(--color-link) 88%, transparent);
-	}
-
-	body.dark-mode .filter-menu .filter-btn {
-		color: var(--color-accent-text);
-	}
-	body.dark-mode .filter-menu .filter-btn:hover {
-		background-color: var(--color-accent-text);
-		color: var(--color-link);
 	}
 
 </style>

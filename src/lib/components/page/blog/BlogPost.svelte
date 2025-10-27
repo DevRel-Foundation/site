@@ -784,6 +784,17 @@
     border: none;
     outline: none;
   }
+
+
+  .post-content :global(li.task-list-item input[type="checkbox"]::before) {
+    content: "☐";
+    color: var(--color-text);
+    font-size: 1.2em;
+    margin-left: 1.0em;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.7;
+  }
   
   .post-content :global(li.task-list-item input[type="checkbox"]:checked) {
     appearance: none;
@@ -798,11 +809,13 @@
   }
   
   .post-content :global(li.task-list-item input[type="checkbox"]:checked::before) {
-    content: "✅";
-    font-size: 1em;
-    margin-left: 0;
+    content: "☑︎";
+    color: var(--color-text);
+    font-size: 1.2em;
+    margin-left: 1.0em;
+    vertical-align: middle;
     display: inline-block;
-    line-height: 1;
+    line-height: 1.7;
   }
   
   .github-author {

@@ -4,6 +4,7 @@
   export let title = '';
   export let description = '';
   export let breadcrumbs = []; // array of strings or dictionaries with links
+  export let wide = false;
 </script>
 
 <svelte:head>
@@ -11,7 +12,7 @@
   <meta name="description" content={description}>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container {wide ? 'container-content-wide' : 'container-content'}">
   {#if typeof breadcrumbs === 'string'}
     {#each breadcrumbs.split(',') as badge}
       <Badge label={badge.trim()} />

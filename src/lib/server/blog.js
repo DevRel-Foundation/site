@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
 import matter from 'gray-matter';
 
-const blogPostsGlob = import.meta.glob('/src/blog/*.md', { eager: true });
+const blogPostsGlob = import.meta.glob('/src/blog/**/*.md', { eager: true });
 const authorsGlob = import.meta.glob('/src/authors/*.md', { query: '?raw', import: 'default' });
   
 
@@ -10,8 +10,10 @@ export async function getBlogPosts() {
   
   for (const path in blogPostsGlob) {
     const post = blogPostsGlob[path];
-    const slug = path.split('/').pop().replace('.md', '');
-    
+    const slug = path
+      .replace(/^\/src\/blog\//, '') // remove leading directory
+      .replace(/\.md$/, '');         // remove .md extension   
+
     if (post.metadata) {
       // Only include metadata, not the component content
       posts.push({

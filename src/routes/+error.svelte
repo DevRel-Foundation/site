@@ -207,7 +207,7 @@
 
   .digit-4 {
     font-size: 10rem;
-    color: var(--color-mint-dark);
+    color: var(--color-button-background);
     text-shadow: 0 4px 8px rgba(var(--color-mint-dark-rgb), 0.3);
     animation: pulse-4 3s ease-in-out infinite;
   }
@@ -217,7 +217,7 @@
     height: 120px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(121, 191, 68, 0.1), rgba(0, 36, 46, 0.1));
-    border: 4px solid var(--color-mint-dark);
+    border: 4px solid var(--color-background-dark);
     box-shadow: 
       0 0 0 2px rgba(121, 191, 68, 0.3),
       0 8px 24px rgba(0, 36, 46, 0.2),
@@ -330,13 +330,13 @@
   }
 
   .cta-button.primary {
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-button-background);
     color: var(--color-background);
     border-color: var(--color-mint-dark);
   }
 
   .cta-button.primary:hover {
-    background-color: color-mix(in srgb, var(--color-mint-dark) 80%, white 20%);
+    background-color: color-mix(in srgb, var(--color-mint-dark) 60%, white 40%);
     border-color: color-mix(in srgb, var(--color-mint-dark) 80%, white 20%);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(var(--color-mint-dark-rgb), 0.3);
@@ -344,12 +344,12 @@
 
   .cta-button.secondary {
     background-color: transparent;
-    color: var(--color-mint-dark);
-    border-color: var(--color-mint-dark);
+    color: var(--color-button-background);
+    border-color: var(--color-button-background);
   }
 
   .cta-button.secondary:hover {
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-button-background);
     color: var(--color-background);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(var(--color-mint-dark-rgb), 0.2);

@@ -1,6 +1,7 @@
-export async function load({ fetch }) {
-    const [res] = await Promise.all([
-      fetch('/api/tools-catalog')
+export async function load({ fetch }: { fetch: typeof globalThis.fetch }) {
+    const [res, toolsRes] = await Promise.all([
+      fetch('/api/tools-catalog'),
+      fetch('/api/tools-catalog/tools')
     ]);
 
   try {
@@ -9,9 +10,17 @@ export async function load({ fetch }) {
       console.error('/api/tools-catalog returned non-OK', { status: res.status });
     }
 
+    if (!toolsRes.ok) {
+      console.error('/api/tools-catalog/tools returned non-OK', { status: toolsRes.status });
+    }
+
     const data = await res.json().catch(() => ({}));
+    const toolsData = await toolsRes.json().catch(() => ({}));
+
+
 
     const count = data.count;
+    let tools: any = toolsData.tools || {};
 
     const labels = data.labels.map((l: any) => ({
       label: l ?? String(l),
@@ -20,7 +29,7 @@ export async function load({ fetch }) {
 
     const categories = data.categories.map((c: any) => ({
       label: c ?? String(c),
-      value: c ?? String(c)
+      value: c ?? String(c),
     }));
 
     const outcomes = data.outcomes.map((o: any) => ({
@@ -44,61 +53,15 @@ export async function load({ fetch }) {
       outcomes: outcomes,
       motivations: motivations,
       situations: situations, 
-      count: count
+      count: count,
+      tools: tools
     };
+
 
   } catch (err) {
     console.error('Error in tools-catalog page load', err);
-    return { categories: [], labels: [] };
+    return { categories: [], labels: [], tools: [], count: 0 };
   }
 
 }
 
-
-/*
-
-
-export async function load({ fetch }) {
-  try {
-    const [catRes, labelRes] = await Promise.all([
-      fetch('/api/tools-catalog/jobs/categories'),
-      fetch('/api/tools-catalog/labels')
-    ]);
-
-    if (!catRes.ok || !labelRes.ok) {
-      // log text bodies for easier debugging in dev
-      const catText = await catRes.text().catch(() => '<no-body>');
-      const labelText = await labelRes.text().catch(() => '<no-body>');
-      console.error('tools-catalog endpoints returned non-OK', { catRes: catRes.status, labelRes: labelRes.status, catText, labelText });
-      return { categories: [], labels: [] };
-    }
-
-    const categoriesData = await catRes.json().catch(() => ({}));
-    const labelsData = await labelRes.json().catch(() => ({}));
-
-    const categoriesArray = Array.isArray(categoriesData?.categories) ? categoriesData.categories : [];
-    const labelsArray = Array.isArray(labelsData?.labels) ? labelsData.labels : [];
-
-    const mappedCategories = categoriesArray.map((c: any) => ({
-      // prefer a human-friendly label, fall back to value or the whole object
-      label: c.description ?? c.value ?? String(c),
-      value: c.value ?? c.const ?? c.description ?? String(c)
-    }));
-
-    const mappedLabels = labelsArray.map((l: any) => ({
-      label: l.label ?? String(l),
-      value: l.label ?? String(l)
-    }));
-
-    // console.log('mappedCategories', mappedCategories);
-
-    return {
-      categories: mappedCategories,
-      labels: mappedLabels
-    };
-  } catch (err) {
-    console.error('Error in tools-catalog page load', err);
-    return { categories: [], labels: [] };
-  }
-}
-*/

@@ -10,13 +10,16 @@ export async function get_tools_index() {
   const now = Date.now();
   if (!toolsCache || now - lastFetch > CACHE_TTL) {
     const res = await fetch(TOOLS_INDEX_URL);
-    console.log(res);
     if (!res.ok) throw new Error('Failed to fetch tools index');
     toolsCache = await res.json();
-    console.log(toolsCache);
     lastFetch = now;
   }
   return toolsCache;
+}
+
+export async function get_tools() {
+    const tools = await get_tools_index();
+    return tools.processed;
 }
 
 export async function get_total_tools_count() {
@@ -25,6 +28,12 @@ export async function get_total_tools_count() {
 }
 
 export async function get_labels() {
+    const tools = await get_tools_index();
+
+    return tools.labels; 
+}
+
+export async function get_labels_list() {
     const tools = await get_tools_index();
 
     return Object.keys(tools.labels); 
@@ -38,20 +47,40 @@ export async function get_tools_by_label(label: string) {
 
 export async function get_job_categories() {
     const tools = await get_tools_index();
+    return tools.jobs.categories;
+}
+
+export async function get_job_categories_list() {
+    const tools = await get_tools_index();
     return Object.keys(tools.jobs.categories);
 }
 
 export async function get_job_outcomes() {
+    const tools = await get_tools_index();
+    return tools.jobs.outcomes;
+}
+
+export async function get_job_outcomes_list() {
     const tools = await get_tools_index();
     return Object.keys(tools.jobs.outcomes);
 }
 
 export async function get_job_motivations() {
     const tools = await get_tools_index();
+    return tools.jobs.motivations;
+}
+
+export async function get_job_motivations_list() {
+    const tools = await get_tools_index();
     return Object.keys(tools.jobs.motivations);
 }
 
 export async function get_job_situations() {
+    const tools = await get_tools_index();
+    return tools.jobs.situations;
+}
+
+export async function get_job_situations_list() {
     const tools = await get_tools_index();
     return Object.keys(tools.jobs.situations);
 }

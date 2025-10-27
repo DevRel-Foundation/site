@@ -8,7 +8,7 @@ tags: ["tools-catalog"]
 image: "/images/blog/devrel-foundation-tools-catalog.png"
 ---
 
-For aspiring Developer Relations professionals who are trying to grow adoption using DevRel tactics, learning the tools of the trade is an important starting place to begin your journey. There are lists that rank and review tools but the sheer number of choices can be overwhelming. The [Tools Catalog](https://github.com/DevRel-Foundation/tools-catalog) initiative was started to collect physical and digital tools as open-data that map to specific day-to-day Developer Relations tasks.
+For aspiring Developer Relations professionals who are trying to grow adoption using DevRel tactics, learning the tools of the trade is an important starting place to begin your journey. There are lists that rank and review tools but the sheer number of choices can be overwhelming. The [Tools Catalog](/projects/tools-catalog) initiative was started to collect physical and digital tools as open-data that map to specific day-to-day Developer Relations tasks.
 
 The move to an **Incubation** stage indicates that this project has advanced beyond early sandbox and prototypes. Effort is underway and the beginnings of a tools definition schema are taking shape. This is the precursor to the _Graduation_ stage indicating today early adopters can start getting some immediate value, but there may still be shifts as feedback and contributions help it grow.
 

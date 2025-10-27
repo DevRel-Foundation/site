@@ -441,6 +441,12 @@ header {
   margin: 0 auto;
 }
 
+.container-content-wide {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
 .content-box h2, .content-box h3 {
   margin-top: 0;
 }

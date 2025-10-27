@@ -1,7 +1,7 @@
 
 <script lang="ts">
 	import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
-  import BlogCarousel from '$lib/components/ui/molecules/BlogStrip.svelte';
+  import BlogCarousel from '$lib/components/ui/molecules/blog/BlogStrip.svelte';
   import ToolsCatalogDescription from '$lib/components/ui/atoms/ToolsCatalogDescription.svelte';
 
   import ResourcesWorkingGroupContact from '$lib/components/ui/molecules/ResourcesWorkingGroupContact.svelte';
