@@ -46,7 +46,7 @@
     '@jcleblanc',
     '@kmillrunner',
     '@ssk_14',
-    '@adityaoberai1'
+    '@adityaoberai'
   ];
   
   // Check if author is a foundation representative
@@ -388,7 +388,7 @@
 <article class="blog-post">
   {#if !isFoundationRepresentative}
     <div class="disclaimer">
-      <p><em>This blog post represents the viewpoint of its author(s) and does not necessarily reflect an official position or perspective of the DevRel Foundation or any subsidiary working group. Authors' current workplace or affiliated products, if mentioned, are disclosed for transparency.</em></p>
+      <p><em>This blog post represents the viewpoint of its author(s) and does not necessarily reflect an official position or perspective of the DevRel Foundation or working groups. Any current workplace or affiliated products, if mentioned, should be disclosed for transparency.</em></p>
     </div>
   {/if}
   
@@ -666,25 +666,29 @@
   .post-content :global(h2),
   .post-content :global(h3) {
     margin-top: var(--space-l);
-    margin-bottom: var(--space-m);
-    line-height: 1.3;
+    margin-bottom: var(--space-s);
+    line-height: 1.4;
   }
   
   .post-content :global(h1) {
-    font-size: var(--step-2);
+    font-size: var(--step-3);
+    font-weight: 800;
   }
   
   .post-content :global(h2) {
-    font-size: var(--step-1);
+    margin-top: var(--space-l);
+    font-size: var(--step-2);
+    font-weight: 700;
   }
   
   .post-content :global(h3) {
-    font-size: var(--step-0);
+    font-size: var(--step-1);
+    color: var(--color-text);
     font-weight: 600;
   }
   
   .post-content :global(p) {
-    margin-bottom: var(--space-m);
+    margin-bottom: var(--space-s);
     font-size: var(--step-0);
   }
   
@@ -757,8 +761,8 @@
   
   .post-content :global(ul),
   .post-content :global(ol) {
-    margin-top: var(--space-s);
-    margin-bottom: var(--space-m);
+    margin-top: 0;
+    margin-bottom: var(--space-s);
     font-size: var(--step-0);
   }
   
