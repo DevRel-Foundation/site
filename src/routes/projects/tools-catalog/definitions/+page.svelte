@@ -47,6 +47,43 @@
         </tbody>
     </table>
 
+    <h2>Job Motivations</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Motivation</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each data.motivations as motivation}
+                <tr>
+                    <td><b>{motivation.value}</b></td>
+                    <td>{motivation.description}</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>    
+
+
+    <h2>Job Situations</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Situation</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each data.situations as situation}
+
+                <tr>
+                    <td><b>{situation.value}</b></td>
+                    <td>{situation.description}</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
 </InfoPage>
 
 

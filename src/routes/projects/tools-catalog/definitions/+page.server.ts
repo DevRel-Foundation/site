@@ -1,12 +1,16 @@
-import { getJobCategories, getJobOutcomes } from '$lib/server/projects/tools-catalog/schema-reader';
+import { getJobCategories, getJobMotivations, getJobOutcomes, getJobSituations } from '$lib/server/projects/tools-catalog/schema-reader';
 
 export async function load() {
-	const [categories, outcomes] = await Promise.all([
+	const [categories, outcomes, motivations, situations] = await Promise.all([
 		getJobCategories(),
-		getJobOutcomes()
+		getJobOutcomes(), 
+        getJobMotivations(),
+        getJobSituations(),
 	]);
 	return {
 		categories,
-		outcomes
+		outcomes,
+        motivations,
+        situations
 	};
 }

@@ -40,7 +40,6 @@ GitHub Discussions was introduced in 2020 in order to support community-driven c
 The [Resources Working Group](https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions) of the DevRel Foundation is using GitHub Discussions for these reasons.
 
 GitHub Discussions may not be your ideal tool if you have constraints such as:
-
 - want to collect user sign ups
 - not comfortable with discussions being in public
 
@@ -103,7 +102,6 @@ Create a message and call it something like "Welcome! How-to Get Started Here". 
 ![pinned messages for github discusions](/images/blog/2025/tools-catalog-discussions-pinned-messages.png)
 
 In your welcome, make sure to cover:
-
 - [ ] explain what the community is
 - [ ] point people to code of conduct or any rules for participation
 - [ ] provide links to tutorials or other introductory materials or posts
@@ -111,7 +109,6 @@ In your welcome, make sure to cover:
 ## Recommendation: Identify a Community Manager for Discussions
 
 You'll want to identify somebody accountable for managing the GitHub Discussions. They should be expected to do a few things:
-
 - [ ] make sure questions are answered
 - [ ] listen to feedback and adjust categories as needed
 - [ ] provide discussion prompts to solicit community feedback
