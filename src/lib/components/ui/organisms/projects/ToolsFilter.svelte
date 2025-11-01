@@ -76,11 +76,12 @@
 .search-filter {
   display: flex;
   flex-direction: column;
+  font-size: var(--step--1);
   gap: var(--space-xs);
 }
 
 .search-label {
-  font-size: var(--step-0);
+  font-size: var(--step--1);
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 0.1em;

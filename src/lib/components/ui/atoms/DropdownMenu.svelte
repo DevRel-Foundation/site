@@ -76,7 +76,6 @@
   border: 1px solid var(--color-logo-text, #145C36);
   border-radius: var(--radius-m);
   padding: var(--space-xs) var(--space-m);
-  font-size: var(--step-0);
   cursor: pointer;
   text-align: left;
   display: flex;
@@ -130,7 +129,6 @@
 .dropdown-item {
   padding: var(--space-xs) var(--space-m);
   cursor: pointer;
-  font-size: var(--step-0);
   color: var(--color-text);
   background: none;
   border-bottom: 0.5px solid var(--color-logo-text);
