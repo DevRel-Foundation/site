@@ -14,7 +14,7 @@
   <label class="facet-label">
     {label}
     {#if help}
-      <InfoTooltip label="" href="" alt={help} />
+      <InfoTooltip label="" href="/projects/tools-catalog/definitions" alt={help} />
     {/if}
   </label>
   <DropdownMenu
@@ -32,11 +32,12 @@
   flex-direction: column;
   gap: var(--space-xs);
   margin-bottom: var(--space-m);
+  font-size: var(--step--1);
   scrollbar-width: thin;        /* Firefox: thin scrollbar */
-
 }
+
 .facet-label {
-  font-size: var(--step-0);
+  font-size: var(--step--1);
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 0.1em;

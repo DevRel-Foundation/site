@@ -38,7 +38,8 @@ export async function getJobCategories() {
     .map(key => ({
       value: defs[key].const,
       description: defs[key].description
-    }));
+    }))
+    .sort((a, b) => a.value.localeCompare(b.value));
   return categories;
 }
 
@@ -50,7 +51,8 @@ export async function getJobOutcomes() {
     .map(key => ({
       value: defs[key].const,
       description: defs[key].description
-    }));
+    }))
+    .sort((a, b) => a.value.localeCompare(b.value));
   return outcomes;
 }
 
@@ -62,7 +64,8 @@ export async function getJobMotivations() {
     .map(key => ({
       value: defs[key].const,
       description: defs[key].description
-    }));
+    }))
+    .sort((a, b) => a.value.localeCompare(b.value));
   return motivations;
 }
 
@@ -74,6 +77,7 @@ export async function getJobSituations() {
     .map(key => ({
       value: defs[key].const,
       description: defs[key].description
-    }));
+    }))
+    .sort((a, b) => a.value.localeCompare(b.value));
   return situations;
 }
