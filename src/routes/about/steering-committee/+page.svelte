@@ -7,6 +7,7 @@
 	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 	const img_jayson = '/images/steering-committee/jayson_d.jpg';
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
+	const img_arun = '/images/steering-committee/arun_g.png';
 </script>
 
 <svelte:head>
@@ -23,33 +24,6 @@
 		</div>
 
 		<div class="team-grid">
-
-			<BioSteeringCommittee
-				name="Jonathan LeBlanc"
-				title="Governance and Formation"
-				accountabilities="
-					Oversees the creation and maintenance of governing documentation and project plans (e.g., charter, code of conduct, etc.).
-					"
-				bio="Jonathan LeBlanc is an Emmy award-winning software engineer for pioneering live streaming video services, author of O'Reilly books 'Identity and Data Security for Web Development' and 'Programming Social Applications', and former board member of the OAuth, OpenID, and OpenSocial specification groups. Currently the VP and GM of Platform at TraceLink, he spent his career architecting platform, product, and devrel organizations globally."
-				linkedin="https://www.linkedin.com/in/jcleblanc/"
-				github="https://github.com/jcleblanc"
-				discord="@jcleblanc"
-				headshot={img_jon}
-			/>
-
-			<BioSteeringCommittee
-				name="Katie Miller"
-				title="Communications"
-				accountabilities="
-					Coordinates outbound public relations, social media, and community communications. Manages volunteer recruitment
-					and onboarding process.
-					"
-				bio="Katie Miller is a Developer Marketing leader who has built and managed developer programs and marketing initiatives for Slack, Asana, and Google. While her career has taken some interesting twists and turns, at its core, she has been committed to creating a better world by empowering people through knowledge and connection. She serves in leadership roles on multiple non-profit boards and is passionate about community building and governance."
-				linkedin="https://www.linkedin.com/in/kmillrunner/"
-				github="https://github.com/katiewaz1977"
-				discord="@katiemillersheher_91737"
-				headshot={img_kat}
-			/>
 
 			<BioSteeringCommittee
 				name="Stacey Kruczek"
@@ -106,6 +80,21 @@
 				github="https://github.com/adityaoberai"
 				discord="@adityaoberai1"
 				headshot={img_aditya}
+			/>
+
+            <BioSteeringCommittee
+				name="Arun Gupta"
+				title="Committee"
+				term="2027"
+				accountabilities="
+					Steering Committee Member.
+					"
+				bio="Arun Gupta is a globally recognized expert in Developer Relations, open source strategy, and go-to-market innovation. He is the VP of Developer Experience at JetBrains, leading the effort to connect with the global developer community and external partners. With over 25 years of experience at Intel, Apple, Amazon, and Red Hat, Arun advocates mindfulness, kindness, and developer empathy as the foundation of modern DevRel."
+				linkedin="https://www.linkedin.com/in/arunpgupta/"
+				twitter="https://x.com/arungupta"
+				github="https://github.com/arun-gupta"
+				discord="@arungupta"
+				headshot={img_arun}
 			/>
 		</div>
 
