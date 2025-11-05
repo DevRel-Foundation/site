@@ -7,6 +7,7 @@
 	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 	const img_jayson = '/images/steering-committee/jayson_d.jpg';
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
+	const img_arun = '/images/steering-committee/arun_g.jpg';
 </script>
 
 <svelte:head>
@@ -106,6 +107,21 @@
 				github="https://github.com/adityaoberai"
 				discord="@adityaoberai1"
 				headshot={img_aditya}
+			/>
+
+            <BioSteeringCommittee
+				name="Arun Gupta"
+				title="Committee"
+				term="2027"
+				accountabilities="
+					Steering Committee Member.
+					"
+				bio="Arun Gupta is a globally recognized expert in developer relations, open source strategy, and go-to-market innovation. He is the VP of Developer Experience at JetBrains, leading the effort to connect with the global developer community and external partners. With over 25 years of experience at Intel, Apple, Amazon, and Red Hat, he’s built developer communities that drive adoption and aligned DevRel with product, marketing, and sales to create lasting champions. Arun advocates mindfulness, kindness, and developer empathy as the foundation of modern DevRel."
+				linkedin="https://www.linkedin.com/in/arunpgupta/"
+				twitter="https://x.com/arungupta"
+				github="https://github.com/arun-gupta"
+				discord="@arungupta"
+				headshot={img_arun}
 			/>
 		</div>
 
