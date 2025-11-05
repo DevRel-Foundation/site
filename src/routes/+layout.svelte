@@ -2,7 +2,7 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { PUBLIC_GA_ID } from '$env/static/public';
+  import * as env from '$env/dynamic/public';
 
   import '../reset.css';
   import '../app.css';
@@ -45,7 +45,7 @@
       posthog.capture('$pageview');
       posthog.capture('cookie_consent_given', { action: 'accept' });
     }
-    const gaId = (typeof PUBLIC_GA_ID !== 'undefined' && PUBLIC_GA_ID) ? PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
+  const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
     injectGA(gaId);
     showConsent.set(false);
   }
@@ -104,8 +104,8 @@
       if (hasConsent === 'true') {
         posthog.opt_in_capturing();
         posthog.capture('$pageview');
-        // initialize GA immediately as consent already given
-        const gaId = (typeof PUBLIC_GA_ID !== 'undefined' && PUBLIC_GA_ID) ? PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
+  // initialize GA immediately as consent already given
+  const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
         injectGA(gaId);
       } else if (hasConsent === null) {
         // Show consent banner for new users
