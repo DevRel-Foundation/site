@@ -105,7 +105,7 @@
 				accountabilities="
 					Steering Committee Member.
 					"
-				bio="Divya Mohan is a Principal Technology Advocate at SUSE, playing a pivotal role in advancing the company’s open source projects and nurturing the community around them. Outside of her day job, she builds and maintain several inclusive tech communities by engaging with diverse global stakeholders. With over a decade of experience, Divya leverages her expertise to make open source tech and communities more accessible and innovative."
+				bio="Divya Mohan is a Principal Technology Advocate at SUSE, playing a pivotal role in advancing the company’s open source projects and nurturing the community around them. Outside of her day job, she builds and maintains several tech communities by engaging with diverse global stakeholders. With over a decade of experience, Divya leverages her expertise to make open source tech and communities more accessible and innovative."
 				linkedin="https://www.linkedin.com/in/divya-mohan0209/"
 				twitter="https://x.com/Divya_Mohan02"
 				github="https://github.com/divya-mohan0209"
