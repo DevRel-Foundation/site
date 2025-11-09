@@ -1,7 +1,7 @@
 ---
-title: "Steering Committee Elections 2025"
+title: "DevRel Foundation Steering Committee 2025 Election Results"
 excerpt: |
-   Results from the 2025 DevRel Foundation Steering Committee Elections
+   Results from the 2025 Elections for the DevRel Foundation Steering Committee
 author: "@katiewaz1977"
 date: "2025-11-10"
 category: "announce"
