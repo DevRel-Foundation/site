@@ -10,7 +10,7 @@ tags: ["elections"]
 
 The DevRel Foundation has completed its first election cycle since its full formation in August 2025, and we’re pleased to share the results.
 
-Congratulations to new members Arun Gupta, Tabs Fakier, and Divya Mohan, and continuing member Stacey Kruczek. They will join [Jayson DeLancey](/blog/author/j12y), Wesley Faulkner, and [Aditya Oberai](/blog/author/adityaoberai), whose terms will conclude on November 1, 2026.
+Congratulations to new members Arun Gupta, Tabs Fakier, and Divya Mohan, and continuing member Stacey Kruczek. They will join Jayson DeLancey, Wesley Faulkner, and Aditya Oberai, whose terms will conclude on November 1, 2026.
 
 The [DRF Steering Committee](https://dev-rel.org/about/steering-committee) is responsible for all aspects of oversight relating to the Foundation, including:
 
