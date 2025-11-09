@@ -10,7 +10,3 @@ updated: '2025-09-06'
 website: 'https://dev.to/anajsana95/'
 ---
 
-# Ana Jiménez Santamaría
-
-Senior Project Manager, Linux Foundation
-Project management and coordination, DevRel Foundation

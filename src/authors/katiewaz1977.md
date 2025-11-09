@@ -8,7 +8,6 @@ company: ''
 updated: '2025-11-09'
 ---
 
-# Katie Miller
 
 
 
