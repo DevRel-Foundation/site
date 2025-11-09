@@ -44,9 +44,9 @@
     '@anajsana',
     '@wesley83',
     '@jcleblanc',
-    '@kmillrunner',
     '@ssk_14',
-    '@adityaoberai'
+    '@adityaoberai',
+    '@katiewaz1977'
   ];
   
   // Check if author is a foundation representative
