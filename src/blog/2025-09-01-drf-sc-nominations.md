@@ -4,7 +4,7 @@ excerpt: "Nominations are Open for DRF Steering Committee until September 10"
 author: "@anajsana"
 date: "2025-09-01"
 category: "announce"
-tags: ["foundation"]
+tags: ["elections"]
 image: "/images/blog/devrel-foundation-governance.png"
 ---
 

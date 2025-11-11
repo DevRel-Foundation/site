@@ -9,6 +9,5 @@ updated: '2025-08-05'
 website: 'https://dev-rel.org'
 ---
 
-# DevRel Foundation
 
 

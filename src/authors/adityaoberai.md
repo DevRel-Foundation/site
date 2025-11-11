@@ -8,8 +8,3 @@ company: Appwrite
 updated: '2025-09-28'
 website: 'https://oberai.dev'
 ---
-
-# Aditya Oberai
-
-Developer Advocate, Appwrite
-Steering Committee, DevRel Foundation
