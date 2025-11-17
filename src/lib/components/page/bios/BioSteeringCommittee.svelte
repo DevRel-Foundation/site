@@ -10,7 +10,8 @@
     github = '', 
     website = '',
     discord = '',
-    headshot = ''
+    headshot = '',
+    term = ''
   } = $props();
   
   import LinkedInIcon from 'iconoir/icons/linkedin.svg';
