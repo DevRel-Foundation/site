@@ -9,6 +9,7 @@
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
 	const img_arun = '/images/steering-committee/arun_g.png';
 	const img_divya = '/images/steering-committee/divya_m.jpg';
+	const img_tabs = '/images/steering-committee/tabs.jpg';
 </script>
 
 <svelte:head>
@@ -111,6 +112,21 @@
 				github="https://github.com/divya-mohan0209"
 				discord="@divya"
 				headshot={img_divya}
+			/>
+
+			<BioSteeringCommittee
+				name="Tabs Fakier"
+				title="Committee"
+				accountabilities="
+					Steering Committee Member.
+					"
+				bio="Tabs is a DevRel Engineer and serial community builder, with 15+ years experience in the latter. Hailing from a diverse background of design, tech, academia, and industry, she's now dedicated towards building in open-source projects and communities. That and promoting DevRel in APAC; AUNZ in particular."
+				linkedin="https://www.linkedin.com/in/ladyofcode/"
+				twitter="https://x.com/ladyofcode"
+				bluesky="https://bsky.app/profile/ladyofcode.com"
+				github="https://github.com/ladyofcode"
+				discord="@ladyofcode"
+				headshot={img_tabs}
 			/>
 		</div>
 
