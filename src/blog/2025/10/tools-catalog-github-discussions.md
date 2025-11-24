@@ -1,5 +1,5 @@
 ---
-title: "Setting Up GitHub Discussions | Tools Catalog"
+title: "A DevRel Guide to GitHub Discussions | Tools Catalog"
 excerpt: |
     GitHub Discussions is an online forum that can be
     used for engaging your developer community.
