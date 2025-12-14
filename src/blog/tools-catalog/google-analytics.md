@@ -72,7 +72,6 @@ Knowing what percentage of visitors have visited multiple times within a period 
 
 A complex metric like attention hours uses page views and time on page provide...
 
-
 ## 4. Take Action
 
 Once you've gathered actionable insights about developer behaviors you can intrument repeatable workflows.
@@ -90,7 +89,6 @@ If you exceed benchmarks at the stage of growth but see activation rate below n 
 
 Look for content that has high traffic but under 2% conversion rate and prioritize this content for rewrites.
 
-
 ### Red Flag: High Tutorial Start, Low Completion
 
 If you instrument GTM with tutorial_start and tutorial_end events you can calculate completion rate...
@@ -100,14 +98,19 @@ Ways to address this:
 - verify you are not missing steps and provide remediation advice should a step have a probability of error
 - consider using a heatmapping tool and watch user behavior, see the [Tools Catalog](/projects/tools-catalog) for examples of this type of tool
 
-### Quarterly: Content Pruning
-
-Look for any content that has x or y characteristics... Consider archiving this content or updating it...
-
-
 ### Red Flag: Low Traffic, High Activation
 
 For content that has a high activation rate but low traffic volume, consider repurposing content into other formats like a video, tutorial, or talk...
+
+## 5. Workflows
+
+### Monthly: Content Reporting
+
+Review your top performing blog post and let others know that...
+
+### Quarterly: Content Pruning
+
+Look for any content that has x or y characteristics... Consider archiving this content or updating it...
 
 
 ## Conclusion
