@@ -1,3 +1,5 @@
+/// <reference types="mdsvex/globals" />
+
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
@@ -11,11 +13,21 @@ declare global {
 }
 
 declare module '*.md' {
-	import type { SvelteComponent } from 'svelte'
+	import type { Component } from 'svelte';
 
-	export default class Comp extends SvelteComponent{}
+	const component: Component;
+	export default component;
 
-	export const metadata: Record<string, unknown>
+	export const metadata: Record<string, unknown>;
+}
+
+declare module '*.svx' {
+	import type { Component } from 'svelte';
+
+	const component: Component;
+	export default component;
+
+	export const metadata: Record<string, unknown>;
 }
 
 export {};
