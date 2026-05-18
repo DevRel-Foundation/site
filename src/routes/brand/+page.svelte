@@ -14,7 +14,6 @@
     <li><a href="#colors">Colors</a></li>
     <li><a href="#usage">Color Usage</a></li>
     <li><a href="#usage">Typography</a></li>
-    <li><a href="/terms">Terms of Use</a></li>
   </ul>
 </nav>
 
