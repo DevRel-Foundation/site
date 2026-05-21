@@ -22,7 +22,6 @@
     {selected}
     {placeholder}
     {onSelect}
-    on:change={event => onSelect(event.detail)}
   />
 </div>
 

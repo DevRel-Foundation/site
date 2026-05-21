@@ -21,7 +21,7 @@
 .contact-box {
   background: var(--color-button-background);
   border: 2px solid var(--color-mint-dark);
-  color: var(--color-text-dark, #FAFAF0);
+  color: var(--color-text-dark, #E9E8E1);
   border-radius: var(--radius-l, 1rem);
   --icon-filter: invert(1);
   padding: var(--space-s, 1rem);
@@ -35,8 +35,8 @@
 
 .contact-box,
 .contact-box * {
-  color: var(--color-text-dark, #FAFAF0) !important;
-  text-decoration-color: var(--color-text-dark, #FAFAF0);
+  color: var(--color-text-dark, #E9E8E1) !important;
+  text-decoration-color: var(--color-text-dark, #E9E8E1);
 }
 
 .contact-box p {

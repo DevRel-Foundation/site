@@ -30,7 +30,7 @@
     display: block;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-fast);
   }
 
   .blog-card:hover {
@@ -42,10 +42,10 @@
     height: 200px;
     overflow: hidden;
     border: 1px solid var(--color-mint);
-    border-radius: 8px;
+    border-radius: var(--radius-s);
     margin-bottom: var(--space-s);
-    box-shadow: 0 0 0 0 var(--color-mint), 2px 2px 2px 0 var(--color-mint);
-    transition: box-shadow 0.2s;
+    box-shadow: var(--shadow-xs), 2px 2px 2px 0 var(--color-mint);
+    transition: box-shadow var(--transition-fast);
   }
 
   .blog-card-image img {

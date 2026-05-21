@@ -725,7 +725,7 @@
   }
   
   .post-content :global(pre code .token.string) {
-    color: #fbbf24; /* yellow-400 */
+    color: var(--color-syntax-string);
   }
   
   .post-content :global(pre code .token.number),

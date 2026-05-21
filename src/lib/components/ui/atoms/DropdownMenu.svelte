@@ -1,147 +1,211 @@
 <script lang="ts">
-  export let options: { label: string; value: string }[] = [];
-  export let selected: string | null = null;
-  export let placeholder = "Select…";
-  export let onSelect: (value: string) => void = () => {};
+  import { Select } from 'bits-ui';
+  import { fly } from 'svelte/transition';
+  import { flyPreset } from '$lib/motion';
 
-  let open = false;
-
-  function selectOption(option) {
-    onSelect(option.value);
-    open = false;
+  interface Option {
+    label: string;
+    value: string;
   }
 
-  function clearSelection(event) {
-    event.stopPropagation(); // Prevent dropdown from opening
-    onSelect(''); // Clear the selection
+  interface Props {
+    options?: Option[];
+    selected?: string | null;
+    placeholder?: string;
+    onSelect?: (value: string) => void;
+  }
+
+  let {
+    options = [],
+    selected = null,
+    placeholder = 'Select…',
+    onSelect = () => {}
+  }: Props = $props();
+
+  const flyTransition = flyPreset('s', 'xs');
+
+  let value = $state<string | undefined>(selected ?? undefined);
+
+  $effect(() => {
+    value = selected ?? undefined;
+  });
+
+  function handleValueChange(next: string | undefined) {
+    value = next;
+    onSelect(next ?? '');
+  }
+
+  function clearSelection(event: MouseEvent | KeyboardEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+    value = undefined;
+    onSelect('');
   }
 </script>
 
-<div class="dropdown" on:blur={() => open = false}>
-  <button
-    class="dropdown-trigger"
-    type="button"
-    aria-haspopup="listbox"
-    aria-expanded={open}
-    on:click={() => open = !open}
-  >
-    {selected
-      ? options.find(o => o.value === selected)?.label
-      : placeholder}
-    {#if selected}
-      <span
-        class="dropdown-clear"
-        role="button"
-        tabindex="0"
-        aria-label="Clear selection"
-        on:click|stopPropagation={clearSelection}
-        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && clearSelection(e)}
-      >✕</span>
-    {:else}
-      <span class="dropdown-arrow">▼</span>
-    {/if}
-  </button>
-  {#if open}
-    <ul class="dropdown-list" role="listbox">
-      {#each options as option}
-        <li
-          class="dropdown-item"
-          role="option"
-          aria-selected={selected?.toLowerCase() === option.value.toLowerCase()}
+<Select.Root
+  type="single"
+  items={options}
+  bind:value
+  onValueChange={handleValueChange}
+  allowDeselect
+>
+  <div class="dropdown">
+    <Select.Trigger class="dropdown-trigger">
+      <Select.Value {placeholder} />
+      {#if selected}
+        <span
+          class="dropdown-clear"
+          role="button"
           tabindex="0"
-          on:click={() => selectOption(option)}
-          on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && selectOption(option)}
-        >
-          {option.label}
-        </li>
-      {/each}
-    </ul>
-  {/if}
-</div>
+          aria-label="Clear selection"
+          onclick={clearSelection}
+          onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && clearSelection(e)}
+        >✕</span>
+      {:else}
+        <span class="dropdown-arrow" aria-hidden="true">▼</span>
+      {/if}
+    </Select.Trigger>
+
+    <Select.Portal>
+      <Select.Content sideOffset={8} class="dropdown-content-root" forceMount>
+        {#snippet child({ wrapperProps, props, open })}
+          {#if open}
+            <div {...wrapperProps}>
+              <div {...props} class="dropdown-list" transition:fly={flyTransition}>
+                <Select.Viewport>
+                  {#each options as option (option.value)}
+                    <Select.Item
+                      value={option.value}
+                      label={option.label}
+                      class="dropdown-item"
+                    >
+                      {#snippet children({ selected: isSelected })}
+                        <span class="dropdown-item-label">{option.label}</span>
+                        {#if isSelected}
+                          <span class="dropdown-item-check" aria-hidden="true">✓</span>
+                        {/if}
+                      {/snippet}
+                    </Select.Item>
+                  {/each}
+                </Select.Viewport>
+              </div>
+            </div>
+          {/if}
+        {/snippet}
+      </Select.Content>
+    </Select.Portal>
+  </div>
+</Select.Root>
 
 <style>
+  .dropdown {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    font-family: var(--font-main);
+  }
 
-.dropdown {
-  position: relative;
-  display: block;
-  width: 100%;
-  min-width: 0;
-  font-family: var(--font-sans, inherit);
-}
+  :global(.dropdown-trigger) {
+    width: 100%;
+    background: var(--color-background-secondary-1);
+    color: var(--color-text);
+    border: var(--border-thickness) solid var(--color-logo-text);
+    border-radius: var(--radius-m);
+    padding: var(--space-xs) var(--space-m);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    transition:
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+    font-family: inherit;
+    font-size: inherit;
+  }
 
-.dropdown-trigger {
-  width: 100%;
-  background: var(--color-background-secondary-1);
-  color: var(--color-text);
-  border: 1px solid var(--color-logo-text, #145C36);
-  border-radius: var(--radius-m);
-  padding: var(--space-xs) var(--space-m);
-  cursor: pointer;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: border-color 0.2s;
-  flex: 1;
-}
-.dropdown-trigger:focus {
-  outline: 2px solid var(--color-mint);
-  border-color: var(--color-mint);
-}
-.dropdown-arrow {
-  margin-left: var(--space-xs);
-  font-size: 0.9em;
-}
+  :global(.dropdown-trigger:focus-visible) {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+    border-color: var(--color-mint);
+  }
 
-.dropdown-clear {
-  margin-left: var(--space-xs);
-  font-size: 1.1em;
-  cursor: pointer;
-  color: var(--color-logo-text, #145C36);
-  font-weight: bold;
-  padding: 2px;
-  border-radius: 3px;
-  transition: background-color 0.15s, color 0.15s;
-  align-self: center;
-}
+  .dropdown-arrow {
+    font-size: 0.9em;
+    flex-shrink: 0;
+  }
 
-.dropdown-clear:hover {
-  background-color: var(--color-background-secondary-2);
-  color: var(--color-mint);
-}
-.dropdown-list {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  right: 0;
-  margin-top: var(--space-2xs);
-  background: var(--color-background-secondary-1);
-  border: 0.5px solid var(--color-background-secondary-2);
-  border-radius: var(--radius-m);
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-  padding: 0;
-  list-style: none;
-  max-height: 420px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-}
-.dropdown-item {
-  padding: var(--space-xs) var(--space-m);
-  cursor: pointer;
-  color: var(--color-text);
-  background: none;
-  border-bottom: 0.5px solid var(--color-logo-text);
-  padding-left: var(--space-m);
-  padding-right: var(--space-m);
-  text-align: left;
-  transition: background 0.15s;
-}
+  .dropdown-clear {
+    font-size: 1.1em;
+    cursor: pointer;
+    color: var(--color-logo-text);
+    font-weight: bold;
+    padding: 2px;
+    border-radius: var(--radius-xs);
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
+    flex-shrink: 0;
+  }
 
-.dropdown-item[aria-selected="true"],
-.dropdown-item:hover {
-  background: var(--color-background-secondary-2);
-  color: var(--color-button-background);
-}
+  .dropdown-clear:hover {
+    background-color: var(--color-background-secondary-2);
+    color: var(--color-mint);
+  }
 
+  :global(.dropdown-content-root) {
+    z-index: var(--z-dropdown);
+    outline: none;
+  }
+
+  :global(.dropdown-list) {
+    background: var(--color-background-secondary-1);
+    border: var(--border-thickness) solid var(--color-background-secondary-2);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-m);
+    padding: 0;
+    list-style: none;
+    max-height: 26rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    width: var(--bits-select-anchor-width);
+    min-width: var(--bits-select-anchor-width);
+  }
+
+  :global(.dropdown-item) {
+    padding: var(--space-xs) var(--space-m);
+    cursor: pointer;
+    color: var(--color-text);
+    border-bottom: var(--border-thickness) solid var(--color-logo-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    text-align: left;
+    transition: background-color var(--transition-fast);
+    outline: none;
+  }
+
+  :global(.dropdown-item:last-child) {
+    border-bottom: none;
+  }
+
+  :global(.dropdown-item[data-highlighted]) {
+    background: var(--color-background-secondary-2);
+    color: var(--color-button-background);
+  }
+
+  :global(.dropdown-item[data-state='checked']) {
+    background: var(--color-background-secondary-2);
+    color: var(--color-button-background);
+  }
+
+  .dropdown-item-check {
+    color: var(--color-mint-dark);
+    font-weight: 700;
+  }
 </style>

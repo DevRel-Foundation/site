@@ -28,7 +28,7 @@
     background: rgba(0,36,46,0.95);
     color: white;
     padding: 1rem;
-    z-index: 10000;
+    z-index: var(--z-max);
     border-top: 2px solid var(--color-mint-dark, #79bf44);
     backdrop-filter: blur(10px);
   }

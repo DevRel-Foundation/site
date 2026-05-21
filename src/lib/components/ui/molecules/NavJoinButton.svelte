@@ -25,7 +25,7 @@
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--transition-fast);
   border: none;
   display: flex;
   align-items: center;

@@ -436,23 +436,27 @@
   }
 
   .decision-badge.considering {
-    background: var(--color-mint);
-    color: var(--color-mint-dark)
+    background: var(--color-info);
+    color: var(--color-info-text);
+    border: var(--border-thickness) solid var(--color-info-border);
   }
 
   .decision-badge.approved {
-    background: #D1FAE5;
-    color: #065F46;
+    background: var(--color-success);
+    color: var(--color-success-text);
+    border: var(--border-thickness) solid var(--color-success-border);
   }
 
   .decision-badge.rejected {
-    background: #FEE2E2;
-    color: #991B1B;
+    background: var(--color-error);
+    color: var(--color-error-text);
+    border: var(--border-thickness) solid var(--color-error-border);
   }
 
   .decision-badge.using {
-    background: var(--color-mint);
-    color: var(--color-text-dark);
+    background: var(--color-success);
+    color: var(--color-success-text);
+    border: var(--border-thickness) solid var(--color-success-border);
   }
 
   .evaluation-meta {
