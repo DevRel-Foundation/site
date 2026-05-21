@@ -1,4 +1,6 @@
-
+<script>
+  import VoiceAndTone from './voice-and-tone.md';
+</script>
 
 <div class="container container-content">
 
@@ -13,13 +15,13 @@
     <li><a href="#logos">Logos</a></li>
     <li><a href="#colors">Colors</a></li>
     <li><a href="#usage">Color Usage</a></li>
-    <li><a href="#usage">Typography</a></li>
-    <li><a href="/terms">Terms of Use</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#voice-and-tone">Voice and tone</a></li>
   </ul>
 </nav>
 
 
-<h2 id="usage">Logos</h2>
+<h2 id="logos">Logos</h2>
 <p>
     Download <a href="https://github.com/DevRel-Foundation/drf-branding" target="_blank" rel="noopener noreferrer">Brand Assets ↗</a> from the GitHub repository.
 </p>
@@ -216,8 +218,12 @@
   </tbody>
 </table>
 
-<h2 id="usage">Typography</h2>
+<h2 id="typography">Typography</h2>
 
+<section id="voice-and-tone" class="brand-markdown">
+  <h2>Voice and Tone</h2>
+  <VoiceAndTone />
+</section>
 
 </div>
 
@@ -281,6 +287,45 @@
 
 .toc a:hover {
   color: var(--color-link);
+}
+
+.brand-markdown {
+  margin-top: 2rem;
+}
+
+.brand-markdown :global(h2) {
+  font-size: var(--step-2);
+  color: var(--color-text);
+  margin: var(--space-xl) 0 var(--space-m);
+  border-bottom: 2px solid var(--color-background-secondary-2);
+  padding-bottom: var(--space-xs);
+}
+
+.brand-markdown :global(h2:first-child) {
+  margin-top: 0;
+}
+
+.brand-markdown :global(h3) {
+  font-size: var(--step-1);
+  color: var(--color-text);
+  margin: var(--space-l) 0 var(--space-s);
+}
+
+.brand-markdown :global(p) {
+  line-height: 1.6;
+  margin-bottom: var(--space-m);
+  color: var(--color-text);
+}
+
+.brand-markdown :global(ul) {
+  margin-bottom: var(--space-m);
+  padding-left: var(--space-l);
+}
+
+.brand-markdown :global(li) {
+  margin-bottom: var(--space-xs);
+  line-height: 1.6;
+  color: var(--color-text);
 }
 
 </style>

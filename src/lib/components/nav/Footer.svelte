@@ -25,6 +25,13 @@
     </div>
 
     <div class="footer-column">
+      <h2>Legal</h2>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" target="_blank" rel="noopener noreferrer">Code of Conduct ↗</a>
+    </div>
+
+    <div class="footer-column">
       <h2>Find Us</h2>
       <div class="social-icons">
         <a href="https://discord.gg/G7CSTKZcuT" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
@@ -58,12 +65,7 @@
       
       <br />
 
-      For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/legal/trademark-usage" target="_blank" rel="noopener noreferrer">Trademark Usage</a>  page. Linux is a registered trademark of Linus Torvalds. 
-
-      <br />
-
-      <a href="/privacy">Privacy Policy</a> • 
-      <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a> • <a href="/terms">Terms of Use</a>
+      For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/legal/trademark-usage" target="_blank" rel="noopener noreferrer">Trademark Usage</a>  page. Linux is a registered trademark of Linus Torvalds.
     </p>
   </div>
 </footer> 
@@ -121,8 +123,15 @@
   
   @media (min-width: 769px) {
     .footer-content {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: var(--space-l);
+      justify-items: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       justify-items: center;
     }
   }

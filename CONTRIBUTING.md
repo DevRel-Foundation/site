@@ -10,6 +10,7 @@ We're excited to have you contribute to our mission.
 - [Code of Conduct](#code-of-conduct)
 - [Ways to Contribute](#ways-to-contribute)
 - [Blog Contribution Guidelines](#blog-contribution-guidelines)
+- [Site-Wide Content Standards](#site-wide-content-standards)
 - [Development Setup](#development-setup)
 - [Support](#support)
 
@@ -54,6 +55,8 @@ Help develop new features, fix bugs, or improve the site's technical implementat
 
 You may be interested in contributing to our community blog but any contributions must be in alignment with our mission and the open-source spirit of the foundation we belong.
 
+For writing style, tone, naming conventions (Developer Relations Foundation / DevRel Foundation / DRF), and heading structure, see the [Voice and tone guide](/brand#voice-and-tone).
+
 Here's what you need to know:
 
 ### Content We Welcome
@@ -86,7 +89,7 @@ title: "Your Blog Post Title"
 excerpt: "A brief description (1-2 sentences) that will appear in listings"
 author: "@your-github-username"
 date: "YYYY-MM-DD"
-category: "exec|early-ic|pro-lead|exec"
+category: "announce|early-ic|pro-lead|exec"
 tags: ["tag1", "tag2", "tag3"]
 ---
 ```
@@ -96,17 +99,18 @@ tags: ["tag1", "tag2", "tag3"]
 - `excerpt`: Brief summary for social sharing and listings
 - `author`: Your GitHub username (prefixed with @)
 - `date`: Publication date in YYYY-MM-DD format
-- `category`: Primary audience (exec, dev, marketing, community, product)
+- `category`: Content type or primary audience — one of:
+  - `announce` — announcements from the DevRel Foundation
+  - `early-ic` — resources and insights for early-career DevRel professionals
+  - `pro-lead` — advanced strategies and leadership perspectives for experienced practitioners
+  - `exec` — executive-level insights on the business value of DevRel
 - `tags`: 2-5 relevant tags for categorization
 
 ### Content Guidelines
 
 #### Writing Style
-- Write in a clear, accessible manner
-- Use active voice where possible
-- Include practical examples and actionable insights
-- Structure content with clear headings and subheadings
-- Keep paragraphs concise and scannable
+
+Follow the [Voice and Tone guide](/brand#voice-and-tone) for tone, sentence structure, naming conventions, heading levels, and general writing standards.
 
 #### Attribution and Sources
 - Properly cite all sources and references
@@ -118,8 +122,9 @@ tags: ["tag1", "tag2", "tag3"]
 - Use high-quality, relevant images
 - Ensure you have rights to use any images included
 - Optimize images for web (recommended: under 500KB)
-- Include descriptive alt text for accessibility
 - Store images in `/static/images/blog/` directory
+
+Alt text and accessibility requirements are covered under [Site-Wide Content Standards](#site-wide-content-standards).
 
 ## Blog Submission Process
 
@@ -181,15 +186,14 @@ If changes are requested:
 - **Expedited Review**: Available for time-sensitive content (contact site maintainers)
 - **Publication Date**: Posts are typically published immediately upon approval
 
-## Content Guidelines
+## Site-Wide Content Standards
 
 ### Inclusivity and Accessibility
 
-- Use inclusive language that welcomes all community members
-- Avoid jargon without proper explanation
-- Include alt text for images
-- Use proper heading structure for screen readers
-- Consider diverse perspectives and experiences
+Language and tone — including inclusive language and jargon — are covered in the [Voice and Tone guide](/brand#voice-and-tone). For the site specifically:
+
+- Include descriptive alt text for all images.
+- Use proper heading levels (H1 → H2 → H3) so screen readers can navigate.
 
 ### Technical Standards
 
@@ -200,10 +204,7 @@ If changes are requested:
 
 ### Community Standards
 
-- Respect different viewpoints and approaches
-- Encourage constructive discussion
-- Avoid inflammatory or divisive language
-- Focus on practical solutions and shared learning
+Conduct is covered by the [Code of Conduct](https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md); language and tone by the [Voice and Tone guide](/brand#voice-and-tone). Focus contributions on practical solutions and shared learning.
 
 ### Examples
 
