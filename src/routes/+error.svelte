@@ -8,7 +8,6 @@
   
   const { status, error } = $props();
   
-  // Browser debugging info (only available on client side)
   let debugInfo = $state({
     userAgent: '',
     language: '',
@@ -19,7 +18,6 @@
     timestamp: ''
   });
   
-  // Populate debug info on client side
   $effect(() => {
     if (browser) {
       debugInfo = {
@@ -34,7 +32,6 @@
     }
   });
   
-  // Different messages for different error types
   const getErrorMessage = (status) => {
     switch (status) {
       case 404:

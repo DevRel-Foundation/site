@@ -7,7 +7,6 @@ export async function GET({ params }) {
     const categoryData = getCategories();
     const validCategories = categoryData.categories;
     
-    // Check if category exists
     if (!validCategories.includes(params.category)) {
       throw error(404, 'Category not found');
     }

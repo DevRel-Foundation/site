@@ -9,8 +9,8 @@
 <style>
 .badge {
   display: inline-block;
-  background: var(--color-background-secondary-2-dark, #2C2B24); /* dark circle */
-  padding: 0.25rem 0.5rem; /* tight pill */
+  background: var(--color-background-secondary-2-dark, #2C2B24);
+  padding: 0.25rem 0.5rem;
   color: var(--color-text-dark, #E9E8E1);
   font-size: var(--step--1);
   font-weight: 600;

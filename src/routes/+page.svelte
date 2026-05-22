@@ -7,16 +7,13 @@
 
 	async function handleNewsletterSubmit(event: SubmitEvent) {
 		event.preventDefault();
-		// Validate email before proceeding
 		if (!email || !isValidEmail(email)) {
 			alert('Please enter a valid email address');
 			return;
 		}
 		
-		// Handle newsletter signup with PostHog tracking
 		console.log('Newsletter signup:', email);
 		
-		// Track with PostHog before redirecting
 		await trackNewsletterSignup(email);
 		
 		handleSubscribe(email);
@@ -26,7 +23,6 @@
 	async function trackNewsletterSignup(emailAddress: string) {
 		if (browser) {
 			try {
-				// Use the consent utility for tracking
 				await identifyWithConsent(emailAddress, {
 					email: emailAddress,
 					newsletter_signup: true,
@@ -53,17 +49,14 @@
 	}
 
 	function handleSubscribe(address: string) {
-		// Additional validation
 		if (!address || !isValidEmail(address)) {
 			console.error('Invalid email address');
 			return;
 		}
 		
-		// Sanitize and encode the email
 		const encodedEmail = encodeURIComponent(address.trim());
 		const subscribeUrl = `https://lists.dev-rel.org/g/community/join?email=${encodedEmail}`;
 		
-		// Open in new tab for security
 		window.open(subscribeUrl, '_blank', 'noopener,noreferrer');
 	}
 
@@ -88,13 +81,11 @@
   <title>Developer Relations Foundation</title>
   <meta name="description" content="The DevRel Foundation is dedicated to elevating the professional practice of Developer Relations through open-source resources, community collaboration, and industry standards." />
   
-  <!-- SEO Optimizations -->
   <meta name="keywords" content="DevRel Foundation, Developer Relations, Developer Advocacy, Community Building, Open Source, Professional Development, DevRel Tools, DevRel Best Practices" />
   <meta name="author" content="DevRel Foundation" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href={page.url.href} />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={page.url.href} />
   <meta property="og:title" content="Developer Relations Foundation" />
@@ -104,14 +95,12 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="DevRel Foundation" />
   
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={page.url.href} />
   <meta name="twitter:title" content="The Developer Relations Foundation" />
   <meta name="twitter:description" content="The DevRel Foundation is dedicated to elevating the professional practice of Developer Relations through open-source resources, community collaboration, and industry standards." />
   <meta name="twitter:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
   
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
     {JSON.stringify({
       "@context": "https://schema.org",

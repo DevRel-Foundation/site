@@ -12,15 +12,13 @@ export async function getBlogPosts() {
   for (const path in blogPostsGlob) {
     const post = blogPostsGlob[path];
     const slug = path
-      .replace(/^\/src\/blog\//, '') // remove leading directory
-      .replace(/\.md$/, '');         // remove .md extension   
+      .replace(/^\/src\/blog\//, '')
+      .replace(/\.md$/, '');
 
     if (post.metadata) {
-      // Only include metadata, not the component content
       posts.push({
         ...post.metadata,
         slug
-        // Remove: content: post.default
       });
     }
   }
@@ -49,15 +47,13 @@ export async function getBlogPost(slug) {
     return null;
   }
   
-  // Return only metadata for server-side loading (no content)
+  // Don't include content here to avoid serialization issues
   return {
     ...post.metadata,
     slug
-    // Don't include content here to avoid serialization issues
   };
 }
 
-// Add a new function to get content client-side
 export function getBlogPostContent(slug) {
   const path = `/src/blog/${slug}.md`;
   const post = blogPostsGlob[path];
@@ -86,7 +82,6 @@ export function calculateReadingTime(content) {
   return `${readingTime} min read`;
 }
 
-// Author-related functions
 export async function getAuthors() {
   const authors = [];
   
@@ -128,7 +123,6 @@ export async function getBlogPostsByTag(tag) {
   const filtered = posts.filter(post => {
     if (!post.tags) return false;
     
-    // Check if the tag exists in the post's tags array
     return post.tags.includes(tag);
   });
   
@@ -141,7 +135,6 @@ export async function getBlogPostsByAuthor(username) {
   const filtered = posts.filter(post => {
     if (!post.author) return false;
     
-    // Split multiple authors and check if the username matches any of them
     const authors = post.author.split(',').map(a => a.trim());
     return authors.some(author => 
       author === `@${username}` || author === username

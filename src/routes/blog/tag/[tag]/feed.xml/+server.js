@@ -6,7 +6,6 @@ export async function GET({ params }) {
   try {
     const posts = await getBlogPosts();
     
-    // Filter posts by tag
     const filteredPosts = posts.filter(post => 
       post.tags && post.tags.includes(params.tag)
     );

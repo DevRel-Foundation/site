@@ -6,7 +6,6 @@ export async function load({ params }) {
     const posts = await getBlogPosts();
     const categoryData = getCategories();
     
-    // Filter posts by tag
     const filteredPosts = posts.filter(post => 
       post.tags && post.tags.includes(params.tag)
     );

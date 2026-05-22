@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
   import MenuIcon from 'iconoir/icons/menu.svg';
   import SunLightIcon from 'iconoir/icons/sun-light.svg';
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
   import CallToActionButton from '$lib/components/ui/molecules/NavJoinButton.svelte';
+  import NavDropdown from '$lib/components/nav/NavDropdown.svelte';
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
-  let activeDropdown = $state(null);
-  let activeAccordion = $state(null);
+  let activeDropdown = $state<string | null>(null);
   let mediaQuery;
   let isMobile = $state(false);
   
@@ -22,13 +22,12 @@
     if (typeof document !== 'undefined' && document.body) {
       document.body.classList.toggle('dark-mode', isDarkMode);
     }
-    // Save user preference
     if (typeof window !== 'undefined') {
       localStorage.setItem('darkMode', isDarkMode.toString());
     }
   }
   
-  function showDropdown(menuItem) {
+  function showDropdown(menuItem: string) {
     activeDropdown = menuItem;
   }
   
@@ -36,18 +35,9 @@
     activeDropdown = null;
   }
   
-  function toggleAccordion(section) {
-    if (activeAccordion === section) {
-      activeAccordion = null;
-    } else {
-      activeAccordion = section;
-    }
-  }
-  
   function closeAll() {
     isMenuOpen = false;
     activeDropdown = null;
-    activeAccordion = null;
   }
   
   $effect(() => {
@@ -109,17 +99,16 @@
 
 
 
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('about')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'about'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('about');
-            }
-          }}>About</a>
-          <div class="dropdown" class:active={activeDropdown === 'about'} class:accordion-open={activeAccordion === 'about'}>
-            <div class="dropdown-content">
+        <NavDropdown
+          label="About"
+          href="/about/mission"
+          {isMobile}
+          menuOpen={isMenuOpen}
+          desktopActive={activeDropdown === 'about'}
+          onDesktopEnter={() => showDropdown('about')}
+          onDesktopLeave={hideDropdown}
+        >
+          {#snippet children()}
               <div class="dropdown-section">
                 <h3 class="menu-header">About the DevRel Foundation</h3>
                 <div class="dropdown-items">
@@ -183,21 +172,19 @@
 
                 </div>
               </div>
-            </div>
-          </div>
-        </li>
+          {/snippet}
+        </NavDropdown>
 
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('learn')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/learn/what-is-devrel" class="nav-link" class:active={activeDropdown === 'learn'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('learn');
-            }
-          }}>Learn</a>
-          <div class="dropdown" class:active={activeDropdown === 'learn'} class:accordion-open={activeAccordion === 'learn'}>
-            <div class="dropdown-content">
+        <NavDropdown
+          label="Learn"
+          href="/learn/what-is-devrel"
+          {isMobile}
+          menuOpen={isMenuOpen}
+          desktopActive={activeDropdown === 'learn'}
+          onDesktopEnter={() => showDropdown('learn')}
+          onDesktopLeave={hideDropdown}
+        >
+          {#snippet children()}
               <div class="dropdown-section">
                 <h3 class="menu-header">Learn About DevRel</h3>
                 <div class="dropdown-items">
@@ -233,70 +220,19 @@
 
                 </div>
               </div>
-            </div>
-          </div>
-        </li>
+          {/snippet}
+        </NavDropdown>
 
-
-
-
-        <!-- 
-        
-
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('community')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/blog" class="nav-link" class:active={activeDropdown === 'community'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('community');
-            }
-          }}>Community</a>
-          <div class="dropdown" class:active={activeDropdown === 'community'} class:accordion-open={activeAccordion === 'community'}>
-            <div class="dropdown-content">
-              <div class="dropdown-section">
-                <h3 class="menu-header">The DevRel Community</h3>
-                <div class="dropdown-items">
-                  <a href="/blog" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Blog</span>
-                      <span class="item-description">News and updates.</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Community Resources</h3>
-                <div class="dropdown-items">
-                  <a href="https://discord.gg/G7CSTKZcuT" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
-                        Discord ↗
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        -->
-
-	
-
-
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('projects')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/projects" class="nav-link" class:active={activeDropdown === 'projects'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('projects');
-            }
-          }}>Projects</a>
-          <div class="dropdown" class:active={activeDropdown === 'projects'} class:accordion-open={activeAccordion === 'projects'}>
-            <div class="dropdown-content">
+        <NavDropdown
+          label="Projects"
+          href="/projects"
+          {isMobile}
+          menuOpen={isMenuOpen}
+          desktopActive={activeDropdown === 'projects'}
+          onDesktopEnter={() => showDropdown('projects')}
+          onDesktopLeave={hideDropdown}
+        >
+          {#snippet children()}
               <div class="dropdown-section">
                 <h3 class="menu-header">Get Involved</h3>
                 <div class="dropdown-items">
@@ -328,9 +264,8 @@
                   </a>
                 </div>
               </div>
-            </div>
-          </div>
-        </li>
+          {/snippet}
+        </NavDropdown>
       </ul>
 
       <div class="cta">
@@ -487,12 +422,12 @@
     background-color: var(--color-background-secondary-1);
   }
 
-  .nav-link {
+  .nav :global(.nav-link) {
     position: relative;
     transition: all 0.2s ease;
   }
 
-  .nav-link.active::after {
+  .nav :global(.nav-link.active::after) {
     content: '';
     position: absolute;
     bottom: -4px;
@@ -503,11 +438,11 @@
     border-radius: 2px;
   }
 
-  .dropdown-container {
+  .nav :global(.dropdown-container) {
     position: relative;
   }
-  
-  .dropdown {
+
+  .nav :global(.dropdown) {
     position: fixed;
     top: 4rem;
     left: 0;
@@ -521,15 +456,17 @@
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 999;
+    pointer-events: none;
   }
-  
-  .dropdown.active {
+
+  .nav :global(.dropdown.active) {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    pointer-events: auto;
   }
-  
-  .dropdown-content {
+
+  .nav :global(.dropdown-content) {
     max-width: var(--grid-max-width);
     margin: 0 auto;
     padding: var(--space-l);
@@ -639,42 +576,46 @@
   @media (min-width: 769px) {
     .nav-menu {
       position: static;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       background: none;
       border: none;
-      flex-direction: row;
       gap: var(--space-m);
       padding: 0;
       transform: none;
       opacity: 1;
       visibility: visible;
     }
-    
+
     .nav-menu li {
       width: auto;
     }
-    
+
     .nav-menu a {
       display: inline;
       padding: var(--space-xs) var(--space-xs);
       border-bottom: none;
       border-radius: var(--radius-s);
     }
-    
+
     .menu-toggle {
       display: none;
     }
   }
-  
+
   @media (max-width: 768px) {
-    .nav-link.active::after {
+    .nav :global(.nav-link.active::after) {
       display: none;
     }
-    .nav-menu.open { 
-      max-height:calc(100dvh - 4rem);
-      overflow-y:auto;
-      -webkit-overflow-scrolling:touch;
+
+    .nav-menu.open {
+      max-height: calc(100dvh - 4rem);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    .dropdown {
+
+    .nav :global(.dropdown) {
       position: static;
       opacity: 0;
       visibility: hidden;
@@ -687,37 +628,34 @@
       background: var(--color-background-secondary-1);
       margin-top: 0;
       transition: all 0.3s ease;
+      pointer-events: none;
     }
 
-    .dropdown.accordion-open {
+    .nav :global(.dropdown.accordion-open) {
       opacity: 1;
       visibility: visible;
       height: auto;
       margin-top: var(--space-xs);
+      pointer-events: auto;
     }
-    
-    .dropdown-content {
+
+    .nav :global(.dropdown-content) {
       padding: var(--space-s);
       grid-template-columns: 1fr;
       gap: 0;
     }
-    
-  @media (max-width: 768px) {
-  .dropdown-section:not(:first-child) {
-    display: block;
-  }
 
-  .item-description {
-    display: block;
-  }
+    .dropdown-section:not(:first-child) {
+      display: block;
+    }
 
-  .menu-header {
-    display: block;
-  }
-}
+    .item-description {
+      display: block;
+    }
 
-
-
+    .menu-header {
+      display: block;
+    }
   }
 
 </style>

@@ -8,7 +8,6 @@
     navLabel?: string;
     sidebarTitle?: string;
     class?: string;
-    /** Full-width content above the sidebar column (e.g. page title) */
     header?: Snippet;
     children?: Snippet;
   }

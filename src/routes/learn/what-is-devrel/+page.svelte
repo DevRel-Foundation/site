@@ -1,29 +1,3 @@
-<script>
-  const endorsers = [
-    "Jayson DeLancey",
-    "Wesley Faulkner",
-    "Stacey Kruczek",
-    "Jonathan LeBlanc",
-	  "Aditya Oberai",
-    "Phil Leggetter",
-	  "Ana Jimenez Santamaria",
-    "Katie Miller"
-  ];
-
-  // Sort names alphabetically by last name
-  const sortedEndorsers = endorsers.sort((a, b) => {
-    const lastNameA = a.split(' ').pop();
-    const lastNameB = b.split(' ').pop();
-    return lastNameA.localeCompare(lastNameB);
-  });
-
-  // Split into 3 columns
-  const columns = [[], [], []];
-  sortedEndorsers.forEach((name, index) => {
-    columns[index % 3].push(name);
-  });
-</script>
-
 <svelte:head>
 	<title>What is Developer Relations | About | Developer Relations Foundation</title>
 </svelte:head>
@@ -52,24 +26,6 @@
 	</p>
 
     <div class="section-divider"></div>
-
-	<!--
-    <p>
-      The DevRel Foundation definitions are endorsed by a growing list of professionals in the field to align on the core principles and practices of Developer Relations. This is a living document, and we welcome contributions to future iterations.
-    </p>
-
-
-		<div class="endorsements-grid">
-			{#each columns as column}
-				<div class="endorsement-column">
-					{#each column as name}
-						<div class="endorsement-item">{name}</div>
-					{/each}
-				</div>
-			{/each}
-		</div>
-	
-	-->
 
     <div class="contribute-button-container">
       <a href="/join-us" class="contribute-button">
@@ -145,26 +101,6 @@
     transform: translateY(-6px);
   }
 
-  .endorsements-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-s);
-    margin-top: var(--space-s);
-  }
-
-  .endorsement-column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4xs);
-  }
-
-  .endorsement-item {
-    text-align: center;
-    font-size: var(--step-0);
-    color: var(--color-text);
-    padding: var(--space-4xs) 0;
-  }
-
 	.section-divider {
 		width: 100%;
 		height: 3px;
@@ -172,11 +108,5 @@
 		margin: var(--space-s) var(--space-xs);
 		border-radius: var(--radius-s);
 	}
-
-  @media (max-width: 768px) {
-    .endorsements-grid {
-      grid-template-columns: 1fr;
-    }
-  }
 
 </style>

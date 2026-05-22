@@ -125,7 +125,7 @@
 
 .styled-table td:first-child,
 .styled-table th:first-child {
-    min-width: 180px; /* or use width: 180px for fixed */
+    min-width: 180px;
     white-space: nowrap;
 }
 

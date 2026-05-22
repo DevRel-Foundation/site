@@ -1,25 +1,74 @@
-/* 
-* This is the base style sheet for everything.
-* Don't forget to include the reset CSS file before this one.
-*/
-
-/* Fluid Space Scale
- * Generated with https://utopia.fyi/space/calculator
- * Using a min viewport of 320px and max viewport of 1240px
- * Using the golden ratio (1.618) for spacing progression
- */
-
 * {
   box-sizing: border-box;
 }
 
 :root {
-  /* Font settings */
   --font-main: 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --font-headings: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  /* Nunito Sans for body text, Nunito for headings */
 
-  /* Fluid typography scale - based on golden ratio (1.618) */
+  --color-background: hsl(48, 100%, 98%);
+  --color-background-secondary-1: hsl(48, 61.8%, 94%);
+  --color-background-secondary-2: hsl(48, 13%, 92%);
+  --color-mint: hsl(90, 65%, 81%);
+  --color-blue: hsl(193, 100%, 92%);
+  --color-teal: hsl(168, 85%, 91%);
+  --color-gold: hsl(41.9, 100%, 91.6%);
+  --color-text: hsl(0, 0%, 32%);
+  --color-link: hsl(140, 38.2%, 18%);
+  --color-background-dark: hsl(60, 3.2%, 6.1%);
+  --color-background-secondary-1-dark: hsl(60, 5.2%, 9.9%);
+  --color-background-secondary-2-dark: hsl(60, 8.4%, 16%);
+  --color-mint-dark: hsl(90, 98%, 18%);
+  --color-blue-dark: hsl(193, 72%, 14%);
+  --color-teal-dark: hsl(168, 63%, 14%);
+  --color-gold-dark: hsl(41.7, 74.5%, 21.6%);
+  --color-text-dark: hsl(60, 20%, 91%);
+  --color-link-dark: hsl(90, 65%, 81%);
+  --color-accent-text: var(--color-mint);
+  --color-accent-text-dark: var(--color-mint-dark);
+  --color-offwhite: var(--color-background);
+  --color-cream: var(--color-background-secondary-1);
+  --color-cream-dark: var(--color-gold-dark);
+  --color-logo-text: rgb(0, 36, 46);
+  --color-logo-text-dark: rgb(121, 191, 68);
+  --color-button-background: var(--color-link);
+  --color-button-background-dark: var(--color-link-dark);
+  --color-button-text: var(--color-mint);
+  --color-button-text-dark: var(--color-mint-dark);
+  --color-code-background: var(--color-mint-dark);
+  --color-code-background-dark: var(--color-background-secondary-1-dark);
+
+  --color-success: hsl(152, 76%, 90%);
+  --color-success-text: hsl(166, 91%, 20%);
+  --color-success-border: hsl(152, 55%, 78%);
+  --color-success-dark: hsl(90, 35%, 16%);
+  --color-success-text-dark: hsl(90, 65%, 81%);
+  --color-success-border-dark: hsl(90, 45%, 28%);
+
+  --color-warning: hsl(41.9, 100%, 91.6%);
+  --color-warning-text: hsl(32, 80%, 28%);
+  --color-warning-border: hsl(41, 85%, 75%);
+  --color-warning-dark: hsl(41.7, 50%, 18%);
+  --color-warning-text-dark: hsl(41.9, 100%, 91.6%);
+  --color-warning-border-dark: hsl(41.7, 55%, 30%);
+
+  --color-error: hsl(0, 93%, 94%);
+  --color-error-text: hsl(0, 72%, 35%);
+  --color-error-border: hsl(0, 70%, 85%);
+  --color-error-dark: hsl(0, 45%, 18%);
+  --color-error-text-dark: hsl(0, 75%, 88%);
+  --color-error-border-dark: hsl(0, 40%, 28%);
+
+  --color-info: hsl(193, 100%, 92%);
+  --color-info-text: hsl(193, 72%, 14%);
+  --color-info-border: hsl(193, 70%, 80%);
+  --color-info-dark: hsl(193, 50%, 16%);
+  --color-info-text-dark: hsl(193, 100%, 92%);
+  --color-info-border-dark: hsl(193, 45%, 28%);
+
+  --color-syntax-string: var(--color-warning-text);
+  --color-syntax-string-dark: var(--color-warning-text-dark);
+
   --step--2: clamp(0.68rem, 0.66rem + 0.11vw, 0.75rem);
   --step--1: clamp(0.83rem, 0.79rem + 0.22vw, 0.96rem);
   --step-0: clamp(1rem, 0.94rem + 0.33vw, 1.2rem);
@@ -29,74 +78,17 @@
   --step-4: clamp(2.07rem, 1.73rem + 1.9vw, 3.09rem);
   --step-5: clamp(2.49rem, 2.01rem + 2.7vw, 4.05rem);
 
-  /* Grid and container settings */
   --grid-max-width: 77.5rem;
 
-  /* 1240px */
   --grid-gutter: var(--space-s-l, clamp(1.05rem, 0.68rem + 2.04vw, 2.75rem));
   --grid-columns: 12;
 
-  /* Column width - based on golden ratio progression */
   --grid-column-min: clamp(1rem, 0.8rem + 1vw, 1.618rem);
   --grid-column-max: clamp(3.09rem, 2.5rem + 3vw, 5rem);
 
 
-  /* Brand color accents */
-  --color-mint: hsl(90, 65%, 81%);
-  --color-mint-dark: hsl(90, 95%, 8%);
-  --color-blue: hsl(193, 100%, 92%);
-  --color-blue-dark: hsl(192, 100%, 9%);
-  --color-gold: hsl(41.9, 100%, 91.6%);
-  --color-gold-dark: hsl(41.7, 74.5%, 21.6%);
-  --color-sage: hsl(120, 20%, 80%);
-  --color-sage-dark: hsl(120, 20%, 20%);
-  --color-emerald: hsl(140, 60%, 40%);
-  --color-emerald-dark: hsl(140, 60%, 20%);
-  --color-olive: hsl(90, 30%, 60%);
-  --color-olive-dark: hsl(90, 30%, 25%);
-  --color-cream: hsl(48, 61.8%, 94%);
-  --color-cream-dark: hsl(42, 32%, 24%);
-  --color-offwhite: hsl(48, 100%, 98%);
-  --color-offwhite-dark: hsl(192, 32%, 22%);
-  --color-offwhite-gray: hsl(0, 0%, 32%); */
-  --color-offwhite-cream: hsl(48, 61%, 90%); */
-
-  /* Not using these colors */
-  --color-seafoam: hsl(160, 50%, 80%);
-  --color-seafoam-dark: hsl(160, 50%, 30%);
-  --color-teal: hsl(168, 85%, 91%);
-  --color-teal-dark: hsl(168, 63%, 14%);
-
-
-  /* Brand color usage */
-  --color-background: var(--color-offwhite);
-  --color-background-dark: var(--color-blue-dark);
-  --color-background-secondary-1: var(--color-cream);
-  --color-background-secondary-1-dark: var(--color-offwhite-dark);
-  --color-background-secondary-2: var(--color-gold);
-  --color-background-secondary-2-dark: var(--color-mint-dark);
-
-  --color-text: var(--color-mint-dark);
-  --color-text-dark: var(--color-offwhite);
-  --color-accent-text: var(--color-mint);
-  --color-accent-text-dark: var(--color-sage);
-  --color-link: var(--color-emerald-dark);
-  --color-link-dark: var(--color-cream);
-  --color-logo-text: var(--color-blue-dark);
-  --color-logo-text-dark: var(--color-mint);
-
-  --color-button-background: var(--color-emerald-dark);
-  --color-button-background-dark: var(--color-mint);
-  --color-button-text: var(--color-mint);
-  --color-button-text-dark: var(--color-mint-dark);
-
-  --color-code-background: var(--color-mint-dark);
-  --color-code-background-dark: var(--color-offwhite-dark);
-
-
   --icon-filter: invert(0.2) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.2);
 
-  /* Border radius scale - based on our circular motif design language */
   --radius-xs: 4px;
   --radius-s: 8px;
   --radius-m: 12px;
@@ -104,7 +96,6 @@
   --radius-xl: 24px;
   --radius-circle: 50%;
 
-  /* Space scale with min and max values using golden ratio (1.618) */
   --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
   --space-2xs: clamp(0.4rem, 0.37rem + 0.17vw, 0.5rem);
   --space-xs: clamp(0.65rem, 0.6rem + 0.28vw, 0.81rem);
@@ -115,7 +106,6 @@
   --space-2xl: clamp(7.2rem, 6.65rem + 3.09vw, 8.98rem);
   --space-3xl: clamp(11.65rem, 10.76rem + 5vw, 14.53rem);
 
-  /* One-up pairs */
   --space-3xs-2xs: clamp(0.25rem, 0.16rem + 0.5vw, 0.5rem);
   --space-2xs-xs: clamp(0.4rem, 0.26rem + 0.78vw, 0.81rem);
   --space-xs-s: clamp(0.65rem, 0.42rem + 1.26vw, 1.31rem);
@@ -125,25 +115,63 @@
   --space-xl-2xl: clamp(4.45rem, 2.88rem + 8.64vw, 8.98rem);
   --space-2xl-3xl: clamp(7.2rem, 4.66rem + 13.98vw, 14.53rem);
 
-  /* Custom pairs for organic growth patterns */
   --space-organic-s: clamp(0.65rem, 0.42rem + 1.26vw, 2.12rem);
   --space-organic-m: clamp(1.7rem, 1.1rem + 3.3vw, 5.55rem);
 
-  /* Border thickness based on golden ratio */
   --border-thickness: 0.146rem;
-  /* Based on golden ratio (0.618) relative to 1rem, using the inverse of the inverse of the inverse of the inverse (0.146 * 0.618) */
 
-  /* Link styles */
   --link-underline-style: solid;
   --link-underline-offset: 0.2em;
   --link-underline-thickness: 1px;
 
-  /* Pattern colors */
   --pattern-color: hsla(0, 0%, 32%, 0.4);
+
+  --phi: 1.618;
+
+  --breakpoint-xs: 20rem;
+  --breakpoint-sm: 29.6875rem;
+  --breakpoint-md: 48.0625rem;
+  --breakpoint-lg: 77.5rem;
+  --breakpoint-xl: 125.375rem;
+
+  --duration-3xs: 62ms;
+  --duration-2xs: 100ms;
+  --duration-xs: 162ms;
+  --duration-s: 262ms;
+  --duration-m: 424ms;
+  --duration-l: 686ms;
+  --duration-xl: 1109ms;
+  --ease-standard: cubic-bezier(0.618, 0, 0.382, 1);
+  --ease-in: cubic-bezier(0.618, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.382, 1);
+  --ease-in-out: cubic-bezier(0.618, 0, 0.382, 1);
+  --transition-fast: var(--duration-xs) var(--ease-out);
+  --transition-normal: var(--duration-s) var(--ease-standard);
+  --transition-slow: var(--duration-m) var(--ease-in-out);
+
+  --shadow-color: hsla(0, 0%, 32%, 0.08);
+  --shadow-xs: 0 1px 2px var(--shadow-color);
+  --shadow-s: 0 2px 5px var(--shadow-color);
+  --shadow-m: 0 5px 13px var(--shadow-color);
+  --shadow-l: 0 8px 21px var(--shadow-color);
+  --shadow-xl: 0 13px 34px var(--shadow-color);
+
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 26;
+  --z-tooltip: 34;
+  --z-sticky: 42;
+  --z-overlay: 68;
+  --z-modal: 110;
+  --z-toast: 178;
+  --z-max: 10000;
+
+  --focus-ring-width: 2px;
+  --focus-ring-color: var(--color-mint);
+  --focus-ring-offset: var(--space-2xs);
 }
 
 
-/* Utility classes for spacing */
 .space-stack-3xs {
   margin-bottom: var(--space-3xs);
 }
@@ -253,32 +281,42 @@
 }
 
 body.dark-mode {
-  --color-background: var(--color-blue-dark);
-  --color-background-dark: var(--color-offwhite);
-  --color-background-secondary-1: var(--color-offwhite-dark);
-  --color-background-secondary-1-dark: var(--color-cream);
-  --color-background-secondary-2: var(--color-mint-dark);
-  --color-background-secondary-2-dark: var(--color-gold);
-
-  --color-text: var(--color-offwhite);
-  --color-text-dark: var(--color-mint-dark);
-  --color-accent-text: var(--color-sage);
-  --color-accent-text-dark: var(--color-mint);
-  --color-link: var(--color-cream);
-  --color-link-dark: var(--color-emerald-dark);
-  --color-logo-text: var(--color-mint);
-  --color-logo-text-dark: var(--color-blue-dark);
-
-  --color-button-background-dark: var(--color-emerald-dark);
-  --color-button-background: var(--color-mint);
-  --color-button-text-dark: var(--color-mint);
+  --color-background: var(--color-background-dark);
+  --color-text: var(--color-text-dark);
+  --color-background-secondary-1: var(--color-background-secondary-1-dark);
+  --color-background-secondary-2: var(--color-background-secondary-2-dark);
+  --color-mint: var(--color-mint-dark);
+  --color-blue: var(--color-blue-dark);
+  --color-teal: var(--color-teal-dark);
+  --color-gold: var(--color-gold-dark);
+  --color-accent-text: var(--color-accent-text-dark);
+  --color-link: var(--color-link-dark);
+  --color-offwhite: var(--color-background);
+  --color-cream: var(--color-background-secondary-1);
+  --color-logo-text: var(--color-logo-text-dark);
+  --color-button-background: var(--color-link);
+  --color-button-background-dark: var(--color-link-dark);
   --color-button-text: var(--color-mint-dark);
-
+  --color-button-text-dark: var(--color-mint);
+  --color-code-background: var(--color-background-secondary-1-dark);
   --color-code-background-dark: var(--color-mint-dark);
-  --color-code-background: var(--color-offwhite-dark);
-
   --icon-filter: invert(0.9) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.9);
-  --pattern-color: hsla(48, 20%, 90%, 0.1);
+  --pattern-color: hsla(60, 20%, 91%, 0.1);
+  --shadow-color: hsla(60, 20%, 91%, 0.12);
+
+  --color-success: var(--color-success-dark);
+  --color-success-text: var(--color-success-text-dark);
+  --color-success-border: var(--color-success-border-dark);
+  --color-warning: var(--color-warning-dark);
+  --color-warning-text: var(--color-warning-text-dark);
+  --color-warning-border: var(--color-warning-border-dark);
+  --color-error: var(--color-error-dark);
+  --color-error-text: var(--color-error-text-dark);
+  --color-error-border: var(--color-error-border-dark);
+  --color-info: var(--color-info-dark);
+  --color-info-text: var(--color-info-text-dark);
+  --color-info-border: var(--color-info-border-dark);
+  --color-syntax-string: var(--color-syntax-string-dark);
 }
 
 body {
@@ -311,7 +349,7 @@ h1 {
 }
 
 h2 {
-  font-size: var(--step-3);
+  font-size: var(--step-4);
   margin-bottom: var(--space-s);
   margin-top: var(--space-l);
 }
@@ -348,6 +386,40 @@ p {
   margin-top: 0;
 }
 
+.container-content :where(p) {
+  margin-bottom: var(--space-m);
+}
+
+.container-content :where(ul, ol) {
+  margin-bottom: var(--space-m);
+  padding-left: var(--space-l);
+}
+
+.container-content :where(li + li) {
+  margin-top: var(--space-xs);
+}
+
+.container-content :where(
+  .color-mode-container,
+  .highlight-box,
+  .spacing-scale,
+  .spacing-text-block,
+  .example-component,
+  .grid-demo,
+  .motif-examples,
+  .motif-grid,
+  .radius-demo,
+  .color-combinations,
+  .type-specimens,
+  .heading-examples,
+  .text-styles-grid,
+  table,
+  pre.code-example
+) {
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
 
 code {
   font-family: monospace;
@@ -363,7 +435,23 @@ a {
   text-underline-offset: var(--link-underline-offset);
   text-decoration-thickness: var(--link-underline-thickness);
   text-decoration-style: var(--link-underline-style);
-  transition: all 0.2s ease;
+  transition: opacity var(--transition-fast);
+}
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 a:hover {
@@ -451,13 +539,11 @@ header {
   margin-top: 0;
 }
 
-/* Grid layout utility */
 .u-grid {
   display: grid;
   gap: var(--grid-gutter);
 }
 
-/* Fluid grid that adapts to content and viewport */
 .u-grid-fluid {
   display: grid;
   gap: var(--grid-gutter);
@@ -471,7 +557,6 @@ header>* {
   box-sizing: border-box;
 }
 
-/* Responsive grid columns */
 .u-grid-2 {
   grid-template-columns: 1fr;
 }
@@ -492,22 +577,20 @@ header>* {
   grid-template-columns: repeat(6, 1fr);
 }
 
-/* Golden ratio based asymmetric grid */
 .u-grid-golden {
   display: grid;
   gap: var(--grid-gutter);
   grid-template-columns: 1fr;
-  /* Golden ratio */
 }
 
 .u-grid-golden-reverse {
   display: grid;
   gap: var(--grid-gutter);
   grid-template-columns: 1fr;
-  /* Golden ratio reversed */
 }
 
-@media (min-width: 769px) {
+/* 48.0625rem = --breakpoint-md (769px) — literals required for @media in most browsers */
+@media (min-width: 48.0625rem) {
 
   section>*,
   header>* {
@@ -546,6 +629,55 @@ header>* {
   .u-grid-12 {
     grid-template-columns: repeat(12, 1fr);
   }
+}
+
+.state-success,
+.state-warning,
+.state-error,
+.state-info {
+  border-radius: var(--radius-s);
+  border-width: var(--border-thickness);
+  border-style: solid;
+}
+
+.state-success {
+  background: var(--color-success);
+  color: var(--color-success-text);
+  border-color: var(--color-success-border);
+}
+
+.state-warning {
+  background: var(--color-warning);
+  color: var(--color-warning-text);
+  border-color: var(--color-warning-border);
+}
+
+.state-error {
+  background: var(--color-error);
+  color: var(--color-error-text);
+  border-color: var(--color-error-border);
+}
+
+.state-info {
+  background: var(--color-info);
+  color: var(--color-info-text);
+  border-color: var(--color-info-border);
+}
+
+.text-success {
+  color: var(--color-success-text);
+}
+
+.text-warning {
+  color: var(--color-warning-text);
+}
+
+.text-error {
+  color: var(--color-error-text);
+}
+
+.text-info {
+  color: var(--color-info-text);
 }
 
 .llm-gen {

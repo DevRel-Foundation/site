@@ -12,12 +12,10 @@
   
   onMount(async () => {
     try {
-      // Get all possible .md files in blog and subfolders
       const modules = import.meta.glob('../../../blog/**/*.md');
-      // Find the matching key
       const match = Object.keys(modules).find(
         (key) =>
-          key.endsWith(`${post.slug}.md`) // matches both flat and nested
+          key.endsWith(`${post.slug}.md`)
       );
       if (!match) throw new Error('Markdown file not found for slug: ' + post.slug);
       const module = await modules[match]();
@@ -36,7 +34,6 @@
   <title>{post?.title || 'Blog Post'} | DevRel Foundation</title>
   <meta name="description" content={post?.excerpt || 'DevRel Foundation blog post'} />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content={$page.url.href} />
   <meta property="og:title" content={post?.title || 'Blog Post'} />
@@ -52,7 +49,6 @@
     {/each}
   {/if}
   
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={$page.url.href} />
   <meta name="twitter:title" content={post?.title || 'Blog Post'} />
@@ -86,6 +82,6 @@
   }
   
   .error {
-    color: var(--color-error, #dc2626);
+    color: var(--color-error-text);
   }
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { tick } from 'svelte';
+  import { CollapsiblePanel } from '$lib/components/ui/primitives';
   import {
     createScrollSpy,
     hrefToId,
@@ -10,9 +11,7 @@
 
   interface Props {
     items?: ScrollSidebarItem[];
-    /** Accessible label for the navigation landmark */
     navLabel?: string;
-    /** Heading shown above the link list (desktop) / collapsible trigger (mobile) */
     title?: string;
     class?: string;
   }
@@ -59,38 +58,40 @@
 </script>
 
 <div class="scroll-sidebar-nav-root {className}" bind:this={navRootEl}>
-<!-- Mobile: collapsible jump menu -->
 <div class="scroll-sidebar-nav scroll-sidebar-nav--mobile">
-  <details class="scroll-sidebar-nav__mobile-details" bind:open={mobileOpen}>
-    <summary class="scroll-sidebar-nav__mobile-trigger">
-      <span class="scroll-sidebar-nav__title">{title}</span>
-      <span class="scroll-sidebar-nav__chevron" aria-hidden="true">▾</span>
-    </summary>
-    <nav
-      class="scroll-sidebar-nav__list scroll-sidebar-nav__mobile-panel"
-      aria-label={navLabel}
-      bind:this={mobileNavEl}
-    >
-      <ul>
-        {#each items as item (item.href)}
-          <li>
-            <a
-              href={item.href}
-              class="scroll-sidebar-nav__link"
-              class:is-active={isActive(item.href)}
-              aria-current={isActive(item.href) ? 'location' : undefined}
-              onclick={(e) => handleNavClick(e, item.href)}
-            >
-              {item.label}
-            </a>
-          </li>
-        {/each}
-      </ul>
-    </nav>
-  </details>
+  <CollapsiblePanel bind:open={mobileOpen} class="scroll-sidebar-nav__mobile-collapsible">
+    {#snippet trigger()}
+      <div class="scroll-sidebar-nav__mobile-trigger">
+        <span class="scroll-sidebar-nav__title">{title}</span>
+        <span class="scroll-sidebar-nav__chevron" class:is-open={mobileOpen} aria-hidden="true">▾</span>
+      </div>
+    {/snippet}
+    {#snippet children()}
+      <nav
+        class="scroll-sidebar-nav__list scroll-sidebar-nav__mobile-panel"
+        aria-label={navLabel}
+        bind:this={mobileNavEl}
+      >
+        <ul>
+          {#each items as item (item.href)}
+            <li>
+              <a
+                href={item.href}
+                class="scroll-sidebar-nav__link"
+                class:is-active={isActive(item.href)}
+                aria-current={isActive(item.href) ? 'location' : undefined}
+                onclick={(e) => handleNavClick(e, item.href)}
+              >
+                {item.label}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </nav>
+    {/snippet}
+  </CollapsiblePanel>
 </div>
 
-<!-- Desktop: sidebar on the right (sticky positioning on layout wrapper) -->
 <aside class="scroll-sidebar-nav scroll-sidebar-nav--desktop" aria-label={navLabel}>
   <div class="scroll-sidebar-nav__inner" bind:this={desktopNavEl}>
     <p class="scroll-sidebar-nav__title">{title}</p>
@@ -128,7 +129,7 @@
     display: none;
   }
 
-  .scroll-sidebar-nav__mobile-details {
+  :global(.scroll-sidebar-nav__mobile-collapsible) {
     background: var(--color-background-secondary-1);
     border: var(--border-thickness) solid var(--color-background-secondary-2);
     border-radius: var(--radius-m);
@@ -145,14 +146,10 @@
     font-size: var(--step-0);
     font-weight: 600;
     color: var(--color-text);
-    list-style: none;
+    width: 100%;
   }
 
-  .scroll-sidebar-nav__mobile-trigger::-webkit-details-marker {
-    display: none;
-  }
-
-  .scroll-sidebar-nav__mobile-details[open] .scroll-sidebar-nav__chevron {
+  .scroll-sidebar-nav__chevron.is-open {
     transform: rotate(180deg);
   }
 

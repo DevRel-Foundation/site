@@ -1,5 +1,4 @@
 <script lang="ts">
-  // Use callback props instead of createEventDispatcher
   export let onAccept: () => void = () => {};
   export let onReject: () => void = () => {};
 </script>

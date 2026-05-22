@@ -22,17 +22,13 @@
   let userLocale = $state<string>('');
   let userTimezone = $state<string>('');
 
-  // Copy state
   let copied = $state(false);
   let copyTimeout: number | null = null;
   
-  // Pagination state
   let currentPage = $state(0);
   const eventsPerPage = 10;
   
-  // Load events from API
   onMount(async () => {
-    // Detect user's locale and timezone
     userLocale = navigator.language || 'en-US';
     userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     
@@ -50,15 +46,12 @@
       events = data.events || [];
       loading = false;
 
-      // Helper to get simplified ID
       function getSimpleId(id: string) {
         return id.split('@')[0];
       }
 
-      // Use eventId prop if provided
       let initialId = eventId;
       if (!initialId) {
-        // Fallback: try to get from URL (for direct browser navigation)
         const match = window.location.pathname.match(/\/calendar\/event\/([^/]+)/);
         initialId = match ? decodeURIComponent(match[1]) : undefined;
       }
@@ -70,7 +63,6 @@
           return;
         }
       }
-      // Auto-select first event if available
       if (events.length > 0) {
         const filtered = filteredEvents();
         if (filtered.length > 0) {
@@ -84,13 +76,10 @@
     }
   });
   
-
-  // Show all events returned by the API (API already filters for 2 weeks past + future + recurring)
   const filteredEvents = $derived(() => {
     return events || [];
   });
   
-  // Pagination calculations
   const totalPages = $derived(() => Math.ceil(filteredEvents().length / eventsPerPage));
   const paginatedEvents = $derived(() => {
     const start = currentPage * eventsPerPage;
@@ -100,7 +89,6 @@
   
   function goToPage(page: number) {
     currentPage = Math.max(0, Math.min(page, totalPages() - 1));
-    // Auto-select first event on new page
     const paginated = paginatedEvents();
     if (paginated.length > 0) {
       selectEvent(paginated[0]);
@@ -119,7 +107,6 @@
     }
   }
   
-  // Copy the event link to the user's clipboard
   function copyPageUrl() {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
@@ -139,7 +126,6 @@
     const start = new Date(event.start);
     const end = event.end ? new Date(event.end) : null;
     
-    // Use user's locale for formatting, fallback to 'en-US'
     const locale = userLocale || 'en-US';
     
     if (event.allDay) {
@@ -189,9 +175,7 @@
   function parseMarkdown(text: string): string {
     if (!text) return '';
     
-    // Simple markdown parser for basic features
     let html = text
-      // Convert markdown links
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
         if (url.startsWith('http://') || url.startsWith('https://')) {
           return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
@@ -199,7 +183,6 @@
         return `<a href="${url}">${text}</a>`;
       })
       
-      // Convert plain URLs that start with https://
       .replace(/(^|[^"'(>\]])https:\/\/[^\s<>)]+/g, (match, prefix) => {
         const url = match.replace(prefix, '');
         return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer">${url} ↗</a>`;
@@ -214,23 +197,18 @@
       .replace(/^\* (.+)$/gm, '<li>$1</li>')
       .replace(/^- (.+)$/gm, '<li>$1</li>')
       
-      // Convert bold and italic (with word boundaries to be safer)
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|\,|\])/g, '$1<em>$2</em>$3')
       
-      // Convert regular headings
       .replace(/^### (.*$)/gm, '<h3>$1</h3>')
       .replace(/^## (.*$)/gm, '<h2>$1</h2>')
       .replace(/^# (.*$)/gm, '<h2>$1</h2>')
       
-      // Convert line breaks to paragraphs
       .split('\n\n')
       .map(paragraph => paragraph.trim())
       .filter(paragraph => paragraph.length > 0)
       .map(paragraph => {
-        // Check if this paragraph contains list items
         if (paragraph.includes('<li>')) {
-          // Wrap consecutive list items in <ul> tags
           return `<ul>${paragraph.replace(/\n/g, '')}</ul>`;
         }
         return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
@@ -241,7 +219,6 @@
   }
   
   function selectEvent(event: CalendarEvent) {
-    // If the same event is clicked again, deselect it
     if (selectedEvent === event) {
       selectedEvent = null;
       updateURLWithEvent(null);
@@ -261,7 +238,6 @@
       window.history.replaceState({}, '', '/calendar');
       return;
     }
-    // Use simplified ID for URL
     const simpleId = event.id.split('@')[0];
     const encodedId = encodeURIComponent(simpleId);
     window.history.replaceState({}, '', `/calendar/event/${encodedId}`);
@@ -271,7 +247,6 @@
 
 <div class="calendar-container">
     <div class="calendar-layout">
-        <!-- Left column: Events list -->
         <div class="events-sidebar">
             <div class="sidebar-header">
                 <h2>Recent & Upcoming Events</h2>
@@ -296,7 +271,6 @@
                 {/if}
             </div>
 
-            <!-- Pagination controls -->
             {#if totalPages() > 1}
                 <div class="pagination">
                     <button 
@@ -338,7 +312,6 @@
 
         </div>
 
-        <!-- Right column: Event details -->
         <div class="event-details-panel">
             {#if selectedEvent}
                 <div class="event-item">

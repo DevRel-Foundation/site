@@ -1,5 +1,4 @@
 <script>
-  // This component renders a call-to-action button and will not change even in dark mode
   export let href = '/join';
   export let label = 'Join';
   export let type = 'button';

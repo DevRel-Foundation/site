@@ -21,7 +21,6 @@
     searchText = '';
   }
 
-  // Update parent when filters change
   $: onFilterChange({ category: selectedCategory, label: selectedLabel, outcome: selectedOutcome, search: searchText });
 </script>
 

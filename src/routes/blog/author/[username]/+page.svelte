@@ -10,16 +10,13 @@
   <title>{author.name || author.username} | Authors | DevRel Foundation</title>
   <meta name="description" content="{author.bio || `Posts by ${author.name || author.username}`}" />
   
-  <!-- RSS Feed -->
   <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog - {author.name || author.username}" href="/blog/author/{username}/feed.xml" />
   
-  <!-- SEO Optimizations -->
   <meta name="keywords" content="DevRel, Developer Relations, {author.name}, {posts.map(p => p.tags).flat().join(', ')}" />
   <meta name="author" content="DevRel Foundation" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href={$page.url.href} />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:url" content={$page.url.href} />
   <meta property="og:title" content="{author.name || author.username} | DevRel Foundation Blog" />
   <meta property="og:description" content="{author.bio || `Posts by ${author.name || author.username}`}" />
@@ -28,7 +25,6 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="DevRel Foundation" />
   
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{author.name || author.username} | DevRel Foundation Blog" />
   <meta name="twitter:description" content="{author.bio || `Posts by ${author.name || author.username}`}" />

@@ -42,11 +42,9 @@
 	let searchTerm = '';
 	
 	$: filteredProjects = projects.filter(project => {
-		// Filter by status
 		const statusMatch = selectedFilter === 'all' || project.status === selectedFilter;
 		
-		// Filter by search term
-		const searchMatch = !searchTerm || 
+		const searchMatch = !searchTerm ||
 			project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			project.description.toLowerCase().includes(searchTerm.toLowerCase());
 		

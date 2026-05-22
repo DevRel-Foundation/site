@@ -6,10 +6,8 @@
   let copyTimeout;
 
   function handleCopy(index, event) {
-    // Find the blockquote element
     const blockquote = event.currentTarget.closest('blockquote');
     if (!blockquote) return;
-    // Get the text content (excluding the icon)
     const text = Array.from(blockquote.childNodes)
       .filter(node => node.nodeType === Node.TEXT_NODE || node.nodeName !== 'IMG')
       .map(node => node.textContent)

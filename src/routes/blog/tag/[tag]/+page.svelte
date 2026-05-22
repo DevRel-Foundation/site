@@ -10,7 +10,6 @@
   <title>#{tag} | Blog | DevRel Foundation</title>
   <meta name="description" content="Blog posts tagged with {tag} from the DevRel Foundation." />
   
-  <!-- RSS Feed -->
   <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog - Posts tagged '{tag}'" href="/blog/tag/{tag}/feed.xml" />
 </svelte:head>
 

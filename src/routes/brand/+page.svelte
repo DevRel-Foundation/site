@@ -817,106 +817,371 @@ h3 { font-size: var(--step-3); }
   <h2 id="motifs-and-patterns">Motifs and patterns</h2>
   <p>
     Our brand embraces organic shapes and rounded forms throughout our visual language. These elements reflect our
-    approachable nature and the continuous, supportive relationship we foster within developer communities.
+    approachable nature and represent the continuous, supportive relationship we foster within developer communities.
   </p>
 
-  <h3>Border radius scale</h3>
-  <p>
-    Use a consistent border radius scale across UI elements. Choose the roundest option that layout permits, and stay
-    consistent at a given screen size.
-  </p>
-  <div class="radius-grid">
-    <div class="radius-item">
-      <div class="radius-example" style="border-radius: var(--radius-m);"></div>
-      <div class="radius-name">M (12px)</div>
-      <div class="radius-usage"><code>--radius-m</code> — Cards, panels</div>
-    </div>
-    <div class="radius-item">
-      <div class="radius-example" style="border-radius: var(--radius-l);"></div>
-      <div class="radius-name">L (16px)</div>
-      <div class="radius-usage"><code>--radius-l</code> — Large cards, modals</div>
-    </div>
-    <div class="radius-item">
-      <div class="radius-example" style="border-radius: var(--radius-xl);"></div>
-      <div class="radius-name">XL (24px)</div>
-      <div class="radius-usage"><code>--radius-xl</code> — Hero sections</div>
-    </div>
-    <div class="radius-item">
-      <div class="radius-example" style="border-radius: var(--radius-circle);"></div>
-      <div class="radius-name">Circle (50%)</div>
-      <div class="radius-usage"><code>--radius-circle</code> — Avatars, icons</div>
+  <div class="radius-demo">
+    <h3>Border radius scale</h3>
+    <p>
+      We use a consistent border radius scale across all UI elements to maintain visual harmony. We should choose the
+      roundest option preferable, screen size and layout permitting. Try to use the border radii at a specific screen
+      size for consistency.
+    </p>
+
+    <div class="radius-grid">
+      <div class="radius-item">
+        <div class="radius-example" style="border-radius: var(--radius-m);"></div>
+        <div class="radius-info">
+          <div class="radius-name">M (12px)</div>
+          <div class="radius-usage">Cards, panels, highlight boxes</div>
+        </div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-example" style="border-radius: var(--radius-l);"></div>
+        <div class="radius-info">
+          <div class="radius-name">L (16px)</div>
+          <div class="radius-usage">Large cards, modals, feature sections</div>
+        </div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-example" style="border-radius: var(--radius-xl);"></div>
+        <div class="radius-info">
+          <div class="radius-name">XL (24px)</div>
+          <div class="radius-usage">Hero sections, large feature panels</div>
+        </div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-example" style="border-radius: var(--radius-circle);"></div>
+        <div class="radius-info">
+          <div class="radius-name">Circle (50%)</div>
+          <div class="radius-usage">Avatars, icons, decorative elements</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <h3>Core motifs</h3>
-  <ul>
-    <li>
-      <strong>Journal grid:</strong> Dotted backgrounds reminiscent of journal grids — structure, organization, and
-      thoughtful planning. Use for backgrounds, section dividers, or subtle texture in documentation.
-    </li>
-    <li>
-      <strong>Concentric circles:</strong> Growth, expansion, and the ripple effect of knowledge sharing. Use in headers,
-      backgrounds, or as metaphors for community impact.
-    </li>
-    <li>
-      <strong>Pill shapes:</strong> Buttons, tags, and form inputs with friendly, accessible rounded forms and ample touch
-      targets.
-    </li>
-    <li>
-      <strong>Background circles:</strong> Large, low-contrast circles for depth without overwhelming content.
-    </li>
-  </ul>
+  <div class="motif-examples">
+    <h3>Core motifs</h3>
+    <p>These foundational motifs can be used as decorative elements throughout our brand materials.</p>
 
-  <h3>Additional motifs</h3>
-  <p>These can be combined across applications: circle groups, overlapping circles, dot grids, wave patterns, arcs, bubble groups, half circles, and quarter circles.</p>
+    <div class="u-grid u-grid-2 motif-row">
+      <div>
+        <h4>Journal grid</h4>
+        <p>Our dotted background pattern is reminiscent of journal grids, representing structure, organization, and thoughtful planning.</p>
+        <p>Use this pattern for backgrounds, section dividers, or as subtle texture in documentation materials.</p>
+      </div>
+      <div class="motif-example-large journal-grid-demo" aria-hidden="true"></div>
+    </div>
+
+    <div class="u-grid u-grid-2 motif-row">
+      <div>
+        <h4>Concentric circles</h4>
+        <p>Concentric circles represent growth, expansion, and the ripple effect of knowledge sharing within communities.</p>
+        <p>Use as decorative elements in headers, backgrounds, or as visual metaphors for community impact.</p>
+      </div>
+      <div class="motif-example-large concentric-circles-demo" aria-hidden="true">
+        <div class="circle-inner"></div>
+        <div class="circle-innermost"></div>
+      </div>
+    </div>
+
+    <div class="u-grid u-grid-2 motif-row">
+      <div>
+        <h4>Pill shapes</h4>
+        <p>Pill-shaped elements are used for buttons, tags, and form inputs to create a friendly, accessible interface.</p>
+        <p>The elongated rounded form provides ample touch targets while maintaining our organic visual language.</p>
+      </div>
+      <div class="motif-example-large pill-shapes-demo">
+        <div class="top-section">
+          <button type="button" class="pill-button primary">Primary Action</button>
+          <div class="pill-tag">Tag Example</div>
+        </div>
+        <div class="bottom-section">
+          <input type="text" class="pill-input" placeholder="Form input example" />
+        </div>
+      </div>
+    </div>
+
+    <div class="u-grid u-grid-2 motif-row">
+      <div>
+        <h4>Background circles</h4>
+        <p>Large, low-contrast circles create depth and visual interest in backgrounds without overwhelming content.</p>
+        <p>Use these subtle circular forms to add dimension to sections while maintaining readability.</p>
+      </div>
+      <div class="motif-example-large background-circles-demo" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="motif-examples">
+    <h3>Additional motifs</h3>
+    <p>These motifs can be combined and adapted to create a rich visual language across different applications.</p>
+
+    <div class="motif-grid">
+      <div class="motif-item">
+        <div class="motif-example motif-group" aria-hidden="true"></div>
+        <div class="motif-name">Circle group</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-overlap" aria-hidden="true"></div>
+        <div class="motif-name">Overlapping circles</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-dots" aria-hidden="true"></div>
+        <div class="motif-name">Dot grid</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-wave" aria-hidden="true"></div>
+        <div class="motif-name">Wave pattern</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-arc" aria-hidden="true"></div>
+        <div class="motif-name">Arc</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-bubble" aria-hidden="true"></div>
+        <div class="motif-name">Bubble group</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-half-circle" aria-hidden="true"></div>
+        <div class="motif-name">Half circle</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-example motif-quarter-circle" aria-hidden="true"></div>
+        <div class="motif-name">Quarter circle</div>
+      </div>
+    </div>
+  </div>
 
   <h2 id="spacing-system">Spacing system</h2>
   <p>
     Our spacing system uses the golden ratio (1.618) to create an organic, harmonious flow that mirrors the natural
-    growth patterns in our leaf-inspired logo.
+    growth patterns reflected in our leaf-inspired logo.
   </p>
 
   <h3>Visual scale</h3>
   <div class="spacing-scale">
     <div class="spacing-demo">
-      <div class="spacing-label">3XS <small>(0.25–0.31rem)</small></div>
+      <div class="spacing-label">3XS (0.25–0.31rem)</div>
       <div class="spacing-visual" style="height: var(--space-3xs);"></div>
     </div>
     <div class="spacing-demo">
-      <div class="spacing-label">XS <small>(0.65–0.81rem)</small></div>
+      <div class="spacing-label">2XS (0.4–0.5rem)</div>
+      <div class="spacing-visual" style="height: var(--space-2xs);"></div>
+    </div>
+    <div class="spacing-demo">
+      <div class="spacing-label">XS (0.65–0.81rem)</div>
       <div class="spacing-visual" style="height: var(--space-xs);"></div>
     </div>
     <div class="spacing-demo">
-      <div class="spacing-label">S <small>(1.05–1.31rem)</small></div>
+      <div class="spacing-label">S (1.05–1.31rem)</div>
       <div class="spacing-visual" style="height: var(--space-s);"></div>
     </div>
     <div class="spacing-demo">
-      <div class="spacing-label">M <small>(1.7–2.12rem)</small></div>
+      <div class="spacing-label">M (1.7–2.12rem)</div>
       <div class="spacing-visual" style="height: var(--space-m);"></div>
     </div>
     <div class="spacing-demo">
-      <div class="spacing-label">L <small>(2.75–3.43rem)</small></div>
+      <div class="spacing-label">L (2.75–3.43rem)</div>
       <div class="spacing-visual" style="height: var(--space-l);"></div>
     </div>
     <div class="spacing-demo">
-      <div class="spacing-label">XL <small>(4.45–5.55rem)</small></div>
+      <div class="spacing-label">XL (4.45–5.55rem)</div>
       <div class="spacing-visual" style="height: var(--space-xl);"></div>
+    </div>
+    <div class="spacing-demo">
+      <div class="spacing-label">2XL (7.2–8.98rem)</div>
+      <div class="spacing-visual" style="height: var(--space-2xl);"></div>
     </div>
   </div>
 
   <h3>Fluid spacing pairs</h3>
-  <p>One-up pairs transition between adjacent sizes as the viewport changes:</p>
-  <ul>
-    <li><code>--space-xs-s</code>, <code>--space-s-m</code>, <code>--space-m-l</code>, <code>--space-l-xl</code></li>
-  </ul>
+  <p>These pairs show how spacing transitions between two adjacent sizes as the viewport changes.</p>
+  <div class="spacing-scale">
+    <div class="spacing-demo">
+      <div class="spacing-label">XS → S (0.65–1.31rem)</div>
+      <div class="spacing-visual" style="height: var(--space-xs-s);"></div>
+    </div>
+    <div class="spacing-demo">
+      <div class="spacing-label">S → M (1.05–2.12rem)</div>
+      <div class="spacing-visual" style="height: var(--space-s-m);"></div>
+    </div>
+    <div class="spacing-demo">
+      <div class="spacing-label">M → L (1.7–3.43rem)</div>
+      <div class="spacing-visual" style="height: var(--space-m-l);"></div>
+    </div>
+    <div class="spacing-demo">
+      <div class="spacing-label">L → XL (2.75–5.55rem)</div>
+      <div class="spacing-visual" style="height: var(--space-l-xl);"></div>
+    </div>
+  </div>
 
-  <h3>Grid and layout</h3>
+  <h3>Component example</h3>
+  <p>This example shows how our spacing system creates harmonious components:</p>
+
+  <div class="example-component">
+    <div class="example-header">
+      <h4>Developer workshop registration</h4>
+    </div>
+    <div class="example-body">
+      <p class="example-date">October 15-16, 2023 • Virtual Event</p>
+      <h5 class="example-title">Advanced API design patterns</h5>
+      <p class="example-description">
+        Join us for a two-day intensive workshop on designing scalable and developer-friendly APIs. Learn best
+        practices from industry experts and apply them in hands-on sessions.
+      </p>
+      <div class="example-details">
+        <div class="example-detail-item">
+          <span class="example-detail-icon" aria-hidden="true">👥</span>
+          <span>Limited to 50 participants</span>
+        </div>
+        <div class="example-detail-item">
+          <span class="example-detail-icon" aria-hidden="true">🔧</span>
+          <span>Hands-on exercises included</span>
+        </div>
+        <div class="example-detail-item">
+          <span class="example-detail-icon" aria-hidden="true">📜</span>
+          <span>Certificate upon completion</span>
+        </div>
+      </div>
+      <div class="example-buttons">
+        <button type="button" class="example-button">Register Now</button>
+        <button type="button" class="example-button secondary">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>Spacing used in this component</h4>
+    <ul class="component-spacing-list">
+      <li><strong>Card padding:</strong> <code>var(--space-m)</code> — Creates comfortable content area</li>
+      <li><strong>Header padding:</strong> <code>var(--space-s)</code> — Balanced header spacing</li>
+      <li><strong>Title margin:</strong> <code>var(--space-xs)</code> — Tight grouping with date</li>
+      <li><strong>Description margin:</strong> <code>var(--space-s)</code> — Separates content sections</li>
+      <li><strong>Details margin:</strong> <code>var(--space-s)</code> — Creates visual hierarchy</li>
+      <li><strong>Button padding:</strong> <code>var(--space-xs) var(--space-s)</code> — Comfortable touch target</li>
+      <li><strong>Button gap:</strong> <code>var(--space-xs)</code> — Related actions spacing</li>
+    </ul>
+  </div>
+
+  <h3>Text spacing examples</h3>
+
+  <div class="spacing-text-block">
+    <h4>3XS spacing (micro)</h4>
+    <div class="space-stack-3xs">This text has 3XS spacing below</div>
+    <div>This demonstrates our smallest spacing unit</div>
+  </div>
+
+  <div class="spacing-text-block">
+    <h4>Small spacing</h4>
+    <div class="space-stack-s">This text has S spacing below</div>
+    <div>Used for related content grouping</div>
+  </div>
+
+  <div class="spacing-text-block">
+    <h4>Medium spacing</h4>
+    <div class="space-stack-m">This text has M spacing below</div>
+    <div>Our default spacing for section elements</div>
+  </div>
+
+  <div class="spacing-text-block">
+    <h4>Large spacing</h4>
+    <div class="space-stack-l">This text has L spacing below</div>
+    <div>Used for major section breaks</div>
+  </div>
+
+  <div class="spacing-text-block">
+    <h4>Inline spacing demo</h4>
+    <div>
+      <span class="space-inline-s">Item 1</span>
+      <span class="space-inline-s">Item 2</span>
+      <span>Item 3</span>
+    </div>
+  </div>
+
+  <h3>Grid and layout system</h3>
   <p>
-    Content is constrained to a maximum width of 1240px (<code>--grid-max-width</code>) with fluid gutters
-    (<code>--grid-gutter</code>). Utility classes include <code>u-grid-fluid</code>, <code>u-grid-golden</code>, and fixed
-    column grids (<code>u-grid-2</code>, <code>u-grid-3</code>, etc.). Grids collapse to a single column on smaller
-    viewports.
+    Our grid system uses the same fluid spacing scale to create harmonious layouts that adapt to different screen sizes,
+    inspired by Utopia's approach but customized to follow our golden ratio theme.
   </p>
+
+  <div class="highlight-box">
+    <h4>Container width</h4>
+    <p>
+      We constrain content to a maximum width of 1240px (77.5rem) with fluid gutters on either side that scale
+      proportionally with the viewport.
+    </p>
+    <pre class="code-example">.u-container {'{'}
+  max-width: var(--grid-max-width);
+  padding-inline: var(--grid-gutter);
+  margin-inline: auto;
+  width: 100%;
+{'}'}</pre>
+  </div>
+
+  <h4>Grid examples</h4>
+  <p>Our grid uses fluid gutters based on our spacing scale, ensuring consistent spacing throughout layouts.</p>
+
+  <div class="grid-demo">
+    <h5>Fluid responsive grid</h5>
+    <p>This grid automatically adjusts the number of columns based on available space.</p>
+    <div class="u-grid-fluid">
+      <div class="grid-item">Auto</div>
+      <div class="grid-item">Auto</div>
+      <div class="grid-item">Auto</div>
+      <div class="grid-item">Auto</div>
+    </div>
+  </div>
+
+  <div class="grid-demo">
+    <h5>Golden ratio grid</h5>
+    <p>This grid uses the golden ratio (1:1.618) for column proportions.</p>
+    <div class="u-grid-golden">
+      <div class="grid-item">1 part</div>
+      <div class="grid-item">1.618 parts</div>
+    </div>
+  </div>
+
+  <div class="grid-demo">
+    <h5>Three-column grid</h5>
+    <div class="u-grid u-grid-3">
+      <div class="grid-item">Column 1</div>
+      <div class="grid-item">Column 2</div>
+      <div class="grid-item">Column 3</div>
+    </div>
+  </div>
+
+  <div class="grid-demo">
+    <h5>12-column grid</h5>
+    <div class="u-grid u-grid-12">
+      <div class="grid-item" style="grid-column: span 8;">Main content (8/12)</div>
+      <div class="grid-item" style="grid-column: span 4;">Sidebar (4/12)</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>Implementation</h4>
+    <p>Our grid system provides several approaches to layout:</p>
+    <pre class="code-example">&lt;div class="u-grid-fluid"&gt;
+  &lt;div&gt;Auto-sizing column&lt;/div&gt;
+  &lt;div&gt;Auto-sizing column&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="u-grid-golden"&gt;
+  &lt;div&gt;Smaller column (1 part)&lt;/div&gt;
+  &lt;div&gt;Larger column (1.618 parts)&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="u-grid u-grid-3"&gt;
+  &lt;div&gt;Column 1&lt;/div&gt;
+  &lt;div&gt;Column 2&lt;/div&gt;
+  &lt;div&gt;Column 3&lt;/div&gt;
+&lt;/div&gt;</pre>
+    <p>
+      All grids automatically adjust to single column on mobile devices, maintaining the harmonious spacing. The fluid
+      nature of our grid system means it adapts to any viewport size without requiring breakpoints, following the same
+      organic growth principles as our spacing and typography systems.
+    </p>
+  </div>
 
   <h2 id="image-guidelines">Image guidelines</h2>
   <p>Image usage guidelines coming soon.</p>
@@ -972,12 +1237,10 @@ h3 { font-size: var(--step-3); }
     opacity: 0.85;
   }
 
-  /* Color palette tables */
   .color-mode-container {
     border: 1px solid var(--color-background-secondary-2);
     border-radius: var(--radius-m);
     padding: var(--space-s);
-    margin-bottom: var(--space-m);
     overflow-x: auto;
   }
 
@@ -1130,7 +1393,6 @@ h3 { font-size: var(--step-3); }
     }
   }
 
-  /* Highlight boxes */
   .highlight-box {
     background: var(--color-background-secondary-1);
     border-radius: var(--radius-m);
@@ -1142,7 +1404,6 @@ h3 { font-size: var(--step-3); }
     margin-top: 0;
   }
 
-  /* Color combination demos */
   .color-combinations {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1220,7 +1481,6 @@ h3 { font-size: var(--step-3); }
     border-color: var(--color-text-dark);
   }
 
-  /* Typography specimens */
   .type-specimens {
     margin: var(--space-m) 0 var(--space-l);
     align-items: start;
@@ -1315,7 +1575,6 @@ h3 { font-size: var(--step-3); }
     margin: var(--space-s) 0 var(--space-m);
   }
 
-  /* Border radius demos */
   .radius-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -1347,7 +1606,337 @@ h3 { font-size: var(--step-3); }
     opacity: 0.85;
   }
 
-  /* Spacing scale bars */
+  .radius-example:hover {
+    transform: scale(1.05);
+  }
+
+  .motif-row {
+    margin-bottom: var(--space-m);
+    align-items: center;
+  }
+
+  .motif-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .motif-examples {
+    margin-bottom: var(--space-l);
+  }
+
+  .motif-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-m);
+    margin-top: var(--space-m);
+  }
+
+  .motif-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .motif-example {
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-background-secondary-2);
+    border-radius: var(--radius-m);
+    margin-bottom: var(--space-xs);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .motif-group::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-accent-text);
+    border-radius: var(--radius-circle);
+    left: 30px;
+    top: 30px;
+  }
+
+  .motif-group::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-blue);
+    border-radius: var(--radius-circle);
+    right: 30px;
+    bottom: 30px;
+  }
+
+  .motif-overlap::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-accent-text);
+    border-radius: var(--radius-circle);
+    opacity: 0.7;
+    left: 25px;
+  }
+
+  .motif-overlap::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-blue);
+    border-radius: var(--radius-circle);
+    opacity: 0.7;
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .motif-name {
+    font-weight: 700;
+  }
+
+  .motif-example-large {
+    width: 100%;
+    min-height: 250px;
+    background-color: var(--color-background);
+    border-radius: var(--radius-m);
+    padding: var(--space-m);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    overflow: hidden;
+    border: 1px solid var(--color-background-secondary-2);
+  }
+
+  .journal-grid-demo {
+    background-image: radial-gradient(var(--color-accent-text) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+  }
+
+  .concentric-circles-demo::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .concentric-circles-demo::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-blue);
+    border-radius: var(--radius-circle);
+    right: 30px;
+    bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .concentric-circles-demo .circle-inner {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .concentric-circles-demo .circle-innermost {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .pill-shapes-demo {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .pill-shapes-demo .top-section {
+    display: flex;
+    gap: var(--space-s);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .pill-shapes-demo .bottom-section {
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .pill-button {
+    padding: var(--space-xs) var(--space-m);
+    border-radius: 50px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .pill-button.primary {
+    background-color: var(--color-accent-text);
+    color: var(--color-text);
+  }
+
+  .pill-button.secondary {
+    background-color: var(--color-blue);
+    color: var(--color-text);
+  }
+
+  .pill-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .pill-tag {
+    display: inline-block;
+    padding: var(--space-2xs) var(--space-s);
+    background-color: var(--color-blue);
+    color: var(--color-text);
+    border-radius: 50px;
+    font-size: 0.9rem;
+  }
+
+  .pill-input {
+    padding: var(--space-xs) var(--space-s);
+    border-radius: 50px;
+    border: 1px solid var(--color-background-secondary-2);
+    width: 100%;
+    max-width: 250px;
+    font-family: inherit;
+    background: var(--color-background);
+    color: var(--color-text);
+  }
+
+  .background-circles-demo::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.1;
+    top: -100px;
+    left: -50px;
+  }
+
+  .background-circles-demo::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: var(--color-blue);
+    border-radius: 50%;
+    opacity: 0.1;
+    bottom: -50px;
+    right: -50px;
+  }
+
+  .motif-dots {
+    background-image: radial-gradient(var(--color-accent-text) 2px, transparent 2px);
+    background-size: 15px 15px;
+  }
+
+  .motif-wave {
+    overflow: hidden;
+  }
+
+  .motif-wave::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 Q 17.5 5, 25 10 Q 32.5 15, 40 10' stroke='%2379bf44' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+    background-size: 60px 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+  }
+
+  .motif-arc::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 3px solid var(--color-accent-text);
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(45deg);
+    opacity: 0.7;
+  }
+
+  .motif-bubble::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.3;
+    top: 30px;
+    left: 30px;
+  }
+
+  .motif-bubble::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.5;
+    bottom: 40px;
+    right: 40px;
+  }
+
+  .motif-half-circle {
+    overflow: hidden;
+  }
+
+  .motif-half-circle::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.3;
+    bottom: -75px;
+    left: 0;
+  }
+
+  .motif-quarter-circle {
+    overflow: hidden;
+  }
+
+  .motif-quarter-circle::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-accent-text);
+    border-radius: 50%;
+    opacity: 0.3;
+    bottom: -75px;
+    right: -75px;
+  }
+
   .spacing-scale {
     margin: var(--space-m) 0 var(--space-l);
   }
@@ -1368,13 +1957,149 @@ h3 { font-size: var(--step-3); }
 
   .spacing-visual {
     flex: 1;
-    min-width: 80px;
-    max-width: calc(100% - 200px);
+    min-width: 50px;
+    max-width: calc(100% - 190px);
     background: var(--color-accent-text);
     border-radius: var(--radius-s);
+    transition: height 0.3s ease;
   }
 
-  /* Logo assets table */
+  .spacing-text-block {
+    margin-bottom: var(--space-l);
+    padding: var(--space-s);
+    background: var(--color-background-secondary-1);
+    border-radius: var(--radius-m);
+  }
+
+  .spacing-text-block h4 {
+    margin: 0 0 var(--space-xs);
+  }
+
+  .example-component {
+    border: 1px solid var(--color-background-secondary-2);
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    max-width: 600px;
+    background-color: var(--color-background);
+    margin-bottom: var(--space-m);
+  }
+
+  .example-header {
+    background-color: var(--color-background-secondary-1);
+    padding: var(--space-s);
+  }
+
+  .example-header h4 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .example-body {
+    padding: var(--space-m);
+  }
+
+  .example-date {
+    margin: 0 0 var(--space-xs);
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+
+  .example-title {
+    margin: 0 0 var(--space-s);
+    font-size: 1.4rem;
+  }
+
+  .example-description {
+    margin: 0 0 var(--space-s);
+    line-height: 1.5;
+  }
+
+  .example-details {
+    margin-bottom: var(--space-s);
+    padding: var(--space-xs);
+    background-color: var(--color-background-secondary-1);
+    border-radius: var(--radius-m);
+  }
+
+  .example-detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-2xs);
+  }
+
+  .example-detail-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .example-detail-icon {
+    margin-right: var(--space-xs);
+    font-size: 1.2rem;
+  }
+
+  .example-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-s);
+  }
+
+  .example-button {
+    padding: var(--space-xs) var(--space-s);
+    border-radius: var(--radius-s);
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.2s ease;
+    background-color: var(--color-accent-text);
+    color: var(--color-text);
+  }
+
+  .example-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .example-button.secondary {
+    background-color: var(--color-blue);
+  }
+
+  .component-spacing-list {
+    margin: 0;
+    padding-left: var(--space-m);
+  }
+
+  .component-spacing-list li {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .component-spacing-list :global(code) {
+    background-color: rgba(0, 0, 0, 0.06);
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-xs);
+    font-family: monospace;
+    font-size: 0.9rem;
+  }
+
+  .grid-demo {
+    margin-bottom: var(--space-m);
+  }
+
+  .grid-demo h5 {
+    margin: 0 0 var(--space-xs);
+  }
+
+  .grid-item {
+    background-color: var(--color-background-secondary-1);
+    padding: var(--space-s);
+    border-radius: var(--radius-s);
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+
   .brand-colors-table {
     width: 100%;
     font-size: var(--step--1);
@@ -1395,7 +2120,6 @@ h3 { font-size: var(--step-3); }
     border-bottom: none;
   }
 
-  /* Voice and tone */
   .brand-markdown {
     margin-top: var(--space-xl);
     padding-top: var(--space-l);
@@ -1434,6 +2158,10 @@ h3 { font-size: var(--step-3); }
   }
 
   @media (max-width: 768px) {
+    .motif-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .type-scale-item {
       flex-direction: column;
       align-items: flex-start;

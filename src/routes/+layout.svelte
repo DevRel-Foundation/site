@@ -10,6 +10,7 @@
   import Footer from '$lib/components/nav/Footer.svelte';
   import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
   import CookieConsent from '$lib/ui/CookieConsent.svelte';
+  import { Tooltip } from 'bits-ui';
   import { writable } from 'svelte/store';
 
   let { children } = $props();
@@ -17,7 +18,6 @@
   let gaLoaded = false;
   const showConsent = writable(false);
 
-  // Helper: inject Google Analytics (gtag)
   function injectGA(gaId: string) {
     if (gaLoaded || !browser) return;
     try {
@@ -36,8 +36,6 @@
     }
   }
 
-  // Cookie consent UI is implemented as a Svelte component `CookieConsent`.
-  // showConsent controls whether it's visible.
   function handleAccept() {
     localStorage.setItem('analytics_consent', 'true');
     if (posthog) {
@@ -59,7 +57,6 @@
     showConsent.set(false);
   }
 
-  // Track page changes (only if consent given)
   $effect(() => {
     if (browser && posthog && $page.url) {
       const hasConsent = localStorage.getItem('analytics_consent');
@@ -68,7 +65,6 @@
           $current_url: $page.url.href,
           $pathname: $page.url.pathname,
         });
-        // If GA is loaded, also send a page view
         if (gaLoaded && (window as any).gtag) {
           try {
             (window as any).gtag('event', 'page_view', { page_path: $page.url.pathname });
@@ -80,10 +76,8 @@
     }
   });
 
-  // Single onMount: initialize PostHog and decide whether to show consent banner / inject GA
   onMount(async () => {
     if (!browser) return;
-    // Initialize PostHog library
     try {
       const { default: posthogLib } = await import('posthog-js');
       posthogLib.init(
@@ -99,40 +93,37 @@
         }
       );
       posthog = posthogLib;
-      // Check consent state
       const hasConsent = localStorage.getItem('analytics_consent');
       if (hasConsent === 'true') {
         posthog.opt_in_capturing();
         posthog.capture('$pageview');
-  // initialize GA immediately as consent already given
   const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
         injectGA(gaId);
       } else if (hasConsent === null) {
-        // Show consent banner for new users
           showConsent.set(true);
       } else {
-        // explicitly rejected or other state: ensure opt-out
         posthog.opt_out_capturing && posthog.opt_out_capturing();
       }
       console.log('PostHog initialized with GDPR compliance');
     } catch (e) {
       console.error('Failed to initialize PostHog', e);
-      // Even if posthog fails, still show the banner so user can give/deny GA consent
       const hasConsent = localStorage.getItem('analytics_consent');
         if (hasConsent === null) showConsent.set(true);
     }
   });
 </script>
 
-<Nav />
+<Tooltip.Provider delayDuration={200} skipDelayDuration={300}>
+  <Nav />
 
-<main class="main">
-  {@render children()}
-</main>
+  <main class="main">
+    {@render children()}
+  </main>
 
 {#if $showConsent}
   <CookieConsent onAccept={handleAccept} onReject={handleReject} />
 {/if}
 
-<Footer />
-<EditThisPage />
+  <Footer />
+  <EditThisPage />
+</Tooltip.Provider>

@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { Tabs } from 'bits-ui';
   import PropertyItem from '../../../atoms/ToolPropertyItem.svelte';
   import SectionDivider from '../../../atoms/SectionDivider.svelte';
 
   export let tool: any = null;
   $: tool = tool || null;
 
-  let activeTab = 'properties';
+  let activeTab = $state('properties');
   let showCopyToast = false;
   let toastX = 0, toastY = 0;
 
@@ -16,7 +17,7 @@
       toastX = event.clientX;
       toastY = event.clientY;
       showCopyToast = true;
-      setTimeout(() => showCopyToast = false, 1500); // Hide after 1.5s
+      setTimeout(() => showCopyToast = false, 1500);
     }
   }
 
@@ -35,6 +36,7 @@
       <p>Choose a tool from the list to view additional details.</p>
     </div>
   {:else}
+    <Tabs.Root bind:value={activeTab} class="tool-details-tabs">
     <div class="tool-details-content">
       <div class="tool-details-header">
         <h2 class="tool-title">{tool.name}</h2>
@@ -59,9 +61,7 @@
 
       <SectionDivider />
 
-      <!-- Tab Content -->
-      <div class="tab-content">
-        {#if activeTab === 'properties'}
+      <Tabs.Content value="properties" class="tab-content">
           <div class="tool-properties">
             <dl class="properties-list">
               <PropertyItem label="URL" format="url" value={tool.url} />
@@ -72,7 +72,9 @@
               <PropertyItem label="Labels" value={tool.labels} />
             </dl>
           </div>
-        {:else if activeTab === 'evaluation'}
+      </Tabs.Content>
+
+      <Tabs.Content value="evaluation" class="tab-content">
           <div class="evaluation-content">
             {#if tool.evaluation && tool.evaluation.length > 0}
               <div class="evaluation-list">
@@ -125,11 +127,12 @@
               </div>
             {/if}
           </div>
-        {:else if activeTab === 'learn'}
+      </Tabs.Content>
+
+      <Tabs.Content value="learn" class="tab-content">
           <div class="learning-content">
             {#if tool.learning}
               <div class="learning-sections">
-                <!-- Setup Section -->
                 {#if tool.learning.setup && tool.learning.setup.length > 0}
                   <div class="learning-section">
                     <h3>Setup</h3>
@@ -147,7 +150,6 @@
                   </div>
                 {/if}
 
-                <!-- Getting Started Section -->
                 {#if tool.learning['getting-started'] && tool.learning['getting-started'].length > 0}
                   <div class="learning-section">
                     <h3>Getting Started</h3>
@@ -165,7 +167,6 @@
                   </div>
                 {/if}
 
-                <!-- Advanced Section -->
                 {#if tool.learning.advanced && tool.learning.advanced.length > 0}
                   <div class="learning-section">
                     <h3>Advanced</h3>
@@ -199,57 +200,40 @@
               </div>
             {/if}
           </div>
-        {/if}
-      </div>
+      </Tabs.Content>
     </div>
 
-    <!-- Bottom Tabs -->
-    <div class="tabs">
-      <button 
-        class="tab {activeTab === 'properties' ? 'active' : ''}"
-        on:click={() => activeTab = 'properties'}
-      >
-        Properties
-      </button>
-      <button 
-        class="tab {activeTab === 'evaluation' ? 'active' : ''}"
-        on:click={() => activeTab = 'evaluation'}
-      >
-        Evaluation
-      </button>
-      <button 
-        class="tab {activeTab === 'learn' ? 'active' : ''}"
-        on:click={() => activeTab = 'learn'}
-      >
-        Learn
-      </button>
+    <Tabs.List class="tabs">
+      <Tabs.Trigger value="properties" class="tab">Properties</Tabs.Trigger>
+      <Tabs.Trigger value="evaluation" class="tab">Evaluation</Tabs.Trigger>
+      <Tabs.Trigger value="learn" class="tab">Learn</Tabs.Trigger>
       {#if tool?.id}
-      <a 
-        class="tab"
-        href={getEditUrl(tool)}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Edit ↗
-
-      </a>
+        <a class="tab tab-link" href={getEditUrl(tool)} target="_blank" rel="noopener noreferrer">
+          Edit ↗
+        </a>
       {:else}
-      <a 
-        class="tab"
-        href="https://github.com/devrel-foundation/tools-catalog"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Edit ↗
-      </a>
-
+        <a
+          class="tab tab-link"
+          href="https://github.com/devrel-foundation/tools-catalog"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Edit ↗
+        </a>
       {/if}
-    </div>
+    </Tabs.List>
+    </Tabs.Root>
   {/if}
 
 </div>
 
 <style>
+  :global(.tool-details-tabs) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   .tool-details {
     height: 100%;
     display: flex;
@@ -358,18 +342,22 @@
     opacity: 0.72;
   }
 
-  .tab.active {
+  :global(.tab[data-state='active']) {
     background: var(--color-button-background);
     color: var(--color-text-dark);
     border-top: 2px solid var(--color-mint-dark);
   }
 
-  .tab.active:hover {
+  :global(.tab[data-state='active']:hover) {
     background: var(--color-background-secondary-1);
     color: var(--color-text);
     border-top: 0px solid var(--color-background-secondary-1);
-    opacity: 1.0;
+    opacity: 1;
     cursor: default;
+  }
+
+  .tab-link {
+    font-family: inherit;
   }
 
   .share-btn {
@@ -395,7 +383,6 @@
     margin: 0;
   }
 
-  /* Evaluation Tab Styles */
   .evaluation-content {
     padding: var(--space-m);
   }
@@ -497,7 +484,6 @@
     margin: var(--space-l) 0;
   }
 
-  /* Learning Tab Styles */
   .learning-content {
     padding: var(--space-m);
   }

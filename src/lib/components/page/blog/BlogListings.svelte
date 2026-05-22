@@ -5,7 +5,6 @@
   
   const { posts } = $props();
   
-  // Load authors data from API endpoint
   async function loadAuthorsData() {
     if (authorsLoaded) return;
     
@@ -20,11 +19,9 @@
     authorsLoaded = true;
   }
   
-  // Function to get author data from API endpoint
   async function fetchGithubUsers(author) {
     if (!author || githubUsersCache[author]) return githubUsersCache[author] || [];
     
-    // Ensure authors data is loaded
     await loadAuthorsData();
     
     const authors = author.split(',').map(a => a.trim());
@@ -43,7 +40,6 @@
             url: authorData.url
           };
         } else {
-          // If not in authors.json, treat as text
           return { type: 'text', name: authorName };
         }
       }

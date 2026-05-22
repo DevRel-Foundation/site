@@ -16,7 +16,6 @@
     hoveredCategory = null;
   }
   
-  // Get current description based on hovered category or default to 'all'
   const currentDescription = $derived(
     hoveredCategory 
       ? (categoryDescriptions[hoveredCategory] || categoryDescriptions.all)
@@ -28,16 +27,13 @@
   <title>Blog | DevRel Foundation</title>
   <meta name="description" content="Elevating the professional practice of Developer Relations through insights, resources, and community collaboration." />
   
-  <!-- RSS Feed -->
   <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog" href="/blog/feed.xml" />
   
-  <!-- SEO Optimizations -->
   <meta name="keywords" content="DevRel, Developer Relations, Developer Advocacy, Community, Technical Writing, Developer Marketing" />
   <meta name="author" content="DevRel Foundation" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href={page.url.href} />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:url" content={page.url.href} />
   <meta property="og:title" content="DevRel Foundation Blog" />
   <meta property="og:description" content="Elevating the professional practice of Developer Relations through insights, resources, and community collaboration." />
@@ -46,7 +42,6 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="DevRel Foundation" />
   
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={page.url.href} />
   <meta name="twitter:title" content="DevRel Foundation Blog" />
@@ -54,7 +49,6 @@
   <meta name="twitter:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
   <meta name="twitter:site" content="@devrel_foundation" />
   
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
     {JSON.stringify({
       "@context": "https://schema.org",

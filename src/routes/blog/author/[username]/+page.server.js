@@ -5,7 +5,6 @@ export async function load({ params, url }) {
   try {
     const author = await getAuthor(params.username);
     
-    // Check if author exists
     if (!author) {
       throw error(404, 'Author not found');
     }

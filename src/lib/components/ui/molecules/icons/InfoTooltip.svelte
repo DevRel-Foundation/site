@@ -1,13 +1,29 @@
-<script>
-	import Icon from '$lib/components/ui/atoms/Icon.svelte';
-	import CheckCircleIcon from 'iconoir/icons/regular/info-circle.svg';
+<script lang="ts">
+  import Icon from '$lib/components/ui/atoms/Icon.svelte';
+  import { AppTooltip } from '$lib/components/ui/primitives';
+  import CheckCircleIcon from 'iconoir/icons/regular/info-circle.svg';
 
-	export let alt = 'Join Distro List';
-	export let label = 'Distribution List';
-	export let href = 'mailto:info@dev-rel.org';
-	export let enclosed = false;
+  interface Props {
+    alt?: string;
+    label?: string;
+    href?: string;
+    enclosed?: boolean;
+  }
+
+  let {
+    alt = 'More information',
+    label = '',
+    href = 'mailto:info@dev-rel.org',
+    enclosed = false
+  }: Props = $props();
 </script>
 
-<span title={alt} aria-label={alt}>
-	<Icon alt={alt} label={label} href={href} icon="{CheckCircleIcon}" enclosed={enclosed} />
-</span>
+{#if alt}
+  <AppTooltip content={alt}>
+    {#snippet trigger()}
+      <Icon {alt} {label} {href} icon={CheckCircleIcon} {enclosed} />
+    {/snippet}
+  </AppTooltip>
+{:else}
+  <Icon {alt} {label} {href} icon={CheckCircleIcon} {enclosed} />
+{/if}
