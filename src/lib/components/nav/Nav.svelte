@@ -6,6 +6,145 @@
   import GitHubIcon from 'iconoir/icons/github.svg';
   import CallToActionButton from '$lib/components/ui/molecules/NavJoinButton.svelte';
   import NavDropdown from '$lib/components/nav/NavDropdown.svelte';
+
+  type NavMenuIcon = 'discord' | 'github';
+
+  type NavMenuItem = {
+    title: string;
+    href: string;
+    target?: '_blank';
+    rel?: string;
+    variant?: 'brief';
+    icon?: NavMenuIcon;
+    iconAlt?: string;
+  };
+
+  type NavMenuSection = {
+    title: string;
+    description: string;
+    items: NavMenuItem[];
+  };
+
+  type NavMenu = {
+    id: string;
+    label: string;
+    href: string;
+    sections: NavMenuSection[];
+  };
+
+  const NAV_MENUS: NavMenu[] = [
+    {
+      id: 'about',
+      label: 'About',
+      href: '/about/mission',
+      sections: [
+        {
+          title: 'About the DevRel Foundation',
+          description: 'Our mission and working groups.',
+          items: [
+            { title: 'Mission', href: '/about/mission' },
+            { title: 'Steering Committee', href: '/about/steering-committee' },
+            { title: 'Working groups', href: '/about/working-groups' },
+            {
+              title: 'Community calendar',
+              href: '/calendar',
+              rel: 'noopener noreferrer'
+            },
+            { title: 'Contact', href: '/contact' }
+          ]
+        },
+        {
+          title: 'Foundation resources',
+          description: 'Governance documents.',
+          items: [
+            {
+              title: 'Charter ↗',
+              href: 'https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief'
+            },
+            {
+              title: 'Code of conduct ↗',
+              href: 'https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'learn',
+      label: 'Learn',
+      href: '/learn/what-is-devrel',
+      sections: [
+        {
+          title: 'Learn about DevRel',
+          description: 'Blog posts, guides, and introductions to developer relations.',
+          items: [
+            { title: 'DevRel Foundation blog', href: '/blog' },
+            { title: 'What is developer relations?', href: '/learn/what-is-devrel' }
+          ]
+        },
+        {
+          title: 'Community resources',
+          description: 'Join the conversation with fellow DevRel professionals.',
+          items: [
+            {
+              title: 'Discord ↗',
+              href: 'https://discord.gg/G7CSTKZcuT',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief',
+              icon: 'discord',
+              iconAlt: 'Join us on Discord'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'projects',
+      label: 'Projects',
+      href: '/projects',
+      sections: [
+        {
+          title: 'Get involved',
+          description: 'Explore open projects and contribute to the foundation.',
+          items: [
+            { title: 'Explore projects', href: '/projects' },
+            {
+              title: 'Contribute',
+              href: '/join-us',
+              rel: 'noopener noreferrer'
+            }
+          ]
+        },
+        {
+          title: 'Project resources',
+          description: 'Open-source code, data, and frameworks on GitHub.',
+          items: [
+            {
+              title: 'GitHub ↗',
+              href: 'https://github.com/devrel-foundation/',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief',
+              icon: 'github',
+              iconAlt: 'Explore our GitHub'
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const menuIcons = {
+    discord: DiscordIcon,
+    github: GitHubIcon
+  } as const;
   
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
@@ -17,11 +156,16 @@
     isMenuOpen = !isMenuOpen;
   }
   
+  function setDarkModeClass(enabled: boolean) {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.toggle('dark-mode', enabled);
+      document.body?.classList.toggle('dark-mode', enabled);
+    }
+  }
+
   function toggleDarkMode() {
     isDarkMode = !isDarkMode;
-    if (typeof document !== 'undefined' && document.body) {
-      document.body.classList.toggle('dark-mode', isDarkMode);
-    }
+    setDarkModeClass(isDarkMode);
     if (typeof window !== 'undefined') {
       localStorage.setItem('darkMode', isDarkMode.toString());
     }
@@ -53,16 +197,12 @@
         mediaQuery.addEventListener('change', (e) => {
           if (localStorage.getItem('darkMode') === null) {
             isDarkMode = e.matches;
-            if (document.body) {
-              document.body.classList.toggle('dark-mode', isDarkMode);
-            }
+            setDarkModeClass(isDarkMode);
           }
         });
       }
       
-      if (document.body) {
-        document.body.classList.toggle('dark-mode', isDarkMode);
-      }
+      setDarkModeClass(isDarkMode);
     }
   });
   
@@ -96,176 +236,47 @@
     
     <div class="nav-menu-container">
       <ul class="nav-menu" class:open={isMenuOpen}>
-
-
-
-        <NavDropdown
-          label="About"
-          href="/about/mission"
-          {isMobile}
-          menuOpen={isMenuOpen}
-          desktopActive={activeDropdown === 'about'}
-          onDesktopEnter={() => showDropdown('about')}
-          onDesktopLeave={hideDropdown}
-        >
-          {#snippet children()}
+        {#each NAV_MENUS as menu (menu.id)}
+          <NavDropdown
+            label={menu.label}
+            href={menu.href}
+            {isMobile}
+            menuOpen={isMenuOpen}
+            desktopActive={activeDropdown === menu.id}
+            onDesktopEnter={() => showDropdown(menu.id)}
+            onDesktopLeave={hideDropdown}
+          >
+            {#each menu.sections as section (section.title)}
               <div class="dropdown-section">
-                <h3 class="menu-header">About the DevRel Foundation</h3>
+                <h3 class="menu-header">{section.title}</h3>
+                <p class="menu-header-description">{section.description}</p>
                 <div class="dropdown-items">
-
-                  <a href="/about/mission" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Mission</span>
-                      <span class="item-description">Our mission and vision.</span>
-                    </div>
-                  </a>
-
-                  <a href="/about/steering-committee" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Steering Committee</span>
-                      <span class="item-description">Meet the leaders guiding the DevRel Foundation.</span>
-                    </div>
-                  </a>
-
-                  <a href="/about/working-groups" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Working Groups</span>
-                      <span class="item-description">Working groups to drive sourcing and innovation.</span>
-                    </div>
-                  </a>
-
-                  <a href="/calendar" onclick={closeAll} rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">
-                        Community Calendar
-                      </span>
-                      <span class="item-description">Public community events.</span>
-                    </div>
-                  </a>
-
-                  <a href="/contact" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Contact</span>
-                      <span class="item-description">Get in touch with us.</span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>  
-
-              <div class="dropdown-section">
-                <h3 class="menu-header">Foundation Resources</h3>
-                <div class="dropdown-items">
-
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">Charter ↗</span>
-                    </div>
-                  </a>
-
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">Code of Conduct ↗</span>
-                    </div>
-                  </a>
-
-
+                  {#each section.items as item (item.href)}
+                    <a
+                      href={item.href}
+                      onclick={closeAll}
+                      target={item.target}
+                      rel={item.rel}
+                    >
+                      <div class={item.variant === 'brief' ? 'dropdown-item-brief' : 'dropdown-item'}>
+                        <span class="item-title">
+                          {#if item.icon}
+                            <img
+                              src={menuIcons[item.icon]}
+                              alt={item.iconAlt ?? ''}
+                              class="social-icon"
+                            />
+                          {/if}
+                          {item.title}
+                        </span>
+                      </div>
+                    </a>
+                  {/each}
                 </div>
               </div>
-          {/snippet}
-        </NavDropdown>
-
-        <NavDropdown
-          label="Learn"
-          href="/learn/what-is-devrel"
-          {isMobile}
-          menuOpen={isMenuOpen}
-          desktopActive={activeDropdown === 'learn'}
-          onDesktopEnter={() => showDropdown('learn')}
-          onDesktopLeave={hideDropdown}
-        >
-          {#snippet children()}
-              <div class="dropdown-section">
-                <h3 class="menu-header">Learn About DevRel</h3>
-                <div class="dropdown-items">
-
-                  <a href="/blog" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">DevRel Foundation Blog</span>
-                      <span class="item-description">The latest news and updates.</span>
-                    </div>
-                  </a>
-
-                  <a href="/learn/what-is-devrel" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">What is Developer Relations?</span>
-                      <span class="item-description">Defining this critical role in technology adoption.</span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Community Resources</h3>
-                <div class="dropdown-items">
-
-                  <a href="https://discord.gg/G7CSTKZcuT" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
-                        Discord ↗
-                      </span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>
-          {/snippet}
-        </NavDropdown>
-
-        <NavDropdown
-          label="Projects"
-          href="/projects"
-          {isMobile}
-          menuOpen={isMenuOpen}
-          desktopActive={activeDropdown === 'projects'}
-          onDesktopEnter={() => showDropdown('projects')}
-          onDesktopLeave={hideDropdown}
-        >
-          {#snippet children()}
-              <div class="dropdown-section">
-                <h3 class="menu-header">Get Involved</h3>
-                <div class="dropdown-items">
-                  <a href="/projects" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Explore Projects</span>
-                      <span class="item-description">Find open-data, frameworks, and guides to support your program.</span>
-                    </div>
-                  </a>
-                  <a href="/join-us" onclick={closeAll} rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">Contribute</span>
-                      <span class="item-description">Join the 400+ professionals who want to see DevRel thrive.
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Project Resources</h3>
-                <div class="dropdown-items">
-                  <a href="https://github.com/devrel-foundation/" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={GitHubIcon} alt="Explore our GitHub" class="social-icon" />
-                        GitHub ↗
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-          {/snippet}
-        </NavDropdown>
+            {/each}
+          </NavDropdown>
+        {/each}
       </ul>
 
       <div class="cta">
@@ -515,7 +526,14 @@
     font-size: 0.7rem;
     font-weight: 200;
     color: var(--color-background-secondary-2);
-    margin-bottom: var(--space-s);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .menu-header-description {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 0 0 var(--space-s) 0;
   }
   
   .item-title {
@@ -529,12 +547,6 @@
     white-space: nowrap;
   }
   
-  .item-description {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    line-height: 1.4;
-  }
-
   .social-icon {
     width: 1rem;
     height: 1rem;
@@ -646,10 +658,6 @@
     }
 
     .dropdown-section:not(:first-child) {
-      display: block;
-    }
-
-    .item-description {
       display: block;
     }
 
