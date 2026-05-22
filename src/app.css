@@ -280,7 +280,8 @@
   padding: var(--space-3xl);
 }
 
-body.dark-mode {
+body.dark-mode,
+html.dark-mode {
   --color-background: var(--color-background-dark);
   --color-text: var(--color-text-dark);
   --color-background-secondary-1: var(--color-background-secondary-1-dark);

@@ -10,6 +10,28 @@
 			rel="stylesheet">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<script>
+			try {
+				const stored = localStorage.getItem('darkMode');
+				const dark =
+					stored !== null
+						? stored === 'true'
+						: window.matchMedia('(prefers-color-scheme: dark)').matches;
+				if (dark) document.documentElement.classList.add('dark-mode');
+			} catch {}
+		</script>
+		<style>
+			html {
+				background-color: #fffef8;
+				color-scheme: light;
+			}
+
+			html.dark-mode {
+				background-color: #10100c;
+				color-scheme: dark;
+			}
+		</style>
 		
 		%sveltekit.head%
 	</head>
