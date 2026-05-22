@@ -1,9 +1,17 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
   import { identifyWithConsent, trackWithConsent } from '$lib/utils/consent';
   
 	let email = '';
+	let heroTextVisible = $state(false);
+
+	onMount(() => {
+		requestAnimationFrame(() => {
+			heroTextVisible = true;
+		});
+	});
 
 	async function handleNewsletterSubmit(event: SubmitEvent) {
 		event.preventDefault();
@@ -75,6 +83,7 @@
   import NetworkIcon from 'iconoir/icons/regular/network-right.svg';
   import PlantIcon from 'iconoir/icons/regular/watering-soil.svg';
   import TreeIcon from 'iconoir/icons/regular/tree.svg';
+  import HeroLogo from '$lib/components/ui/atoms/HeroLogo.svelte';
 </script>
 
 <svelte:head>
@@ -126,7 +135,7 @@
 <div class="container">
 	<section class="hero">
 		<div class="hero-title-area">
-			<div class="hero-title">
+			<div class="hero-title" class:is-visible={heroTextVisible}>
 				<h1>
 					<span class="devrel">DEVREL</span>
 					<span class="foundation">Foundation</span>
@@ -135,7 +144,9 @@
 					Fostering growth, community, and best practices in Developer Relations.
 				</p>
 			</div>
-			<img src="/drf_logo_symbol.svg" alt="DevRel Foundation Logo" class="hero-logo" />
+			<div class="hero-logo-wrap" aria-label="DevRel Foundation Logo" role="img">
+				<HeroLogo />
+			</div>
 		</div>
 	</section>
 
@@ -220,6 +231,28 @@
 	.hero-title {
 		text-align: center;
 		flex: 1;
+		--hero-text-duration: 0.65s;
+	}
+
+	.hero-title h1,
+	.hero-title .subtitle {
+		opacity: 0;
+		transform: translateY(0.4rem);
+		transition:
+			opacity var(--hero-text-duration) ease-out,
+			transform var(--hero-text-duration) ease-out;
+	}
+
+	.hero-title.is-visible h1 {
+		opacity: 1;
+		transform: translateY(0);
+		transition-delay: 0.05s;
+	}
+
+	.hero-title.is-visible .subtitle {
+		opacity: 1;
+		transform: translateY(0);
+		transition-delay: 0.2s;
 	}
 
 	.hero h1 {
@@ -240,11 +273,9 @@
 		line-height: 1;
 	}
 
-	.hero-logo {
-		height: auto;
-		max-width: min(40vw, 200px);
-		width: auto;
+	.hero-logo-wrap {
 		flex-shrink: 0;
+		width: min(40vw, 200px);
 	}
 
 	.hero .subtitle {
@@ -377,12 +408,12 @@
 			text-align: left;
 		}
 
-		.hero h1 {
-			font-size: calc(var(--step-5) * 1.2);
+		.hero-logo-wrap {
+			width: calc(40% - var(--space-l));
 		}
 
-		.hero-logo {
-			max-width: calc(40% - var(--space-l));
+		.hero h1 {
+			font-size: calc(var(--step-5) * 1.2);
 		}
 
 		.newsletter-form {
@@ -391,6 +422,15 @@
 
 		.content-boxes {
 			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-title h1,
+		.hero-title .subtitle {
+			opacity: 1;
+			transform: none;
+			transition: none;
 		}
 	}
 </style>
