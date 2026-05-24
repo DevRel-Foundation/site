@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import { identifyWithConsent, trackWithConsent } from '$lib/utils/consent';
   
-	let email = '';
+	let email = $state('');
 	let heroTextVisible = $state(false);
 
 	onMount(() => {
@@ -157,7 +157,7 @@
 			<p>
 				To elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
 			</p>
-			<button class="content-button" on:click={handleMissionClick}>Learn</button>
+			<button class="content-button" onclick={handleMissionClick}>Learn</button>
 		</div>
 
 		<div class="content-box">
@@ -166,7 +166,7 @@
 			<p>
 				We source and innovate on the knowledge, systems, and best practices needed to achieve technology adoption.
 			</p>
-			<button class="content-button" on:click={handleProjectClick}>Explore</button>
+			<button class="content-button" onclick={handleProjectClick}>Explore</button>
 		</div>
 
 		<div class="content-box">
@@ -175,7 +175,7 @@
 			<p>
 				Partner with us on <a href="https://discord.gg/G7CSTKZcuT">Discord</a> and <a href="https://github.com/DevRel-Foundation">GitHub</a> to share your voice and collaborate with peers.
 			</p>
-			<button class="content-button" on:click={handleJoinClick}>Get Involved</button>
+			<button class="content-button" onclick={handleJoinClick}>Get Involved</button>
 		</div>
 	</section>
 
@@ -186,7 +186,7 @@
 				Stay in the loop with the latest announcements, events, best practices, and other community news.
 			</p>
 
-			<form class="newsletter-form" on:submit={handleNewsletterSubmit}>
+			<form class="newsletter-form" onsubmit={handleNewsletterSubmit}>
 				<input type="email" bind:value={email} placeholder="Enter your email address" required />
 				<button type="submit">Subscribe</button>
 			</form>

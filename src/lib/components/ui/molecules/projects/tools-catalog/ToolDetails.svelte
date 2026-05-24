@@ -48,7 +48,7 @@
 
             <button 
             class="share-btn"
-            on:click={(e) => copyToolUrl(e)}
+            onclick={(e) => copyToolUrl(e)}
             title="Copy link to this tool"
             >
             Share 🔗

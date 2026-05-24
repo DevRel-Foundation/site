@@ -12,7 +12,7 @@
     <button 
       class="pagination-btn"
       disabled={!canGoPrevious}
-      on:click={() => onPageChange(currentPage - 1)}
+      onclick={() => onPageChange(currentPage - 1)}
       aria-label="Previous page"
     >
       ‹ Previous
@@ -25,7 +25,7 @@
     <button 
       class="pagination-btn"
       disabled={!canGoNext}
-      on:click={() => onPageChange(currentPage + 1)}
+      onclick={() => onPageChange(currentPage + 1)}
       aria-label="Next page"
     >
       Next ›

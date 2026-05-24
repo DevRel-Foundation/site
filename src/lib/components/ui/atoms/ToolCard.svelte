@@ -11,8 +11,8 @@
   class:selected={isSelected}
   role="button"
   tabindex="0"
-  on:click={() => onSelect(key)}
-  on:keydown={(e) => e.key === 'Enter' && onSelect(key)}
+  onclick={() => onSelect(key)}
+  onkeydown={(e) => e.key === 'Enter' && onSelect(key)}
 >
   <h3 class="tool-name">{tool.name || key}</h3>
   <p class="tool-description">{tool.description || ''}</p>

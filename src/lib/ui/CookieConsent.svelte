@@ -12,8 +12,8 @@
       </p>
     </div>
     <div class="cookie-actions">
-      <button on:click={onAccept} class="btn-accept">Accept All</button>
-      <button on:click={onReject} class="btn-reject">Reject</button>
+      <button onclick={onAccept} class="btn-accept">Accept All</button>
+      <button onclick={onReject} class="btn-reject">Reject</button>
     </div>
   </div>
 </div>

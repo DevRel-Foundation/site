@@ -56,7 +56,7 @@
         <span class="copy-confirm">Copied!</span>
       {/if}
       <blockquote>
-        <img src="{CopyIcon}" alt="Copy Citation" class="copy-icon" on:click={(e) => handleCopy(0,e)} />
+        <img src="{CopyIcon}" alt="Copy Citation" class="copy-icon" onclick={(e) => handleCopy(0,e)} />
         This documentation includes material from the Developer Relations Foundation, available under the 
         <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
           Creative Commons Attribution 4.0 International License
@@ -69,7 +69,7 @@
         <span class="copy-confirm">Copied!</span>
       {/if}
       <blockquote>
-        <img src="{CopyIcon}" alt="Copy Citation" class="copy-icon" on:click={(e) => handleCopy(1,e)} />
+        <img src="{CopyIcon}" alt="Copy Citation" class="copy-icon" onclick={(e) => handleCopy(1,e)} />
         This documentation is adapted from materials originally created by the Developer Relations Foundation, available under the 
         <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
           Creative Commons Attribution 4.0 International License

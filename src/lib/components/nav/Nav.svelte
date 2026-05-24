@@ -410,7 +410,7 @@
     visibility: visible;
   }
   
-  .nav-menu li {
+  .nav-menu :global(li) {
     width: 100%;
   }
   
@@ -600,7 +600,7 @@
       visibility: visible;
     }
 
-    .nav-menu li {
+    .nav-menu :global(li) {
       width: auto;
     }
 

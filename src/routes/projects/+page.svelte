@@ -72,25 +72,25 @@
 			<div class="filter-menu">
 				<button 
 					class="filter-btn {selectedFilter === 'all' ? 'active' : ''}"
-					on:click={() => setFilter('all')}
+					onclick={() => setFilter('all')}
 				>
 					All Projects
 				</button>
 				<button 
 					class="filter-btn {selectedFilter === 'sandbox' ? 'active' : ''}"
-					on:click={() => setFilter('sandbox')}
+					onclick={() => setFilter('sandbox')}
 				>
 					Sandbox
 				</button>
 				<button 
 					class="filter-btn {selectedFilter === 'incubation' ? 'active' : ''}"
-					on:click={() => setFilter('incubation')}
+					onclick={() => setFilter('incubation')}
 				>
 					Incubation
 				</button>
 				<button 
 					class="filter-btn {selectedFilter === 'graduated' ? 'active' : ''}"
-					on:click={() => setFilter('graduated')}
+					onclick={() => setFilter('graduated')}
 				>
 					Graduated
 				</button>
@@ -133,11 +133,11 @@
 					<h3>{project.title}</h3>
 					<p class="description">{project.description}</p>
 					{#if project.learnMoreUrl.startsWith('http')}
-						<button class="cta" on:click={() => window.open(project.learnMoreUrl, '_blank')}>
+						<button class="cta" onclick={() => window.open(project.learnMoreUrl, '_blank')}>
 							Learn more →
 						</button>
 					{:else}
-						<button class="cta" on:click={() => goto(project.learnMoreUrl)}>
+						<button class="cta" onclick={() => goto(project.learnMoreUrl)}>
 							Learn more →
 						</button>
 					{/if}
@@ -170,7 +170,7 @@
 			To propose new projects or give feedback, attend a working group call, and start the conversation.
 		</p>
 
-		<button class="cta" on:click={handleJoinClick}>Join Us</button>
+		<button class="cta" onclick={handleJoinClick}>Join Us</button>
 
 	</section>
 </div>

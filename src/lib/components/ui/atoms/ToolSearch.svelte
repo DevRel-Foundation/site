@@ -28,7 +28,7 @@
       type="text"
       {placeholder}
       {value}
-      on:input={handleInput}
+      oninput={handleInput}
       class="search-field"
     />
     <SearchIcon />
@@ -36,7 +36,7 @@
       <button
         type="button"
         class="clear-button"
-        on:click={clearInput}
+        onclick={clearInput}
         aria-label="Clear search"
       >
         ✕
