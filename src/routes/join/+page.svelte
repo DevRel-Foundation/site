@@ -54,8 +54,6 @@
 		</div>
 	</section>
 
-	<div class="section-divider"></div>
-
 	<section class="page-section">
 		<h2>Why join the DevRel Foundation?</h2>
 		<p>
@@ -83,8 +81,6 @@
 		</div>	
 	</section>
 
-	<div class="section-divider"></div>
-
 	<section class="page-section">
 		<h2 id="join" class="content-header">How to join the Community</h2>
 		<p>
@@ -111,8 +107,6 @@
 			</p>
 		</div>
 	</section>
-
-	<div class="section-divider"></div>
 
 	<section class="page-section">
 		<h2 id="contribute" class="content-header">Contribute to Open-Source</h2>
@@ -156,8 +150,6 @@
 			</div>
 		</div>	
 	</section>
-
-	<div class="section-divider"></div>
 	
 	<section class="page-section">
 		<h2 id="lead" class="content-header">Become a Leader</h2>

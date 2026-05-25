@@ -24,9 +24,7 @@
 	<p>
 		Definitions on this page are a synthesis of the collective knowledge and experiences of the Developer Relations community.
 	</p>
-
-    <div class="section-divider"></div>
-
+  
     <div class="contribute-button-container">
       <a href="/join-us" class="contribute-button">
         Contribute to or endorse these definitions →

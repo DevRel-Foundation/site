@@ -14,7 +14,7 @@
 		pointer-events: none;
 		width: 0;
 		height: 0;
-		right: 0;
+		right: 12vw;
 		top: -4%;
 	}
 
@@ -40,7 +40,6 @@
 
 	@media (max-width: 768px) {
 		.motif-overlapping-circles {
-			right: 6vw;
 			top: -2%;
 		}
 

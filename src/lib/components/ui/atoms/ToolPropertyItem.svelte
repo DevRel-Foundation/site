@@ -1,7 +1,7 @@
 <script lang="ts">
     export let format = '';
     export let label = '';
-    export let value = '';
+    export let value: string | string[] | Record<string, unknown> | null = '';
 
     $: format = format || '';
     $: label = label || '';

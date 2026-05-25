@@ -1,14 +1,48 @@
 <script lang="ts">
   import { Tabs } from 'bits-ui';
   import PropertyItem from '../../../atoms/ToolPropertyItem.svelte';
-  import SectionDivider from '../../../atoms/SectionDivider.svelte';
 
-  export let tool: any = null;
-  $: tool = tool || null;
+  type LearningItem = {
+    type: string;
+    url: string;
+    title: string;
+  };
+
+  type ToolEvaluation = {
+    team: string;
+    decision?: string;
+    pricing?: string;
+    compatibility?: string;
+    customizability?: string[];
+    notes?: string[];
+  };
+
+  type CatalogTool = {
+    id?: string;
+    name: string;
+    description?: string;
+    url?: string;
+    jobs?: {
+      categories?: string[];
+      outcomes?: string[];
+      motivations?: string[];
+      scenarios?: string[];
+    };
+    labels?: string[];
+    evaluation?: ToolEvaluation[];
+    learning?: {
+      setup?: LearningItem[];
+      'getting-started'?: LearningItem[];
+      advanced?: LearningItem[];
+    };
+  };
+
+  let { tool = null }: { tool?: CatalogTool | null } = $props();
 
   let activeTab = $state('properties');
-  let showCopyToast = false;
-  let toastX = 0, toastY = 0;
+  let showCopyToast = $state(false);
+  let toastX = $state(0);
+  let toastY = $state(0);
 
   function copyToolUrl(event: MouseEvent) {
     if (tool?.id) {
@@ -17,13 +51,13 @@
       toastX = event.clientX;
       toastY = event.clientY;
       showCopyToast = true;
-      setTimeout(() => showCopyToast = false, 1500);
+      setTimeout(() => (showCopyToast = false), 1500);
     }
   }
 
-  function getEditUrl(tool: any): string {
-    if (tool?.id) {
-      return `https://github.com/DevRel-Foundation/tools-catalog/blob/main/data/${tool.id}.json`;
+  function getEditUrl(catalogTool: CatalogTool): string {
+    if (catalogTool?.id) {
+      return `https://github.com/DevRel-Foundation/tools-catalog/blob/main/data/${catalogTool.id}.json`;
     }
     return '';
   }
@@ -59,17 +93,15 @@
         <p class="tool-description">{tool.description}</p>
       {/if}
 
-      <SectionDivider />
-
       <Tabs.Content value="properties" class="tab-content">
           <div class="tool-properties">
             <dl class="properties-list">
-              <PropertyItem label="URL" format="url" value={tool.url} />
-              <PropertyItem label="Job Categories" value={tool.jobs ? tool.jobs.categories : []} />
-              <PropertyItem label="Outcomes" value={tool.jobs ? tool.jobs.outcomes : []} />
-              <PropertyItem label="Motivations" value={tool.jobs ? tool.jobs.motivations : []} />
-              <PropertyItem label="Scenarios" value={tool.jobs ? tool.jobs.scenarios : []} />
-              <PropertyItem label="Labels" value={tool.labels} />
+              <PropertyItem label="URL" format="url" value={tool.url ?? ''} />
+              <PropertyItem label="Job Categories" value={tool.jobs?.categories ?? []} />
+              <PropertyItem label="Outcomes" value={tool.jobs?.outcomes ?? []} />
+              <PropertyItem label="Motivations" value={tool.jobs?.motivations ?? []} />
+              <PropertyItem label="Scenarios" value={tool.jobs?.scenarios ?? []} />
+              <PropertyItem label="Labels" value={tool.labels ?? []} />
             </dl>
           </div>
       </Tabs.Content>
@@ -78,7 +110,7 @@
           <div class="evaluation-content">
             {#if tool.evaluation && tool.evaluation.length > 0}
               <div class="evaluation-list">
-                {#each tool.evaluation as evaluation, index}
+                {#each tool.evaluation as evaluation, index (`${evaluation.team}-${index}`)}
                   <div class="evaluation-item">
                     <div class="evaluation-header">
                       <h4 class="evaluation-source">
@@ -109,7 +141,7 @@
 
                     {#if evaluation.notes && evaluation.notes.length > 0}
                       <div class="evaluation-notes">
-                        {#each evaluation.notes as note}
+                        {#each evaluation.notes as note, noteIndex (noteIndex)}
                           <p>{note}</p>
                         {/each}
                       </div>
@@ -137,7 +169,7 @@
                   <div class="learning-section">
                     <h3>Setup</h3>
                     <ul class="learning-list">
-                      {#each tool.learning.setup as item}
+                      {#each tool.learning.setup as item (item.url)}
                         {#if item.type === 'article'}
                           <li class="learning-item">
                             <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
@@ -154,7 +186,7 @@
                   <div class="learning-section">
                     <h3>Getting Started</h3>
                     <ul class="learning-list">
-                      {#each tool.learning['getting-started'] as item}
+                      {#each tool.learning['getting-started'] as item (item.url)}
                         {#if item.type === 'article'}
                           <li class="learning-item">
                             <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
@@ -171,7 +203,7 @@
                   <div class="learning-section">
                     <h3>Advanced</h3>
                     <ul class="learning-list">
-                      {#each tool.learning.advanced as item}
+                      {#each tool.learning.advanced as item (item.url)}
                         {#if item.type === 'article'}
                           <li class="learning-item">
                             <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">

@@ -560,6 +560,7 @@ header {
 .main {
   position: relative;
   isolation: isolate;
+  overflow-x: clip;
 }
 
 .main :is(section, .container, .layout-section, .homepage, article) {

@@ -48,7 +48,6 @@
 			
 		</p>
 
-		<div class="section-divider"></div>
 
 		<h2>How It Works</h2>
 
@@ -97,7 +96,6 @@
 			</div>
 		</div>
 
-		<div class="section-divider"></div>
 
 		<h2 id="groups">Active Working Groups</h2>
 
@@ -147,8 +145,6 @@
 		<a href="https://lists.dev-rel.org/g/wg-resource-aggregation/calendar">
 			<img src={CalendarIcon} alt="Join a Call" class="social-icon" /></a> First Thursday of each month (<a href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/working-group-calls">Agenda and Notes</a>)
 		</p>
-
-		<div class="section-divider"></div>
 
 </main>
 
