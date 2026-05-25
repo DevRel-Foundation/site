@@ -143,7 +143,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 4px solid var(--color-mint);
+    border: 4px solid var(--color-accent-green);
     object-fit: cover;
   }
 
@@ -193,7 +193,7 @@
     font-weight: 600;
     padding: var(--space-2xs) var(--space-s);
     border: 1px solid var(--color-link);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     transition: all 0.2s ease;
   }
 
@@ -216,7 +216,7 @@
     font-weight: 600;
     padding: var(--space-2xs) var(--space-s);
     border: 1px solid var(--color-link);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     transition: all 0.2s ease;
   }
 

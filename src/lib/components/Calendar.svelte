@@ -449,7 +449,7 @@
     text-align: left;
     padding: var(--space-s);
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     background: var(--color-background);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -540,7 +540,7 @@
     line-height: 1.3;
     text-decoration: none;
     border-bottom: 2px solid transparent;
-    background-image: linear-gradient(to right, var(--color-mint-dark), var(--color-mint), rgba(var(--color-mint-rgb, 0, 255, 127), 0.3), transparent);
+    background-image: linear-gradient(to right, var(--color-forest), var(--color-mint), rgba(var(--color-mint-rgb), 0.3), transparent);
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 100% 2px;
@@ -645,7 +645,7 @@
     font-size: var(--step--1);
     padding: var(--space-xs) var(--space-s);
     border: 1px solid var(--color-link);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-pill);
     width: fit-content;
     transition: all 0.2s ease;
   }
@@ -668,7 +668,7 @@
     text-align: left;
     padding: var(--space-s);
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     background: var(--color-background);
     color: var(--color-text);
     cursor: pointer;
@@ -681,7 +681,7 @@
   
   .subscribe-link:hover {
     background: var(--color-background-secondary-1);
-    border-color: var(--color-mint);
+    border-color: var(--color-accent-green);
     text-decoration: none;
   }
   
@@ -708,7 +708,7 @@
     width: 32px;
     height: 32px;
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-pill);
     background: var(--color-background);
     color: var(--color-text);
     cursor: pointer;
@@ -719,7 +719,7 @@
   
   .pagination-btn:hover:not(:disabled) {
     background: var(--color-background-secondary-1);
-    border-color: var(--color-mint);
+    border-color: var(--color-accent-green);
   }
   
   .pagination-btn:disabled {
@@ -779,7 +779,7 @@
     top: -2rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-forest);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);

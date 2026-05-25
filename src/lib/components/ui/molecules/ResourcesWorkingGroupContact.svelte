@@ -20,7 +20,7 @@
 <style>
 .contact-box {
   background: var(--color-button-background);
-  border: 2px solid var(--color-mint-dark);
+  border: 2px solid var(--color-forest);
   color: var(--color-text-dark, #E9E8E1);
   border-radius: var(--radius-l, 1rem);
   --icon-filter: invert(1);

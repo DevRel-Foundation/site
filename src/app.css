@@ -10,32 +10,39 @@
   --color-background-secondary-1: hsl(48, 61.8%, 94%);
   --color-background-secondary-2: hsl(48, 13%, 92%);
   --color-mint: hsl(90, 65%, 81%);
-  --color-blue: hsl(193, 100%, 92%);
-  --color-teal: hsl(168, 85%, 91%);
-  --color-gold: hsl(41.9, 100%, 91.6%);
+  --color-mint-rgb: 200, 236, 173;
+  --color-sand: hsl(41.9, 100%, 91.6%);
+  --color-sky: hsl(193, 100%, 92%);
+  --color-agave: hsl(168, 85%, 91%);
+  --color-forest: hsl(91, 93.5%, 6.1%);
+  --color-forest-rgb: 15, 30, 1;
+  --color-gold: hsl(41.7, 74.5%, 21.6%);
+  --color-sea: hsl(193, 72%, 14%);
+  --color-hosta: hsl(168, 63%, 14%);
+  --color-accent-green: var(--color-mint);
+  --color-accent-gold: var(--color-sand);
+  --color-accent-blue: var(--color-sky);
+  --color-accent-teal: var(--color-agave);
   --color-text: hsl(0, 0%, 32%);
   --color-link: hsl(140, 38.2%, 18%);
+  --color-light-cream: hsl(48, 100%, 98%);
   --color-background-dark: hsl(60, 3.2%, 6.1%);
   --color-background-secondary-1-dark: hsl(60, 5.2%, 9.9%);
   --color-background-secondary-2-dark: hsl(60, 8.4%, 16%);
-  --color-mint-dark: hsl(90, 98%, 18%);
-  --color-blue-dark: hsl(193, 72%, 14%);
-  --color-teal-dark: hsl(168, 63%, 14%);
-  --color-gold-dark: hsl(41.7, 74.5%, 21.6%);
   --color-text-dark: hsl(60, 20%, 91%);
   --color-link-dark: hsl(90, 65%, 81%);
-  --color-accent-text: var(--color-mint);
-  --color-accent-text-dark: var(--color-mint-dark);
+  --color-accent-text: var(--color-accent-green);
+  --color-accent-text-dark: var(--color-forest);
   --color-offwhite: var(--color-background);
   --color-cream: var(--color-background-secondary-1);
-  --color-cream-dark: var(--color-gold-dark);
+  --color-cream-dark: var(--color-gold);
   --color-logo-text: rgb(0, 36, 46);
   --color-logo-text-dark: rgb(121, 191, 68);
   --color-button-background: var(--color-link);
   --color-button-background-dark: var(--color-link-dark);
-  --color-button-text: var(--color-mint);
-  --color-button-text-dark: var(--color-mint-dark);
-  --color-code-background: var(--color-mint-dark);
+  --color-button-text: var(--color-accent-green);
+  --color-button-text-dark: var(--color-forest);
+  --color-code-background: var(--color-forest);
   --color-code-background-dark: var(--color-background-secondary-1-dark);
 
   --color-success: hsl(152, 76%, 90%);
@@ -96,6 +103,7 @@
   --radius-l: 16px;
   --radius-xl: 24px;
   --radius-circle: 50%;
+  --radius-pill: 999px;
 
   --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
   --space-2xs: clamp(0.4rem, 0.37rem + 0.17vw, 0.5rem);
@@ -125,7 +133,7 @@
   --link-underline-offset: 0.2em;
   --link-underline-thickness: 1px;
 
-  --pattern-color: hsla(60, 8%, 12%, 0.14);
+  --pattern-color: hsla(60, 10%, 14%, 0.24);
 
   --phi: 1.618;
 
@@ -168,7 +176,7 @@
   --z-max: 10000;
 
   --focus-ring-width: 2px;
-  --focus-ring-color: var(--color-mint);
+  --focus-ring-color: var(--color-accent-green);
   --focus-ring-offset: var(--space-2xs);
 }
 
@@ -287,10 +295,10 @@ html.dark-mode {
   --color-text: var(--color-text-dark);
   --color-background-secondary-1: var(--color-background-secondary-1-dark);
   --color-background-secondary-2: var(--color-background-secondary-2-dark);
-  --color-mint: var(--color-mint-dark);
-  --color-blue: var(--color-blue-dark);
-  --color-teal: var(--color-teal-dark);
-  --color-gold: var(--color-gold-dark);
+  --color-accent-green: var(--color-forest);
+  --color-accent-gold: var(--color-gold);
+  --color-accent-blue: var(--color-sea);
+  --color-accent-teal: var(--color-hosta);
   --color-accent-text: var(--color-accent-text-dark);
   --color-link: var(--color-link-dark);
   --color-offwhite: var(--color-background);
@@ -298,10 +306,10 @@ html.dark-mode {
   --color-logo-text: var(--color-logo-text-dark);
   --color-button-background: var(--color-link);
   --color-button-background-dark: var(--color-link-dark);
-  --color-button-text: var(--color-mint-dark);
+  --color-button-text: var(--color-forest);
   --color-button-text-dark: var(--color-mint);
   --color-code-background: var(--color-background-secondary-1-dark);
-  --color-code-background-dark: var(--color-mint-dark);
+  --color-code-background-dark: var(--color-forest);
   --icon-filter: invert(0.9) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.9);
   --pattern-color: hsla(60, 20%, 91%, 0.16);
   --shadow-color: hsla(60, 20%, 91%, 0.12);
@@ -349,10 +357,6 @@ h1 {
   margin-bottom: var(--space-m);
   margin-top: var(--space-xl);
   text-align: left;
-}
-
-.homepage .hero h1 {
-  text-align: center;
 }
 
 h2 {
@@ -470,6 +474,89 @@ a {
   outline-offset: var(--focus-ring-offset);
 }
 
+button,
+[data-button-root] {
+  border-radius: var(--radius-pill);
+}
+
+/* Blog & filter chrome: shared chip styles, pinned in dark mode */
+.category-link {
+  padding: var(--space-2xs) var(--space-s);
+  border: 1px solid var(--color-background-secondary-2-dark);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  color: var(--color-background-secondary-2-dark);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+button.category-link {
+  font: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.category-link:hover,
+.category-link.active {
+  background-color: var(--color-background-secondary-2-dark);
+  color: var(--color-light-cream);
+  border-color: var(--color-background-secondary-2-dark);
+}
+
+.category-search {
+  padding: var(--space-2xs) var(--space-s);
+  padding-left: 2.25rem;
+  border: 1px solid var(--color-background-secondary-2-dark);
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-size: var(--step-0);
+  min-width: 200px;
+  background: transparent;
+  color: var(--color-background-secondary-2-dark);
+  transition: all 0.2s ease;
+}
+
+.category-search:focus {
+  outline: none;
+  border-color: var(--color-background-secondary-2-dark);
+}
+
+.category-tag {
+  color: var(--color-light-cream);
+}
+
+body.dark-mode .category-link,
+html.dark-mode .category-link,
+body.dark-mode .category-search,
+html.dark-mode .category-search,
+body.dark-mode .rss-link,
+html.dark-mode .rss-link {
+  color: var(--color-text-dark);
+  border-color: var(--color-text-dark);
+}
+
+body.dark-mode .category-link:hover,
+body.dark-mode .category-link.active,
+html.dark-mode .category-link:hover,
+html.dark-mode .category-link.active {
+  color: var(--color-light-cream);
+  background-color: var(--color-background-secondary-2-dark);
+  border-color: var(--color-background-secondary-2-dark);
+}
+
+body.dark-mode .category-search:focus,
+html.dark-mode .category-search:focus {
+  color: var(--color-light-cream);
+  background-color: var(--color-background-secondary-2-dark);
+  border-color: var(--color-background-secondary-2-dark);
+}
+
+body.dark-mode .rss-link:hover,
+html.dark-mode .rss-link:hover {
+  color: var(--color-text-dark);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -542,14 +629,17 @@ header {
   width: 100%;
 }
 
-/* Stacking: body bg → dot grid (0, fixed/absolute) → motifs (1) → content in .main (2) */
+/* Stacking: dot grid (-1) → main (1) → motifs in main (1–2) → nav (1000) */
 .site-chrome {
   position: relative;
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 [data-pattern] {
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -559,8 +649,10 @@ header {
 
 .main {
   position: relative;
+  z-index: 1;
   isolation: isolate;
   overflow-x: clip;
+  flex: 1;
 }
 
 .main :is(section, .container, .layout-section, .homepage, article) {
@@ -618,7 +710,7 @@ header {
 .section-divider {
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-accent-green), transparent);
   margin: var(--space-s) var(--space-xs);
   border-radius: var(--radius-s);
 }

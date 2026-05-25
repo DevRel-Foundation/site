@@ -1,5 +1,11 @@
 <script lang="ts">
-  export let tool: any;
+  type CatalogTool = {
+    name?: string;
+    description?: string;
+    labels?: string[];
+  };
+
+  export let tool: CatalogTool;
   export let key: string;
   export let isSelected: boolean = false;
   export let onSelect: (key: string) => void = () => {};
@@ -18,7 +24,7 @@
   <p class="tool-description">{tool.description || ''}</p>
   {#if tool.labels && tool.labels.length > 0}
     <div class="tool-labels">
-      {#each tool.labels.slice(0, 3) as label}
+      {#each tool.labels.slice(0, 3) as label (label)}
         <span class="tool-label">{label}</span>
       {/each}
       {#if tool.labels.length > 3}
@@ -47,7 +53,7 @@
   .tool-card.selected {
     border-color: var(--color-button-background);
     background: var(--color-background-secondary-2);
-    box-shadow: 0 0 0 1px var(--color-mint);
+    box-shadow: 0 0 0 1px var(--color-accent-green);
   }
 
   .tool-name {
@@ -64,6 +70,7 @@
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -84,7 +91,7 @@
   }
 
   .tool-label-more {
-    background: var(--color-mint-dark);
+    background: var(--color-forest);
     color: var(--color-offwhite);
     padding: 2px 6px;
     border-radius: var(--radius-s);

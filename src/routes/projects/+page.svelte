@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import ActionCard from '$lib/components/ui/molecules/ActionCard.svelte';
+	import { CtaButton } from '$lib/components/ui/primitives';
 
 	type ProjectStatus = 'sandbox' | 'incubation' | 'graduated';
 	type ProjectFilter = 'all' | ProjectStatus;
@@ -81,25 +83,25 @@
 		<div class="filter-controls">
 			<div class="filter-menu">
 				<button 
-					class="filter-btn {selectedFilter === 'all' ? 'active' : ''}"
+					class="category-link {selectedFilter === 'all' ? 'active' : ''}"
 					onclick={() => setFilter('all')}
 				>
 					All projects
 				</button>
 				<button 
-					class="filter-btn {selectedFilter === 'sandbox' ? 'active' : ''}"
+					class="category-link {selectedFilter === 'sandbox' ? 'active' : ''}"
 					onclick={() => setFilter('sandbox')}
 				>
 					Sandbox
 				</button>
 				<button 
-					class="filter-btn {selectedFilter === 'incubation' ? 'active' : ''}"
+					class="category-link {selectedFilter === 'incubation' ? 'active' : ''}"
 					onclick={() => setFilter('incubation')}
 				>
 					Incubating
 				</button>
 				<button 
-					class="filter-btn {selectedFilter === 'graduated' ? 'active' : ''}"
+					class="category-link {selectedFilter === 'graduated' ? 'active' : ''}"
 					onclick={() => setFilter('graduated')}
 				>
 					Graduated
@@ -116,7 +118,7 @@
 						type="text" 
 						placeholder="Find project..." 
 						bind:value={searchTerm}
-						class="search-input"
+						class="category-search"
 					/>
 				</div>
 			</div>
@@ -139,19 +141,19 @@
 
 		<div class="u-grid u-grid-auto-fill projects-grid">
 			{#each filteredProjects as project (project.title)}
-				<div class="project-card">
-					<h3>{project.title}</h3>
-					<p class="description">{project.description}</p>
-					{#if project.learnMoreUrl.startsWith('http')}
-						<button class="cta" onclick={() => window.open(project.learnMoreUrl, '_blank')}>
-							Learn more →
-						</button>
-					{:else}
-						<button class="cta" onclick={() => goto(project.learnMoreUrl)}>
-							Learn more →
-						</button>
-					{/if}
-				</div>
+				<ActionCard
+					title={project.title}
+					description={project.description}
+					descriptionClamp={true}
+					ctaLabel="Learn more →"
+					onclick={() => {
+						if (project.learnMoreUrl.startsWith('http')) {
+							window.open(project.learnMoreUrl, '_blank');
+						} else {
+							goto(project.learnMoreUrl);
+						}
+					}}
+				/>
 			{:else}
 				<div class="no-projects">
 					<p>
@@ -180,7 +182,7 @@
 			To propose new projects or give feedback, attend a working group call, and start the conversation.
 		</p>
 
-		<button class="cta" onclick={handleJoinClick}>Join us</button>
+		<CtaButton onclick={handleJoinClick}>Join us</CtaButton>
 
 	</section>
 </div>
@@ -194,44 +196,6 @@
 		margin-bottom: var(--space-s);
 	}
 
-	.cta {
-		margin: 0;
-		padding: 0.75em;
-		padding-left: 3em;;
-		padding-right: 3em;;
-		background: var(--color-button-background);
-		border: none;
-		cursor: pointer;
-		border-radius: 4px;
-		font-weight: 500;
-		transition: all 0.2s ease;
-		color: var(--color-button-text);
-		display: block;
-	}
-
-	.cta:hover {
-		background-color: var(--color-button-background);
-		transform: translateY(-1px);
-		color: var(--color-button-text);
-		text-decoration: underline;
-	}
-
-	.cta:focus {
-		outline: 2px solid var(--color-button-background);
-		outline-offset: 2px;
-	}
-
-	.cta:active {
-		transform: translateY(0);
-		background-color: var(--color-button-background);
-	}
-
-	.cta:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-		transform: none;
-	}
-
 	.filter-controls {
 		display: flex;
 		justify-content: space-between;
@@ -243,7 +207,7 @@
 
 	.filter-menu {
 		display: flex;
-		gap: 1rem;
+		gap: var(--space-s);
 		flex-wrap: wrap;
 	}
 
@@ -259,7 +223,7 @@
 
 	.search-icon {
 		position: absolute;
-		left: 0.75rem;
+		left: var(--space-s);
 		width: 1rem;
 		height: 1rem;
 		color: var(--color-background-secondary-2-dark);
@@ -267,48 +231,13 @@
 		z-index: 1;
 	}
 
-	.search-input {
-		padding: 0.5rem 1rem 0.5rem 2.5rem;
-		border: 2px solid var(--color-accent-text);
-		border-radius: 4px;
-		font-size: 1rem;
-		min-width: 200px;
-		transition: border-color 0.2s ease;
-	}
-
-	.search-input:focus {
-		outline: none;
-		border-color: var(--color-background-secondary-2-dark);
+	:global(body.dark-mode) .search-input-wrapper .search-icon,
+	:global(html.dark-mode) .search-input-wrapper .search-icon {
+		color: var(--color-text-dark);
 	}
 
 	.projects-grid {
 		margin-top: var(--space-m);
-	}
-
-	.project-card {
-		border: 1px solid var(--color-light-gray);
-		border-radius: 8px;
-		padding: var(--space-m);
-		background-color: var(--color-background-secondary-1);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		transition: box-shadow 0.2s ease, transform 0.2s ease;
-	}
-
-	.project-card:hover {
-		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-		background-color: var(--color-background-secondary-1);
-		transform: translateY(-2px);
-	}
-
-	.project-card h3 {
-		margin: 0 0 var(--space-s) 0;
-		color: var(--color-dark);
-	}
-
-	.project-card p {
-		margin: 0 0 var(--space-m) 0;
-		color: var(--color-gray);
-		line-height: 1.5;
 	}
 
 	.no-projects {
@@ -321,45 +250,6 @@
 
 	.no-projects p {
 		margin: 0;
-	}
-
-	.filter-btn {
-		padding: 0.5rem 1rem;
-		border: 2px solid var(--color-accent-text);
-		background: transparent;
-		color: var(--color-background-secondary-2-dark);
-		cursor: pointer;
-		border-radius: 4px;
-		font-weight: 500;
-		transition: all 0.2s ease;
-	}
-
-	.filter-btn:hover:not(.active) {
-		background-color: var(--color-background-secondary-2-dark);
-		color: var(--color-background);
-	}
-
-	.filter-btn.active {
-		background-color: var(--color-accent-text) !important;
-		color: var(--color-mint-dark) !important;
-	}
-
-	.filter-btn:not(.active) {
-		background: transparent;
-		color: var(--color-background-secondary-2-dark);
-	}
-
-	.description {
-		font-size: var(--step-0);
-		color: var(--color-gray);
-		margin-bottom: var(--space-m);
-		height: calc(4 * 1.5em);
-		line-height: 1.5;
-		overflow: hidden;
-		display: -webkit-box;
-		line-clamp: 4;
-		-webkit-line-clamp: 4;
-		-webkit-box-orient: vertical;
 	}
 
 </style>

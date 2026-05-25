@@ -218,14 +218,14 @@
 	.hero-title-area {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
 		background-color: var(--color-background);
 		gap: var(--space-l);
 	}
 	
 	.hero-title {
-		text-align: center;
+		text-align: left;
 		flex: 1;
 		--hero-text-duration: 0.65s;
 	}
@@ -295,8 +295,8 @@
 		border: var(--border-thickness) solid var(--color-background-secondary-2);
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		text-align: center;
+		align-items: flex-start;
+		text-align: left;
 		min-height: 300px;
 	}
 
@@ -324,13 +324,14 @@
 
 	.content-button {
 		margin-top: auto;
-		padding: var(--space-3xs) var(--space-l);
+		padding: var(--space-xs) var(--space-l);
 		background-color: var(--color-button-background);
 		color: var(--color-button-text);
 		border: none;
-		border-radius: var(--radius-s);
+		border-radius: var(--radius-pill);
 		cursor: pointer;
 		font-weight: 500;
+		line-height: 1;
 	}
 
 	.content-button:hover {
@@ -346,15 +347,19 @@
 		z-index: 1;
 	}
 
+	.newsletter-content {
+		text-align: left;
+	}
+
 	.newsletter-content h2 {
-		color: var(--color-mint-dark);
+		color: var(--color-forest);
 		margin-top: 0;
 		margin-bottom: var(--space-xs);
 		font-size: var(--step-3);
 	}
 
 	.newsletter-content p {
-		color: var(--color-mint-dark);
+		color: var(--color-forest);
 		margin-bottom: var(--space-s);
 		font-size: var(--step-0);
 	}
@@ -363,17 +368,21 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-xs);
-		margin: 0 auto;
 	}
 
 	.newsletter-form input {
 		width: 100%;
-		padding: var(--space-2xs);
+		padding: var(--space-xs) var(--space-m);
 		border: var(--border-thickness) solid var(--color-background-secondary-1);
-		border-radius: var(--radius-s);
+		border-radius: var(--radius-pill);
 		background-color: var(--color-offwhite);
-		color: var(--color-mint-dark);
+		color: var(--color-forest);
 		box-sizing: border-box;
+	}
+
+	.newsletter-form input::placeholder {
+		color: color-mix(in srgb, var(--color-forest) 55%, transparent);
+		opacity: 1;
 	}
 
 	.newsletter-form button {
@@ -381,8 +390,26 @@
 		background-color: var(--color-link);
 		color: var(--color-background-secondary-1);
 		border: none;
-		border-radius: var(--radius-s);
+		border-radius: var(--radius-pill);
 		cursor: pointer;
+	}
+
+	:global(body.dark-mode) .newsletter-content :is(h2, p),
+	:global(html.dark-mode) .newsletter-content :is(h2, p) {
+		color: var(--color-mint);
+	}
+
+	:global(body.dark-mode) .newsletter-form input,
+	:global(html.dark-mode) .newsletter-form input {
+		background-color: var(--color-background-secondary-2-dark);
+		color: var(--color-mint);
+		border-color: var(--color-mint);
+	}
+
+	:global(body.dark-mode) .newsletter-form input::placeholder,
+	:global(html.dark-mode) .newsletter-form input::placeholder {
+		color: var(--color-mint);
+		opacity: 0.75;
 	}
 
 	@media (min-width: 769px) {
@@ -393,11 +420,6 @@
 		.hero-title-area {
 			flex-direction: row;
 			gap: var(--space-m);
-			text-align: left;
-		}
-
-		.hero-title {
-			text-align: left;
 		}
 
 		.hero-logo-wrap {

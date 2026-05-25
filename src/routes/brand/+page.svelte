@@ -8,7 +8,6 @@
     { href: '#color-palette', label: 'Color palette' },
     { href: '#state-colors', label: 'State colors' },
     { href: '#typography', label: 'Typography' },
-    { href: '#logo-construction', label: 'Logo construction' },
     { href: '#logo-usage', label: 'Logo usage' },
     { href: '#motifs-and-patterns', label: 'Motifs and patterns' },
     { href: '#spacing-system', label: 'Spacing system' },
@@ -29,17 +28,17 @@
   ];
 
   const accentLight = [
-    { name: 'Forest green', variable: '--color-mint', hex: '#c8ecad', rgb: '200, 236, 173', cmyk: '—', hsl: '90, 65%, 81%', swatch: 'var(--color-mint)' },
-    { name: 'Sky blue', variable: '--color-blue', hex: '#d8f7ff', rgb: '216, 247, 255', cmyk: '—', hsl: '193, 100%, 92%', swatch: 'var(--color-blue)' },
-    { name: 'Ocean teal', variable: '--color-teal', hex: '#d3f9f0', rgb: '211, 249, 240', cmyk: '—', hsl: '168, 85%, 91%', swatch: 'var(--color-teal)' },
-    { name: 'Sunset gold', variable: '--color-gold', hex: '#fff5d6', rgb: '255, 245, 214', cmyk: '—', hsl: '41.9, 100%, 91.6%', swatch: 'var(--color-gold)' }
+    { name: 'Mint', variable: '--color-mint', hex: '#c8ecad', rgb: '200, 236, 173', cmyk: '—', hsl: '90, 65%, 81%', swatch: 'var(--color-mint)' },
+    { name: 'Sky', variable: '--color-sky', hex: '#d8f7ff', rgb: '216, 247, 255', cmyk: '—', hsl: '193, 100%, 92%', swatch: 'var(--color-sky)' },
+    { name: 'Agave', variable: '--color-agave', hex: '#d3f9f0', rgb: '211, 249, 240', cmyk: '—', hsl: '168, 85%, 91%', swatch: 'var(--color-agave)' },
+    { name: 'Sand', variable: '--color-sand', hex: '#fff5d6', rgb: '255, 245, 214', cmyk: '—', hsl: '41.9, 100%, 91.6%', swatch: 'var(--color-sand)' }
   ];
 
   const accentDark = [
-    { name: 'Forest green dark', variable: '--color-mint-dark', hex: '#275901', rgb: '39, 89, 1', cmyk: '—', hsl: '90, 98%, 18%', swatch: 'var(--color-mint-dark)' },
-    { name: 'Sky blue dark', variable: '--color-blue-dark', hex: '#0a313c', rgb: '10, 49, 60', cmyk: '—', hsl: '193, 72%, 14%', swatch: 'var(--color-blue-dark)' },
-    { name: 'Ocean teal dark', variable: '--color-teal-dark', hex: '#15372f', rgb: '21, 55, 47', cmyk: '—', hsl: '168, 63%, 14%', swatch: 'var(--color-teal-dark)' },
-    { name: 'Sunset gold dark', variable: '--color-gold-dark', hex: '#6B4F1B', rgb: '107, 79, 27', cmyk: '—', hsl: '41.7, 74.5%, 21.6%', swatch: 'var(--color-gold-dark)' }
+    { name: 'Forest', variable: '--color-forest', hex: '#0F1E01', rgb: '15, 30, 1', cmyk: '—', hsl: '91, 93.5%, 6.1%', swatch: 'var(--color-forest)' },
+    { name: 'Sea', variable: '--color-sea', hex: '#0a313c', rgb: '10, 49, 60', cmyk: '—', hsl: '193, 72%, 14%', swatch: 'var(--color-sea)' },
+    { name: 'Hosta', variable: '--color-hosta', hex: '#15372f', rgb: '21, 55, 47', cmyk: '—', hsl: '168, 63%, 14%', swatch: 'var(--color-hosta)' },
+    { name: 'Gold', variable: '--color-gold', hex: '#6B4F1B', rgb: '107, 79, 27', cmyk: '—', hsl: '41.7, 74.5%, 21.6%', swatch: 'var(--color-gold)' }
   ];
 
   const typographyLight = [
@@ -82,6 +81,37 @@
     { name: 'Info (text)', variable: '--color-info-text-dark', hex: '#D8F7FF', rgb: '216, 247, 255', cmyk: '—', hsl: '193, 100%, 92%', swatch: 'var(--color-info-text-dark)' },
     { name: 'Info (border)', variable: '--color-info-border-dark', hex: '#275566', rgb: '39, 85, 102', cmyk: '—', hsl: '193, 45%, 28%', swatch: 'var(--color-info-border-dark)' },
     { name: 'Syntax string (code)', variable: '--color-syntax-string-dark', hex: '#FFF5D6', rgb: '255, 245, 214', cmyk: '—', hsl: '41.9, 100%, 91.6%', swatch: 'var(--color-syntax-string-dark)' }
+  ];
+
+  const colorCombinationItems = [
+    {
+      id: 'mint-text',
+      previewClass: 'mint-bg',
+      elementClass: '',
+      text: 'This combination is good for larger text blocks.',
+      label: 'Text on mint'
+    },
+    {
+      id: 'sand-button',
+      previewClass: '',
+      elementClass: 'sand-bg',
+      text: 'Click me',
+      label: 'Sand button'
+    },
+    {
+      id: 'sky-border',
+      previewClass: 'sky-bg text-border',
+      elementClass: '',
+      text: 'Sentence on sky with a text-colored border.',
+      label: 'Text with border on sky'
+    },
+    {
+      id: 'agave-border',
+      previewClass: 'agave-bg text-border',
+      elementClass: '',
+      text: 'Sentence on agave with a text-colored border.',
+      label: 'Text with border on agave'
+    }
   ];
 
   let copiedKey = $state<string | null>(null);
@@ -147,7 +177,7 @@
     <li><strong>Secondary background 2:</strong> Cards, form fields, highlighted content boxes</li>
   </ul>
 
-  <div class="color-mode-container">
+  <div class="color-mode-container color-mode-container--light">
     <h4>Light mode</h4>
     <table class="palette-table">
       <thead>
@@ -202,7 +232,7 @@
     </table>
   </div>
 
-  <div class="color-mode-container">
+  <div class="color-mode-container color-mode-container--dark">
     <h4>Dark mode</h4>
     <table class="palette-table">
       <thead>
@@ -260,22 +290,35 @@
   <h3>Accent colors</h3>
   <p>Our accent colors should be used strategically to draw attention to important elements and actions.</p>
   <ul>
-    <li><strong>Greens:</strong> Primary accent color; use for initial focus if it's the only accent.</li>
-    <li><strong>Blues:</strong> Use in addition or alternative to the greens.</li>
-    <li><strong>Teal:</strong> Use in small amounts.</li>
-    <li><strong>Gold:</strong> Use sparingly.</li>
+    <li><strong>Mint & forest:</strong> Primary green accent pair; mint in light mode, forest in dark mode.</li>
+    <li><strong>Sky & sea:</strong> Blue accent pair for highlights and secondary emphasis.</li>
+    <li><strong>Agave & hosta:</strong> Teal accent pair — use in small amounts.</li>
+    <li><strong>Sand & gold:</strong> Warm accent pair — use sparingly.</li>
   </ul>
   <p>
     Any page should mostly consist of background and text colors, using accent colors to highlight information as
-    required. On any page, green and blue should make up the majority of the accent colors.
+    required. On any page, mint/forest and sky/sea should make up the majority of the accent colors.
   </p>
   <p>
     Light mode should feature the lighter colors as background colors for accentuated elements. Conversely, dark mode
     should feature the darker colors as background colors for accentuated elements. These can be swapped for minor
     highlighting.
   </p>
+  <div class="highlight-box accent-usage-note">
+    <h4>Button and accent usage</h4>
+    <ul>
+      <li>
+        <strong>Buttons:</strong> Limit button fills to the first two accent colours — <strong>mint</strong> and
+        <strong>sky</strong>. Do not use agave, hosta, sand, or gold for buttons.
+      </li>
+      <li>
+        <strong>Sky & sea:</strong> The blue accent pair is for accents only — tags, highlights, borders, and small
+        emphasis — not for page backgrounds, large text areas, or replacing mint/forest as the primary accent.
+      </li>
+    </ul>
+  </div>
 
-  <div class="color-mode-container">
+  <div class="color-mode-container color-mode-container--light">
     <h4>Light mode</h4>
     <table class="palette-table">
       <thead>
@@ -330,7 +373,7 @@
     </table>
   </div>
 
-  <div class="color-mode-container">
+  <div class="color-mode-container color-mode-container--dark">
     <h4>Dark mode</h4>
     <table class="palette-table">
       <thead>
@@ -393,7 +436,7 @@
   </ul>
 
   <div class="typography-colors-container">
-    <div class="color-mode-container">
+    <div class="color-mode-container color-mode-container--light">
       <h4>Light mode</h4>
       <table class="palette-table">
         <thead>
@@ -447,7 +490,7 @@
         </tbody>
       </table>
     </div>
-    <div class="color-mode-container">
+    <div class="color-mode-container color-mode-container--dark">
       <h4>Dark mode</h4>
       <table class="palette-table">
         <thead>
@@ -529,7 +572,7 @@
   </p>
 
   <div class="typography-colors-container state-colors-container">
-    <div class="color-mode-container">
+    <div class="color-mode-container color-mode-container--light">
       <h4>Light mode</h4>
       <table class="palette-table">
         <thead>
@@ -583,7 +626,7 @@
         </tbody>
       </table>
     </div>
-    <div class="color-mode-container">
+    <div class="color-mode-container color-mode-container--dark">
       <h4>Dark mode</h4>
       <table class="palette-table">
         <thead>
@@ -640,34 +683,40 @@
   </div>
 
   <h3>Color combinations & accessibility</h3>
-  <div class="highlight-box">
-    <h4>Color combinations</h4>
-    <div class="color-combinations">
-      <div class="color-combo">
-        <div class="combo-preview mint-bg">
-          <div class="combo-element">This combination is good for larger text blocks.</div>
-        </div>
-        <div class="combo-label">Text on forest green</div>
+  <p>
+    These examples show recommended accent pairings in each color mode. You may swap them out for emphasis as required.
+  </p>
+
+  <p>
+    The majority of the hues used should be the initial green and the shade of brown/gold. Blues are to be used sparingly as accent colours to draw attention as required.
+  </p>
+
+  <div class="color-combinations-container">
+    {#snippet colorCombinations()}
+      <div class="color-combinations">
+        {#each colorCombinationItems as combo (combo.id)}
+          <div class="color-combo">
+            <div class="combo-preview {combo.previewClass}">
+              <div class="combo-element {combo.elementClass}">{combo.text}</div>
+            </div>
+            <div class="combo-label">{combo.label}</div>
+          </div>
+        {/each}
       </div>
-      <div class="color-combo">
-        <div class="combo-preview">
-          <div class="combo-element gold-bg">Click me</div>
-        </div>
-        <div class="combo-label">Gold button</div>
-      </div>
-      <div class="color-combo">
-        <div class="combo-preview blue-bg text-border">
-          <div class="combo-element">Sentence on sky blue with a text-colored border.</div>
-        </div>
-        <div class="combo-label">Text with border on sky blue</div>
-      </div>
-      <div class="color-combo">
-        <div class="combo-preview teal-bg text-border">
-          <div class="combo-element">Sentence on teal with a text-colored border.</div>
-        </div>
-        <div class="combo-label">Text with border on teal</div>
-      </div>
+    {/snippet}
+
+    <div class="color-mode-container color-mode-container--light">
+      <h4>Light mode</h4>
+      {@render colorCombinations()}
     </div>
+
+    <div class="color-mode-container color-mode-container--dark">
+      <h4>Dark mode</h4>
+      {@render colorCombinations()}
+    </div>
+  </div>
+
+  <div class="highlight-box">
     <h4>Accessibility considerations</h4>
     <p>
       Always ensure sufficient contrast between text and background colors. Our color palette has been designed with
@@ -688,6 +737,10 @@
   <p>
     Our typography system uses Nunito for headings and Nunito Sans for body text. The type scale is fluid, adapting to
     different screen sizes while maintaining proportions.
+  </p>
+  <p>
+    We use sentence case for headings, titles, and labels — capitalizing only the first word and proper nouns. Sentence
+    case feels more approachable and conversational than title case, which aligns with our friendly voice and usability values.
   </p>
 
   <div class="type-specimens u-grid u-grid-2">
@@ -778,9 +831,6 @@ h3 { font-size: var(--step-3); }
     previous, aligning with our spacing system and brand values.
   </p>
 
-  <h2 id="logo-construction">Logo construction</h2>
-  <p>Logo construction guidelines coming soon.</p>
-
   <h2 id="logo-usage">Logo usage</h2>
   <p>
     Download
@@ -792,23 +842,23 @@ h3 { font-size: var(--step-3); }
   <table class="brand-colors-table">
     <tbody>
       <tr>
-        <td style="background: var(--color-background);">
+        <td class="brand-colors-table__cell brand-colors-table__cell--light">
           <img src="/images/brand/logo-dark-text.svg" alt="logo-dark-text.svg" width="300" />
           logo-dark-text.svg
         </td>
-        <td style="background: var(--color-background-dark);">
+        <td class="brand-colors-table__cell brand-colors-table__cell--dark">
           <img src="/images/brand/logo-light-text.svg" alt="logo-light-text.svg" width="300" />
-          <span style="color: var(--color-text-dark);">logo-light-text.svg</span>
+          logo-light-text.svg
         </td>
       </tr>
       <tr>
-        <td style="background: var(--color-background);">
+        <td class="brand-colors-table__cell brand-colors-table__cell--light">
           <img src="/images/brand/logo.svg" alt="logo.svg" width="75" />
           logo.svg
         </td>
-        <td style="background: var(--color-background-dark);">
+        <td class="brand-colors-table__cell brand-colors-table__cell--dark">
           <img src="/images/brand/logo-gray.png" alt="logo-gray.png" width="300" />
-          <span style="color: var(--color-text-dark);">logo-gray.png</span>
+          logo-gray.png
         </td>
       </tr>
     </tbody>
@@ -1185,7 +1235,13 @@ h3 { font-size: var(--step-3); }
   </div>
 
   <h2 id="image-guidelines">Image guidelines</h2>
-  <p>Image usage guidelines coming soon.</p>
+  <p>
+    We prioritize images of DevRel practitioners — preferably our own community members —
+    actively doing DevRel work: speaking, mentoring, collaborating, or building together.
+  </p>
+  <p>
+    Generic photos don't add value to a page or post.
+  </p>
 
     <section id="voice-and-tone" class="brand-markdown">
       <h2>Voice and tone</h2>
@@ -1217,15 +1273,11 @@ h3 { font-size: var(--step-3); }
   }
 
   .brand-page > h2 {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-l);
-    border-top: 1px solid var(--color-background-secondary-2);
+    margin-top: var(--space-2xl);
   }
 
   .brand-page > h2:first-of-type {
     margin-top: var(--space-l);
-    padding-top: 0;
-    border-top: none;
   }
 
   .brand-page > h3 {
@@ -1249,6 +1301,66 @@ h3 { font-size: var(--step-3); }
     margin: 0 0 var(--space-s);
     font-size: var(--step-1);
     opacity: 0.75;
+  }
+
+  /* Pin light-mode sections to :root light tokens regardless of site theme */
+  .brand-page .color-mode-container--light {
+    --color-background: hsl(48, 100%, 98%);
+    --color-background-secondary-1: hsl(48, 61.8%, 94%);
+    --color-background-secondary-2: hsl(48, 13%, 92%);
+    --color-accent-green: var(--color-mint);
+    --color-accent-gold: var(--color-sand);
+    --color-accent-blue: var(--color-sky);
+    --color-accent-teal: var(--color-agave);
+    --color-accent-text: var(--color-mint);
+    --color-text: hsl(0, 0%, 32%);
+    --color-link: hsl(140, 38.2%, 18%);
+    --color-success: hsl(152, 76%, 90%);
+    --color-success-text: hsl(166, 91%, 20%);
+    --color-success-border: hsl(152, 55%, 78%);
+    --color-warning: hsl(41.9, 100%, 91.6%);
+    --color-warning-text: hsl(32, 80%, 28%);
+    --color-warning-border: hsl(41, 85%, 75%);
+    --color-error: hsl(0, 93%, 94%);
+    --color-error-text: hsl(0, 72%, 35%);
+    --color-error-border: hsl(0, 70%, 85%);
+    --color-info: hsl(193, 100%, 92%);
+    --color-info-text: hsl(193, 72%, 14%);
+    --color-info-border: hsl(193, 70%, 80%);
+    --color-syntax-string: hsl(32, 80%, 28%);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-color: var(--color-background-secondary-2);
+  }
+
+  /* Pin dark-mode sections to static -dark primitives regardless of site theme */
+  .brand-page .color-mode-container--dark {
+    --color-background: var(--color-background-dark);
+    --color-background-secondary-1: var(--color-background-secondary-1-dark);
+    --color-background-secondary-2: var(--color-background-secondary-2-dark);
+    --color-accent-green: var(--color-forest);
+    --color-accent-gold: var(--color-gold);
+    --color-accent-blue: var(--color-sea);
+    --color-accent-teal: var(--color-hosta);
+    --color-accent-text: var(--color-forest);
+    --color-text: var(--color-text-dark);
+    --color-link: var(--color-link-dark);
+    --color-success: var(--color-success-dark);
+    --color-success-text: var(--color-success-text-dark);
+    --color-success-border: var(--color-success-border-dark);
+    --color-warning: var(--color-warning-dark);
+    --color-warning-text: var(--color-warning-text-dark);
+    --color-warning-border: var(--color-warning-border-dark);
+    --color-error: var(--color-error-dark);
+    --color-error-text: var(--color-error-text-dark);
+    --color-error-border: var(--color-error-border-dark);
+    --color-info: var(--color-info-dark);
+    --color-info-text: var(--color-info-text-dark);
+    --color-info-border: var(--color-info-border-dark);
+    --color-syntax-string: var(--color-syntax-string-dark);
+    background-color: var(--color-background-dark);
+    color: var(--color-text-dark);
+    border-color: var(--color-background-secondary-2-dark);
   }
 
   .palette-table {
@@ -1293,7 +1405,11 @@ h3 { font-size: var(--step-3); }
     flex-shrink: 0;
   }
 
-  :global(body.dark-mode) .brand-page .color-swatch-circle {
+  .brand-page .color-mode-container--light .color-swatch-circle {
+    border-color: var(--color-text);
+  }
+
+  .brand-page .color-mode-container--dark .color-swatch-circle {
     border-color: var(--color-text-dark);
   }
 
@@ -1305,7 +1421,7 @@ h3 { font-size: var(--step-3); }
     padding: 0.2rem 0.35rem;
     margin: -0.2rem -0.35rem;
     border: none;
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-pill);
     background: transparent;
     color: inherit;
     font: inherit;
@@ -1339,11 +1455,11 @@ h3 { font-size: var(--step-3); }
   }
 
   .copy-value.is-copied {
-    background: var(--color-mint);
+    background: var(--color-accent-green);
   }
 
-  :global(body.dark-mode) .brand-page .copy-value.is-copied {
-    background: var(--color-mint-dark);
+  .brand-page .color-mode-container--dark .copy-value.is-copied {
+    background: var(--color-forest);
     color: var(--color-text-dark);
   }
 
@@ -1355,6 +1471,13 @@ h3 { font-size: var(--step-3); }
     display: flex;
     flex-direction: column;
     gap: var(--space-m);
+  }
+
+  .color-combinations-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    margin-bottom: var(--space-m);
   }
 
   .state-previews {
@@ -1409,7 +1532,10 @@ h3 { font-size: var(--step-3); }
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-m);
-    margin-bottom: var(--space-m);
+  }
+
+  .color-mode-container .color-combinations {
+    margin-bottom: 0;
   }
 
   .color-combo {
@@ -1443,43 +1569,60 @@ h3 { font-size: var(--step-3); }
   }
 
   .mint-bg {
+    background-color: var(--color-accent-green);
+  }
+
+  .brand-page .color-mode-container--light .mint-bg {
     background-color: var(--color-mint);
   }
 
-  .blue-bg {
-    background-color: var(--color-blue);
+  .brand-page .color-mode-container--dark .mint-bg {
+    background-color: var(--color-forest);
   }
 
-  .teal-bg {
-    background-color: var(--color-teal);
+  .brand-page .color-mode-container--light .copy-value.is-copied {
+    background: var(--color-mint);
+    color: inherit;
   }
 
-  .gold-bg {
+  .sky-bg {
+    background-color: var(--color-accent-blue);
+  }
+
+  .brand-page .color-mode-container--light .sky-bg {
+    background-color: var(--color-sky);
+  }
+
+  .brand-page .color-mode-container--dark .sky-bg {
+    background-color: var(--color-sea);
+  }
+
+  .agave-bg {
+    background-color: var(--color-accent-teal);
+  }
+
+  .brand-page .color-mode-container--light .agave-bg {
+    background-color: var(--color-agave);
+  }
+
+  .brand-page .color-mode-container--dark .agave-bg {
+    background-color: var(--color-hosta);
+  }
+
+  .sand-bg {
+    background-color: var(--color-accent-gold);
+  }
+
+  .brand-page .color-mode-container--light .sand-bg {
+    background-color: var(--color-sand);
+  }
+
+  .brand-page .color-mode-container--dark .sand-bg {
     background-color: var(--color-gold);
   }
 
   .text-border .combo-element {
     border: 1px solid var(--color-text);
-  }
-
-  :global(body.dark-mode) .brand-page .mint-bg {
-    background-color: var(--color-mint-dark);
-  }
-
-  :global(body.dark-mode) .brand-page .blue-bg {
-    background-color: var(--color-blue-dark);
-  }
-
-  :global(body.dark-mode) .brand-page .teal-bg {
-    background-color: var(--color-teal-dark);
-  }
-
-  :global(body.dark-mode) .brand-page .gold-bg {
-    background-color: var(--color-gold-dark);
-  }
-
-  :global(body.dark-mode) .brand-page .text-border .combo-element {
-    border-color: var(--color-text-dark);
   }
 
   .type-specimens {
@@ -1667,7 +1810,7 @@ h3 { font-size: var(--step-3); }
     position: absolute;
     width: 40px;
     height: 40px;
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
     border-radius: var(--radius-circle);
     right: 30px;
     bottom: 30px;
@@ -1689,7 +1832,7 @@ h3 { font-size: var(--step-3); }
     position: absolute;
     width: 80px;
     height: 80px;
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
     border-radius: var(--radius-circle);
     opacity: 0.7;
     right: 20px;
@@ -1717,9 +1860,9 @@ h3 { font-size: var(--step-3); }
   }
 
   .journal-grid-demo {
-    background-image: radial-gradient(var(--color-accent-text) 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.5;
+    background-color: var(--color-background);
+    background-image: radial-gradient(circle, var(--pattern-color) 1px, transparent 1px);
+    background-size: var(--space-m) var(--space-m);
   }
 
   .concentric-circles-demo::before {
@@ -1737,7 +1880,7 @@ h3 { font-size: var(--step-3); }
     position: absolute;
     width: 40px;
     height: 40px;
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
     border-radius: var(--radius-circle);
     right: 30px;
     bottom: 30px;
@@ -1796,7 +1939,7 @@ h3 { font-size: var(--step-3); }
   }
 
   .pill-button.secondary {
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
     color: var(--color-text);
   }
 
@@ -1807,7 +1950,7 @@ h3 { font-size: var(--step-3); }
   .pill-tag {
     display: inline-block;
     padding: var(--space-2xs) var(--space-s);
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
     color: var(--color-text);
     border-radius: 50px;
     font-size: 0.9rem;
@@ -1841,7 +1984,7 @@ h3 { font-size: var(--step-3); }
     position: absolute;
     width: 200px;
     height: 200px;
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
     border-radius: 50%;
     opacity: 0.1;
     bottom: -50px;
@@ -2046,7 +2189,7 @@ h3 { font-size: var(--step-3); }
 
   .example-button {
     padding: var(--space-xs) var(--space-s);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     border: none;
     font-weight: 500;
     cursor: pointer;
@@ -2061,7 +2204,7 @@ h3 { font-size: var(--step-3); }
   }
 
   .example-button.secondary {
-    background-color: var(--color-blue);
+    background-color: var(--color-accent-blue);
   }
 
   .component-spacing-list {
@@ -2117,22 +2260,34 @@ h3 { font-size: var(--step-3); }
     vertical-align: middle;
   }
 
+  .brand-colors-table__cell--light {
+    background-color: hsl(48, 100%, 98%);
+    color: hsl(0, 0%, 32%);
+    border-color: hsl(48, 13%, 92%);
+  }
+
+  .brand-colors-table__cell--dark {
+    background-color: hsl(60, 3.2%, 6.1%);
+    color: hsl(60, 20%, 91%);
+    border-color: hsl(60, 8.4%, 16%);
+  }
+
   .brand-colors-table tr:last-child td {
     border-bottom: none;
   }
 
   .brand-markdown {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-l);
-    border-top: 1px solid var(--color-background-secondary-2);
+    margin-top: var(--space-2xl);
   }
 
   .brand-markdown :global(h2) {
     font-size: var(--step-2);
     color: var(--color-text);
-    margin: 0 0 var(--space-m);
-    border-bottom: 2px solid var(--color-background-secondary-2);
-    padding-bottom: var(--space-xs);
+    margin: var(--space-xl) 0 var(--space-m);
+  }
+
+  .brand-markdown > h2 {
+    margin-top: 0;
   }
 
   .brand-markdown :global(h3) {

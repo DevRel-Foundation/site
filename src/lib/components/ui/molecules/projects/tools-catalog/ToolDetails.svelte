@@ -377,7 +377,7 @@
   :global(.tab[data-state='active']) {
     background: var(--color-button-background);
     color: var(--color-text-dark);
-    border-top: 2px solid var(--color-mint-dark);
+    border-top: 2px solid var(--color-forest);
   }
 
   :global(.tab[data-state='active']:hover) {
@@ -396,7 +396,7 @@
     padding: var(--space-xs) var(--space-s);
     background: var(--color-button-background);
     border: none;
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     color: var(--color-text-dark);
     font-size: var(--step--1);
     cursor: pointer;

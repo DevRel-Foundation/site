@@ -24,11 +24,7 @@
 
   const flyTransition = flyPreset('s', 'xs');
 
-  let value = $state<string | undefined>(selected ?? undefined);
-
-  $effect(() => {
-    value = selected ?? undefined;
-  });
+  let value = $derived(selected ?? undefined);
 
   function handleValueChange(next: string | undefined) {
     value = next;
@@ -130,7 +126,7 @@
   :global(.dropdown-trigger:focus-visible) {
     outline: var(--focus-ring-width) solid var(--focus-ring-color);
     outline-offset: var(--focus-ring-offset);
-    border-color: var(--color-mint);
+    border-color: var(--color-accent-green);
   }
 
   .dropdown-arrow {
@@ -144,7 +140,7 @@
     color: var(--color-logo-text);
     font-weight: bold;
     padding: 2px;
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-pill);
     transition:
       background-color var(--transition-fast),
       color var(--transition-fast);
@@ -153,7 +149,7 @@
 
   .dropdown-clear:hover {
     background-color: var(--color-background-secondary-2);
-    color: var(--color-mint);
+    color: var(--color-accent-green);
   }
 
   :global(.dropdown-content-root) {
@@ -205,7 +201,7 @@
   }
 
   .dropdown-item-check {
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
     font-weight: 700;
   }
 </style>

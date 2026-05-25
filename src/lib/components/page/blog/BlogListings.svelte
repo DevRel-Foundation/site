@@ -199,7 +199,7 @@
     border-radius: var(--radius-s);
     align-self: start;
 
-    border: 1px solid var(--color-mint);
+    border: 1px solid var(--color-accent-green);
     border-radius: 8px;
   }
   
@@ -240,9 +240,9 @@
   
   .category-tag {
     background-color: var(--color-background-secondary-2-dark);
-    color: var(--color-background);
+    color: var(--color-light-cream);
     padding: var(--space-3xs) var(--space-2xs);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--step--2);

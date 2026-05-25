@@ -140,23 +140,6 @@
     align-items: center;
   }
   
-  .category-link {
-    padding: var(--space-2xs) var(--space-s);
-    border: 1px solid var(--color-background-secondary-2-dark);
-    border-radius: var(--radius-s);
-    text-decoration: none;
-    color: var(--color-background-secondary-2-dark);
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-  }
-  
-  .category-link:hover,
-  .category-link.active {
-    background-color: var(--color-background-secondary-2-dark);
-    color: var(--color-background);
-    border-color: var(--color-background-secondary-2-dark);
-  }
-  
   .rss-link {
     display: flex;
     align-items: center;

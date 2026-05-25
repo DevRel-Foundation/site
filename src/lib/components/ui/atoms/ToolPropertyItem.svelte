@@ -19,7 +19,7 @@
     {#if Array.isArray(value)}
       {#if value.length > 0}
         <ul class="property-list">
-          {#each value as item}
+          {#each value as item, index (index)}
             <li>{item}</li>
           {/each}
         </ul>
@@ -95,7 +95,7 @@
   }
 
   .property-link:hover {
-    color: var(--color-mint);
+    color: var(--color-accent-green);
   }
 
   .property-text {

@@ -1,5 +1,5 @@
-<script>
-
+<script lang="ts">
+  import { goto } from '$app/navigation';
   import StrategyIcon from 'iconoir/icons/strategy.svg';
   import DownloadIcon from 'iconoir/icons/download.svg';
   import HeadsetIcon from 'iconoir/icons/headset-solid.svg';
@@ -7,7 +7,11 @@
   import MailIcon from 'iconoir/icons/mail.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import CalendarIcon from 'iconoir/icons/regular/calendar.svg';
+  import ActionCard from '$lib/components/ui/molecules/ActionCard.svelte';
 
+  function scrollToGroups() {
+    document.getElementById('groups')?.scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
 
 
@@ -15,7 +19,7 @@
 	<title>Working groups | Projects | Developer Relations Foundation</title>
 </svelte:head>
 
-<main class="container">
+<div class="container">
 		<h1>DevRel Foundation working groups</h1>
 
 
@@ -66,34 +70,30 @@
 		</ul>
 
 
-		<div class="u-grid u-grid-3">
-			
-			<div class="content-box">
-				<h3 class="box-header">Sourcing</h3>
-				<img src="{DownloadIcon}" alt="Download Icon" class="icon-left" />
-				<p class="box-description">
-					Some groups will curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency are achieved through proven and trustworthy guides.
-				</p>
-				<a href="/learn/what-is-devrel" class="box-cta">Learning resources</a>
-			</div>
+		<div class="u-grid u-grid-3 wg-cards-grid">
+			<ActionCard
+				icon={DownloadIcon}
+				title="Sourcing"
+				description="Some groups curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency are achieved through trustworthy guides."
+				ctaLabel="Learning resources →"
+				onclick={() => goto('/learn/what-is-devrel')}
+			/>
 
-			<div class="content-box">
-				<h3 class="box-header">Innovation</h3>
-				<img src="{StrategyIcon}" alt="Strategy Icon" class="icon-left" />
-				<p class="box-description">
-					Some groups will focus on experimental initiatives designed to fill gaps in the field. Each innovation working group is launched around a clearly defined problem statement.
-				</p>
-				<a href="/projects" class="box-cta">Explore projects</a>
-			</div>
+			<ActionCard
+				icon={StrategyIcon}
+				title="Innovation"
+				description="Some groups focus on experimental initiatives designed to fill gaps in the field. Each innovation working group is launched around a clearly defined problem statement."
+				ctaLabel="Explore projects →"
+				onclick={() => goto('/projects')}
+			/>
 
-			<div class="content-box">
-				<h3 class="box-header">Calls</h3>
-				<img src="{HeadsetIcon}" alt="Headset Icon" class="icon-left" />
-				<p class="box-description">
-					Working groups meet regularly on their specific projects. Community calls bring together the entire community to hear reports on progress and share updates.
-				</p>
-				<a href="#groups" class="box-cta">Find a working group</a>
-			</div>
+			<ActionCard
+				icon={HeadsetIcon}
+				title="Calls"
+				description="Working groups meet regularly on their specific projects. Community calls bring together the entire community to hear reports on progress and share updates."
+				ctaLabel="Find a working group →"
+				onclick={scrollToGroups}
+			/>
 		</div>
 
 
@@ -146,7 +146,7 @@
 			<img src={CalendarIcon} alt="Join a call" class="social-icon" /></a> First Thursday of each month (<a href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/working-group-calls">Agenda and notes</a>)
 		</p>
 
-</main>
+</div>
 
 <style>
 	.container {
@@ -172,15 +172,8 @@
 		font-size: var(--step-0);
 	}
 
-	.content-box {
-		background-color: var(--color-background-secondary-1);
-		padding: var(--space-s);
-		border-radius: var(--radius-m);
-		border: var(--border-thickness) solid var(--color-background-secondary-2);
+	.wg-cards-grid {
 		margin-top: var(--space-m);
-		display: flex;
-		flex-direction: column;
-		min-height: 300px;
 	}
 
 	.question {
@@ -188,72 +181,6 @@
 		font-weight: 900;
 		margin: 0 0 var(--space-s) 0;
 		color: var(--color-text);
-	}
-
-	.box-description {
-		font-size: var(--step-0);
-		line-height: 1.5;
-		margin: var(--space-s) 0 var(--space-l) 0;
-		color: var(--color-text);
-		flex-grow: 1;
-	}
-
-	.box-cta {
-		display: inline-block;
-		font-size: var(--step--1);
-		font-weight: 700;
-		text-decoration: none;
-		color: var(--color-text);
-		border-bottom: 3px solid var(--color-accent-text);
-		padding-bottom: var(--space-3xs);
-		margin-top: auto;
-		transition: all 0.2s ease;
-	}
-
-	.box-cta:hover {
-		border-bottom-color: var(--color-accent-text);
-		color: var(--color-secondary-2-dark);
-	}
-
-	.box-header {
-		font-size: var(--step-2);
-		font-weight: 700;
-		margin: calc(var(--space-s) * -1) calc(var(--space-s) * -1) var(--space-xs) calc(var(--space-s) * -1);
-		padding: var(--space-xs) var(--space-xs);
-		border-radius: var(--radius-s) var(--radius-s) 0 0;
-		text-align: center;
-		background-color: var(--color-background-dark);
-		color: var(--color-text-dark);
-	}
-
-	:global(body.dark-mode) .box-header {
-		background-color: var(--color-background);
-		color: var(--color-mint);
-	}
-
-
-	.icon-left {
-		height: auto;
-		max-width: min(50vw, 50px);
-		width: 50%;
-		flex-shrink: 0;
-		filter: var(--icon-filter);
-		stroke-width: 1;
-		opacity: 0.8;
-		display: block;
-		margin: 0 auto;
-	}
-
-	.box-cta {
-		display: inline-block;
-		font-size: var(--step--1);
-		font-weight: 700;
-		text-decoration: none;
-		color: var(--color-text);
-		border-bottom: 3px solid var(--color-mint);
-		padding-bottom: var(--space-3xs);
-		margin-top: auto;
-		transition: all 0.2s ease;
 	}
 
 	.social-icon {

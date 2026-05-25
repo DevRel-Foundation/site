@@ -3,6 +3,7 @@
   import MagnetIcon from 'iconoir/icons/magnet.svg';
   import GiftIcon from 'iconoir/icons/gift.svg';
   import MegaphoneIcon from 'iconoir/icons/megaphone.svg';
+  import ActionCard from '$lib/components/ui/molecules/ActionCard.svelte';
 
 
 </script>
@@ -21,35 +22,28 @@
 			Whether you're a seasoned DevRel professional, just starting your journey, or simply interested in learning more about the field, this foundation has a place for you.
 		</p>
 		
-		<div class="u-grid u-grid-3">
+		<div class="u-grid u-grid-3 join-cards">
 			
-			<div class="content-box end-users">
-				<h3 class="box-header">Getting started</h3>
-				<p class="box-question">Need help navigating your DevRel role?</p>
-				<p class="box-description">
+			<ActionCard title="Getting started" ctaLabel="Join the community" ctaHref="#join">
+				<p class="action-card__question">Need help navigating your DevRel role?</p>
+				<p>
 					Join our community to connect with peers, share experiences, and access project resources to help you build your DevRel skills and knowledge.
 				</p>
-				<a href="#join" class="box-cta">Join the community</a>
-			</div>
+			</ActionCard>
 
-			<div class="content-box contributors">
-				<h3 class="box-header">Contributors</h3>
-				<p class="box-question">Looking to advance the field and make an impact?</p>
-				<p class="box-description">
+			<ActionCard title="Contributors" ctaLabel="Contribute to open source" ctaHref="#contribute">
+				<p class="action-card__question">Looking to advance the field and make an impact?</p>
+				<p>
 					Our working groups are the heart of the DevRel Foundation and require regular participation. Whether you're a developer, content creator, developer marketer, or community manager -- your skills can help shape our success.
-					
 				</p>
-				<a href="#contribute" class="box-cta">Contribute to open source</a>
-			</div>
+			</ActionCard>
 
-			<div class="content-box members">
-				<h3 class="box-header">Leaders</h3>
-				<p class="box-question">Want to establish yourself as an industry leader?</p>
-				<p class="box-description">
+			<ActionCard title="Leaders" ctaLabel="Become a leader" ctaHref="#lead">
+				<p class="action-card__question">Want to establish yourself as an industry leader?</p>
+				<p>
 					<a href="/contact">Contact</a> the steering committee to learn more about leadership opportunities. We can shape the ecosystem and drive cross-company collaboration with hundreds of participants together.
 				</p>
-				<a href="#lead" class="box-cta">Become a leader</a>
-			</div>
+			</ActionCard>
 
 		</div>
 	</section>
@@ -88,12 +82,12 @@
 		</p>
 
 		<div class="steps">
-			<a href="https://discord.gg/G7CSTKZcuT" class="cta-button" target="_blank">Step 1. Join the Discord community</a>
+			<a href="https://discord.gg/G7CSTKZcuT" class="step-cta" target="_blank" rel="noopener noreferrer">Step 1. Join the Discord community</a>
 			<p>
 				The foundation's <a href="https://discord.gg/G7CSTKZcuT">Discord server</a> is the primary synchronous communication channel for community participants. Here, you can connect with other DevRel professionals, ask questions, share experiences, and stay updated on activities.
 			</p>
 
-			<a href="https://lists.dev-rel.org/g/community/join" class="cta-button" target="_blank">Step 2. Sign up for the mailing list</a>
+			<a href="https://lists.dev-rel.org/g/community/join" class="step-cta" target="_blank">Step 2. Sign up for the mailing list</a>
 			<p>
 				The <a href="https://lists.dev-rel.org/g/community/join">mailing lists</a> are the primary asynchronous communication channel for the community. You can subscribe to the mailing lists to receive updates, announcements, and discussions about the foundation's activities.
 			</p>
@@ -101,7 +95,7 @@
 				Working groups often have additional mailing lists to subscribe to for project updates and calendar invites for working group sessions.
 			</p>
 
-			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 3. Explore the GitHub repositories</a>
+			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="step-cta" target="_blank">Step 3. Explore the GitHub repositories</a>
 			<p>
 				The <a href="https://github.com/orgs/DevRel-Foundation/repositories" target="_blank">DevRel-Foundation GitHub</a> is where you will find all the open-source projects and resources created by the community. Star any projects you find interesting and consider helpful.
 			</p>
@@ -114,7 +108,7 @@
 			Contributing to open-source projects is a great way to give back to the community, improve your skills, and gain recognition for your work.
 		</p>
 		<div class="steps">
-			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 4. Make a contribution</a>
+			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="step-cta" target="_blank">Step 4. Make a contribution</a>
 			<p>
 				To contribute to a project, start by familiarizing yourself with the project's goals and guidelines. Engage with the community to understand their needs and how you can help. Then create issues or pull requests for the projects you are interested in. Join the <a href="/about/working-groups">working groups</a> to collaborate with other contributors.
 			</p>
@@ -132,7 +126,7 @@
 			</div>
 		</div>	
 		<div class="steps">
-			<a href="/projects" class="cta-button" target="_blank">Step 5. Spread the word</a>
+			<a href="/projects" class="step-cta" target="_blank">Step 5. Spread the word</a>
 			<p>
 				Stay connected with the community through foundation events such as community calls, office hours, and working group meetings. These events provide opportunities to share your work, learn from others, and build relationships within the wider DevRel community about our <a href="/projects">projects</a>.
 			</p>
@@ -157,7 +151,7 @@
 			How far will you go? Lead a working group, organize events, or become a member of the steering committee in the next election. The foundation is always looking for passionate individuals to take on leadership roles and help shape the future of Developer Relations.
 		</p>
 		<div class="steps">
-			<a href="/about/steering-committee" class="cta-button" target="_blank">Step 6. Contact the Steering Committee</a>
+			<a href="/about/steering-committee" class="step-cta" target="_blank">Step 6. Contact the Steering Committee</a>
 			<p>
 				If you're interested in taking on a leadership role or have project ideas for the community, reach out to the <a href="/about/steering-committee">steering committee</a>. They can provide guidance, support, and help you get involved in shaping the future of the foundation.
 			</p>
@@ -171,95 +165,26 @@
 	.container {
 		margin-bottom: var(--space-2xl);
 	}
-	
-	.content-box {
-		background-color: var(--color-background-secondary-1);
-		padding: var(--space-s);
-		border-radius: var(--radius-m);
-		border: var(--border-thickness) solid var(--color-background-secondary-2);
+
+	.join-cards {
 		margin-top: var(--space-m);
-		display: flex;
-		flex-direction: column;
-		min-height: 300px;
 	}
 
-	.hero .content-box {
-		background-color: var(--color-background-secondary-1);
-		border: var(--border-thickness) solid var(--color-background-secondary-2);
-	}
-
-	.box-header {
-		font-size: var(--step-2);
-		font-weight: 700;
-		margin: calc(var(--space-s) * -1) calc(var(--space-s) * -1) var(--space-xs) calc(var(--space-s) * -1);
-		padding: var(--space-xs) var(--space-xs);
-		border-radius: var(--radius-s) var(--radius-s) 0 0;
-		text-align: center;
-		background-color: var(--color-background-dark);
-		color: var(--color-text-dark);
-	}
-
-	.members .box-header {
-		background-color: var(--color-background-dark);
-		color: var(--color-text-dark);
-	}
-
-	.contributors .box-header {
-		background-color: var(--color-background-dark);
-		color: var(--color-text-dark);
-	}
-
-	.end-users .box-header {
-		background-color: var(--color-background-dark);
-		color: var(--color-text-dark);
-	}
-
-	.box-question {
-		font-size: var(--step-0);
-		font-weight: 900;
-		margin: 0 0 var(--space-s) 0;
-		color: var(--color-text);
-	}
-
-	.box-description {
-		font-size: var(--step-0);
-		line-height: 1.5;
-		margin: 0 0 var(--space-l) 0;
-		color: var(--color-text);
-		flex-grow: 1;
-	}
-
-	.box-cta {
+	.step-cta {
 		display: inline-block;
-		font-size: var(--step--1);
-		font-weight: 700;
-		text-decoration: none;
-		color: var(--color-text);
-		border-bottom: 3px solid var(--color-accent-text);
-		padding-bottom: var(--space-3xs);
-		margin-top: auto;
-		transition: all 0.2s ease;
-	}
-
-	.box-cta:hover {
-		border-bottom-color: var(--color-accent-text);
-		color: var(--color-secondary-2-dark);
-	}
-
-	.cta-button {
-		display: inline-block;
-		padding: var(--space-s) var(--space-l);
+		padding: var(--space-xs) var(--space-l);
 		background-color: var(--color-button-background);
 		color: var(--color-button-text);
-		border-radius: var(--radius-s);
+		border-radius: var(--radius-pill);
 		text-decoration: none;
 		font-weight: 600;
+		line-height: 1;
 		margin-right: var(--space-s);
 		transition: all 0.2s ease;
 		margin-top: var(--space-s);
 	}
 
-	.cta-button:hover {
+	.step-cta:hover {
 		background-color: var(--color-button-background);
 	}
 
@@ -314,7 +239,7 @@
 		gap: var(--space-xs);
 	}
 
-	.steps .cta-button {
+	.steps .step-cta {
 		width: auto;
 		text-align: left;
 		box-sizing: border-box;
@@ -323,7 +248,7 @@
 	}
 
 	@media (min-width: 769px) {
-		.steps .cta-button {
+		.steps .step-cta {
 			text-align: left;
 		}
 	}

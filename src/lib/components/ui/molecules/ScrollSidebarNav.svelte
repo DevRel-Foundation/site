@@ -66,29 +66,27 @@
         <span class="scroll-sidebar-nav__chevron" class:is-open={mobileOpen} aria-hidden="true">▾</span>
       </div>
     {/snippet}
-    {#snippet children()}
-      <nav
-        class="scroll-sidebar-nav__list scroll-sidebar-nav__mobile-panel"
-        aria-label={navLabel}
-        bind:this={mobileNavEl}
-      >
-        <ul>
-          {#each items as item (item.href)}
-            <li>
-              <a
-                href={item.href}
-                class="scroll-sidebar-nav__link"
-                class:is-active={isActive(item.href)}
-                aria-current={isActive(item.href) ? 'location' : undefined}
-                onclick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </a>
-            </li>
-          {/each}
-        </ul>
-      </nav>
-    {/snippet}
+    <nav
+      class="scroll-sidebar-nav__list scroll-sidebar-nav__mobile-panel"
+      aria-label={navLabel}
+      bind:this={mobileNavEl}
+    >
+      <ul>
+        {#each items as item (item.href)}
+          <li>
+            <a
+              href={item.href}
+              class="scroll-sidebar-nav__link"
+              class:is-active={isActive(item.href)}
+              aria-current={isActive(item.href) ? 'location' : undefined}
+              onclick={(e) => handleNavClick(e, item.href)}
+            >
+              {item.label}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
   </CollapsiblePanel>
 </div>
 
@@ -223,13 +221,13 @@
 
   .scroll-sidebar-nav__link.is-active {
     background: var(--color-background-secondary-2);
-    border-left-color: var(--color-mint-dark);
+    border-left-color: var(--color-forest);
     color: var(--color-text);
     font-weight: 600;
   }
 
   :global(body.dark-mode) .scroll-sidebar-nav__link.is-active {
-    border-left-color: var(--color-mint);
+    border-left-color: var(--color-accent-green);
   }
 
   @media (min-width: 48.0625rem) {

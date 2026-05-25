@@ -22,7 +22,7 @@
   white-space: nowrap;
   vertical-align: middle;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
-  border: 1px solid var(--color-mint-dark);
+  border: 1px solid var(--color-forest);
   cursor: default;
 }
 

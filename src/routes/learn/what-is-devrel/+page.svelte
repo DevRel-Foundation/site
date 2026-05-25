@@ -48,7 +48,7 @@
     background-color: var(--color-background-secondary-1);
     color: var(--color-link);
     padding: var(--space-xs) var(--space-m);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     font-weight: 600;
     text-decoration: none;
     transition: background-color 0.2s ease;
@@ -71,7 +71,7 @@
 
   .pillar-circle {
     background-color: var(--color-background-secondary-1);
-    border: 2px solid var(--color-mint);
+    border: 2px solid var(--color-accent-green);
     color: var(--color-text);
     border-radius: 50%;
     width: 140px;
@@ -90,7 +90,7 @@
 
   .pillar-circle:hover {
     box-shadow: 0 0 20px rgba(115, 207, 181, 0.6), 0 12px 30px rgba(0, 0, 0, 0.3);
-    border-color: var(--color-mint-dark);
+    border-color: var(--color-forest);
     transform: translateY(-6px);
   }
 

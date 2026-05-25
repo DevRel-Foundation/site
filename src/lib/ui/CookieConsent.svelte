@@ -28,7 +28,7 @@
     color: white;
     padding: 1rem;
     z-index: var(--z-max);
-    border-top: 2px solid var(--color-mint-dark, #79bf44);
+    border-top: 2px solid var(--color-forest, #79bf44);
     backdrop-filter: blur(10px);
   }
 
@@ -65,11 +65,11 @@
   }
 
   .btn-accept {
-    background: var(--color-mint-dark, #79bf44);
+    background: var(--color-forest, #79bf44);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-weight: 600;
     white-space: nowrap;
@@ -80,7 +80,7 @@
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     white-space: nowrap;
   }

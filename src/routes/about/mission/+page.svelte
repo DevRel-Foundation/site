@@ -253,7 +253,7 @@
     background-color: var(--color-button-background);
     color: var(--color-button-text);
     padding: var(--space-s) var(--space-l);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     transition: background-color var(--transition-fast), transform var(--transition-fast);
@@ -274,8 +274,13 @@
     background-color: var(--color-button-background);
     padding: var(--space-m);
     border-radius: var(--radius-m);
-    border: var(--border-thickness) solid var(--color-mint-dark);
+    border: var(--border-thickness) solid var(--color-forest);
     color: var(--color-text-dark);
+  }
+
+  :global(body.dark-mode) .governance-block,
+  :global(html.dark-mode) .governance-block {
+    background-color: var(--color-forest);
   }
 
   .governance-block h2 {

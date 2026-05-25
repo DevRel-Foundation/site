@@ -114,7 +114,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background-color: var(--color-mint);
+      background-color: var(--color-accent-green);
       border-radius: 2px;
     }
 
@@ -127,8 +127,8 @@
       overflow: visible;
       border-radius: 0;
       background: var(--color-background);
-      border-top: 3px solid var(--color-mint-dark);
-      border-bottom: var(--border-thickness) solid var(--color-mint-dark);
+      border-top: 3px solid var(--color-forest);
+      border-bottom: var(--border-thickness) solid var(--color-forest);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       opacity: 0;
       visibility: hidden;

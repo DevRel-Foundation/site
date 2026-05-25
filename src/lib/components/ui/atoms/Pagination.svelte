@@ -46,7 +46,7 @@
     padding: var(--space-xs) var(--space-s);
     background: var(--color-background-secondary-1);
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     color: var(--color-text);
     cursor: pointer;
     font-size: var(--step--1);

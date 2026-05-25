@@ -536,7 +536,7 @@
     border: none;
     padding: var(--space-xs);
     cursor: pointer;
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     transition: background-color 0.2s ease;
     display: flex;
     align-items: center;

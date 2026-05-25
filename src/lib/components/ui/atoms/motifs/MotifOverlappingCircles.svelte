@@ -34,8 +34,18 @@
 		width: clamp(7rem, 22vw, 18rem);
 		height: clamp(7rem, 22vw, 18rem);
 		border-radius: 50%;
-		background-color: color-mix(in srgb, var(--color-blue) 22%, transparent);
+		background-color: color-mix(in srgb, var(--color-accent-blue) 22%, transparent);
 		transform: translate(-20%, 60%);
+	}
+
+	:global(body.dark-mode) .motif-overlapping-circles::before,
+	:global(html.dark-mode) .motif-overlapping-circles::before {
+		background-color: color-mix(in srgb, var(--color-mint) 4%, transparent);
+	}
+
+	:global(body.dark-mode) .motif-overlapping-circles::after,
+	:global(html.dark-mode) .motif-overlapping-circles::after {
+		background-color: color-mix(in srgb, var(--color-sky) 5%, transparent);
 	}
 
 	@media (max-width: 768px) {

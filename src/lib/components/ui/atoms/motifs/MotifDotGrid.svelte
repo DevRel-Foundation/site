@@ -17,10 +17,8 @@
 
 <style>
 	.motif-dot-grid {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 100vw;
+		inset-inline: 0;
+		width: auto;
 		pointer-events: none;
 		background-image: radial-gradient(
 			circle,
@@ -31,12 +29,14 @@
 	}
 
 	.motif-dot-grid--full {
+		position: absolute;
 		top: 0;
 		height: 100%;
 	}
 
 	.motif-dot-grid--header {
-		position: fixed;
+		position: absolute;
+		inset-inline: 0;
 		top: 0;
 		height: 400px;
 		mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);

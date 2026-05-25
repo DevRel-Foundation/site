@@ -1,7 +1,14 @@
-<script>
-  const { post, href } = $props();
-  
-  function formatDate(dateString) {
+<script lang="ts">
+  type BlogPost = {
+    title: string;
+    date: string;
+    image?: string;
+    excerpt?: string;
+  };
+
+  const { post, href }: { post: BlogPost; href: string } = $props();
+
+  function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -41,10 +48,10 @@
     width: 100%;
     height: 200px;
     overflow: hidden;
-    border: 1px solid var(--color-mint);
+    border: 1px solid var(--color-accent-green);
     border-radius: var(--radius-s);
     margin-bottom: var(--space-s);
-    box-shadow: var(--shadow-xs), 2px 2px 2px 0 var(--color-mint);
+    box-shadow: var(--shadow-xs), 2px 2px 2px 0 var(--color-accent-green);
     transition: box-shadow var(--transition-fast);
   }
 

@@ -217,7 +217,7 @@
   .digit-4 {
     font-size: 10rem;
     color: var(--color-button-background);
-    text-shadow: 0 4px 8px rgba(var(--color-mint-dark-rgb), 0.3);
+    text-shadow: 0 4px 8px rgba(var(--color-forest-rgb), 0.3);
     animation: pulse-4 3s ease-in-out infinite;
   }
 
@@ -292,7 +292,7 @@
 
   .error-subtitle {
     font-size: var(--step-1);
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
     margin-bottom: var(--space-m);
     font-weight: 600;
   }
@@ -324,7 +324,7 @@
     align-items: center;
     gap: var(--space-2xs);
     padding: var(--space-s) var(--space-m);
-    border-radius: var(--radius-m);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--step-0);
@@ -337,14 +337,14 @@
   .cta-button.primary {
     background-color: var(--color-button-background);
     color: var(--color-background);
-    border-color: var(--color-mint-dark);
+    border-color: var(--color-forest);
   }
 
   .cta-button.primary:hover {
-    background-color: color-mix(in srgb, var(--color-mint-dark) 60%, white 40%);
-    border-color: color-mix(in srgb, var(--color-mint-dark) 80%, white 20%);
+    background-color: color-mix(in srgb, var(--color-forest) 60%, white 40%);
+    border-color: color-mix(in srgb, var(--color-forest) 80%, white 20%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--color-mint-dark-rgb), 0.3);
+    box-shadow: 0 4px 12px rgba(var(--color-forest-rgb), 0.3);
   }
 
   .cta-button.secondary {
@@ -357,7 +357,7 @@
     background-color: var(--color-button-background);
     color: var(--color-background);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--color-mint-dark-rgb), 0.2);
+    box-shadow: 0 4px 12px rgba(var(--color-forest-rgb), 0.2);
   }
 
   .button-icon {
@@ -395,7 +395,7 @@
   }
 
   .error-details summary:hover {
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
   }
 
   .debug-grid {
@@ -410,7 +410,7 @@
 
   .debug-section h4 {
     margin: 0 0 var(--space-xs) 0;
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
     font-size: var(--step--1);
     font-weight: 600;
     border-bottom: 1px solid var(--color-background-secondary-1);
