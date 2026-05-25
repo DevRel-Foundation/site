@@ -2,19 +2,23 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import * as env from '$env/dynamic/public';
+  import { env } from '$env/dynamic/public';
 
   import '../reset.css';
   import '../app.css';
   import Nav from '$lib/components/nav/Nav.svelte';
   import Footer from '$lib/components/nav/Footer.svelte';
+  import { MotifDotGrid } from '$lib/components/ui/atoms/motifs';
   import CookieConsent from '$lib/ui/CookieConsent.svelte';
   import { Tooltip } from 'bits-ui';
   import { writable } from 'svelte/store';
+  import type { PostHog } from 'posthog-js';
 
   let { children } = $props();
-  let posthog: any = null;
+  const isHomepage = $derived($page.url.pathname === '/');
+  let posthog: PostHog | null = null;
   let gaLoaded = false;
+  const DEFAULT_GA_ID = 'G-Z5ZG34WJP1';
   const showConsent = writable(false);
 
   function injectGA(gaId: string) {
@@ -42,7 +46,7 @@
       posthog.capture('$pageview');
       posthog.capture('cookie_consent_given', { action: 'accept' });
     }
-  const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
+    const gaId = env.PUBLIC_GA_ID || DEFAULT_GA_ID;
     injectGA(gaId);
     showConsent.set(false);
   }
@@ -64,10 +68,10 @@
           $current_url: $page.url.href,
           $pathname: $page.url.pathname,
         });
-        if (gaLoaded && (window as any).gtag) {
+        if (gaLoaded && window.gtag) {
           try {
-            (window as any).gtag('event', 'page_view', { page_path: $page.url.pathname });
-          } catch (e) {
+            window.gtag('event', 'page_view', { page_path: $page.url.pathname });
+          } catch {
             // ignore
           }
         }
@@ -96,12 +100,12 @@
       if (hasConsent === 'true') {
         posthog.opt_in_capturing();
         posthog.capture('$pageview');
-  const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
+        const gaId = env.PUBLIC_GA_ID || DEFAULT_GA_ID;
         injectGA(gaId);
       } else if (hasConsent === null) {
           showConsent.set(true);
       } else {
-        posthog.opt_out_capturing && posthog.opt_out_capturing();
+        posthog.opt_out_capturing();
       }
       console.log('PostHog initialized with GDPR compliance');
     } catch (e) {
@@ -113,15 +117,34 @@
 </script>
 
 <Tooltip.Provider delayDuration={200} skipDelayDuration={300}>
-  <Nav />
+  <div class="site-chrome">
+    {#if !isHomepage}
+      <MotifDotGrid variant="header" />
+    {/if}
 
-  <main class="main">
-    {@render children()}
-  </main>
+    <Nav />
 
-{#if $showConsent}
-  <CookieConsent onAccept={handleAccept} onReject={handleReject} />
-{/if}
+    <main class="main">
+      {@render children()}
+    </main>
 
-  <Footer />
+    {#if !isHomepage}
+      <div class="footer-dot-grid-anchor">
+        <MotifDotGrid variant="footer" />
+      </div>
+    {/if}
+
+    <Footer />
+  </div>
+
+  {#if $showConsent}
+    <CookieConsent onAccept={handleAccept} onReject={handleReject} />
+  {/if}
 </Tooltip.Provider>
+
+<style>
+  .footer-dot-grid-anchor {
+    position: relative;
+    height: 0;
+  }
+</style>

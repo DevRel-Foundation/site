@@ -35,6 +35,7 @@
 	},
 	"dependencies": {
 		"bits-ui": "^2.18.1",
+		"dompurify": "^3.4.5",
 		"gray-matter": "^4.0.3",
 		"ical.js": "^2.2.0",
 		"iconoir": "^7.11.0",

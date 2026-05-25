@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import DOMPurify from 'dompurify';
+  import type { Config } from 'dompurify';
   const { eventId } = $props<{ eventId?: string }>();
   
   interface CalendarEvent {
@@ -17,7 +19,6 @@
   let events = $state<CalendarEvent[]>([]);
   let loading = $state(true);
   let error = $state<string | null>(null);
-  let currentDate = $state(new Date());
   let selectedEvent = $state<CalendarEvent | null>(null);
   let userLocale = $state<string>('');
   let userTimezone = $state<string>('');
@@ -27,6 +28,11 @@
   
   let currentPage = $state(0);
   const eventsPerPage = 10;
+
+  const descriptionSanitizeConfig: Config = {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'li', 'h2', 'h3'],
+    ALLOWED_ATTR: ['href', 'target', 'rel'],
+  };
   
   onMount(async () => {
     userLocale = navigator.language || 'en-US';
@@ -122,7 +128,7 @@
       });
   }
   
-  function formatEventDate(event: CalendarEvent, year: false) {
+  function formatEventDate(event: CalendarEvent, year = false) {
     const start = new Date(event.start);
     const end = event.end ? new Date(event.end) : null;
     
@@ -198,7 +204,7 @@
       .replace(/^- (.+)$/gm, '<li>$1</li>')
       
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|\,|\])/g, '$1<em>$2</em>$3')
+      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|,|\])/g, '$1<em>$2</em>$3')
       
       .replace(/^### (.*$)/gm, '<h3>$1</h3>')
       .replace(/^## (.*$)/gm, '<h2>$1</h2>')
@@ -217,6 +223,10 @@
       
     return html;
   }
+
+  function renderDescription(text: string): string {
+    return DOMPurify.sanitize(parseMarkdown(text), descriptionSanitizeConfig);
+  }
   
   function selectEvent(event: CalendarEvent) {
     if (selectedEvent === event) {
@@ -226,11 +236,6 @@
       selectedEvent = event;
       updateURLWithEvent(event);
     }
-  }
-
-  function deselectEvent() {
-    selectedEvent = null;
-    updateURLWithEvent(null);
   }
 
   function updateURLWithEvent(event: CalendarEvent | null) {
@@ -252,8 +257,16 @@
                 <h2>Recent & Upcoming Events</h2>
             </div>
             <div class="events-list">
-                {#if paginatedEvents().length > 0}
-                    {#each paginatedEvents() as event}
+                {#if loading}
+                    <div class="no-events-message">
+                        <p>Loading events...</p>
+                    </div>
+                {:else if error}
+                    <div class="no-events-message">
+                        <p>{error}</p>
+                    </div>
+                {:else if paginatedEvents().length > 0}
+                    {#each paginatedEvents() as event (event.id)}
                         <button 
                             class="event-list-item" 
                             class:selected={selectedEvent === event}
@@ -345,7 +358,8 @@
                             </div>
                         {/if}
                         {#if selectedEvent.description}
-                            <div class="event-description">{@html parseMarkdown(selectedEvent.description)}</div>
+                            <!-- eslint-disable-next-line svelte/no-at-html-tags -- HTML sanitized via DOMPurify in renderDescription -->
+                            <div class="event-description">{@html renderDescription(selectedEvent.description)}</div>
                         {/if}
                         {#if selectedEvent.isRecurring}
                             <div class="event-recurring">🔄 Recurring Event</div>
