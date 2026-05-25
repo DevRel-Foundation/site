@@ -19,12 +19,22 @@
 </div>
 
 <section class="devrel-callout">
-	<div class="layout-section callout-content">
-		<h2>DevRel: accelerating technology adoption</h2>
-		<p>
-			Developer Relations (DevRel) is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
-		</p>
-		<a href="/learn/what-is-devrel" class="callout-cta">Learn about developer relations →</a>
+	<div class="layout-section">
+		<div class="callout-block u-grid u-grid-2 devrel-callout-grid">
+			<div class="callout-text">
+				<h2>Accelerating technology adoption</h2>
+				<p>
+					Developer Relations (DevRel) is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
+				</p>
+				<a href="/learn/what-is-devrel" class="callout-cta">Learn about developer relations →</a>
+			</div>
+			<div class="callout-image-box">
+				<img
+					src="/images/headway-F2KRf_QfCqw-unsplash.jpg"
+					alt="People collaborating at a technology event"
+				/>
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -77,18 +87,17 @@
 </div>
 
 <section class="governance-callout">
-<div class="container">
-	<section class="mission-section">
-		<h2>Governance playbook</h2>
-		<p>
-			The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">working groups</a> that focus on sourcing and innovating best practices  through peer-reviewed resources and materials.
-		</p>
-
-		<p>
-			<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
-		</p>
-	</section>
-</div>
+	<div class="layout-section">
+		<div class="governance-block">
+			<h2>Governance playbook</h2>
+			<p>
+				The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">working groups</a> that focus on sourcing and innovating best practices through peer-reviewed resources and materials.
+			</p>
+			<p>
+				<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
+			</p>
+		</div>
+	</div>
 </section>
 
 <div class="container">
@@ -194,89 +203,119 @@
  }
 
   .devrel-callout {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-					  url('/images/headway-F2KRf_QfCqw-unsplash.jpg');
-    background-size: cover;
-    background-position: center 50%;
     margin: var(--space-m) 0;
-    padding: var(--space-l) var(--space-s);
-    color: white;
-    text-align: center;
+    padding-block: var(--space-s);
   }
 
-  .devrel-callout .callout-content {
-    position: relative;
-    z-index: 1;
+  .callout-block {
+    background-color: var(--color-background-secondary-1);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    border: var(--border-thickness) solid var(--color-background-secondary-2);
   }
 
-  .callout-content h2 {
+  .devrel-callout-grid {
+    align-items: stretch;
+  }
+
+  .callout-text h2 {
     font-size: var(--step-3);
     margin-top: 0;
     margin-bottom: var(--space-m);
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
   }
 
-  .callout-content p {
+  .callout-text p {
     font-size: var(--step-0);
     line-height: 1.6;
-    max-width: 60ch;
-    margin: 0 auto var(--space-l);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--space-m);
+    color: var(--color-text);
+  }
+
+  .callout-image-box {
+    height: 100%;
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    min-height: 12rem;
+  }
+
+  .callout-image-box img {
+    width: 100%;
+    height: 100%;
+    min-height: 12rem;
+    object-fit: cover;
+    object-position: center 50%;
+    display: block;
   }
 
   .callout-cta {
     display: inline-block;
-    background-color: var(--color-button-background-dark);
-    color: var(--color-button-text-dark);
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
     padding: var(--space-s) var(--space-l);
     border-radius: var(--radius-s);
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
   }
 
   .callout-cta:hover {
-    background-color: var(--color-button-background-dark);
-    color: var(--color-button-text-dark);
+    background-color: color-mix(in srgb, var(--color-button-background) 80%, white 20%);
+    color: var(--color-button-text);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
 
   .governance-callout {
-    background-image: 
-      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
-      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
-      radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(135deg, var(--color-button-background), var(--color-button-background));
-    background-size: 60px 60px, 80px 80px, 40px 40px, 100% 100%;
-    margin: var(--space-s) 0;
-	padding: var(--space-3xs) var(--space-3xs);
-    color: var(--color-text-dark);
-    text-align: left;
+    margin: var(--space-m) 0;
+    padding-block: var(--space-s);
   }
 
-  .governance-callout .link {
+  .governance-block {
+    background-color: var(--color-button-background);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    border: var(--border-thickness) solid var(--color-mint-dark);
+    color: var(--color-text-dark);
+  }
+
+  .governance-block h2 {
+    font-size: var(--step-3);
+    margin-top: 0;
+    margin-bottom: var(--space-m);
+    color: var(--color-text-dark);
+  }
+
+  .governance-block p {
+    font-size: var(--step-0);
+    line-height: 1.6;
+    margin-bottom: var(--space-m);
+    color: var(--color-text-dark);
+  }
+
+  .governance-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .governance-block .link {
     color: var(--color-link-dark);
     text-decoration: underline;
   }
 
   @media (max-width: 768px) {
-    .devrel-callout {
-      padding: var(--space-l) var(--space-m);
-    }
-
-    .callout-content h2 {
+    .callout-text h2 {
       font-size: var(--step-2);
     }
 
-    .callout-content p {
+    .callout-text p {
       font-size: var(--step--1);
     }
 
-    .governance-callout {
-      padding: var(--space-l) var(--space-m);
+    .governance-block h2 {
+      font-size: var(--step-2);
+    }
+
+    .governance-block p {
+      font-size: var(--step--1);
     }
   }
 	.text-column {
