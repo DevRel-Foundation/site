@@ -10,9 +10,34 @@
   const menuIcons = {
     discord: DiscordIcon,
     github: GitHubIcon
+  } as const;
+
+  type NavMenuIcon = keyof typeof menuIcons;
+
+  type NavMenuItem = {
+    title: string;
+    href: string;
+    target?: string;
+    rel?: string;
+    variant?: 'brief';
+    icon?: NavMenuIcon;
+    iconAlt?: string;
   };
 
-  const NAV_MENUS = [
+  type NavMenuSection = {
+    title: string;
+    description: string;
+    items: NavMenuItem[];
+  };
+
+  type NavMenu = {
+    id: string;
+    label: string;
+    href: string;
+    sections: NavMenuSection[];
+  };
+
+  const NAV_MENUS: NavMenu[] = [
     {
       id: 'about',
       label: 'About',
@@ -132,6 +157,13 @@
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
+    if (!isMenuOpen) {
+      activeDropdown = null;
+    }
+  }
+
+  function toggleMobileDropdown(menuId: string) {
+    activeDropdown = activeDropdown === menuId ? null : menuId;
   }
 
   function setDarkModeClass(enabled: boolean) {
@@ -201,7 +233,14 @@
   $effect(() => {
     if (typeof window !== 'undefined') {
       const checkMobile = () => {
-        isMobile = window.innerWidth <= 768;
+        const nextIsMobile = window.innerWidth <= 768;
+        if (nextIsMobile !== isMobile) {
+          activeDropdown = null;
+          if (!nextIsMobile) {
+            isMenuOpen = false;
+          }
+        }
+        isMobile = nextIsMobile;
       };
 
       checkMobile();
@@ -215,6 +254,14 @@
 </script>
 
 <nav class="nav">
+  {#if isMenuOpen && isMobile}
+    <button
+      type="button"
+      class="nav-backdrop"
+      onclick={closeAll}
+      aria-label="Close menu"
+    ></button>
+  {/if}
   <div class="layout-section nav-container">
     <div class="nav-brand">
       <a href="/">
@@ -230,10 +277,12 @@
       <ul class="nav-menu" class:open={isMenuOpen}>
         {#each NAV_MENUS as menu (menu.id)}
           <NavDropdown
+            id={menu.id}
             label={menu.label}
             href={menu.href}
             {isMobile}
-            menuOpen={isMenuOpen}
+            mobileActive={activeDropdown === menu.id}
+            onMobileToggle={() => toggleMobileDropdown(menu.id)}
             desktopActive={activeDropdown === menu.id}
             onDesktopEnter={() => showDropdown(menu.id)}
             onDesktopLeave={hideDropdown}
@@ -291,11 +340,8 @@
 </nav>
 
 <style>
-  .cta {
-    margin-left: var(--space-l);
-  }
-
   .nav {
+    --nav-bar-height: 4rem;
     background-color: var(--color-background);
     border-bottom: var(--border-thickness) solid var(--color-background-secondary-2);
     position: sticky;
@@ -307,11 +353,29 @@
     text-decoration: none;
   }
 
+  .nav-backdrop {
+    position: fixed;
+    top: var(--nav-bar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: default;
+    background: color-mix(in srgb, var(--color-text) 12%, transparent);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 0;
+  }
+
   .nav-container {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 4rem;
+    min-height: var(--nav-bar-height);
   }
 
   .nav-brand {
@@ -376,6 +440,11 @@
     align-items: center;
   }
 
+  .cta {
+    margin-left: var(--space-s);
+  }
+
+  /* Mobile: collapsible full-width menu */
   .nav-menu {
     position: absolute;
     top: 100%;
@@ -401,27 +470,64 @@
     visibility: visible;
   }
 
+  @media (max-width: 768px) {
+    .nav-menu.open {
+      max-height: calc(100dvh - var(--nav-bar-height));
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
   .nav-menu :global(li) {
     width: 100%;
   }
 
-  .nav-menu a {
+  .nav-menu :global(li) > :global(.nav-link) {
     color: var(--color-text);
     text-decoration: none;
     transition: color 0.2s ease;
     display: block;
-    padding: var(--space-s) 0;
-    border-bottom: 1px solid var(--color-background-secondary-1);
+    padding: var(--space-xs) 0;
+    border-bottom: none;
     white-space: nowrap;
   }
 
-  .nav-menu a:last-child {
-    border-bottom: none;
+  @media (max-width: 768px) {
+    .nav-menu :global(li) > :global(.nav-link) {
+      border-bottom: var(--border-thickness) solid var(--color-background-secondary-1);
+    }
+
+    .nav-menu :global(li:last-child) > :global(.nav-link) {
+      border-bottom: none;
+    }
   }
 
-  .nav-menu a:hover {
+  .nav-menu :global(li) > :global(.nav-link:hover) {
     color: var(--color-link);
     background-color: var(--color-background-secondary-1);
+  }
+
+  .nav-menu .dropdown-items a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding-block: var(--space-3xs);
+    padding-inline: 0;
+    border-bottom: none;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .nav-menu .dropdown-items a:hover {
+    color: var(--color-link);
+    background-color: transparent;
+  }
+
+  .menu-toggle {
+    display: flex;
+    margin-left: var(--space-xs);
+    margin-right: var(--space-xs);
   }
 
   .theme-toggle,
@@ -444,21 +550,81 @@
 
   .theme-toggle img,
   .menu-toggle img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--step-1);
+    height: var(--step-1);
     filter: var(--icon-filter);
   }
 
-  .menu-toggle {
+  /* Mobile: compact accordion dropdown content */
+  .dropdown-section {
+    margin: 0;
+  }
+
+  .menu-header {
+    display: block;
+    margin: var(--space-m) 0 var(--space-3xs) 0;
+    padding: 0;
+    border-bottom: none;
+    font-size: var(--step--2);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dropdown-items {
     display: flex;
-    margin-left: var(--space-xs);
-    margin-right: var(--space-xs);
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .dropdown-item,
+  .dropdown-item-brief {
+    font-size: var(--step-0);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .dropdown-items a:has(.dropdown-item-brief):hover {
+    background-color: transparent;
+  }
+
+  .menu-header-description {
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+    margin: 0 0 var(--space-2xs) 0;
+  }
+
+  .item-title {
+    font-weight: 800;
+    color: var(--color-text);
+    font-size: var(--step-0);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding-block: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .social-icon {
+    width: var(--step-0);
+    height: var(--step-0);
+    filter: var(--icon-filter);
+    flex-shrink: 0;
   }
 
   @media (min-width: 769px) {
-    .nav-menu {
+    .cta {
+      margin-left: var(--space-l);
+    }
+
+    .nav-menu,
+    .nav-menu.open {
       position: static;
-      display: flex;
       flex-direction: row;
       align-items: center;
       background: none;
@@ -468,106 +634,61 @@
       transform: none;
       opacity: 1;
       visibility: visible;
+      max-height: none;
+      overflow: visible;
     }
 
     .nav-menu :global(li) {
       width: auto;
     }
 
-    .nav-menu a {
+    .nav-menu :global(li) > :global(.nav-link) {
       display: inline;
       padding: var(--space-xs) var(--space-xs);
-      border-bottom: none;
       border-radius: var(--radius-s);
     }
 
     .menu-toggle {
       display: none;
     }
-  }
 
-  @media (max-width: 768px) {
-    .nav-menu.open {
-      max-height: calc(100dvh - 4rem);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-
-  .dropdown-section h3 {
-    margin: 0 0 var(--space-m) 0;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .dropdown-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-
-  .dropdown-item {
-    font-size: 1.5rem;
-    padding: var(--space-3xs);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3xs);
-  }
-
-  .dropdown-item-brief {
-    padding: calc(var(--space-4xs) / 32);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-
-  .dropdown-items a:has(.dropdown-item-brief):hover {
-    background-color: transparent;
-  }
-
-  .menu-header {
-    font-size: 0.7rem;
-    font-weight: 200;
-    color: var(--color-background-secondary-2);
-    margin-bottom: var(--space-3xs);
-  }
-
-  .menu-header-description {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    line-height: 1.4;
-    margin: 0 0 var(--space-s) 0;
-  }
-
-  .item-title {
-    font-weight: 800;
-    color: var(--color-text);
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    white-space: nowrap;
-  }
-
-  .social-icon {
-    width: 1rem;
-    height: 1rem;
-    filter: var(--icon-filter);
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 768px) {
-    .dropdown-section:not(:first-child) {
-      display: block;
+    .dropdown-section + .dropdown-section {
+      margin-top: 0;
     }
 
     .menu-header {
-      display: block;
+      margin-top: 0;
+      margin-bottom: var(--space-3xs);
+      font-size: var(--step--1);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dropdown-items {
+      gap: var(--space-2xs);
+    }
+
+    .dropdown-item {
+      font-size: var(--step-1);
+      padding: var(--space-3xs);
+      gap: var(--space-3xs);
+    }
+
+    .dropdown-item-brief {
+      padding: var(--space-3xs);
+      gap: var(--space-2xs);
+    }
+
+    .menu-header-description {
+      line-height: 1.4;
+      margin-bottom: var(--space-s);
+    }
+
+    .item-title {
+      padding-block: 0;
+      line-height: inherit;
     }
   }
 </style>
