@@ -202,7 +202,11 @@
 		transform: translateX(-50%);
 		width: 100vw;
 		height: 100%;
-		background-image: radial-gradient(var(--pattern-color) 1px, transparent 1px);
+		background-image: radial-gradient(
+			circle,
+			var(--pattern-color) 0.8px,
+			transparent 0.8px
+		);
 		background-size: var(--space-m) var(--space-m);
 		z-index: -1;
 	}
@@ -338,6 +342,8 @@
 		background-color: var(--color-accent-text);
 		padding: var(--space-m);
 		border-radius: var(--radius-l);
+		position: relative;
+		z-index: 1;
 	}
 
 	.newsletter-content h2 {

@@ -8,7 +8,7 @@
   import '../app.css';
   import Nav from '$lib/components/nav/Nav.svelte';
   import Footer from '$lib/components/nav/Footer.svelte';
-  import { MotifDotGrid } from '$lib/components/ui/atoms/motifs';
+  import { MotifDotGrid, MotifOverlappingCircles } from '$lib/components/ui/atoms/motifs';
   import CookieConsent from '$lib/ui/CookieConsent.svelte';
   import { Tooltip } from 'bits-ui';
   import { writable } from 'svelte/store';
@@ -16,6 +16,9 @@
 
   let { children } = $props();
   const isHomepage = $derived($page.url.pathname === '/');
+  const showOverlappingCircles = $derived(
+    !isHomepage && $page.url.pathname !== '/about/steering-committee'
+  );
   let posthog: PostHog | null = null;
   let gaLoaded = false;
   const DEFAULT_GA_ID = 'G-Z5ZG34WJP1';
@@ -125,6 +128,9 @@
     <Nav />
 
     <main class="main">
+      {#if showOverlappingCircles}
+        <MotifOverlappingCircles />
+      {/if}
       {@render children()}
     </main>
 

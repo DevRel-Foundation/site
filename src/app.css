@@ -125,7 +125,7 @@
   --link-underline-offset: 0.2em;
   --link-underline-thickness: 1px;
 
-  --pattern-color: hsla(0, 0%, 32%, 0.4);
+  --pattern-color: hsla(60, 8%, 12%, 0.14);
 
   --phi: 1.618;
 
@@ -303,7 +303,7 @@ html.dark-mode {
   --color-code-background: var(--color-background-secondary-1-dark);
   --color-code-background-dark: var(--color-mint-dark);
   --icon-filter: invert(0.9) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.9);
-  --pattern-color: hsla(60, 20%, 91%, 0.1);
+  --pattern-color: hsla(60, 20%, 91%, 0.16);
   --shadow-color: hsla(60, 20%, 91%, 0.12);
 
   --color-success: var(--color-success-dark);
@@ -348,6 +348,11 @@ h1 {
   font-size: var(--step-5);
   margin-bottom: var(--space-m);
   margin-top: var(--space-xl);
+  text-align: left;
+}
+
+.homepage .hero h1 {
+  text-align: center;
 }
 
 h2 {
@@ -388,19 +393,39 @@ p {
   margin-top: 0;
 }
 
+.container :where(p),
 .container-content :where(p) {
   margin-bottom: var(--space-m);
 }
 
+.container :where(ul, ol),
 .container-content :where(ul, ol) {
   margin-bottom: var(--space-m);
   padding-left: var(--space-l);
 }
 
+.container :where(li + li),
 .container-content :where(li + li) {
   margin-top: var(--space-xs);
 }
 
+.container :where(
+  .color-mode-container,
+  .highlight-box,
+  .spacing-scale,
+  .spacing-text-block,
+  .example-component,
+  .grid-demo,
+  .motif-examples,
+  .motif-grid,
+  .radius-demo,
+  .color-combinations,
+  .type-specimens,
+  .heading-examples,
+  .text-styles-grid,
+  table,
+  pre.code-example
+),
 .container-content :where(
   .color-mode-container,
   .highlight-box,
@@ -515,6 +540,42 @@ small {
 section,
 header {
   width: 100%;
+}
+
+/* Stacking: body bg → dot grid (0, fixed/absolute) → motifs (1) → content in .main (2) */
+.site-chrome {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-pattern] {
+  z-index: 0;
+  pointer-events: none;
+}
+
+[data-motif] {
+  z-index: 1;
+}
+
+.main {
+  position: relative;
+  isolation: isolate;
+}
+
+.main :is(section, .container, .layout-section, .homepage, article) {
+  position: relative;
+  z-index: 2;
+}
+
+.motif-section {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.motif-section > :not([data-motif]) {
+  position: relative;
+  z-index: 2;
 }
 
 .container {

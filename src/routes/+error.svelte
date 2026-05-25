@@ -1,13 +1,16 @@
-<script>
-  import { page } from '$app/stores';
+<script lang="ts">
+  import { page } from '$app/state';
   import { browser } from '$app/environment';
   import HomeIcon from 'iconoir/icons/home.svg';
   import MailIcon from 'iconoir/icons/mail.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
   import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
-  
-  const { status, error } = $props();
-  
+
+  type ExtendedNavigator = Navigator & {
+    connection?: { effectiveType?: string };
+    deviceMemory?: number;
+  };
+
   let debugInfo = $state({
     userAgent: '',
     language: '',
@@ -15,24 +18,31 @@
     screenSize: '',
     viewport: '',
     referrer: '',
-    timestamp: ''
+    timestamp: '',
+    connectionType: '',
+    deviceMemory: '',
+    pageLoadTime: ''
   });
-  
+
   $effect(() => {
     if (browser) {
+      const nav = navigator as ExtendedNavigator;
       debugInfo = {
-        userAgent: navigator.userAgent,
-        language: navigator.language,
-        cookiesEnabled: navigator.cookieEnabled,
+        userAgent: nav.userAgent,
+        language: nav.language,
+        cookiesEnabled: nav.cookieEnabled,
         screenSize: `${screen.width}x${screen.height}`,
         viewport: `${window.innerWidth}x${window.innerHeight}`,
         referrer: document.referrer || 'Direct navigation',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        connectionType: nav.connection?.effectiveType || 'Unknown',
+        deviceMemory: nav.deviceMemory ? `${nav.deviceMemory}GB` : 'Unknown',
+        pageLoadTime: `${performance.now().toFixed(2)}ms`
       };
     }
   });
-  
-  const getErrorMessage = (status) => {
+
+  const getErrorMessage = (status: number) => {
     switch (status) {
       case 404:
         return {
@@ -58,7 +68,7 @@
     }
   };
   
-  const errorInfo = $derived(getErrorMessage(status));
+  const errorInfo = $derived(getErrorMessage(page.status));
 </script>
 
 <svelte:head>
@@ -66,7 +76,7 @@
   <meta name="description" content="Page not found - DevRel Foundation" />
 </svelte:head>
 
-<div class="container container-content error-page">
+<div class="container error-page">
   <div class="error-banner">
     <div class="custom-404">
       <div class="digit digit-4">4</div>
@@ -88,7 +98,7 @@
     </div>
   </div>
 
-  <EditThisPage currentPath={$page.url.pathname} />
+  <EditThisPage />
 
   <div class="action-buttons">
 
@@ -106,9 +116,9 @@
 
 
     
-    {#if status === 404}
+    {#if page.status === 404}
       <a 
-        href="https://github.com/DevRel-Foundation/site/issues/new?title=Missing%20Page%3A%20{encodeURIComponent($page.url.pathname)}&body=I%20was%20looking%20for%20this%20page%3A%20{encodeURIComponent($page.url.href)}%0A%0AExpected%20to%20find%3A%0A%0APlease%20add%20this%20page%20or%20redirect%20to%20the%20correct%20location." 
+        href="https://github.com/DevRel-Foundation/site/issues/new?title=Missing%20Page%3A%20{encodeURIComponent(page.url.pathname)}&body=I%20was%20looking%20for%20this%20page%3A%20{encodeURIComponent(page.url.href)}%0A%0AExpected%20to%20find%3A%0A%0APlease%20add%20this%20page%20or%20redirect%20to%20the%20correct%20location." 
         class="cta-button secondary"
         target="_blank"
         rel="noopener noreferrer"
@@ -125,11 +135,11 @@
       <div class="u-grid u-grid-auto-fill debug-grid">
         <div class="debug-section">
           <h4>Error Information</h4>
-          <p><strong>Status Code:</strong> {status}</p>
-          <p><strong>Path:</strong> {$page.url.pathname}</p>
-          <p><strong>Full URL:</strong> {$page.url.href}</p>
-          {#if error?.message}
-            <p><strong>Error Message:</strong> {error.message}</p>
+          <p><strong>Status Code:</strong> {page.status}</p>
+          <p><strong>Path:</strong> {page.url.pathname}</p>
+          <p><strong>Full URL:</strong> {page.url.href}</p>
+          {#if page.error?.message}
+            <p><strong>Error Message:</strong> {page.error.message}</p>
           {/if}
           <p><strong>Timestamp:</strong> {debugInfo.timestamp}</p>
         </div>
@@ -153,10 +163,10 @@
           
           <div class="debug-section">
             <h4>Network & Performance</h4>
-            <p><strong>Connection:</strong> {navigator.connection?.effectiveType || 'Unknown'}</p>
+            <p><strong>Connection:</strong> {debugInfo.connectionType}</p>
             <p><strong>Online Status:</strong> {navigator.onLine ? 'Online' : 'Offline'}</p>
-            <p><strong>Page Load Time:</strong> {performance.now().toFixed(2)}ms</p>
-            <p><strong>Memory Usage:</strong> {navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown'}</p>
+            <p><strong>Page Load Time:</strong> {debugInfo.pageLoadTime}</p>
+            <p><strong>Memory Usage:</strong> {debugInfo.deviceMemory}</p>
           </div>
         {/if}
       </div>
@@ -169,18 +179,22 @@
     min-height: 70vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     padding-block: var(--space-xl);
-    text-align: center;
   }
 
   .error-banner {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-l);
     margin-bottom: var(--space-2xl);
+  }
+
+  .error-content {
+    width: 100%;
+    max-width: 600px;
   }
 
   .custom-404 {
@@ -267,10 +281,6 @@
     66% {
       transform: translateY(2px) rotate(-1deg);
     }
-  }
-
-  .error-content {
-    max-width: 600px;
   }
 
   .error-title {

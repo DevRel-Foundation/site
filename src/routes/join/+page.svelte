@@ -12,7 +12,7 @@
 </svelte:head>
 
 <div class="container">
-	<section class="hero container-content">
+	<section class="hero page-section">
 		<h1>Join Us</h1>
 		<p>
 			Working under the Linux Foundation, the DevRel Foundation serves as a focal point for best practices in technology adoption by software developers and communities. Our initiatives are collaborative and community-driven to drive innovation and impactful value into the global Developer Relations ecosystem.
@@ -56,7 +56,7 @@
 
 	<div class="section-divider"></div>
 
-	<section class="container-content">
+	<section class="page-section">
 		<h2>Why join the DevRel Foundation?</h2>
 		<p>
 			There are personal and professional benefits to joining the DevRel Foundation. Whether you are a newcomer to the field or an experienced professional, there are opportunities for you to grow, learn, and contribute.
@@ -85,9 +85,8 @@
 
 	<div class="section-divider"></div>
 
-	<div> <a name="join"></a> </div>
-	<section class="container-content">
-		<h2 class="content-header">How to join the Community</h2>
+	<section class="page-section">
+		<h2 id="join" class="content-header">How to join the Community</h2>
 		<p>
 			There are no membership fees or formal requirements to join the DevRel Foundation. We welcome anyone interested in Developer Relations to participate and contribute.
 		</p>
@@ -109,14 +108,14 @@
 			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 3. Explore the GitHub Repositories</a>
 			<p>
 				The <a href="https://github.com/orgs/DevRel-Foundation/repositories" target="_blank">DevRel-Foundation GitHub</a> is where you will find all the open-source projects and resources created by the community. Star any projects you find interesting and consider helpful.
+			</p>
 		</div>
 	</section>
 
 	<div class="section-divider"></div>
 
-	<div> <a name="contribute"></a> </div>
-	<section class="container-content">
-		<h2 class="content-header">Contribute to Open-Source</h2>
+	<section class="page-section">
+		<h2 id="contribute" class="content-header">Contribute to Open-Source</h2>
 		<p>
 			Contributing to open-source projects is a great way to give back to the community, improve your skills, and gain recognition for your work.
 		</p>
@@ -160,9 +159,8 @@
 
 	<div class="section-divider"></div>
 	
-	<div> <a name="lead"></a> </div>	
-	<section class="container-content">
-		<h2 class="content-header">Become a Leader</h2>
+	<section class="page-section">
+		<h2 id="lead" class="content-header">Become a Leader</h2>
 		<p>
 			How far will you go? Lead a working group, organize events, or become a member of the steering committee in the next election. The foundation is always looking for passionate individuals to take on leadership roles and help shape the future of Developer Relations.
 		</p>
@@ -278,7 +276,7 @@
 		margin-bottom: var(--space-s);
 	}
 
-	.container-content {
+	.page-section {
 		margin-bottom: var(--space-l);
 	}
 
@@ -287,14 +285,6 @@
 		margin-top: var(--space-m);
 		color: var(--color-text);
 		scroll-margin-top: 5rem;
-	}
-
-	/* Alternative approach using the anchor elements */
-	a[name] {
-		display: block;
-		position: relative;
-		top: -5rem;
-		visibility: hidden;
 	}
 
 	.icon-left-r90 {

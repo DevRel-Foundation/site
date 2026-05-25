@@ -84,10 +84,10 @@
     { name: 'Syntax string (code)', variable: '--color-syntax-string-dark', hex: '#FFF5D6', rgb: '255, 245, 214', cmyk: '—', hsl: '41.9, 100%, 91.6%', swatch: 'var(--color-syntax-string-dark)' }
   ];
 
-  let copiedKey = $state(null);
-  let copyTimeout;
+  let copiedKey = $state<string | null>(null);
+  let copyTimeout: ReturnType<typeof setTimeout> | undefined;
 
-  async function copyValue(key, value) {
+  async function copyValue(key: string, value: string) {
     try {
       await navigator.clipboard.writeText(value);
       copiedKey = key;
@@ -108,12 +108,12 @@
   class="brand-page-layout"
 >
   {#snippet header()}
-    <div class="container container-content brand-page brand-page__header">
+    <div class="container brand-page brand-page__header">
       <h1>Brand Guidelines</h1>
     </div>
   {/snippet}
 
-  <div class="container container-content brand-page">
+  <div class="container brand-page">
     <p>
       Representing the DevRel Foundation brand in public should be done with care and consistency. Please
       <a href="/contact">contact us</a> for permission and guidance on using brand assets.
@@ -894,6 +894,7 @@ h3 { font-size: var(--step-3); }
       <div class="motif-example-large pill-shapes-demo">
         <div class="top-section">
           <button type="button" class="pill-button primary">Primary Action</button>
+          <button type="button" class="pill-button secondary">Secondary Action</button>
           <div class="pill-tag">Tag Example</div>
         </div>
         <div class="bottom-section">
@@ -1110,12 +1111,12 @@ h3 { font-size: var(--step-3); }
       We constrain content to a maximum width of 1240px (77.5rem) with fluid gutters on either side that scale
       proportionally with the viewport.
     </p>
-    <pre class="code-example">.u-container {'{'}
+    <pre class="code-example">{`.u-container {
   max-width: var(--grid-max-width);
   padding-inline: var(--grid-gutter);
   margin-inline: auto;
   width: 100%;
-{'}'}</pre>
+}`}</pre>
   </div>
 
   <h4>Grid examples</h4>
@@ -1194,13 +1195,13 @@ h3 { font-size: var(--step-3); }
 </ScrollSidebarLayout>
 
 <style>
-  .brand-page-layout {
+  :global(.brand-page-layout) {
     padding-top: var(--space-s);
     padding-bottom: var(--space-xl);
   }
 
-  .brand-page.container-content,
-  .brand-page__header.container-content {
+  .brand-page.container,
+  .brand-page__header.container {
     max-width: none;
     padding: 0;
   }
@@ -1210,7 +1211,7 @@ h3 { font-size: var(--step-3); }
   }
 
   @media (min-width: 48.0625rem) {
-    .brand-page.container-content {
+    .brand-page.container {
       padding-right: 0;
     }
   }

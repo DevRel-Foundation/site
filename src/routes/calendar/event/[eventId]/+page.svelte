@@ -1,13 +1,8 @@
 <script lang="ts">
   import Calendar from '$lib/components/Calendar.svelte';
-  import { page } from '$app/stores';
-  import { onDestroy } from 'svelte';
+  import { page } from '$app/state';
 
-  let eventId = '';
-  const unsubscribe = page.subscribe(($page) => {
-    eventId = $page.params.eventId;
-  });
-  onDestroy(unsubscribe);
+  const eventId = $derived(page.params.eventId);
 </script>
 
 <div class="calendar-page">
@@ -34,6 +29,5 @@
     padding: 0 var(--space-m);
     font-size: var(--step-5);
     color: var(--color-text);
-    text-align: center;
   }
 </style>

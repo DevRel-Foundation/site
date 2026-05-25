@@ -18,6 +18,5 @@
 		margin: var(--space-s) 0;
 		font-size: var(--step-5);
 		color: var(--color-text);
-		text-align: center;
 	}
 </style>

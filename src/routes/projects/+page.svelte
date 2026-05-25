@@ -1,11 +1,21 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
+
+	type ProjectStatus = 'sandbox' | 'incubation' | 'graduated';
+	type ProjectFilter = 'all' | ProjectStatus;
+
+	interface Project {
+		title: string;
+		description: string;
+		status: ProjectStatus;
+		learnMoreUrl: string;
+	}
 	
 	function handleJoinClick() {
 		goto('/join-us');
 	}
 
-	const projects = [
+	const projects: Project[] = [
 		{
 			title: "Tools Catalog",
 			description: "Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done.",
@@ -51,7 +61,7 @@
 		return statusMatch && searchMatch;
 	});
 
-	function setFilter(filter) {
+	function setFilter(filter: ProjectFilter) {
 		selectedFilter = filter;
 	}
 </script>
@@ -60,7 +70,7 @@
 	<title>Projects | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
 	<section>
 		<h1>Projects</h1>
 		<p>
@@ -128,7 +138,7 @@
 		</div>
 
 		<div class="u-grid u-grid-auto-fill projects-grid">
-			{#each filteredProjects as project}
+			{#each filteredProjects as project (project.title)}
 				<div class="project-card">
 					<h3>{project.title}</h3>
 					<p class="description">{project.description}</p>
@@ -347,6 +357,7 @@
 		line-height: 1.5;
 		overflow: hidden;
 		display: -webkit-box;
+		line-clamp: 4;
 		-webkit-line-clamp: 4;
 		-webkit-box-orient: vertical;
 	}

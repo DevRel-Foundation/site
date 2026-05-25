@@ -1,58 +1,111 @@
-<script>
-  let githubUsersCache = $state({});
-  let authorsData = $state({});
+<script lang="ts">
+  import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
+
+  type BlogPost = {
+    slug: string;
+    title: string;
+    image?: string;
+    category?: string;
+    date: string;
+    author?: string;
+    excerpt?: string;
+    readingTime?: string;
+  };
+
+  type AuthorData = {
+    name?: string;
+    avatar?: string;
+    url?: string;
+  };
+
+  type GithubUser =
+    | {
+        type: 'github';
+        username: string;
+        name: string;
+        avatar?: string;
+        url?: string;
+      }
+    | {
+        type: 'text';
+        name: string;
+      };
+
+  const { posts } = $props<{ posts: BlogPost[] }>();
+
+  let githubUsersCache = $state<Record<string, GithubUser[]>>({});
+  let authorsData = $state<Record<string, AuthorData>>({});
   let authorsLoaded = $state(false);
-  
-  const { posts } = $props();
-  
+
+  onMount(() => {
+    void loadAuthorsData();
+  });
+
   async function loadAuthorsData() {
-    if (authorsLoaded) return;
-    
+    if (!browser || authorsLoaded) return;
+
     try {
       const response = await fetch('/api/authors');
       if (response.ok) {
-        authorsData = await response.json();
+        authorsData = (await response.json()) as Record<string, AuthorData>;
       }
     } catch (error) {
       console.error('Failed to load authors data:', error);
     }
     authorsLoaded = true;
   }
-  
-  async function fetchGithubUsers(author) {
-    if (!author || githubUsersCache[author]) return githubUsersCache[author] || [];
-    
+
+  function parseAuthorsAsText(author: string): GithubUser[] {
+    return author.split(',').map((authorName) => ({
+      type: 'text',
+      name: authorName.trim(),
+    }));
+  }
+
+  async function fetchGithubUsers(author: string): Promise<GithubUser[]> {
+    if (!author || githubUsersCache[author]) return githubUsersCache[author] ?? [];
+
+    if (!browser) {
+      return parseAuthorsAsText(author);
+    }
+
     await loadAuthorsData();
-    
-    const authors = author.split(',').map(a => a.trim());
-    const users = authors.map((authorName) => {
+
+    const authors = author.split(',').map((a) => a.trim());
+    const users: GithubUser[] = authors.map((authorName) => {
       if (authorName.startsWith('@')) {
         const username = authorName.slice(1);
         const authorKey = `@${username}`;
         const authorData = authorsData[authorKey];
-        
+
         if (authorData) {
           return {
             type: 'github',
             username,
             name: authorData.name || username,
             avatar: authorData.avatar,
-            url: authorData.url
+            url: authorData.url,
           };
-        } else {
-          return { type: 'text', name: authorName };
         }
+
+        return { type: 'text', name: authorName };
       }
+
       return { type: 'text', name: authorName };
     });
-    
+
     githubUsersCache[author] = users;
     return users;
+  }
+
+  function authorUserKey(user: GithubUser): string {
+    return user.type === 'github' ? user.username : user.name;
   }
 </script>
 
 <div class="posts-list">
-  {#each posts as post}
+  {#each posts as post (post.slug)}
   <article class="post-item">
     <div class="post-image">
       <a href="/blog/{post.slug}">
@@ -77,7 +130,7 @@
             {:then githubUsers}
               {#if githubUsers.length > 0}
                 <div class="authors">
-                  {#each githubUsers as user, index}
+                  {#each githubUsers as user, index (authorUserKey(user))}
                     {#if user.type === 'github'}
                       <a href="/blog/author/{user.username}" class="github-author">
                         {#if user.avatar}

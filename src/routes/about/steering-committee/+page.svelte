@@ -1,9 +1,8 @@
 <script>
 	import BioSteeringCommittee from '$lib/components/page/bios/BioSteeringCommittee.svelte';
+	import { MotifConcentricCircles } from '$lib/components/ui/atoms/motifs';
 	const img_wes = '/images/steering-committee/wes_f.jpg';
 	const img_ana = '/images/steering-committee/ana_j.jpg';
-	const img_jon = '/images/steering-committee/jon_l.jpg';
-	const img_kat = '/images/steering-committee/katie_m.jpg';
 	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 	const img_jayson = '/images/steering-committee/jayson_d.jpg';
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
@@ -16,9 +15,11 @@
 	<title>Steering Committee | About | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="motif-section steering-page">
+	<MotifConcentricCircles />
+	<div class="container">
 	<section class="team-section">
-		<h2 id="steering-committee">Steering Committee</h2>
+		<h1 id="steering-committee">Steering Committee</h1>
 		<p>
 			The <strong>Steering Committee</strong> provides expectations, timelines, tools, and regular oversight and continuity for <a href="/about/working-groups" class="link">working groups</a> and the Developer Relations Foundation (DRF) and its initiatives.
 		</p>
@@ -151,10 +152,16 @@
 
 
 	</section>
+	</div>
 </div>
 
 <style>
-  .container {
+  .steering-page {
+    position: relative;
+    overflow: visible;
+  }
+
+  .steering-page .container {
     margin-bottom: var(--space-m);
   }
 </style>

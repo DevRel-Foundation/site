@@ -3,7 +3,7 @@
   import ContributorCallout from '$lib/components/page/blog/ContributorCallout.svelte';
   
   const { data } = $props();
-  const { posts, tag, categoryDescriptions } = data;
+  const { posts, tag } = data;
 </script>
 
 <svelte:head>
@@ -13,7 +13,7 @@
   <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog - Posts tagged '{tag}'" href="/blog/tag/{tag}/feed.xml" />
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
   <header class="tag-header">
     <h1>#{tag}</h1>
     <p>All blog posts tagged with #{tag}</p>
@@ -43,7 +43,6 @@
 
 <style>
   .tag-header {
-    text-align: center;
     margin-bottom: var(--space-l);
   }
   
@@ -65,7 +64,7 @@
   
   .tag-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: var(--space-s);
   }

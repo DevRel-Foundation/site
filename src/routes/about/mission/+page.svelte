@@ -1,13 +1,12 @@
 <script>
   import RocketIcon from 'iconoir/icons/rocket.svg';
-
 </script>
 
 <svelte:head>
 	<title>Mission | About | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container mission-intro">
 	<section class="mission-section">
 		<h1 id="about">Developer Relations Foundation</h1>
 
@@ -29,7 +28,7 @@
 	</div>
 </section>
 
-<div class="container container-content">
+<div class="container">
 	<section class="mission-section">
 		<h2>Vision</h2>
 
@@ -78,7 +77,7 @@
 </div>
 
 <section class="governance-callout">
-<div class="container container-content">
+<div class="container">
 	<section class="mission-section">
 		<h2>Governance Playbook</h2>
 		<p>
@@ -92,8 +91,8 @@
 </div>
 </section>
 
-<div class="container container-content">
-	<section class="container-content">
+<div class="container">
+	<section class="mission-section">
 		<h2>Why Do We Need a DevRel Foundation?</h2>
 		<p>
 			The major benefit of a foundation is that it promotes participatory governance, preventing any single company from monopolizing a collaborative project. Specifically, a foundation ensures:
@@ -130,8 +129,8 @@
 	</section>
 </div>  
 
-<div class="container container-content">
-	<section class="container-content">
+<div class="container">
+	<section class="mission-section">
 		<h2>Why the Linux Foundation?</h2>
 		<p>
 			This collaborative project has been hosted as a community project, with no funding involved. This means taking advantage of the governance structure, project management staff, and back-end resources that the Linux Foundation (LF) provides to all hosted projects under an unfunded model, to ensure long-term sustainability. Developer Relations Foundation is part of the LF project series, as a <a href="https://donorbox.org/nonprofit-blog/501c3-vs-501c6" target="_blank" rel="noopener noreferrer">non-profit 501(c)(6)</a>.
@@ -168,6 +167,10 @@
 
 
 <style>
+  .mission-intro {
+    margin-bottom: var(--space-l);
+  }
+
   .container {
     margin-bottom: var(--space-l);
   }
@@ -199,6 +202,11 @@
     padding: var(--space-l) var(--space-s);
     color: white;
     text-align: center;
+  }
+
+  .devrel-callout .callout-content {
+    position: relative;
+    z-index: 1;
   }
 
   .callout-content h2 {

@@ -16,7 +16,6 @@
 </svelte:head>
 
 <main class="container">
-	<div class="container-content">
 		<h1>DevRel Foundation Working Groups</h1>
 
 
@@ -100,10 +99,7 @@
 
 		<div class="section-divider"></div>
 
-		<div> <a name="groups"></a> </div>
-
-
-		<h2>Active Working Groups</h2>
+		<h2 id="groups">Active Working Groups</h2>
 
 		<h3>Community Engagement and Support</h3>
 		<p>The Community Engagement and Support Working Group documents standardized approaches and frameworks that help organizations to build, nurture, and scale developer communities.</p>
@@ -154,8 +150,6 @@
 
 		<div class="section-divider"></div>
 
-
-	</div>
 </main>
 
 <style>
@@ -236,7 +230,7 @@
 		color: var(--color-text-dark);
 	}
 
-	.dark .box-header {
+	:global(body.dark-mode) .box-header {
 		background-color: var(--color-background);
 		color: var(--color-mint);
 	}

@@ -1,13 +1,9 @@
-<script>
-  import { page } from '$app/stores';
-</script>
-
 <svelte:head>
   <title>Privacy Policy | DevRel Foundation</title>
   <meta name="description" content="DevRel Foundation privacy policy and data protection information" />
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
   <header class="page-header">
     <h1>Privacy Policy</h1>
     <p class="subtitle">How we protect and handle your personal information</p>
@@ -100,7 +96,6 @@
   }
 
   .page-header {
-    text-align: center;
     margin-bottom: var(--space-2xl);
   }
 

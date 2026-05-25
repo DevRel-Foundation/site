@@ -17,7 +17,7 @@
   ];
 </script>
 
-<div class="container container-content">
+<div class="container">
   <h1>Contact Us</h1>
   <p>
     Have a question or looking to get involved? Reach out to us through email or explore our quick links for helpful resources
@@ -28,7 +28,7 @@
       <h2>Email Inquiries</h2>
       <div class="card">
         <ul class="contact-list">
-          {#each emailContacts as contact}
+          {#each emailContacts as contact (contact.email)}
             <li>
               <span class="contact-label">{contact.label}</span>
               <a class="contact-email" href={`mailto:${contact.email}`}>{contact.email}</a>
@@ -42,7 +42,7 @@
       <h2>Getting Help</h2>
       <div class="card">
         <ul class="contact-list">
-          {#each gettingHelp as link}
+          {#each gettingHelp as link (link.url)}
             <li><a href={link.url} target="_blank">{link.label}</a></li>
           {/each}
         </ul>

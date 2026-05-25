@@ -1,49 +1,80 @@
-<script>
-  import { page } from '$app/stores';
+<script lang="ts">
+  import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
-  
+
+  type Author = {
+    username: string;
+    name?: string;
+    bio?: string;
+    avatar?: string;
+    url?: string;
+    linkedin?: string;
+    content?: string;
+  };
+
+  type BlogPost = {
+    slug: string;
+    title: string;
+    image?: string;
+    category?: string;
+    date: string;
+    author?: string;
+    excerpt?: string;
+    readingTime?: string;
+    tags?: string[];
+  };
+
   const { data } = $props();
-  const { posts, author, username } = data;
+  const { username } = data;
+  const author = data.author as Author;
+  const posts = data.posts as BlogPost[];
+
+  const displayName = $derived(author.name || author.username);
+  const metaDescription = $derived(author.bio || `Posts by ${displayName}`);
+  const ogImage = $derived(author.avatar || `${page.url.origin}/images/devrel-foundation-logo.png`);
+  const keywords = $derived(
+    `DevRel, Developer Relations, ${author.name ?? ''}, ${posts.flatMap((p) => p.tags ?? []).join(', ')}`
+  );
 </script>
 
 <svelte:head>
-  <title>{author.name || author.username} | Authors | DevRel Foundation</title>
-  <meta name="description" content="{author.bio || `Posts by ${author.name || author.username}`}" />
+  <title>{displayName} | Authors | DevRel Foundation</title>
+  <meta name="description" content={metaDescription} />
   
-  <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog - {author.name || author.username}" href="/blog/author/{username}/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog - {displayName}" href="/blog/author/{username}/feed.xml" />
   
-  <meta name="keywords" content="DevRel, Developer Relations, {author.name}, {posts.map(p => p.tags).flat().join(', ')}" />
+  <meta name="keywords" content={keywords} />
   <meta name="author" content="DevRel Foundation" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href={$page.url.href} />
+  <link rel="canonical" href={page.url.href} />
   
-  <meta property="og:url" content={$page.url.href} />
-  <meta property="og:title" content="{author.name || author.username} | DevRel Foundation Blog" />
-  <meta property="og:description" content="{author.bio || `Posts by ${author.name || author.username}`}" />
-  <meta property="og:image" content="{author.avatar || $page.url.origin + '/images/devrel-foundation-logo.png'}" />
+  <meta property="og:url" content={page.url.href} />
+  <meta property="og:title" content="{displayName} | DevRel Foundation Blog" />
+  <meta property="og:description" content={metaDescription} />
+  <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="DevRel Foundation" />
   
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{author.name || author.username} | DevRel Foundation Blog" />
-  <meta name="twitter:description" content="{author.bio || `Posts by ${author.name || author.username}`}" />
-  <meta name="twitter:image" content="{author.avatar || $page.url.origin + '/images/devrel-foundation-logo.png'}" />
+  <meta name="twitter:title" content="{displayName} | DevRel Foundation Blog" />
+  <meta name="twitter:description" content={metaDescription} />
+  <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
 <div class="author-page">
   <div class="author-header">
     <div class="author-info">
       {#if author.avatar}
-        <img src={author.avatar} alt={author.name || author.username} class="author-avatar" />
+        <img src={author.avatar} alt={displayName} class="author-avatar" />
       {/if}
       
       <div class="author-details">
-        <h1 class="author-name">{author.name || author.username}</h1>
+        <h1 class="author-name">{displayName}</h1>
         
         {#if author.bio}
           <div class="author-bio">
-            {#each author.bio.split('\n') as bioLine}
+            {#each author.bio.split('\n') as bioLine, i (i)}
               <p><b>{bioLine}</b></p>
             {/each}
           </div>
@@ -99,13 +130,12 @@
     border-radius: var(--radius-m);
     padding: var(--space-xl);
     margin-bottom: var(--space-xl);
-    text-align: center;
   }
 
   .author-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-m);
   }
 
@@ -120,7 +150,7 @@
   .author-details {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-s);
   }
 
@@ -132,7 +162,7 @@
   }
 
   .author-bio {
-    text-align: center;
+    text-align: left;
     color: var(--color-text-secondary);
     line-height: 1.6;
     max-width: 60ch;
@@ -151,7 +181,7 @@
     align-items: center;
     gap: var(--space-m);
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .github-link {

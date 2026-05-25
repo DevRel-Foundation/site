@@ -2,7 +2,7 @@
 	<title>What is Developer Relations | About | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
 	<section class="section">
 		<h1>What is Developer Relations?</h1>
 
