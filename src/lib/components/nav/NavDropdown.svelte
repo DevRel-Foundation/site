@@ -49,14 +49,14 @@
       {label}
     </a>
     <div class="dropdown" class:accordion-open={mobileOpen}>
-      <div class="dropdown-content">
+      <div class="layout-section dropdown-content">
         {@render children()}
       </div>
     </div>
   {:else}
     <a {href} class="nav-link" class:active={desktopActive}>{label}</a>
     <div class="dropdown" class:active={desktopActive}>
-      <div class="dropdown-content">
+      <div class="layout-section dropdown-content">
         {@render children()}
       </div>
     </div>

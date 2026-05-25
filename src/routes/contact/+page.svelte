@@ -23,7 +23,7 @@
     Have a question or looking to get involved? Reach out to us through email or explore our quick links for helpful resources
   </p>
 
-  <div class="cards-wrapper">
+  <div class="u-grid u-grid-2 cards-wrapper">
     <div class="section">
       <h2>Email Inquiries</h2>
       <div class="card">
@@ -58,9 +58,6 @@
   }
 
   .cards-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-l);
     margin-top: var(--space-l);
   }
 
@@ -99,11 +96,5 @@
     color: var(--color-link);
     font-family: monospace;
     font-size: var(--step--1);
-  }
-
-  @media (max-width: 768px) {
-    .cards-wrapper {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

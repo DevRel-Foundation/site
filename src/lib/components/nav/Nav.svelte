@@ -223,7 +223,7 @@
 </script>
 
 <nav class="nav">
-  <div class="nav-container">
+  <div class="layout-section nav-container">
     <div class="nav-brand">
       <a href="/">
         <img src="/drf_logo_symbol.svg" alt="DevRel Foundation" class="logo-symbol" />
@@ -312,11 +312,12 @@
     top: 0;
     z-index: 1000;
   }
+
+  .nav :global(a) {
+    text-decoration: none;
+  }
   
   .nav-container {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-m);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -478,8 +479,6 @@
   }
 
   .nav :global(.dropdown-content) {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
     padding: var(--space-l);
     display: grid;
     grid-template-columns: 1fr 1fr;

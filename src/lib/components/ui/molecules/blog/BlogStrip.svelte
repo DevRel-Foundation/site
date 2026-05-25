@@ -9,7 +9,7 @@
   <section class="blog-carousel">
     <SectionDivider />
     {#if title}<h2 class="blog-carousel-title">{title}</h2>{/if}
-    <div class="blog-carousel-grid">
+    <div class="u-grid u-grid-3 blog-carousel-grid">
       {#each posts as post}
         <BlogCard {post} href="/blog/{post.slug}" />
       {/each}
@@ -30,15 +30,7 @@
   }
 
   .blog-carousel-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-l);
-  }
-
-  @media (min-width: 768px) {
-    .blog-carousel-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
 </style>

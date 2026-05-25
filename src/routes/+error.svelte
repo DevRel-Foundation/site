@@ -66,7 +66,7 @@
   <meta name="description" content="Page not found - DevRel Foundation" />
 </svelte:head>
 
-<div class="error-page">
+<div class="container container-content error-page">
   <div class="error-banner">
     <div class="custom-404">
       <div class="digit digit-4">4</div>
@@ -122,7 +122,7 @@
   <div class="error-details">
     <details>
       <summary>Debugging Details</summary>
-      <div class="debug-grid">
+      <div class="u-grid u-grid-auto-fill debug-grid">
         <div class="debug-section">
           <h4>Error Information</h4>
           <p><strong>Status Code:</strong> {status}</p>
@@ -171,10 +171,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-xl) var(--space-l);
+    padding-block: var(--space-xl);
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
   }
 
   .error-banner {
@@ -368,7 +366,6 @@
 
   .error-details {
     width: 100%;
-    max-width: 800px;
     margin-top: var(--space-l);
   }
 
@@ -392,9 +389,6 @@
   }
 
   .debug-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-m);
     margin-top: var(--space-s);
   }
 

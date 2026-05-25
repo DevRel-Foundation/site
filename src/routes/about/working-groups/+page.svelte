@@ -163,14 +163,6 @@
 		margin-bottom: var(--space-2xl);
 	}
 
-	.section-divider {
-		width: 100%;
-		height: 3px;
-		background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
-		margin: var(--space-s) var(--space-xs);
-		border-radius: var(--radius-s);
-	}
-
 	p {
 		font-size: var(--step-0);
 		margin-bottom: var(--space-s);

@@ -8,7 +8,6 @@
   import '../app.css';
   import Nav from '$lib/components/nav/Nav.svelte';
   import Footer from '$lib/components/nav/Footer.svelte';
-  import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
   import CookieConsent from '$lib/ui/CookieConsent.svelte';
   import { Tooltip } from 'bits-ui';
   import { writable } from 'svelte/store';
@@ -125,5 +124,4 @@
 {/if}
 
   <Footer />
-  <EditThisPage />
 </Tooltip.Provider>

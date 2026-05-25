@@ -11,7 +11,7 @@
 		</p>
 
 
-    <div class="pillars-grid">
+    <div class="u-grid u-grid-auto-fit-sm pillars-grid">
       <div class="pillar-circle">Advocacy</div>
       <div class="pillar-circle">Community Engagement</div>
       <div class="pillar-circle">Education</div>
@@ -68,12 +68,7 @@
   }
 
   .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--space-m);
-    margin-top: var(--space-m);
-    margin-bottom: var(--space-m);
-    justify-items: center;
+    margin-block: var(--space-m);
   }
 
   .pillar-circle {
@@ -101,12 +96,5 @@
     transform: translateY(-6px);
   }
 
-	.section-divider {
-		width: 100%;
-		height: 3px;
-		background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
-		margin: var(--space-s) var(--space-xs);
-		border-radius: var(--radius-s);
-	}
 
 </style>

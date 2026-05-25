@@ -62,8 +62,8 @@
 			There are personal and professional benefits to joining the DevRel Foundation. Whether you are a newcomer to the field or an experienced professional, there are opportunities for you to grow, learn, and contribute.
 		</p>
 
-		<div class="two-column-layout">
-			<div class="icon-column">
+		<div class="u-grid u-grid-icon-text">
+			<div class="u-icon-column">
 				<img src="{MagnetIcon}" alt="Magnet Icon" class="icon-left-r90" />
 			</div>
 			<div class="text-column">
@@ -126,9 +126,9 @@
 				To contribute to a project, start by familiarizing yourself with the project's goals and guidelines. Engage with the community to understand their needs and how you can help. Then create issues or pull requests for the projects you are interested in. Join the <a href="/about/working-groups">working groups</a> to collaborate with other contributors.
 			</p>
 		</div>
-		<div class="two-column-layout">
-			<div class="icon-column">
-				<img src="{GiftIcon}" alt="Gift Icon" class="icon-left" />
+		<div class="u-grid u-grid-icon-text">
+			<div class="u-icon-column">
+				<img src="{GiftIcon}" alt="Gift Icon" class="u-icon" />
 			</div>
 			<div class="text-column">
 				<ul class="benefit-list">
@@ -144,9 +144,9 @@
 				Stay connected with the community through foundation events such as Community Calls, Office Hours, and Working Group Meetings. These events provide opportunities to share your work, learn from others, and build relationships within the wider DevRel community about our <a href="/projects">projects</a>.
 			</p>
 		</div>
-		<div class="two-column-layout">
-			<div class="icon-column">
-				<img src="{MegaphoneIcon}" alt="Megaphone Icon" class="icon-left" />
+		<div class="u-grid u-grid-icon-text">
+			<div class="u-icon-column">
+				<img src="{MegaphoneIcon}" alt="Megaphone Icon" class="u-icon" />
 			</div>
 			<div class="text-column">
 				<ul class="benefit-list">
@@ -279,7 +279,7 @@
 	}
 
 	.container-content {
-		margin: var(--space-l);
+		margin-bottom: var(--space-l);
 	}
 
 	.content-header {
@@ -297,62 +297,19 @@
 		visibility: hidden;
 	}
 
-	.two-column-layout {
-		display: grid;
-		grid-template-columns: 1fr 5fr;
-		gap: var(--space-l);
-		align-items: center;
-	}
-
-	.icon-column {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		min-height: 200px;
-	}
-
-	.text-column {
-		flex: 1;
-	}
-
-	.icon-left {
-		height: auto;
-		max-width: min(50vw, 250px);
-		width: 50%;
-		flex-shrink: 0;
-		filter: var(--icon-filter);
-		stroke-width: 1;
-		opacity: 0.8;
-	}
-
 	.icon-left-r90 {
 		height: auto;
-		max-width: min(50vw, 250px);
+		max-width: min(50vw, 15.625rem);
 		width: 50%;
 		flex-shrink: 0;
 		filter: var(--icon-filter);
-		stroke-width: 1;
 		opacity: 0.8;
 		transform: rotate(90deg);
 	}
 
 	@media (max-width: 768px) {
-		.two-column-layout {
-			grid-template-columns: 1fr;
-			gap: var(--space-m);
-		}
-		
-		.icon-column {
-			justify-content: center;
-			min-height: 150px;
-		}
-
-		.icon-left {
-			max-width: min(40vw, 150px);
-			stroke-width: 1;
-			opacity: 0.8;
-			transform: rotate(90deg);
+		.icon-left-r90 {
+			max-width: min(40vw, 9.375rem);
 		}
 	}
 
@@ -367,14 +324,6 @@
 
 	.benefit-item {
 		margin-bottom: var(--space-xs);
-	}
-
-	.section-divider {
-		width: 100%;
-		height: 3px;
-		background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
-		margin: var(--space-s) var(--space-xs);
-		border-radius: var(--radius-s);
 	}
 
 	.steps {

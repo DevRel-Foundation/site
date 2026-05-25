@@ -127,7 +127,7 @@
 			{/if}
 		</div>
 
-		<div class="projects-grid">
+		<div class="u-grid u-grid-auto-fill projects-grid">
 			{#each filteredProjects as project}
 				<div class="project-card">
 					<h3>{project.title}</h3>
@@ -272,9 +272,6 @@
 	}
 
 	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: var(--space-l);
 		margin-top: var(--space-m);
 	}
 

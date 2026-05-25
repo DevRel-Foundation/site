@@ -20,10 +20,7 @@
 			return;
 		}
 		
-		console.log('Newsletter signup:', email);
-		
 		await trackNewsletterSignup(email);
-		
 		handleSubscribe(email);
 		email = '';
 	}
@@ -43,28 +40,23 @@
 					source: 'homepage',
 					list: 'community'
 				});
-				
-				console.log('PostHog tracking completed for:', emailAddress);
 			} catch (error) {
 				console.error('PostHog tracking failed:', error);
 			}
 		}
 	}
 
-	function isValidEmail(email: string): boolean {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
+	function isValidEmail(value: string): boolean {
+		return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 	}
 
 	function handleSubscribe(address: string) {
 		if (!address || !isValidEmail(address)) {
-			console.error('Invalid email address');
 			return;
 		}
 		
 		const encodedEmail = encodeURIComponent(address.trim());
 		const subscribeUrl = `https://lists.dev-rel.org/g/community/join?email=${encodedEmail}`;
-		
 		window.open(subscribeUrl, '_blank', 'noopener,noreferrer');
 	}
 
@@ -132,8 +124,8 @@
   </script>
 </svelte:head>
 
-<div class="container">
-	<section class="hero">
+<div class="homepage">
+	<section class="layout-section hero">
 		<div class="hero-title-area">
 			<div class="hero-title" class:is-visible={heroTextVisible}>
 				<h1>
@@ -150,7 +142,7 @@
 		</div>
 	</section>
 
-	<section class="content-boxes">
+	<section class="layout-section u-grid u-grid-3 content-boxes">
 		<div class="content-box">
 			<img src={PlantIcon} alt="Plant" />
 			<h3 class="content-box-heading">Our Mission</h3>
@@ -179,28 +171,30 @@
 		</div>
 	</section>
 
-	<section class="newsletter-section">
-		<div class="newsletter-content">
-			<h2>Subscribe to the Mailing List</h2>
-			<p>
-				Stay in the loop with the latest announcements, events, best practices, and other community news.
-			</p>
+	<section class="layout-section newsletter-wrap">
+		<div class="newsletter-section">
+			<div class="newsletter-content">
+				<h2>Subscribe to the Mailing List</h2>
+				<p>
+					Stay in the loop with the latest announcements, events, best practices, and other community news.
+				</p>
 
-			<form class="newsletter-form" onsubmit={handleNewsletterSubmit}>
-				<input type="email" bind:value={email} placeholder="Enter your email address" required />
-				<button type="submit">Subscribe</button>
-			</form>
+				<form class="newsletter-form" onsubmit={handleNewsletterSubmit}>
+					<input type="email" bind:value={email} placeholder="Enter your email address" required />
+					<button type="submit">Subscribe</button>
+				</form>
+			</div>
 		</div>
 	</section>
 </div>
 
 <style>
-	.container {
+	.homepage {
 		position: relative;
 		box-sizing: border-box;
 	}
 
-	.container::before {
+	.homepage::before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -214,7 +208,7 @@
 	}
 
 	.hero {
-		padding: var(--space-m) var(--space-m);
+		padding-block: var(--space-m);
 	}
 	
 	.hero-title-area {
@@ -224,8 +218,6 @@
 		justify-content: center;
 		background-color: var(--color-background);
 		gap: var(--space-l);
-		max-width: var(--grid-max-width);
-		margin: 0 auto;
 	}
 	
 	.hero-title {
@@ -285,13 +277,11 @@
 	}
 
 	.content-boxes {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--space-l);
-		max-width: var(--grid-max-width);
-		margin: 0 auto;
 		margin-bottom: var(--space-2xl);
-		padding: 0 var(--space-m);
+	}
+
+	.newsletter-wrap {
+		margin-bottom: var(--space-2xl);
 	}
 
 	.content-box {
@@ -348,10 +338,6 @@
 		background-color: var(--color-accent-text);
 		padding: var(--space-m);
 		border-radius: var(--radius-l);
-		width: 80%;
-		max-width: calc(var(--grid-max-width) * 0.8);
-		margin: 0 auto var(--space-2xl) auto;
-		box-sizing: border-box;
 	}
 
 	.newsletter-content h2 {
@@ -395,7 +381,7 @@
 
 	@media (min-width: 769px) {
 		.hero {
-			padding: var(--space-l) var(--space-m);
+			padding-block: var(--space-l);
 		}
 
 		.hero-title-area {
@@ -418,10 +404,6 @@
 
 		.newsletter-form {
 			flex-direction: row;
-		}
-
-		.content-boxes {
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		}
 	}
 

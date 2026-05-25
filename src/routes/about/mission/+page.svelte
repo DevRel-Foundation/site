@@ -20,7 +20,7 @@
 </div>
 
 <section class="devrel-callout">
-	<div class="callout-content">
+	<div class="layout-section callout-content">
 		<h2>DevRel: Accelerating Technology Adoption</h2>
 		<p>
 			Developer Relations (DevRel) is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
@@ -99,9 +99,9 @@
 			The major benefit of a foundation is that it promotes participatory governance, preventing any single company from monopolizing a collaborative project. Specifically, a foundation ensures:
 		</p>
 
-		<div class="two-column-layout">
-			<div class="icon-column">
-				<img src="{RocketIcon}" alt="Rocket Icon" class="icon-left" />
+		<div class="u-grid u-grid-icon-text">
+			<div class="u-icon-column">
+				<img src="{RocketIcon}" alt="Rocket Icon" class="u-icon" />
 			</div>
 			<div class="text-column">
 
@@ -201,11 +201,6 @@
     text-align: center;
   }
 
-  .callout-content {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-  }
-
   .callout-content h2 {
     font-size: var(--step-3);
     margin-top: 0;
@@ -275,45 +270,9 @@
     .governance-callout {
       padding: var(--space-l) var(--space-m);
     }
-
-    .governance-callout .callout-content h2 {
-      font-size: var(--step-2);
-    }
-
-    .governance-callout .callout-content p {
-      font-size: var(--step--1);
-    }
-
   }
-
-	.two-column-layout {
-		display: grid;
-		grid-template-columns: 1fr 5fr;
-		gap: var(--space-l);
-		align-items: center;
-	}
-
-	.icon-column {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		min-height: 200px;
-	}
-
 	.text-column {
-		flex: 1;
-    font-size: var(--step-0);
-	}
-
-	.icon-left {
-		height: auto;
-		max-width: min(50vw, 250px);
-		width: 50%;
-		flex-shrink: 0;
-		filter: var(--icon-filter);
-		stroke-width: 1;
-		opacity: 0.8;
+		font-size: var(--step-0);
 	}
 
 </style>

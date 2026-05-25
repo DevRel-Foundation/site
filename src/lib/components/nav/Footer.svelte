@@ -3,10 +3,11 @@
   import LinkedInIcon from 'iconoir/icons/regular/linkedin.svg';
   import GitHubIcon from 'iconoir/icons/regular/github.svg';
   import MailIcon from 'iconoir/icons/regular/mail.svg';
+  import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
 </script>
 
 <footer>
-  <div class="footer-content">
+  <div class="layout-section u-grid u-grid-footer footer-content">
 
     
     <div class="footer-column">
@@ -47,12 +48,14 @@
           <img src={MailIcon} alt="Mail" />
         </a>
       </div>
+
+      <EditThisPage variant="footer" />
     </div>
 
   </div>
   
   
-  <div class="legal-notice">
+  <div class="layout-section legal-notice">
     <hr />
     <p>
       Copyright © 2025 The Linux Foundation® .
@@ -73,15 +76,11 @@
 <style>
   footer {
     background-color: var(--color-background-secondary-1);
-    padding: var(--space-s) var(--space-m);
+    padding-block: var(--space-s);
     border-top: var(--border-thickness) solid var(--color-background-secondary-1);
   }
 
   .footer-content {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
     gap: var(--space-m);
   }
   
@@ -91,7 +90,7 @@
     margin-bottom: var(--space-s);
   }
   
-  .footer-column a {
+  .footer-column > a {
     color: var(--color-link);
     text-decoration: none;
     font-size: var(--step--1);
@@ -114,28 +113,13 @@
     filter: var(--icon-filter);
   }
   
-  @media (min-width: 481px) {
-    .footer-content {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-m);
-    }
-  }
-  
   @media (min-width: 769px) {
     .footer-content {
-      grid-template-columns: 1fr 1fr;
       gap: var(--space-l);
       justify-items: start;
     }
   }
 
-  @media (min-width: 1024px) {
-    .footer-content {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      justify-items: center;
-    }
-  }
-  
   hr {
     border: none;
     border-top: var(--border-thickness) solid var(--color-background-secondary-1);
@@ -144,9 +128,6 @@
   
   .legal-notice {
     text-align: center;
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-xl);
   }
   
   .legal-notice p {

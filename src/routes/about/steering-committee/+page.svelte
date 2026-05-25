@@ -18,14 +18,12 @@
 
 <div class="container container-content">
 	<section class="team-section">
-		<div class="container">
-			<h2 id="steering-committee">Steering Committee</h2>
-			<p>
-				The <strong>Steering Committee</strong> provides expectations, timelines, tools, and regular oversight and continuity for <a href="/about/working-groups" class="link">working groups</a> and the Developer Relations Foundation (DRF) and its initiatives.
-			</p>
-		</div>
+		<h2 id="steering-committee">Steering Committee</h2>
+		<p>
+			The <strong>Steering Committee</strong> provides expectations, timelines, tools, and regular oversight and continuity for <a href="/about/working-groups" class="link">working groups</a> and the Developer Relations Foundation (DRF) and its initiatives.
+		</p>
 
-		<div class="team-grid">
+		<div class="u-grid u-grid-cards team-grid">
 
 			<BioSteeringCommittee
 				name="Stacey Kruczek"
@@ -130,15 +128,12 @@
 			/>
 		</div>
 
-		<div class="container">
-			<h2 id="steering-committee">Foundation Staff</h2>
-			<p>
-				Linux Foundation Staff provide guidance and expertise to support our mission.
-			</p>
-		</div>
+		<h2 id="foundation-staff">Foundation Staff</h2>
+		<p>
+			Linux Foundation Staff provide guidance and expertise to support our mission.
+		</p>
 
-		<div class="team-grid">
-
+		<div class="u-grid u-grid-cards team-grid">
 			<BioSteeringCommittee
 				name="Ana Jiménez"
 				title="Project Manager"
@@ -162,22 +157,4 @@
   .container {
     margin-bottom: var(--space-m);
   }
-
-	.team-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--space-l);
-	}
-
-	@media (min-width: 769px) {
-		.team-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (min-width: 1025px) {
-		.team-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
 </style>
