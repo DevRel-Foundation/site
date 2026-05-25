@@ -7,32 +7,12 @@
   import CallToActionButton from '$lib/components/ui/molecules/NavJoinButton.svelte';
   import NavDropdown from '$lib/components/nav/NavDropdown.svelte';
 
-  type NavMenuIcon = 'discord' | 'github';
-
-  type NavMenuItem = {
-    title: string;
-    href: string;
-    target?: '_blank';
-    rel?: string;
-    variant?: 'brief';
-    icon?: NavMenuIcon;
-    iconAlt?: string;
+  const menuIcons = {
+    discord: DiscordIcon,
+    github: GitHubIcon
   };
 
-  type NavMenuSection = {
-    title: string;
-    description: string;
-    items: NavMenuItem[];
-  };
-
-  type NavMenu = {
-    id: string;
-    label: string;
-    href: string;
-    sections: NavMenuSection[];
-  };
-
-  const NAV_MENUS: NavMenu[] = [
+  const NAV_MENUS = [
     {
       id: 'about',
       label: 'About',
@@ -141,21 +121,19 @@
     }
   ];
 
-  const menuIcons = {
-    discord: DiscordIcon,
-    github: GitHubIcon
-  } as const;
-  
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
   let activeDropdown = $state<string | null>(null);
+  let hideDropdownTimeout: ReturnType<typeof setTimeout> | undefined;
   let mediaQuery;
   let isMobile = $state(false);
-  
+
+  const DROPDOWN_CLOSE_DELAY_MS = 200;
+
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
-  
+
   function setDarkModeClass(enabled: boolean) {
     if (typeof document !== 'undefined') {
       document.documentElement.classList.toggle('dark-mode', enabled);
@@ -170,30 +148,44 @@
       localStorage.setItem('darkMode', isDarkMode.toString());
     }
   }
-  
+
   function showDropdown(menuItem: string) {
+    if (hideDropdownTimeout) {
+      clearTimeout(hideDropdownTimeout);
+      hideDropdownTimeout = undefined;
+    }
     activeDropdown = menuItem;
   }
-  
+
   function hideDropdown() {
-    activeDropdown = null;
+    if (hideDropdownTimeout) {
+      clearTimeout(hideDropdownTimeout);
+    }
+    hideDropdownTimeout = setTimeout(() => {
+      activeDropdown = null;
+      hideDropdownTimeout = undefined;
+    }, DROPDOWN_CLOSE_DELAY_MS);
   }
-  
+
   function closeAll() {
+    if (hideDropdownTimeout) {
+      clearTimeout(hideDropdownTimeout);
+      hideDropdownTimeout = undefined;
+    }
     isMenuOpen = false;
     activeDropdown = null;
   }
-  
+
   $effect(() => {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const savedMode = localStorage.getItem('darkMode');
-      
+
       if (savedMode !== null) {
         isDarkMode = savedMode === 'true';
       } else {
         mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         isDarkMode = mediaQuery.matches;
-        
+
         mediaQuery.addEventListener('change', (e) => {
           if (localStorage.getItem('darkMode') === null) {
             isDarkMode = e.matches;
@@ -201,20 +193,20 @@
           }
         });
       }
-      
+
       setDarkModeClass(isDarkMode);
     }
   });
-  
+
   $effect(() => {
     if (typeof window !== 'undefined') {
       const checkMobile = () => {
         isMobile = window.innerWidth <= 768;
       };
-      
+
       checkMobile();
       window.addEventListener('resize', checkMobile);
-      
+
       return () => {
         window.removeEventListener('resize', checkMobile);
       };
@@ -233,7 +225,7 @@
         </div>
       </a>
     </div>
-    
+
     <div class="nav-menu-container">
       <ul class="nav-menu" class:open={isMenuOpen}>
         {#each NAV_MENUS as menu (menu.id)}
@@ -283,7 +275,6 @@
         <CallToActionButton />
       </div>
 
-      
       <button class="theme-toggle" onclick={toggleDarkMode} aria-label="Toggle dark mode">
         {#if isDarkMode}
           <img src={SunLightIcon} alt="Light mode" />
@@ -291,7 +282,7 @@
           <img src={HalfMoonIcon} alt="Dark mode" />
         {/if}
       </button>
-      
+
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
       </button>
@@ -300,7 +291,6 @@
 </nav>
 
 <style>
-
   .cta {
     margin-left: var(--space-l);
   }
@@ -316,41 +306,41 @@
   .nav :global(a) {
     text-decoration: none;
   }
-  
+
   .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 4rem;
   }
-  
+
   .nav-brand {
     flex-shrink: 0;
   }
-  
+
   .nav-brand a {
     color: var(--color-text);
     text-decoration: none;
     display: flex;
     align-items: center;
   }
-  
+
   .nav-brand a:hover {
     opacity: 0.8;
   }
-  
+
   .logo-symbol {
     height: 3rem;
     width: auto;
   }
-  
+
   .brand-text {
     display: flex;
     flex-direction: column;
     margin-left: var(--space-xs);
     line-height: 1;
   }
-  
+
   .devrel-text {
     font-family: var(--font-headings);
     font-weight: 800;
@@ -358,7 +348,7 @@
     color: var(--color-logo-text);
     text-transform: uppercase;
   }
-  
+
   .foundation-text {
     font-family: var(--font-headings);
     font-weight: 300;
@@ -366,26 +356,26 @@
     color: var(--color-logo-text);
     text-transform: uppercase;
   }
-  
+
   @media (max-width: 480px) {
     .brand-text {
       margin-left: var(--space-2xs);
     }
-    
+
     .devrel-text {
       font-size: 0.75rem;
     }
-    
+
     .foundation-text {
       font-size: 0.625rem;
     }
   }
-  
+
   .nav-menu-container {
     display: flex;
     align-items: center;
   }
-  
+
   .nav-menu {
     position: absolute;
     top: 100%;
@@ -404,17 +394,17 @@
     visibility: hidden;
     transition: all 0.3s ease;
   }
-  
+
   .nav-menu.open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-  
+
   .nav-menu :global(li) {
     width: 100%;
   }
-  
+
   .nav-menu a {
     color: var(--color-text);
     text-decoration: none;
@@ -424,135 +414,16 @@
     border-bottom: 1px solid var(--color-background-secondary-1);
     white-space: nowrap;
   }
-  
+
   .nav-menu a:last-child {
     border-bottom: none;
   }
-  
+
   .nav-menu a:hover {
     color: var(--color-link);
     background-color: var(--color-background-secondary-1);
   }
 
-  .nav :global(.nav-link) {
-    position: relative;
-    transition: all 0.2s ease;
-  }
-
-  .nav :global(.nav-link.active::after) {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background-color: var(--color-mint);
-    border-radius: 2px;
-  }
-
-  .nav :global(.dropdown-container) {
-    position: relative;
-  }
-
-  .nav :global(.dropdown) {
-    position: fixed;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    background: var(--color-background);
-    border-top: 3px solid var(--color-mint-dark);
-    border-bottom: 1px solid var(--color-mint-dark);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 999;
-    pointer-events: none;
-  }
-
-  .nav :global(.dropdown.active) {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .nav :global(.dropdown-content) {
-    padding: var(--space-l);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-  }
-  
-  .dropdown-section h3 {
-    margin: 0 0 var(--space-m) 0;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  
-  .dropdown-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-  
-  .dropdown-item {
-    font-size: 1.5rem;
-    padding: var(--space-3xs);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3xs);
-  }
-
-  .dropdown-item-brief {
-    padding: calc(var(--space-4xs) / 32);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-
-  .dropdown-items a:has(.dropdown-item-brief):hover {
-    background-color: transparent;
-  }
-
-  .menu-header {
-    font-size: 0.7rem;
-    font-weight: 200;
-    color: var(--color-background-secondary-2);
-    margin-bottom: var(--space-3xs);
-  }
-
-  .menu-header-description {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    line-height: 1.4;
-    margin: 0 0 var(--space-s) 0;
-  }
-  
-  .item-title {
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: var(--color-text);
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    white-space: nowrap;
-  }
-  
-  .social-icon {
-    width: 1rem;
-    height: 1rem;
-    filter: var(--icon-filter);
-    flex-shrink: 0;
-  }
-  
   .theme-toggle,
   .menu-toggle {
     background: none;
@@ -565,25 +436,25 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .theme-toggle:hover,
   .menu-toggle:hover {
     background-color: var(--color-background-secondary-1);
   }
-  
+
   .theme-toggle img,
   .menu-toggle img {
     width: 1.5rem;
     height: 1.5rem;
     filter: var(--icon-filter);
   }
-  
+
   .menu-toggle {
     display: flex;
     margin-left: var(--space-xs);
     margin-right: var(--space-xs);
   }
-  
+
   @media (min-width: 769px) {
     .nav-menu {
       position: static;
@@ -616,46 +487,81 @@
   }
 
   @media (max-width: 768px) {
-    .nav :global(.nav-link.active::after) {
-      display: none;
-    }
-
     .nav-menu.open {
       max-height: calc(100dvh - 4rem);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
+  }
 
-    .nav :global(.dropdown) {
-      position: static;
-      opacity: 0;
-      visibility: hidden;
-      height: 0;
-      overflow: hidden;
-      transform: none;
-      box-shadow: none;
-      border: none;
-      border-top: none;
-      background: var(--color-background-secondary-1);
-      margin-top: 0;
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
+  .dropdown-section h3 {
+    margin: 0 0 var(--space-m) 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 
-    .nav :global(.dropdown.accordion-open) {
-      opacity: 1;
-      visibility: visible;
-      height: auto;
-      margin-top: var(--space-xs);
-      pointer-events: auto;
-    }
+  .dropdown-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
 
-    .nav :global(.dropdown-content) {
-      padding: var(--space-s);
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
+  .dropdown-item {
+    font-size: 1.5rem;
+    padding: var(--space-3xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
 
+  .dropdown-item-brief {
+    padding: calc(var(--space-4xs) / 32);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .dropdown-items a:has(.dropdown-item-brief):hover {
+    background-color: transparent;
+  }
+
+  .menu-header {
+    font-size: 0.7rem;
+    font-weight: 200;
+    color: var(--color-background-secondary-2);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .menu-header-description {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 0 0 var(--space-s) 0;
+  }
+
+  .item-title {
+    font-weight: 800;
+    color: var(--color-text);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    white-space: nowrap;
+  }
+
+  .social-icon {
+    width: 1rem;
+    height: 1rem;
+    filter: var(--icon-filter);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
     .dropdown-section:not(:first-child) {
       display: block;
     }
@@ -664,5 +570,4 @@
       display: block;
     }
   }
-
 </style>
