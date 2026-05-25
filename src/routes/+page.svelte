@@ -145,7 +145,7 @@
 	<section class="layout-section u-grid u-grid-3 content-boxes">
 		<div class="content-box">
 			<img src={PlantIcon} alt="Plant" />
-			<h3 class="content-box-heading">Our Mission</h3>
+			<h3 class="content-box-heading">Our mission</h3>
 			<p>
 				To elevate the professional practice of developer relations and increase awareness of it as a driver of business value.
 			</p>
@@ -154,7 +154,7 @@
 
 		<div class="content-box">
 			<img src={TreeIcon} alt="Tree" />
-			<h3 class="content-box-heading">The Projects</h3>
+			<h3 class="content-box-heading">The projects</h3>
 			<p>
 				We source and innovate on the knowledge, systems, and best practices needed to achieve technology adoption.
 			</p>
@@ -163,18 +163,18 @@
 
 		<div class="content-box">
 			<img src={NetworkIcon} alt="Network" />
-			<h3 class="content-box-heading">Join Us</h3>
+			<h3 class="content-box-heading">Join us</h3>
 			<p>
 				Partner with us on <a href="https://discord.gg/G7CSTKZcuT">Discord</a> and <a href="https://github.com/DevRel-Foundation">GitHub</a> to share your voice and collaborate with peers.
 			</p>
-			<button class="content-button" onclick={handleJoinClick}>Get Involved</button>
+			<button class="content-button" onclick={handleJoinClick}>Get involved</button>
 		</div>
 	</section>
 
 	<section class="layout-section newsletter-wrap">
 		<div class="newsletter-section">
 			<div class="newsletter-content">
-				<h2>Subscribe to the Mailing List</h2>
+				<h2>Subscribe to the mailing list</h2>
 				<p>
 					Stay in the loop with the latest announcements, events, best practices, and other community news.
 				</p>

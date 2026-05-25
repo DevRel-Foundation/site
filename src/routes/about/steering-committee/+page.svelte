@@ -28,7 +28,7 @@
 
 			<BioSteeringCommittee
 				name="Stacey Kruczek"
-				title="Marketing and Brand"
+				title="Marketing and brand"
 				accountabilities="
 					Formulates integrated marketing plans and acts as spokesperson, overseeing messaging, press, and brand identity.
 					"
@@ -40,7 +40,7 @@
 
 			<BioSteeringCommittee
 				name="Wesley Faulkner"
-				title="Community Strategy"
+				title="Community strategy"
 				accountabilities="
 					Develops community engagement strategy, coordinating outreach and relationships with other communities.
 					"
@@ -53,7 +53,7 @@
 
 			<BioSteeringCommittee
 				name="Jayson DeLancey"
-				title="Technology Innovation"
+				title="Technology innovation"
 				term="2027"
 				accountabilities="
 					Innovates on new engineering projects, tool development, and advises on technical strategy for working groups and new open-source development practices.
@@ -129,7 +129,7 @@
 			/>
 		</div>
 
-		<h2 id="foundation-staff">Foundation Staff</h2>
+		<h2 id="foundation-staff">Foundation staff</h2>
 		<p>
 			Linux Foundation Staff provide guidance and expertise to support our mission.
 		</p>
@@ -137,7 +137,7 @@
 		<div class="u-grid u-grid-cards team-grid">
 			<BioSteeringCommittee
 				name="Ana Jiménez"
-				title="Project Manager"
+				title="Project manager"
 				accountabilities="
 					Collaborates with Linux Foundation projects and teams while representing the DevRel Foundation. Manages
 					resources, including GitHub, Netlify, PCC, etc.

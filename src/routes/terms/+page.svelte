@@ -26,20 +26,20 @@
 </script>
 
 <svelte:head>
-  <title>Terms of Use | DevRel Foundation</title>
-  <meta name="description" content="DevRel Foundation Terms of Use and Licensing" />
+  <title>Terms of use | DevRel Foundation</title>
+  <meta name="description" content="DevRel Foundation terms of use and licensing" />
 </svelte:head>
 
 <div class="container">
   <header class="page-header">
-    <h1>Terms of Use</h1>
+    <h1>Terms of use</h1>
     <p class="subtitle">Intellectual property and licensing considerations for DevRel Foundation projects.</p>
   </header>
 
   <div class="content">
 
     <section>
-      <h2>License and Intellectual Property</h2>
+      <h2>License and intellectual property</h2>
       <p>All documentation is made available by the Developer Relations Foundation under the <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer"> Creative Commons Attribution 4.0 International License</a>.</p>
       <p>
         This means that anyone contributing to or using this documentation—including managers, working groups, and users—must follow the terms of this license. In simple terms:
@@ -84,7 +84,7 @@
     </section>
 
     <section>
-      <h2>Contact Us</h2>
+      <h2>Contact us</h2>
       <p>If you have any questions about these terms and proper use, please contact us:</p>
       <ul>
         <li><strong>Email:</strong> info@dev-rel.org</li>

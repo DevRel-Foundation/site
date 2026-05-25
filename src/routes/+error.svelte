@@ -46,14 +46,14 @@
     switch (status) {
       case 404:
         return {
-          title: "This Page Needs to Grow!",
+          title: "This page needs to grow!",
           subtitle: "404 - Page Not Found",
           message: "Looks like this branch of our site hasn't sprouted yet.",
           suggestion: "Ready to contribute? Maybe you can help us plant something new."
         };
       case 500:
         return {
-          title: "Our Servers Need Some Nurturing",
+          title: "Our servers need some nurturing",
           subtitle: "500 - Internal Server Error",
           message: "Something went wrong on our end.",
           suggestion: "We're working to fix this. Please try again in a moment."
@@ -105,12 +105,12 @@
 
     <a href="/" class="cta-button primary">
       <img src={HomeIcon} alt="Home" class="button-icon" />
-      Visit Homepage
+      Visit homepage
     </a>
     
     <a href="/contact" class="cta-button secondary">
       <img src={MailIcon} alt="Contact" class="button-icon" />
-      Contact Us
+      Contact us
     </a>
 
 
@@ -124,49 +124,49 @@
         rel="noopener noreferrer"
       >
         <img src={GitHubIcon} alt="GitHub" class="button-icon" />
-        Request This Page
+        Request this page
       </a>
     {/if}
   </div>
 
   <div class="error-details">
     <details>
-      <summary>Debugging Details</summary>
+      <summary>Debugging details</summary>
       <div class="u-grid u-grid-auto-fill debug-grid">
         <div class="debug-section">
-          <h4>Error Information</h4>
-          <p><strong>Status Code:</strong> {page.status}</p>
+          <h4>Error information</h4>
+          <p><strong>Status code:</strong> {page.status}</p>
           <p><strong>Path:</strong> {page.url.pathname}</p>
           <p><strong>Full URL:</strong> {page.url.href}</p>
           {#if page.error?.message}
-            <p><strong>Error Message:</strong> {page.error.message}</p>
+            <p><strong>Error message:</strong> {page.error.message}</p>
           {/if}
           <p><strong>Timestamp:</strong> {debugInfo.timestamp}</p>
         </div>
         
         {#if browser}
           <div class="debug-section">
-            <h4>Browser Information</h4>
-            <p><strong>User Agent:</strong> <span class="user-agent">{debugInfo.userAgent}</span></p>
+            <h4>Browser information</h4>
+            <p><strong>User agent:</strong> <span class="user-agent">{debugInfo.userAgent}</span></p>
             <p><strong>Language:</strong> {debugInfo.language}</p>
-            <p><strong>Cookies Enabled:</strong> {debugInfo.cookiesEnabled ? 'Yes' : 'No'}</p>
+            <p><strong>Cookies enabled:</strong> {debugInfo.cookiesEnabled ? 'Yes' : 'No'}</p>
             <p><strong>Referrer:</strong> {debugInfo.referrer}</p>
           </div>
           
           <div class="debug-section">
-            <h4>Display Information</h4>
-            <p><strong>Screen Size:</strong> {debugInfo.screenSize}</p>
-            <p><strong>Viewport Size:</strong> {debugInfo.viewport}</p>
-            <p><strong>Device Pixel Ratio:</strong> {window.devicePixelRatio || 'Unknown'}</p>
-            <p><strong>Color Scheme:</strong> {window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light'}</p>
+            <h4>Display information</h4>
+            <p><strong>Screen size:</strong> {debugInfo.screenSize}</p>
+            <p><strong>Viewport size:</strong> {debugInfo.viewport}</p>
+            <p><strong>Device pixel ratio:</strong> {window.devicePixelRatio || 'Unknown'}</p>
+            <p><strong>Color scheme:</strong> {window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light'}</p>
           </div>
           
           <div class="debug-section">
-            <h4>Network & Performance</h4>
+            <h4>Network & performance</h4>
             <p><strong>Connection:</strong> {debugInfo.connectionType}</p>
-            <p><strong>Online Status:</strong> {navigator.onLine ? 'Online' : 'Offline'}</p>
-            <p><strong>Page Load Time:</strong> {debugInfo.pageLoadTime}</p>
-            <p><strong>Memory Usage:</strong> {debugInfo.deviceMemory}</p>
+            <p><strong>Online status:</strong> {navigator.onLine ? 'Online' : 'Offline'}</p>
+            <p><strong>Page load time:</strong> {debugInfo.pageLoadTime}</p>
+            <p><strong>Memory usage:</strong> {debugInfo.deviceMemory}</p>
           </div>
         {/if}
       </div>

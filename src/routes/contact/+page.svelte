@@ -10,22 +10,22 @@
   ];
 
   const gettingHelp = [
-    { label: "LFX Project Control Center Support (Meetings)", url: "https://lfx.linuxfoundation.org/services/request" },
-    { label: "Report a Website Issue", url: "https://github.com/DevRel-Foundation/site/issues" },
-    { label: "Give Feedback on Discord (Chat)", url: "https://discord.gg/G7CSTKZcuT" },
-    { label: "Give Feedback on GitHub Discussions (Forum)", url: "https://github.com/DevRel-Foundation/governance/discussions" },
+    { label: "LFX Project Control Center support (meetings)", url: "https://lfx.linuxfoundation.org/services/request" },
+    { label: "Report a website issue", url: "https://github.com/DevRel-Foundation/site/issues" },
+    { label: "Give feedback on Discord (chat)", url: "https://discord.gg/G7CSTKZcuT" },
+    { label: "Give feedback on GitHub Discussions (forum)", url: "https://github.com/DevRel-Foundation/governance/discussions" },
   ];
 </script>
 
 <div class="container">
-  <h1>Contact Us</h1>
+  <h1>Contact us</h1>
   <p>
     Have a question or looking to get involved? Reach out to us through email or explore our quick links for helpful resources
   </p>
 
   <div class="u-grid u-grid-2 cards-wrapper">
     <div class="section">
-      <h2>Email Inquiries</h2>
+      <h2>Email inquiries</h2>
       <div class="card">
         <ul class="contact-list">
           {#each emailContacts as contact (contact.email)}
@@ -39,7 +39,7 @@
     </div>
 
     <div class="section">
-      <h2>Getting Help</h2>
+      <h2>Getting help</h2>
       <div class="card">
         <ul class="contact-list">
           {#each gettingHelp as link (link.url)}

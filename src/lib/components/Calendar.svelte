@@ -254,7 +254,7 @@
     <div class="calendar-layout">
         <div class="events-sidebar">
             <div class="sidebar-header">
-                <h2>Recent & Upcoming Events</h2>
+                <h2>Recent & upcoming events</h2>
             </div>
             <div class="events-list">
                 {#if loading}
@@ -319,7 +319,7 @@
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    View Full Calendar and Subscribe
+                    View full calendar and subscribe
                 </a>
             </div>
 
@@ -362,11 +362,11 @@
                             <div class="event-description">{@html renderDescription(selectedEvent.description)}</div>
                         {/if}
                         {#if selectedEvent.isRecurring}
-                            <div class="event-recurring">🔄 Recurring Event</div>
+                            <div class="event-recurring">🔄 Recurring event</div>
                         {/if}
                         {#if selectedEvent.url}
                             <a href={selectedEvent.url} target="_blank" rel="noopener noreferrer" class="event-link">
-                                View Details →
+                                View details →
                             </a>
                         {/if}
                     </div>

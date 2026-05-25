@@ -20,11 +20,11 @@
 
 <section class="devrel-callout">
 	<div class="layout-section callout-content">
-		<h2>DevRel: Accelerating Technology Adoption</h2>
+		<h2>DevRel: accelerating technology adoption</h2>
 		<p>
 			Developer Relations (DevRel) is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
 		</p>
-		<a href="/learn/what-is-devrel" class="callout-cta">Learn About Developer Relations →</a>
+		<a href="/learn/what-is-devrel" class="callout-cta">Learn about developer relations →</a>
 	</div>
 </section>
 
@@ -79,13 +79,13 @@
 <section class="governance-callout">
 <div class="container">
 	<section class="mission-section">
-		<h2>Governance Playbook</h2>
+		<h2>Governance playbook</h2>
 		<p>
-			The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">Working Groups</a> that focus on sourcing and innovating best practices  through peer-reviewed resources and materials.
+			The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">working groups</a> that focus on sourcing and innovating best practices  through peer-reviewed resources and materials.
 		</p>
 
 		<p>
-			<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our Charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
+			<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
 		</p>
 	</section>
 </div>
@@ -93,7 +93,7 @@
 
 <div class="container">
 	<section class="mission-section">
-		<h2>Why Do We Need a DevRel Foundation?</h2>
+		<h2>Why do we need a DevRel Foundation?</h2>
 		<p>
 			The major benefit of a foundation is that it promotes participatory governance, preventing any single company from monopolizing a collaborative project. Specifically, a foundation ensures:
 		</p>
@@ -141,13 +141,13 @@
 
 		<div class="text-column">
 		<ul class="benefit-list">
-			<li class="benefit-item"><div><strong>DevRel Value Outside DevRel</strong></div>
+			<li class="benefit-item"><div><strong>DevRel value outside DevRel</strong></div>
 				Being part of a renowned and large open source foundation like the Linux Foundation enhances the project's credibility within the DevRel community and among external stakeholders and decision-makers. This recognition elevates DevRel's visibility and perceived value as a profession, demonstrating its importance and impact beyond industry peers.
 			</li>
-			<li class="benefit-item"><div><strong>Level Playing Field</strong></div>
+			<li class="benefit-item"><div><strong>Level playing field</strong></div>
 				Ensuring that no single company in the ecosystem can exert undue control over the project by owning the trademark.
 			</li>
-			<li class="benefit-item"><div><strong>Licensing Integrity</strong></div>
+			<li class="benefit-item"><div><strong>Licensing integrity</strong></div>
 				Protecting the licensing integrity of the collaborative project, as detailed in this blog post: <a href="https://www.linuxfoundation.org/blog/how-open-source-foundations-protect-the-licensing-integrity-of-open-source-projects">How Open Source Foundations Protect the Licensing Integrity of Open Source Projects</a>.
 			</li>
 

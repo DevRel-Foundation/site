@@ -12,14 +12,14 @@
 
 
 <svelte:head>
-	<title>Working Groups | Projects | Developer Relations Foundation</title>
+	<title>Working groups | Projects | Developer Relations Foundation</title>
 </svelte:head>
 
 <main class="container">
-		<h1>DevRel Foundation Working Groups</h1>
+		<h1>DevRel Foundation working groups</h1>
 
 
-		<h2>What are Working Groups?</h2>
+		<h2>What are working groups?</h2>
 
 		<p>
 
@@ -49,12 +49,12 @@
 		</p>
 
 
-		<h2>How It Works</h2>
+		<h2>How it works</h2>
 
 
 
 		<p>
-			A <strong>Working Group Manager</strong> is a leadership position within working groups responsible for keeping the group focused, organized, and moving forward. They help create an environment where all working group participants can share ideas, co-create meaningful outputs, and make an impact in the DevRel ecosystem. Working Group Managers are appointed by the Steering Committee and act as a liaison between the working group and the overall community.
+			A <strong>working group manager</strong> is a leadership position within working groups responsible for keeping the group focused, organized, and moving forward. They help create an environment where all working group participants can share ideas, co-create meaningful outputs, and make an impact in the DevRel ecosystem. Working group managers are appointed by the Steering Committee and act as a liaison between the working group and the overall community.
 		</p>
 
 		<ul class="list">
@@ -74,7 +74,7 @@
 				<p class="box-description">
 					Some groups will curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency are achieved through proven and trustworthy guides.
 				</p>
-				<a href="/learn/what-is-devrel" class="box-cta">LEARNING RESOURCES</a>
+				<a href="/learn/what-is-devrel" class="box-cta">Learning resources</a>
 			</div>
 
 			<div class="content-box">
@@ -83,28 +83,28 @@
 				<p class="box-description">
 					Some groups will focus on experimental initiatives designed to fill gaps in the field. Each innovation working group is launched around a clearly defined problem statement.
 				</p>
-				<a href="/projects" class="box-cta">EXPLORE PROJECTS</a>
+				<a href="/projects" class="box-cta">Explore projects</a>
 			</div>
 
 			<div class="content-box">
 				<h3 class="box-header">Calls</h3>
 				<img src="{HeadsetIcon}" alt="Headset Icon" class="icon-left" />
 				<p class="box-description">
-					Working Groups meet regularly on their specific projects. Community Calls bring together the entire community to hear reports on progress and share updates.
+					Working groups meet regularly on their specific projects. Community calls bring together the entire community to hear reports on progress and share updates.
 				</p>
-				<a href="#groups" class="box-cta">FIND A WORKING GROUP</a>
+				<a href="#groups" class="box-cta">Find a working group</a>
 			</div>
 		</div>
 
 
-		<h2 id="groups">Active Working Groups</h2>
+		<h2 id="groups">Active working groups</h2>
 
 		<h3>Community Engagement and Support</h3>
 		<p>The Community Engagement and Support Working Group documents standardized approaches and frameworks that help organizations to build, nurture, and scale developer communities.</p>
 
 		<p>
 		<a href="https://github.com/DevRel-Foundation/wg-community-engagement-support">
-			<img src={GitHubIcon} alt="Learn More" class="social-icon" /> wg-community-engagement-support
+			<img src={GitHubIcon} alt="Learn more" class="social-icon" /> wg-community-engagement-support
 		</a>
 
 		</p>
@@ -116,7 +116,7 @@
 
 		<p>
 		<a href="https://discord.gg/G7CSTKZcuT">
-			<img src={DiscordIcon} alt="Lets Chat" class="social-icon" /> #community-engage-support
+			<img src={DiscordIcon} alt="Let's chat" class="social-icon" /> #community-engage-support
 		</a>
 		</p>
 
@@ -125,7 +125,7 @@
 
 		<p>
 		<a href="https://github.com/DevRel-Foundation/wg-resource-aggregation">
-			<img src={GitHubIcon} alt="Learn More" class="social-icon" /> wg-resource-aggregation
+			<img src={GitHubIcon} alt="Learn more" class="social-icon" /> wg-resource-aggregation
 		</a>
 
 		</p>
@@ -137,13 +137,13 @@
 
 		<p>
 		<a href="https://discord.gg/G7CSTKZcuT">
-			<img src={DiscordIcon} alt="Lets Chat" class="social-icon" /> #resource-aggregation
+			<img src={DiscordIcon} alt="Let's chat" class="social-icon" /> #resource-aggregation
 		</a>
 		</p>
 
 		<p>
 		<a href="https://lists.dev-rel.org/g/wg-resource-aggregation/calendar">
-			<img src={CalendarIcon} alt="Join a Call" class="social-icon" /></a> First Thursday of each month (<a href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/working-group-calls">Agenda and Notes</a>)
+			<img src={CalendarIcon} alt="Join a call" class="social-icon" /></a> First Thursday of each month (<a href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/working-group-calls">Agenda and notes</a>)
 		</p>
 
 </main>

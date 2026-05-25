@@ -79,7 +79,7 @@
 
 <div class="container">
   <header class="blog-header">
-    <h1>DevRel Foundation News</h1>
+    <h1>DevRel Foundation news</h1>
     <p>{currentDescription}</p>
     
     <nav class="category-nav">

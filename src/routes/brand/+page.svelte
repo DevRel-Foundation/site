@@ -17,39 +17,39 @@
   ];
 
   const backgroundLight = [
-    { name: 'Primary Background', variable: '--color-background', hex: '#FFFEF8', rgb: '255, 254, 248', cmyk: '0%, 0%, 3%, 0%', hsl: '48, 100%, 98%', swatch: 'var(--color-background)' },
-    { name: 'Secondary Background 1', variable: '--color-background-secondary-1', hex: '#F7F4E1', rgb: '247, 244, 225', cmyk: '0%, 1%, 9%, 3%', hsl: '48, 61.8%, 94%', swatch: 'var(--color-background-secondary-1)' },
-    { name: 'Secondary Background 2', variable: '--color-background-secondary-2', hex: '#F0EFEA', rgb: '240, 239, 234', cmyk: '0%, 0%, 3%, 6%', hsl: '48, 13%, 92%', swatch: 'var(--color-background-secondary-2)' }
+    { name: 'Primary background', variable: '--color-background', hex: '#FFFEF8', rgb: '255, 254, 248', cmyk: '0%, 0%, 3%, 0%', hsl: '48, 100%, 98%', swatch: 'var(--color-background)' },
+    { name: 'Secondary background 1', variable: '--color-background-secondary-1', hex: '#F7F4E1', rgb: '247, 244, 225', cmyk: '0%, 1%, 9%, 3%', hsl: '48, 61.8%, 94%', swatch: 'var(--color-background-secondary-1)' },
+    { name: 'Secondary background 2', variable: '--color-background-secondary-2', hex: '#F0EFEA', rgb: '240, 239, 234', cmyk: '0%, 0%, 3%, 6%', hsl: '48, 13%, 92%', swatch: 'var(--color-background-secondary-2)' }
   ];
 
   const backgroundDark = [
-    { name: 'Primary Background', variable: '--color-background-dark', hex: '#10100C', rgb: '16, 16, 12', cmyk: '—', hsl: '60, 3.2%, 6.1%', swatch: 'var(--color-background-dark)' },
-    { name: 'Secondary Background 1', variable: '--color-background-secondary-1-dark', hex: '#1B1B15', rgb: '27, 27, 21', cmyk: '—', hsl: '60, 5.2%, 9.9%', swatch: 'var(--color-background-secondary-1-dark)' },
-    { name: 'Secondary Background 2', variable: '--color-background-secondary-2-dark', hex: '#2C2B24', rgb: '44, 43, 36', cmyk: '—', hsl: '60, 8.4%, 16%', swatch: 'var(--color-background-secondary-2-dark)' }
+    { name: 'Primary background', variable: '--color-background-dark', hex: '#10100C', rgb: '16, 16, 12', cmyk: '—', hsl: '60, 3.2%, 6.1%', swatch: 'var(--color-background-dark)' },
+    { name: 'Secondary background 1', variable: '--color-background-secondary-1-dark', hex: '#1B1B15', rgb: '27, 27, 21', cmyk: '—', hsl: '60, 5.2%, 9.9%', swatch: 'var(--color-background-secondary-1-dark)' },
+    { name: 'Secondary background 2', variable: '--color-background-secondary-2-dark', hex: '#2C2B24', rgb: '44, 43, 36', cmyk: '—', hsl: '60, 8.4%, 16%', swatch: 'var(--color-background-secondary-2-dark)' }
   ];
 
   const accentLight = [
-    { name: 'Forest Green', variable: '--color-mint', hex: '#c8ecad', rgb: '200, 236, 173', cmyk: '—', hsl: '90, 65%, 81%', swatch: 'var(--color-mint)' },
-    { name: 'Sky Blue', variable: '--color-blue', hex: '#d8f7ff', rgb: '216, 247, 255', cmyk: '—', hsl: '193, 100%, 92%', swatch: 'var(--color-blue)' },
-    { name: 'Ocean Teal', variable: '--color-teal', hex: '#d3f9f0', rgb: '211, 249, 240', cmyk: '—', hsl: '168, 85%, 91%', swatch: 'var(--color-teal)' },
-    { name: 'Sunset Gold', variable: '--color-gold', hex: '#fff5d6', rgb: '255, 245, 214', cmyk: '—', hsl: '41.9, 100%, 91.6%', swatch: 'var(--color-gold)' }
+    { name: 'Forest green', variable: '--color-mint', hex: '#c8ecad', rgb: '200, 236, 173', cmyk: '—', hsl: '90, 65%, 81%', swatch: 'var(--color-mint)' },
+    { name: 'Sky blue', variable: '--color-blue', hex: '#d8f7ff', rgb: '216, 247, 255', cmyk: '—', hsl: '193, 100%, 92%', swatch: 'var(--color-blue)' },
+    { name: 'Ocean teal', variable: '--color-teal', hex: '#d3f9f0', rgb: '211, 249, 240', cmyk: '—', hsl: '168, 85%, 91%', swatch: 'var(--color-teal)' },
+    { name: 'Sunset gold', variable: '--color-gold', hex: '#fff5d6', rgb: '255, 245, 214', cmyk: '—', hsl: '41.9, 100%, 91.6%', swatch: 'var(--color-gold)' }
   ];
 
   const accentDark = [
-    { name: 'Forest Green Dark', variable: '--color-mint-dark', hex: '#275901', rgb: '39, 89, 1', cmyk: '—', hsl: '90, 98%, 18%', swatch: 'var(--color-mint-dark)' },
-    { name: 'Sky Blue Dark', variable: '--color-blue-dark', hex: '#0a313c', rgb: '10, 49, 60', cmyk: '—', hsl: '193, 72%, 14%', swatch: 'var(--color-blue-dark)' },
-    { name: 'Ocean Teal Dark', variable: '--color-teal-dark', hex: '#15372f', rgb: '21, 55, 47', cmyk: '—', hsl: '168, 63%, 14%', swatch: 'var(--color-teal-dark)' },
-    { name: 'Sunset Gold Dark', variable: '--color-gold-dark', hex: '#6B4F1B', rgb: '107, 79, 27', cmyk: '—', hsl: '41.7, 74.5%, 21.6%', swatch: 'var(--color-gold-dark)' }
+    { name: 'Forest green dark', variable: '--color-mint-dark', hex: '#275901', rgb: '39, 89, 1', cmyk: '—', hsl: '90, 98%, 18%', swatch: 'var(--color-mint-dark)' },
+    { name: 'Sky blue dark', variable: '--color-blue-dark', hex: '#0a313c', rgb: '10, 49, 60', cmyk: '—', hsl: '193, 72%, 14%', swatch: 'var(--color-blue-dark)' },
+    { name: 'Ocean teal dark', variable: '--color-teal-dark', hex: '#15372f', rgb: '21, 55, 47', cmyk: '—', hsl: '168, 63%, 14%', swatch: 'var(--color-teal-dark)' },
+    { name: 'Sunset gold dark', variable: '--color-gold-dark', hex: '#6B4F1B', rgb: '107, 79, 27', cmyk: '—', hsl: '41.7, 74.5%, 21.6%', swatch: 'var(--color-gold-dark)' }
   ];
 
   const typographyLight = [
-    { name: 'Main Text', variable: '--color-text', hex: '#515151', rgb: '81, 81, 81', cmyk: '0%, 0%, 0%, 68%', hsl: '0, 0%, 32%', swatch: 'var(--color-text)' },
-    { name: 'Link Color', variable: '--color-link', hex: '#174027', rgb: '23, 64, 39', cmyk: '64%, 0%, 39%, 75%', hsl: '140, 38.2%, 18%', swatch: 'var(--color-link)' }
+    { name: 'Main text', variable: '--color-text', hex: '#515151', rgb: '81, 81, 81', cmyk: '0%, 0%, 0%, 68%', hsl: '0, 0%, 32%', swatch: 'var(--color-text)' },
+    { name: 'Link color', variable: '--color-link', hex: '#174027', rgb: '23, 64, 39', cmyk: '64%, 0%, 39%, 75%', hsl: '140, 38.2%, 18%', swatch: 'var(--color-link)' }
   ];
 
   const typographyDark = [
-    { name: 'Main Text', variable: '--color-text-dark', hex: '#E9E8E1', rgb: '233, 232, 225', cmyk: '—', hsl: '60, 20%, 91%', swatch: 'var(--color-text-dark)' },
-    { name: 'Link Color', variable: '--color-link-dark', hex: '#c8ecad', rgb: '200, 236, 173', cmyk: '36%, 0%, 19%, 14%', hsl: '90, 65%, 81%', swatch: 'var(--color-link-dark)' }
+    { name: 'Main text', variable: '--color-text-dark', hex: '#E9E8E1', rgb: '233, 232, 225', cmyk: '—', hsl: '60, 20%, 91%', swatch: 'var(--color-text-dark)' },
+    { name: 'Link color', variable: '--color-link-dark', hex: '#c8ecad', rgb: '200, 236, 173', cmyk: '36%, 0%, 19%, 14%', hsl: '90, 65%, 81%', swatch: 'var(--color-link-dark)' }
   ];
 
   const stateLight = [
@@ -109,7 +109,7 @@
 >
   {#snippet header()}
     <div class="container brand-page brand-page__header">
-      <h1>Brand Guidelines</h1>
+      <h1>Brand guidelines</h1>
     </div>
   {/snippet}
 
@@ -142,9 +142,9 @@
     subtle contrast for alternating sections, cards, and UI elements.
   </p>
   <ul>
-    <li><strong>Primary Background:</strong> Main canvas for content, default page background</li>
-    <li><strong>Secondary Background 1:</strong> Alternating sections, subtle contrast areas</li>
-    <li><strong>Secondary Background 2:</strong> Cards, form fields, highlighted content boxes</li>
+    <li><strong>Primary background:</strong> Main canvas for content, default page background</li>
+    <li><strong>Secondary background 1:</strong> Alternating sections, subtle contrast areas</li>
+    <li><strong>Secondary background 2:</strong> Cards, form fields, highlighted content boxes</li>
   </ul>
 
   <div class="color-mode-container">
@@ -388,8 +388,8 @@
   <h3>Typography colors</h3>
   <p>Our typography colors ensure readability while maintaining brand consistency.</p>
   <ul>
-    <li><strong>Main Text:</strong> Primary content, body text, headings</li>
-    <li><strong>Link Color:</strong> Interactive text elements and hyperlinks</li>
+    <li><strong>Main text:</strong> Primary content, body text, headings</li>
+    <li><strong>Link color:</strong> Interactive text elements and hyperlinks</li>
   </ul>
 
   <div class="typography-colors-container">
@@ -702,7 +702,7 @@
     <div class="type-specimen">
       <div class="type-specimen-header">
         <span class="type-specimen-name">Nunito Sans</span>
-        <span class="type-specimen-details">Body Text</span>
+        <span class="type-specimen-details">Body text</span>
       </div>
       <p class="alphabet">a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
       <p class="alphabet">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
@@ -893,9 +893,9 @@ h3 { font-size: var(--step-3); }
       </div>
       <div class="motif-example-large pill-shapes-demo">
         <div class="top-section">
-          <button type="button" class="pill-button primary">Primary Action</button>
-          <button type="button" class="pill-button secondary">Secondary Action</button>
-          <div class="pill-tag">Tag Example</div>
+          <button type="button" class="pill-button primary">Primary action</button>
+          <button type="button" class="pill-button secondary">Secondary action</button>
+          <div class="pill-tag">Tag example</div>
         </div>
         <div class="bottom-section">
           <input type="text" class="pill-input" placeholder="Form input example" />
@@ -1045,8 +1045,8 @@ h3 { font-size: var(--step-3); }
         </div>
       </div>
       <div class="example-buttons">
-        <button type="button" class="example-button">Register Now</button>
-        <button type="button" class="example-button secondary">View Details</button>
+        <button type="button" class="example-button">Register now</button>
+        <button type="button" class="example-button secondary">View details</button>
       </div>
     </div>
   </div>
@@ -1188,7 +1188,7 @@ h3 { font-size: var(--step-3); }
   <p>Image usage guidelines coming soon.</p>
 
     <section id="voice-and-tone" class="brand-markdown">
-      <h2>Voice and Tone</h2>
+      <h2>Voice and tone</h2>
       <VoiceAndTone />
     </section>
   </div>

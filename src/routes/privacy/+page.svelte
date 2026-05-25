@@ -1,47 +1,47 @@
 <svelte:head>
-  <title>Privacy Policy | DevRel Foundation</title>
+  <title>Privacy policy | DevRel Foundation</title>
   <meta name="description" content="DevRel Foundation privacy policy and data protection information" />
 </svelte:head>
 
 <div class="container">
   <header class="page-header">
-    <h1>Privacy Policy</h1>
+    <h1>Privacy policy</h1>
     <p class="subtitle">How we protect and handle your personal information</p>
   </header>
 
   <div class="content">
     <section>
-      <h2>Information We Collect</h2>
+      <h2>Information we collect</h2>
       <p>We collect information to provide better services to our community members:</p>
       <ul>
-        <li><strong>Analytics Data:</strong> We use PostHog to collect anonymized usage analytics, including page views, interactions, and performance metrics to understand interest in projects and resources</li>
-        <li><strong>Email Addresses:</strong> When you subscribe to our mailing list, we collect your email address for delivery calendar invites to working group calls and community announcements</li>
+        <li><strong>Analytics data:</strong> We use PostHog to collect anonymized usage analytics, including page views, interactions, and performance metrics to understand interest in projects and resources</li>
+        <li><strong>Email addresses:</strong> When you subscribe to our mailing list, we collect your email address for delivery calendar invites to working group calls and community announcements</li>
         <li><strong>Cookies:</strong> We use essential cookies for site functionality and analytics (with your consent)</li>
       </ul>
     </section>
 
     <section>
-      <h2>How We Use Your Information</h2>
+      <h2>How we use your information</h2>
       <ul>
         <li><strong>Analytics:</strong> To understand how our site is used in order to improve user experience</li>
         <li><strong>Communications:</strong> To send you updates about the DevRel Foundation (only if you subscribe)</li>
-        <li><strong>Site Functionality:</strong> To ensure our website works properly and securely</li>
+        <li><strong>Site functionality:</strong> To ensure our website works properly and securely</li>
       </ul>
     </section>
 
     <section>
-      <h2>Your Rights and Choices</h2>
+      <h2>Your rights and choices</h2>
       <p>You have control over your personal information:</p>
       <ul>
-        <li><strong>Cookie Consent:</strong> You can accept or reject cookies from the consent banner</li>
-        <li><strong>Mailing List:</strong> You can unsubscribe from our mailing list at any time by visiting https://lists.dev-rel.org</li>
-        <li><strong>Data Access:</strong> You can request access to personal data by contacting us at website@dev-rel.org</li>
-        <li><strong>Data Deletion:</strong> You can request deletion of your personal data</li>
+        <li><strong>Cookie consent:</strong> You can accept or reject cookies from the consent banner</li>
+        <li><strong>Mailing list:</strong> You can unsubscribe from our mailing list at any time by visiting https://lists.dev-rel.org</li>
+        <li><strong>Data access:</strong> You can request access to personal data by contacting us at website@dev-rel.org</li>
+        <li><strong>Data deletion:</strong> You can request deletion of your personal data</li>
       </ul>
     </section>
 
     <section>
-      <h2>Data Protection</h2>
+      <h2>Data protection</h2>
       <p>We take appropriate measures to protect your personal information:</p>
       <ul>
         <li>All data is transmitted over secure HTTPS connections</li>
@@ -52,7 +52,7 @@
     </section>
 
     <section>
-      <h2>Third-Party Services</h2>
+      <h2>Third-party services</h2>
       <p>We use the following third-party services:</p>
       <ul>
         <li><strong>PostHog:</strong> For analytics and user experience insights (<a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">PostHog Privacy Policy</a>)</li>
@@ -62,23 +62,23 @@
     </section>
 
     <section>
-      <h2>Cookie Policy</h2>
+      <h2>Cookie policy</h2>
       <p>We use cookies to enhance user experience:</p>
       <ul>
-        <li><strong>Essential Cookies:</strong> Required for basic site functionality (these cannot be disabled)</li>
-        <li><strong>Analytics Cookies:</strong> Help us understand how you use our site (these require your consent)</li>
+        <li><strong>Essential cookies:</strong> Required for basic site functionality (these cannot be disabled)</li>
+        <li><strong>Analytics cookies:</strong> Help us understand how you use our site (these require your consent)</li>
       </ul>
       <p>You can manage your cookie preferences through our consent banner or your browser settings.</p>
     </section>
 
     <section>
-      <h2>Updates to This Policy</h2>
+      <h2>Updates to this policy</h2>
       <p>We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page.</p>
       <p><strong>Last updated:</strong> August 2025</p>
     </section>
 
     <section>
-      <h2>Contact Us</h2>
+      <h2>Contact us</h2>
       <p>If you have any questions about this privacy policy or our data practices, please contact us:</p>
       <ul>
         <li><strong>Email:</strong> website@dev-rel.org</li>

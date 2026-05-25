@@ -5,12 +5,12 @@
   export let label = '';
   export let href = '';
   export let icon = '';
-  export let enclosed = '';
+  export let enclosed = false;
 
 </script>
 
 
-{#if enclosed === "True"}
+{#if enclosed}
 	<IconEnclosed {alt} {label} {href} {icon} />
 {:else}
 

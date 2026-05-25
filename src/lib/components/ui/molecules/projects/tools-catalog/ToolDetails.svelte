@@ -66,7 +66,7 @@
 <div class="tool-details">
   {#if !tool}
     <div class="empty-state">
-      <h2>Select a Tool</h2>
+      <h2>Select a tool</h2>
       <p>Choose a tool from the list to view additional details.</p>
     </div>
   {:else}
@@ -97,7 +97,7 @@
           <div class="tool-properties">
             <dl class="properties-list">
               <PropertyItem label="URL" format="url" value={tool.url ?? ''} />
-              <PropertyItem label="Job Categories" value={tool.jobs?.categories ?? []} />
+              <PropertyItem label="Job categories" value={tool.jobs?.categories ?? []} />
               <PropertyItem label="Outcomes" value={tool.jobs?.outcomes ?? []} />
               <PropertyItem label="Motivations" value={tool.jobs?.motivations ?? []} />
               <PropertyItem label="Scenarios" value={tool.jobs?.scenarios ?? []} />
@@ -114,7 +114,7 @@
                   <div class="evaluation-item">
                     <div class="evaluation-header">
                       <h4 class="evaluation-source">
-                        {evaluation.team.toUpperCase() === 'N/A' ? 'Anonymous DevRel Team' : evaluation.team}
+                        {evaluation.team.toUpperCase() === 'N/A' ? 'Anonymous DevRel team' : evaluation.team}
                       </h4>
                       {#if evaluation.decision}
                         <span class="decision-badge {evaluation.decision}">{evaluation.decision}</span>
@@ -184,7 +184,7 @@
 
                 {#if tool.learning['getting-started'] && tool.learning['getting-started'].length > 0}
                   <div class="learning-section">
-                    <h3>Getting Started</h3>
+                    <h3>Getting started</h3>
                     <ul class="learning-list">
                       {#each tool.learning['getting-started'] as item (item.url)}
                         {#if item.type === 'article'}

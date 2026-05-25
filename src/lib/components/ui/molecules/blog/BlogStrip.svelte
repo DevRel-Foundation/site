@@ -1,7 +1,7 @@
 <script>
   import BlogCard from './BlogCard.svelte';
 
-  const { posts, title = 'Related Blog Posts', maxPosts = 3 } = $props();
+  const { posts, title = 'Related blog posts', maxPosts = 3 } = $props();
   const visiblePosts = $derived(posts.slice(0, maxPosts));
 </script>
 

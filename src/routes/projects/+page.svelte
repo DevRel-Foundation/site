@@ -84,7 +84,7 @@
 					class="filter-btn {selectedFilter === 'all' ? 'active' : ''}"
 					onclick={() => setFilter('all')}
 				>
-					All Projects
+					All projects
 				</button>
 				<button 
 					class="filter-btn {selectedFilter === 'sandbox' ? 'active' : ''}"
@@ -180,7 +180,7 @@
 			To propose new projects or give feedback, attend a working group call, and start the conversation.
 		</p>
 
-		<button class="cta" onclick={handleJoinClick}>Join Us</button>
+		<button class="cta" onclick={handleJoinClick}>Join us</button>
 
 	</section>
 </div>

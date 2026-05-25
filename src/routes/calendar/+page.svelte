@@ -4,7 +4,7 @@
 
 <div class="calendar-page">
 	<div class="layout-section">
-		<h1>DevRel Foundation Calendar</h1>
+		<h1>DevRel Foundation calendar</h1>
 		<Calendar />
 	</div>
 </div>

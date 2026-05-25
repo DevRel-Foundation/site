@@ -27,19 +27,19 @@
 
         <div>&nbsp;</div>
 
-        <OpenInBrowser enclosed="True" label="Explore the Tools Catalog" href="/projects/tools-catalog/explore" alt="Open Tools Catalog" />
+        <OpenInBrowser enclosed={true} label="Explore the Tools Catalog" href="/projects/tools-catalog/explore" alt="Open Tools Catalog" />
 
         <br/>
 
-        <ChatBubbleIcon enclosed="True" label="Discuss the Project" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog" alt="Discuss the Tools Catalog" />
+        <ChatBubbleIcon enclosed={true} label="Discuss the project" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog" alt="Discuss the Tools Catalog" />
 
         <br/>
 
-        <Check enclosed="True" label="Open Issues" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/issues?q=is%3Aissue%20state%3Aopen%20label%3Aresource%3Atools" alt="See Open Issues" />
+        <Check enclosed={true} label="Open issues" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/issues?q=is%3Aissue%20state%3Aopen%20label%3Aresource%3Atools" alt="See open issues" />
 
         <br/>
 
-        <SourceCodeIcon enclosed="True" label="View Source" href="https://github.com/devrel-foundation/tools-catalog" alt="View Project Source" />
+        <SourceCodeIcon enclosed={true} label="View source" href="https://github.com/devrel-foundation/tools-catalog" alt="View project source" />
 
 
 
@@ -50,7 +50,7 @@
   </div>
 
 
-  <BlogCarousel posts={relatedPosts()} title="More About the Tools Catalog" />
+  <BlogCarousel posts={relatedPosts()} title="More about the Tools Catalog" />
 
 </InfoPage>
 

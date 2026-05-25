@@ -269,7 +269,7 @@
 <div class="blog-header-wrapper">
   <header class="blog-header">
     <div class="post-meta">
-      <a href="/blog" class="blog-title">BLOG</a> | 
+      <a href="/blog" class="blog-title">Blog</a> | 
       <a href="/blog/category/{category}" class="category-tag">{category}</a>
       <time datetime={date}>{new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { 
         year: 'numeric', 

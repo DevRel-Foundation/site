@@ -27,21 +27,21 @@
 <div class="tools-filter">
   <div class="filter-row">
     <FacetDropdown
-      label="Job Category"
+      label="Job category"
       options={categories}
       selected={selectedCategory}
       onSelect={val => selectedCategory = val}
       help="Match tools by job category."
     />
     <FacetDropdown
-      label="Desired Outcome"
+      label="Desired outcome"
       options={outcomes}
       selected={selectedOutcome}
       onSelect={val => selectedOutcome = val}
       help="Match tools by desired outcome."
     />
     <FacetDropdown
-      label="Find by Label"
+      label="Find by label"
       options={labels}
       selected={selectedLabel}
       onSelect={val => selectedLabel = val}

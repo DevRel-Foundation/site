@@ -6,7 +6,7 @@
 </script>
 
 <div class="calendar-page">
-  <h1>DevRel Foundation Calendar</h1>
+  <h1>DevRel Foundation calendar</h1>
   <Calendar eventId={eventId} />
 </div>
 

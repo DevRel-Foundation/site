@@ -12,7 +12,7 @@
       </p>
     </div>
     <div class="cookie-actions">
-      <button onclick={onAccept} class="btn-accept">Accept All</button>
+      <button onclick={onAccept} class="btn-accept">Accept all</button>
       <button onclick={onReject} class="btn-reject">Reject</button>
     </div>
   </div>

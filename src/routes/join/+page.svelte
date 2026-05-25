@@ -8,12 +8,12 @@
 </script>
 
 <svelte:head>
-	<title>Join Us | Developer Relations Foundation</title>
+	<title>Join us | Developer Relations Foundation</title>
 </svelte:head>
 
 <div class="container">
 	<section class="hero page-section">
-		<h1>Join Us</h1>
+		<h1>Join us</h1>
 		<p>
 			Working under the Linux Foundation, the DevRel Foundation serves as a focal point for best practices in technology adoption by software developers and communities. Our initiatives are collaborative and community-driven to drive innovation and impactful value into the global Developer Relations ecosystem.
 		</p>
@@ -24,12 +24,12 @@
 		<div class="u-grid u-grid-3">
 			
 			<div class="content-box end-users">
-				<h3 class="box-header">Getting Started</h3>
+				<h3 class="box-header">Getting started</h3>
 				<p class="box-question">Need help navigating your DevRel role?</p>
 				<p class="box-description">
 					Join our community to connect with peers, share experiences, and access project resources to help you build your DevRel skills and knowledge.
 				</p>
-				<a href="#join" class="box-cta">JOIN THE COMMUNITY</a>
+				<a href="#join" class="box-cta">Join the community</a>
 			</div>
 
 			<div class="content-box contributors">
@@ -39,7 +39,7 @@
 					Our working groups are the heart of the DevRel Foundation and require regular participation. Whether you're a developer, content creator, developer marketer, or community manager -- your skills can help shape our success.
 					
 				</p>
-				<a href="#contribute" class="box-cta">CONTRIBUTE TO OPEN-SOURCE</a>
+				<a href="#contribute" class="box-cta">Contribute to open source</a>
 			</div>
 
 			<div class="content-box members">
@@ -48,7 +48,7 @@
 				<p class="box-description">
 					<a href="/contact">Contact</a> the steering committee to learn more about leadership opportunities. We can shape the ecosystem and drive cross-company collaboration with hundreds of participants together.
 				</p>
-				<a href="#lead" class="box-cta">BECOME A LEADER</a>
+				<a href="#lead" class="box-cta">Become a leader</a>
 			</div>
 
 		</div>
@@ -66,13 +66,13 @@
 			</div>
 			<div class="text-column">
 				<ul class="benefit-list">
-					<li class="benefit-item"><div><strong>Industry Impact</strong></div>
+					<li class="benefit-item"><div><strong>Industry impact</strong></div>
 						There is a growing need for a unified voice in Developer Relations in recognition of the persistent challenges in the roles. Formally defining DevRel practices, addressing common challenges with best-in-practice resources, and attracting both individuals and organizations’ decision-makers is essential. A foundation aims to be a trusted, credible, and expert resource, similar to professional bodies in other fields, providing training, certification, continuing education, and advocacy. 
 					</li>
-					<li class="benefit-item"><div><strong>Career Growth</strong></div>
+					<li class="benefit-item"><div><strong>Career growth</strong></div>
 						Gain visibility in the DevRel community, build your professional network, and access opportunities that can accelerate your career progression. Working group contributions are excellent portfolio pieces. Connect with experienced DevRel professionals who can offer guidance, share insights, and help you navigate challenges. Find mentors and become one for others.
 					</li>
-					<li class="benefit-item"><div><strong>Practical Resources</strong></div>
+					<li class="benefit-item"><div><strong>Practical resources</strong></div>
 						 Access exclusive resources, workshops, and knowledge-sharing sessions. Learn from real-world case studies, pragmatic tools, and knowledge to help impress your team and organization through greater impact.
 					</li>
 				</ul>
@@ -82,18 +82,18 @@
 	</section>
 
 	<section class="page-section">
-		<h2 id="join" class="content-header">How to join the Community</h2>
+		<h2 id="join" class="content-header">How to join the community</h2>
 		<p>
 			There are no membership fees or formal requirements to join the DevRel Foundation. We welcome anyone interested in Developer Relations to participate and contribute.
 		</p>
 
 		<div class="steps">
-			<a href="https://discord.gg/G7CSTKZcuT" class="cta-button" target="_blank">Step 1. Join the Discord Community</a>
+			<a href="https://discord.gg/G7CSTKZcuT" class="cta-button" target="_blank">Step 1. Join the Discord community</a>
 			<p>
 				The foundation's <a href="https://discord.gg/G7CSTKZcuT">Discord server</a> is the primary synchronous communication channel for community participants. Here, you can connect with other DevRel professionals, ask questions, share experiences, and stay updated on activities.
 			</p>
 
-			<a href="https://lists.dev-rel.org/g/community/join" class="cta-button" target="_blank">Step 2. Sign-up for the Mailing List</a>
+			<a href="https://lists.dev-rel.org/g/community/join" class="cta-button" target="_blank">Step 2. Sign up for the mailing list</a>
 			<p>
 				The <a href="https://lists.dev-rel.org/g/community/join">mailing lists</a> are the primary asynchronous communication channel for the community. You can subscribe to the mailing lists to receive updates, announcements, and discussions about the foundation's activities.
 			</p>
@@ -101,7 +101,7 @@
 				Working groups often have additional mailing lists to subscribe to for project updates and calendar invites for working group sessions.
 			</p>
 
-			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 3. Explore the GitHub Repositories</a>
+			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 3. Explore the GitHub repositories</a>
 			<p>
 				The <a href="https://github.com/orgs/DevRel-Foundation/repositories" target="_blank">DevRel-Foundation GitHub</a> is where you will find all the open-source projects and resources created by the community. Star any projects you find interesting and consider helpful.
 			</p>
@@ -109,12 +109,12 @@
 	</section>
 
 	<section class="page-section">
-		<h2 id="contribute" class="content-header">Contribute to Open-Source</h2>
+		<h2 id="contribute" class="content-header">Contribute to open source</h2>
 		<p>
 			Contributing to open-source projects is a great way to give back to the community, improve your skills, and gain recognition for your work.
 		</p>
 		<div class="steps">
-			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 4. Make a Contribution</a>
+			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="cta-button" target="_blank">Step 4. Make a contribution</a>
 			<p>
 				To contribute to a project, start by familiarizing yourself with the project's goals and guidelines. Engage with the community to understand their needs and how you can help. Then create issues or pull requests for the projects you are interested in. Join the <a href="/about/working-groups">working groups</a> to collaborate with other contributors.
 			</p>
@@ -125,16 +125,16 @@
 			</div>
 			<div class="text-column">
 				<ul class="benefit-list">
-					<li class="benefit-item"><div><strong>Develop Skills</strong></div>
+					<li class="benefit-item"><div><strong>Develop skills</strong></div>
 						Create tangible deliverables that showcase your expertise and can be featured in your professional portfolio or resume. Work on real projects that challenge and expand your capabilities in content creation, community building, or technical documentation.
 					</li>
 				</ul>
 			</div>
 		</div>	
 		<div class="steps">
-			<a href="/projects" class="cta-button" target="_blank">Step 5. Spread the Word</a>
+			<a href="/projects" class="cta-button" target="_blank">Step 5. Spread the word</a>
 			<p>
-				Stay connected with the community through foundation events such as Community Calls, Office Hours, and Working Group Meetings. These events provide opportunities to share your work, learn from others, and build relationships within the wider DevRel community about our <a href="/projects">projects</a>.
+				Stay connected with the community through foundation events such as community calls, office hours, and working group meetings. These events provide opportunities to share your work, learn from others, and build relationships within the wider DevRel community about our <a href="/projects">projects</a>.
 			</p>
 		</div>
 		<div class="u-grid u-grid-icon-text">
@@ -143,7 +143,7 @@
 			</div>
 			<div class="text-column">
 				<ul class="benefit-list">
-					<li class="benefit-item"><div><strong>Evangelize the Foundation projects</strong></div>
+					<li class="benefit-item"><div><strong>Evangelize the foundation projects</strong></div>
 						Share your experience with the projects with others who may need resources to help them in their own DevRel journey. This can include writing blog posts, giving talks, or creating tutorials.
 					</li>
 				</ul>
@@ -152,7 +152,7 @@
 	</section>
 	
 	<section class="page-section">
-		<h2 id="lead" class="content-header">Become a Leader</h2>
+		<h2 id="lead" class="content-header">Become a leader</h2>
 		<p>
 			How far will you go? Lead a working group, organize events, or become a member of the steering committee in the next election. The foundation is always looking for passionate individuals to take on leadership roles and help shape the future of Developer Relations.
 		</p>

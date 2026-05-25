@@ -13,9 +13,9 @@
 
     <div class="u-grid u-grid-auto-fit-sm pillars-grid">
       <div class="pillar-circle">Advocacy</div>
-      <div class="pillar-circle">Community Engagement</div>
+      <div class="pillar-circle">Community engagement</div>
       <div class="pillar-circle">Education</div>
-      <div class="pillar-circle">Technical Support</div>
+      <div class="pillar-circle">Technical support</div>
     </div>
 
 

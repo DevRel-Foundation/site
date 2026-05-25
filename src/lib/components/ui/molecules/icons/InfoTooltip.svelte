@@ -13,7 +13,7 @@
   let {
     alt = 'More information',
     label = '',
-    href = 'mailto:info@dev-rel.org',
+    href = '',
     enclosed = false
   }: Props = $props();
 </script>

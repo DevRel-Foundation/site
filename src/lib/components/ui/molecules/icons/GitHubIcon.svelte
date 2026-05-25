@@ -2,9 +2,9 @@
 	import Icon from '$lib/components/ui/atoms/Icon.svelte';
 	import GitHubIcon from 'iconoir/icons/github.svg';
 
-	export let alt = 'View on GitHub';
-	export let label = 'https://github.com/devrel-foundation';
-	export let href = 'https://github.com/devrel-foundation';
+	export let alt = 'GitHub';
+	export let label = 'GitHub';
+	export let href = '';
 	export let enclosed = false;
 </script>
 
