@@ -15,7 +15,7 @@
 </script>
 
 <InfoPage 
-  title="Tools Catalog" 
+  title="Tools catalog" 
   description="Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done."
   breadcrumbs={[{label:"Projects", link: "/projects"}]}
    >
@@ -27,11 +27,11 @@
 
         <div>&nbsp;</div>
 
-        <OpenInBrowser enclosed={true} label="Explore the Tools Catalog" href="/projects/tools-catalog/explore" alt="Open Tools Catalog" />
+        <OpenInBrowser enclosed={true} label="Explore the tools catalog" href="/projects/tools-catalog/explore" alt="Open tools catalog" />
 
         <br/>
 
-        <ChatBubbleIcon enclosed={true} label="Discuss the project" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog" alt="Discuss the Tools Catalog" />
+        <ChatBubbleIcon enclosed={true} label="Discuss the project" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog" alt="Discuss the tools catalog" />
 
         <br/>
 
@@ -50,7 +50,7 @@
   </div>
 
 
-  <BlogCarousel posts={relatedPosts()} title="More about the Tools Catalog" />
+  <BlogCarousel posts={relatedPosts()} title="More about the tools catalog" />
 
 </InfoPage>
 

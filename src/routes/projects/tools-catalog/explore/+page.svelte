@@ -261,9 +261,9 @@
 </script>
 
 <InfoPage
-  title="Tools Catalog explorer"
-  description="Browse and filter tools in the DevRel Foundation Tools Catalog by job category and label. Find the right tools for your Developer Relations needs."
-  breadcrumbs={[{ label: 'About | Tools Catalog', link: '/projects/tools-catalog' }]}
+  title="Tools catalog explorer"
+  description="Browse and filter tools in the DevRel Foundation tools catalog by job category and label. Find the right tools for your Developer Relations needs."
+  breadcrumbs={[{ label: 'Tools catalog', link: '/projects/tools-catalog' }]}
   wide={true}
 >
   <ToolsFilter

@@ -17,34 +17,34 @@
 
 	const projects: Project[] = [
 		{
-			title: "Tools Catalog",
-			description: "Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done.",
-			status: "incubation",
-			learnMoreUrl: "/projects/tools-catalog"
+			title: 'Tools catalog',
+			description: 'Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done.',
+			status: 'incubation',
+			learnMoreUrl: '/projects/tools-catalog'
 		},
 		{
-			title: "Persona Library",
-			description: "Reference collection for the study and standardization of developer personas. Aims to offer pragmatic advice for use in day-to-day go-to-market strategies.",
-			status: "incubation",
-			learnMoreUrl: "https://github.com/devrel-foundation/persona-library"
+			title: 'Persona library',
+			description: 'Reference collection for the study and standardization of developer personas. Aims to offer pragmatic advice for use in day-to-day go-to-market strategies.',
+			status: 'incubation',
+			learnMoreUrl: 'https://github.com/devrel-foundation/persona-library'
 		},
 		{
-			title: "Events Directory",
-			description: "Directory of developer events, conferences, and meetups to engage with community strategies.",
-			status: "sandbox",
-			learnMoreUrl: "https://github.com/devrel-foundation/events-directory"
+			title: 'Events directory',
+			description: 'Directory of developer events, conferences, and meetups to engage with community strategies.',
+			status: 'sandbox',
+			learnMoreUrl: 'https://github.com/devrel-foundation/events-directory'
 		},
 		{
-			title: "Metrics Index",
-			description: "Index of metrics and KPIs for measuring the performance and impact of DevRel initiatives.",
-			status: "sandbox",
-			learnMoreUrl: "https://github.com/devrel-foundation/metrics-index"
+			title: 'Metrics index',
+			description: 'Index of metrics and KPIs for measuring the performance and impact of DevRel initiatives.',
+			status: 'sandbox',
+			learnMoreUrl: 'https://github.com/devrel-foundation/metrics-index'
 		},
 		{
-			title: "DevRel Maturity Model",
-			description: "Framework for assessing the maturity of the organization and structure in executing DevRel tactics and programs.",
-			status: "sandbox",
-			learnMoreUrl: "https://github.com/devrel-foundation/devrel-maturity-model"
+			title: 'DevRel maturity model',
+			description: 'Framework for assessing the maturity of the organization and structure in executing DevRel tactics and programs.',
+			status: 'sandbox',
+			learnMoreUrl: 'https://github.com/devrel-foundation/devrel-maturity-model'
 		}
 	];
 
@@ -77,7 +77,7 @@
 			<strong>Projects are the output of the Developer Relations Foundation working group initiatives to source and innovate on best practices.</strong> These open-source initiatives gather knowledge, open-data, and other resources that advance the effectiveness of Developer Relations activities and tactics.
 		</p>
 
-		<h2>Explore</h2>
+		<h2>Explore projects</h2>
 		<div class="filter-controls">
 			<div class="filter-menu">
 				<button 
@@ -96,7 +96,7 @@
 					class="filter-btn {selectedFilter === 'incubation' ? 'active' : ''}"
 					onclick={() => setFilter('incubation')}
 				>
-					Incubation
+					Incubating
 				</button>
 				<button 
 					class="filter-btn {selectedFilter === 'graduated' ? 'active' : ''}"
@@ -170,7 +170,7 @@
 			{/each}
 		</div>
 
-		<h2>Contributing</h2>
+		<h2>Contributing to projects</h2>
 
 		<p>
 			The value of open-source projects comes from the collaborative ideation that happens when gathering professionals of varied backgrounds and experiences with common goals.

@@ -5,9 +5,9 @@
 </script>
 
 
-<InfoPage title="Tools Catalog definitions" 
-  description="Definitions for job categories and outcomes used in the DevRel Foundation Tools Catalog."
-  breadcrumbs={[{label:"About | Tools Catalog", link: "/projects/tools-catalog"}]}
+<InfoPage title="Tools catalog definitions" 
+  description="Definitions for job categories and outcomes used in the DevRel Foundation tools catalog."
+  breadcrumbs={[{label:"Tools catalog", link: "/projects/tools-catalog"}]}
   wide={true}
   >
 

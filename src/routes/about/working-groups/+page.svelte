@@ -121,7 +121,7 @@
 		</p>
 
 		<h3>Resources</h3>
-		<p>The Resources Working Group innovates on building open-data tools such as the Persona Library, Tools Catalog, and Events Directory to support DevRel activities.</p>
+		<p>The Resources Working Group innovates on building open-data tools such as the persona library, tools catalog, and events directory to support DevRel activities.</p>
 
 		<p>
 		<a href="https://github.com/DevRel-Foundation/wg-resource-aggregation">
