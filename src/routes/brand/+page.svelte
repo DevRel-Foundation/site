@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { Button } from 'bits-ui';
   import VoiceAndTone from './voice-and-tone.md';
+  import ExampleCard from '$lib/components/ui/molecules/ExampleCard.svelte';
   import ScrollSidebarLayout from '$lib/components/ui/organisms/ScrollSidebarLayout.svelte';
   import type { ScrollSidebarItem } from '$lib/scroll-sidebar';
 
@@ -1069,37 +1071,36 @@ h3 { font-size: var(--step-3); }
   <h3>Component example</h3>
   <p>This example shows how our spacing system creates harmonious components:</p>
 
-  <div class="example-component">
-    <div class="example-header">
-      <h4>Developer workshop registration</h4>
-    </div>
-    <div class="example-body">
-      <p class="example-date">October 15-16, 2023 • Virtual Event</p>
-      <h5 class="example-title">Advanced API design patterns</h5>
-      <p class="example-description">
-        Join us for a two-day intensive workshop on designing scalable and developer-friendly APIs. Learn best
-        practices from industry experts and apply them in hands-on sessions.
-      </p>
-      <div class="example-details">
-        <div class="example-detail-item">
-          <span class="example-detail-icon" aria-hidden="true">👥</span>
-          <span>Limited to 50 participants</span>
-        </div>
-        <div class="example-detail-item">
-          <span class="example-detail-icon" aria-hidden="true">🔧</span>
-          <span>Hands-on exercises included</span>
-        </div>
-        <div class="example-detail-item">
-          <span class="example-detail-icon" aria-hidden="true">📜</span>
-          <span>Certificate upon completion</span>
-        </div>
+  <ExampleCard
+    title="Developer workshop registration"
+    headingLevel="h4"
+    class="example-component--demo"
+  >
+    <p class="example-date">October 15-16, 2023 • Virtual Event</p>
+    <h5 class="example-title">Advanced API design patterns</h5>
+    <p class="example-description">
+      Join us for a two-day intensive workshop on designing scalable and developer-friendly APIs. Learn best
+      practices from industry experts and apply them in hands-on sessions.
+    </p>
+    <div class="example-details">
+      <div class="example-detail-item">
+        <span class="example-detail-icon" aria-hidden="true">👥</span>
+        <span>Limited to 50 participants</span>
       </div>
-      <div class="example-buttons">
-        <button type="button" class="example-button">Register now</button>
-        <button type="button" class="example-button secondary">View details</button>
+      <div class="example-detail-item">
+        <span class="example-detail-icon" aria-hidden="true">🔧</span>
+        <span>Hands-on exercises included</span>
+      </div>
+      <div class="example-detail-item">
+        <span class="example-detail-icon" aria-hidden="true">📜</span>
+        <span>Certificate upon completion</span>
       </div>
     </div>
-  </div>
+    <div class="example-buttons">
+      <Button.Root type="button" class="example-button">Register now</Button.Root>
+      <Button.Root type="button" class="example-button secondary">View details</Button.Root>
+    </div>
+  </ExampleCard>
 
   <div class="highlight-box">
     <h4>Spacing used in this component</h4>
@@ -2117,94 +2118,6 @@ h3 { font-size: var(--step-3); }
 
   .spacing-text-block h4 {
     margin: 0 0 var(--space-xs);
-  }
-
-  .example-component {
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-l);
-    overflow: hidden;
-    max-width: 600px;
-    background-color: var(--color-background);
-    margin-bottom: var(--space-m);
-  }
-
-  .example-header {
-    background-color: var(--color-background-secondary-1);
-    padding: var(--space-s);
-  }
-
-  .example-header h4 {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .example-body {
-    padding: var(--space-m);
-  }
-
-  .example-date {
-    margin: 0 0 var(--space-xs);
-    opacity: 0.8;
-    font-size: 0.9rem;
-  }
-
-  .example-title {
-    margin: 0 0 var(--space-s);
-    font-size: 1.4rem;
-  }
-
-  .example-description {
-    margin: 0 0 var(--space-s);
-    line-height: 1.5;
-  }
-
-  .example-details {
-    margin-bottom: var(--space-s);
-    padding: var(--space-xs);
-    background-color: var(--color-background-secondary-1);
-    border-radius: var(--radius-m);
-  }
-
-  .example-detail-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--space-2xs);
-  }
-
-  .example-detail-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .example-detail-icon {
-    margin-right: var(--space-xs);
-    font-size: 1.2rem;
-  }
-
-  .example-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-s);
-  }
-
-  .example-button {
-    padding: var(--space-xs) var(--space-s);
-    border-radius: var(--radius-pill);
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    transition: transform 0.2s ease;
-    background-color: var(--color-accent-text);
-    color: var(--color-text);
-  }
-
-  .example-button:hover {
-    transform: translateY(-2px);
-  }
-
-  .example-button.secondary {
-    background-color: var(--color-accent-blue);
   }
 
   .component-spacing-list {

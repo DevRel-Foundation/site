@@ -715,6 +715,185 @@ header {
   border-radius: var(--radius-s);
 }
 
+/* Card with header band — shared by ActionCard and brand guidelines example */
+.example-component {
+  border: var(--border-thickness) solid var(--color-background-secondary-2);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+}
+
+.example-component.action-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.example-component.action-card:hover {
+  box-shadow: var(--shadow-m);
+  transform: translateY(-2px);
+}
+
+.example-header {
+  background-color: var(--color-background-secondary-1);
+  padding: var(--space-s);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.example-header :is(h3, h4, .example-header__title) {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text);
+  font-family: var(--font-headings);
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+
+.example-header__icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  filter: var(--icon-filter);
+}
+
+.example-body {
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--space-s);
+}
+
+.example-body .action-card__description {
+  margin: 0;
+  font-size: var(--step-0);
+  color: var(--color-text);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.example-body .action-card__description--clamp {
+  height: calc(4 * 1.5em);
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.example-body .action-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  flex-grow: 1;
+}
+
+.example-body .action-card__content :where(p) {
+  margin: 0;
+  font-size: var(--step-0);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.example-body .action-card__content :where(p.action-card__question) {
+  font-weight: 900;
+}
+
+.example-body :is(.cta-button, [data-button-root].cta-button) {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Body content patterns (brand guidelines example + shared card content) */
+.example-date {
+  margin: 0 0 var(--space-xs);
+  color: var(--color-text);
+  opacity: 0.8;
+  font-size: var(--step--1);
+}
+
+.example-title {
+  margin: 0 0 var(--space-s);
+  font-size: var(--step-2);
+  font-family: var(--font-headings);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.example-description {
+  margin: 0 0 var(--space-s);
+  font-size: var(--step-0);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.example-details {
+  margin-bottom: var(--space-s);
+  padding: var(--space-xs);
+  background-color: var(--color-background-secondary-1);
+  border-radius: var(--radius-m);
+}
+
+.example-detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-2xs);
+  font-size: var(--step-0);
+  color: var(--color-text);
+}
+
+.example-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.example-detail-icon {
+  margin-right: var(--space-xs);
+  font-size: var(--step-1);
+  flex-shrink: 0;
+}
+
+.example-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-s);
+}
+
+.example-button,
+[data-button-root].example-button {
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-pill);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--step-0);
+  line-height: 1;
+  transition: transform 0.2s ease;
+  background-color: var(--color-accent-text);
+  color: var(--color-text);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.example-button:hover,
+[data-button-root].example-button:hover {
+  transform: translateY(-2px);
+}
+
+.example-button.secondary,
+[data-button-root].example-button.secondary {
+  background-color: var(--color-accent-blue);
+}
+
+.example-component--demo {
+  max-width: 37.5rem;
+  margin-bottom: var(--space-m);
+}
+
 .u-grid {
   display: grid;
   gap: var(--grid-gutter);

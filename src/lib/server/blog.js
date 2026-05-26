@@ -3,7 +3,11 @@ import matter from 'gray-matter';
 
 const blogPostsGlob = import.meta.glob('/src/blog/**/*.md', { eager: true });
 // load author markdown files as raw strings so gray-matter can parse frontmatter
-const authorsGlob = import.meta.glob('/src/authors/*.md', { eager: true, as: 'raw' });
+const authorsGlob = import.meta.glob('/src/authors/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default'
+});
   
 
 export async function getBlogPosts() {

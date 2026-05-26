@@ -170,6 +170,11 @@
 		margin-top: var(--space-m);
 	}
 
+	.join-cards :global(.cta-button) {
+		display: inline-block;
+		width: fit-content;
+	}
+
 	.step-cta {
 		display: inline-block;
 		padding: var(--space-xs) var(--space-l);
@@ -240,16 +245,11 @@
 	}
 
 	.steps .step-cta {
-		width: auto;
+		width: fit-content;
 		text-align: left;
 		box-sizing: border-box;
 		margin: var(--space-s) 0;
-		display: block;
-	}
-
-	@media (min-width: 769px) {
-		.steps .step-cta {
-			text-align: left;
-		}
+		display: inline-block;
+		align-self: flex-start;
 	}
 </style>

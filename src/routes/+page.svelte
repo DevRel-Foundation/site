@@ -213,6 +213,7 @@
 
 	.hero {
 		padding-block: var(--space-m);
+		margin-bottom: var(--space-xl);
 	}
 	
 	.hero-title-area {
@@ -223,8 +224,9 @@
 		background-color: var(--color-background);
 		gap: var(--space-l);
 	}
-	
+
 	.hero-title {
+		align-self: flex-start;
 		text-align: left;
 		flex: 1;
 		--hero-text-duration: 0.65s;
@@ -281,7 +283,7 @@
 	}
 
 	.content-boxes {
-		margin-bottom: var(--space-2xl);
+		margin-bottom: var(--space-3xl);
 	}
 
 	.newsletter-wrap {
@@ -340,9 +342,10 @@
 	}
 
 	.newsletter-section {
-		background-color: var(--color-accent-text);
+		background-color: var(--color-background-secondary-1);
 		padding: var(--space-m);
-		border-radius: var(--radius-l);
+		border-radius: var(--radius-m);
+		border: var(--border-thickness) solid var(--color-accent-green);
 		position: relative;
 		z-index: 1;
 	}
@@ -352,14 +355,14 @@
 	}
 
 	.newsletter-content h2 {
-		color: var(--color-forest);
+		color: var(--color-text);
 		margin-top: 0;
 		margin-bottom: var(--space-xs);
 		font-size: var(--step-3);
 	}
 
 	.newsletter-content p {
-		color: var(--color-forest);
+		color: var(--color-text);
 		margin-bottom: var(--space-s);
 		font-size: var(--step-0);
 	}
@@ -373,15 +376,15 @@
 	.newsletter-form input {
 		width: 100%;
 		padding: var(--space-xs) var(--space-m);
-		border: var(--border-thickness) solid var(--color-background-secondary-1);
+		border: var(--border-thickness) solid var(--color-background-secondary-2);
 		border-radius: var(--radius-pill);
-		background-color: var(--color-offwhite);
-		color: var(--color-forest);
+		background-color: var(--color-background);
+		color: var(--color-text);
 		box-sizing: border-box;
 	}
 
 	.newsletter-form input::placeholder {
-		color: color-mix(in srgb, var(--color-forest) 55%, transparent);
+		color: var(--color-text-secondary);
 		opacity: 1;
 	}
 
@@ -394,24 +397,6 @@
 		cursor: pointer;
 	}
 
-	:global(body.dark-mode) .newsletter-content :is(h2, p),
-	:global(html.dark-mode) .newsletter-content :is(h2, p) {
-		color: var(--color-mint);
-	}
-
-	:global(body.dark-mode) .newsletter-form input,
-	:global(html.dark-mode) .newsletter-form input {
-		background-color: var(--color-background-secondary-2-dark);
-		color: var(--color-mint);
-		border-color: var(--color-mint);
-	}
-
-	:global(body.dark-mode) .newsletter-form input::placeholder,
-	:global(html.dark-mode) .newsletter-form input::placeholder {
-		color: var(--color-mint);
-		opacity: 0.75;
-	}
-
 	@media (min-width: 769px) {
 		.hero {
 			padding-block: var(--space-l);
@@ -419,7 +404,12 @@
 
 		.hero-title-area {
 			flex-direction: row;
+			align-items: center;
 			gap: var(--space-m);
+		}
+
+		.hero-title {
+			padding-top: var(--space-2xl);
 		}
 
 		.hero-logo-wrap {
