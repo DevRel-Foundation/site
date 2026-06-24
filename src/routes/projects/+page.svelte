@@ -14,9 +14,9 @@
 		},
 		{
 			title: "Persona Library",
-			description: "Reference collection for the study and standardization of developer personas. Aims to offer pragmatic advice for use in day-to-day go-to-market strategies.",
+			description: "Collection of developer persona traits and tactics to build programs and engagement strategies.",
 			status: "incubation",
-			learnMoreUrl: "https://github.com/devrel-foundation/persona-library"
+			learnMoreUrl: "/projects/persona-library"
 		},
 		{
 			title: "Events Directory",
