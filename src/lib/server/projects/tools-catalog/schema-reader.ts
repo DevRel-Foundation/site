@@ -1,5 +1,3 @@
-// src/lib/server/tools-catalog/schema-reader.ts
-// (moved from schema.ts)
 import { json } from '@sveltejs/kit';
 
 let schemaCache: any = null;
@@ -8,7 +6,6 @@ const CACHE_TTL = 1000 * 60 * 60; // 1 hour
 
 const SCHEMA_URL = 'https://raw.githubusercontent.com/DevRel-Foundation/tools-catalog/main/src/schemas/tools.json';
 
-// Reads the tools schema periodically and reuses it for future requests.
 export async function getToolsSchema() {
   const now = Date.now();
   if (!schemaCache || now - lastFetch > CACHE_TTL) {
@@ -20,8 +17,6 @@ export async function getToolsSchema() {
   return schemaCache;
 }
 
-// Returns a list of labels for the tools catalog. They are returned as a dictionary
-// in case we want to enrich them with additional details.
 export async function getLabels() {
   const schema = await getToolsSchema();
   const labelEnum = schema.properties.labels.items.enum;

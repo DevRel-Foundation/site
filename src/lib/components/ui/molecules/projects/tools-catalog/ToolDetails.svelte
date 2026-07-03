@@ -1,13 +1,48 @@
 <script lang="ts">
+  import { Tabs } from 'bits-ui';
   import PropertyItem from '../../../atoms/ToolPropertyItem.svelte';
-  import SectionDivider from '../../../atoms/SectionDivider.svelte';
 
-  export let tool: any = null;
-  $: tool = tool || null;
+  type LearningItem = {
+    type: string;
+    url: string;
+    title: string;
+  };
 
-  let activeTab = 'properties';
-  let showCopyToast = false;
-  let toastX = 0, toastY = 0;
+  type ToolEvaluation = {
+    team: string;
+    decision?: string;
+    pricing?: string;
+    compatibility?: string;
+    customizability?: string[];
+    notes?: string[];
+  };
+
+  type CatalogTool = {
+    id?: string;
+    name: string;
+    description?: string;
+    url?: string;
+    jobs?: {
+      categories?: string[];
+      outcomes?: string[];
+      motivations?: string[];
+      scenarios?: string[];
+    };
+    labels?: string[];
+    evaluation?: ToolEvaluation[];
+    learning?: {
+      setup?: LearningItem[];
+      'getting-started'?: LearningItem[];
+      advanced?: LearningItem[];
+    };
+  };
+
+  let { tool = null }: { tool?: CatalogTool | null } = $props();
+
+  let activeTab = $state('properties');
+  let showCopyToast = $state(false);
+  let toastX = $state(0);
+  let toastY = $state(0);
 
   function copyToolUrl(event: MouseEvent) {
     if (tool?.id) {
@@ -16,13 +51,13 @@
       toastX = event.clientX;
       toastY = event.clientY;
       showCopyToast = true;
-      setTimeout(() => showCopyToast = false, 1500); // Hide after 1.5s
+      setTimeout(() => (showCopyToast = false), 1500);
     }
   }
 
-  function getEditUrl(tool: any): string {
-    if (tool?.id) {
-      return `https://github.com/DevRel-Foundation/tools-catalog/blob/main/data/${tool.id}.json`;
+  function getEditUrl(catalogTool: CatalogTool): string {
+    if (catalogTool?.id) {
+      return `https://github.com/DevRel-Foundation/tools-catalog/blob/main/data/${catalogTool.id}.json`;
     }
     return '';
   }
@@ -31,10 +66,11 @@
 <div class="tool-details">
   {#if !tool}
     <div class="empty-state">
-      <h2>Select a Tool</h2>
+      <h2>Select a tool</h2>
       <p>Choose a tool from the list to view additional details.</p>
     </div>
   {:else}
+    <Tabs.Root bind:value={activeTab} class="tool-details-tabs">
     <div class="tool-details-content">
       <div class="tool-details-header">
         <h2 class="tool-title">{tool.name}</h2>
@@ -46,7 +82,7 @@
 
             <button 
             class="share-btn"
-            on:click={(e) => copyToolUrl(e)}
+            onclick={(e) => copyToolUrl(e)}
             title="Copy link to this tool"
             >
             Share 🔗
@@ -57,30 +93,28 @@
         <p class="tool-description">{tool.description}</p>
       {/if}
 
-      <SectionDivider />
-
-      <!-- Tab Content -->
-      <div class="tab-content">
-        {#if activeTab === 'properties'}
+      <Tabs.Content value="properties" class="tab-content">
           <div class="tool-properties">
             <dl class="properties-list">
-              <PropertyItem label="URL" format="url" value={tool.url} />
-              <PropertyItem label="Job Categories" value={tool.jobs ? tool.jobs.categories : []} />
-              <PropertyItem label="Outcomes" value={tool.jobs ? tool.jobs.outcomes : []} />
-              <PropertyItem label="Motivations" value={tool.jobs ? tool.jobs.motivations : []} />
-              <PropertyItem label="Scenarios" value={tool.jobs ? tool.jobs.scenarios : []} />
-              <PropertyItem label="Labels" value={tool.labels} />
+              <PropertyItem label="URL" format="url" value={tool.url ?? ''} />
+              <PropertyItem label="Job categories" value={tool.jobs?.categories ?? []} />
+              <PropertyItem label="Outcomes" value={tool.jobs?.outcomes ?? []} />
+              <PropertyItem label="Motivations" value={tool.jobs?.motivations ?? []} />
+              <PropertyItem label="Scenarios" value={tool.jobs?.scenarios ?? []} />
+              <PropertyItem label="Labels" value={tool.labels ?? []} />
             </dl>
           </div>
-        {:else if activeTab === 'evaluation'}
+      </Tabs.Content>
+
+      <Tabs.Content value="evaluation" class="tab-content">
           <div class="evaluation-content">
             {#if tool.evaluation && tool.evaluation.length > 0}
               <div class="evaluation-list">
-                {#each tool.evaluation as evaluation, index}
+                {#each tool.evaluation as evaluation, index (`${evaluation.team}-${index}`)}
                   <div class="evaluation-item">
                     <div class="evaluation-header">
                       <h4 class="evaluation-source">
-                        {evaluation.team.toUpperCase() === 'N/A' ? 'Anonymous DevRel Team' : evaluation.team}
+                        {evaluation.team.toUpperCase() === 'N/A' ? 'Anonymous DevRel team' : evaluation.team}
                       </h4>
                       {#if evaluation.decision}
                         <span class="decision-badge {evaluation.decision}">{evaluation.decision}</span>
@@ -107,7 +141,7 @@
 
                     {#if evaluation.notes && evaluation.notes.length > 0}
                       <div class="evaluation-notes">
-                        {#each evaluation.notes as note}
+                        {#each evaluation.notes as note, noteIndex (noteIndex)}
                           <p>{note}</p>
                         {/each}
                       </div>
@@ -125,16 +159,17 @@
               </div>
             {/if}
           </div>
-        {:else if activeTab === 'learn'}
+      </Tabs.Content>
+
+      <Tabs.Content value="learn" class="tab-content">
           <div class="learning-content">
             {#if tool.learning}
               <div class="learning-sections">
-                <!-- Setup Section -->
                 {#if tool.learning.setup && tool.learning.setup.length > 0}
                   <div class="learning-section">
                     <h3>Setup</h3>
                     <ul class="learning-list">
-                      {#each tool.learning.setup as item}
+                      {#each tool.learning.setup as item (item.url)}
                         {#if item.type === 'article'}
                           <li class="learning-item">
                             <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
@@ -147,12 +182,11 @@
                   </div>
                 {/if}
 
-                <!-- Getting Started Section -->
                 {#if tool.learning['getting-started'] && tool.learning['getting-started'].length > 0}
                   <div class="learning-section">
-                    <h3>Getting Started</h3>
+                    <h3>Getting started</h3>
                     <ul class="learning-list">
-                      {#each tool.learning['getting-started'] as item}
+                      {#each tool.learning['getting-started'] as item (item.url)}
                         {#if item.type === 'article'}
                           <li class="learning-item">
                             <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
@@ -165,12 +199,11 @@
                   </div>
                 {/if}
 
-                <!-- Advanced Section -->
                 {#if tool.learning.advanced && tool.learning.advanced.length > 0}
                   <div class="learning-section">
                     <h3>Advanced</h3>
                     <ul class="learning-list">
-                      {#each tool.learning.advanced as item}
+                      {#each tool.learning.advanced as item (item.url)}
                         {#if item.type === 'article'}
                           <li class="learning-item">
                             <a href={item.url} target="_blank" rel="noopener noreferrer" class="learning-link">
@@ -199,57 +232,40 @@
               </div>
             {/if}
           </div>
-        {/if}
-      </div>
+      </Tabs.Content>
     </div>
 
-    <!-- Bottom Tabs -->
-    <div class="tabs">
-      <button 
-        class="tab {activeTab === 'properties' ? 'active' : ''}"
-        on:click={() => activeTab = 'properties'}
-      >
-        Properties
-      </button>
-      <button 
-        class="tab {activeTab === 'evaluation' ? 'active' : ''}"
-        on:click={() => activeTab = 'evaluation'}
-      >
-        Evaluation
-      </button>
-      <button 
-        class="tab {activeTab === 'learn' ? 'active' : ''}"
-        on:click={() => activeTab = 'learn'}
-      >
-        Learn
-      </button>
+    <Tabs.List class="tabs">
+      <Tabs.Trigger value="properties" class="tab">Properties</Tabs.Trigger>
+      <Tabs.Trigger value="evaluation" class="tab">Evaluation</Tabs.Trigger>
+      <Tabs.Trigger value="learn" class="tab">Learn</Tabs.Trigger>
       {#if tool?.id}
-      <a 
-        class="tab"
-        href={getEditUrl(tool)}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Edit ↗
-
-      </a>
+        <a class="tab tab-link" href={getEditUrl(tool)} target="_blank" rel="noopener noreferrer">
+          Edit ↗
+        </a>
       {:else}
-      <a 
-        class="tab"
-        href="https://github.com/devrel-foundation/tools-catalog"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Edit ↗
-      </a>
-
+        <a
+          class="tab tab-link"
+          href="https://github.com/devrel-foundation/tools-catalog"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Edit ↗
+        </a>
       {/if}
-    </div>
+    </Tabs.List>
+    </Tabs.Root>
   {/if}
 
 </div>
 
 <style>
+  :global(.tool-details-tabs) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   .tool-details {
     height: 100%;
     display: flex;
@@ -358,25 +374,29 @@
     opacity: 0.72;
   }
 
-  .tab.active {
+  :global(.tab[data-state='active']) {
     background: var(--color-button-background);
     color: var(--color-text-dark);
-    border-top: 2px solid var(--color-mint-dark);
+    border-top: 2px solid var(--color-forest);
   }
 
-  .tab.active:hover {
+  :global(.tab[data-state='active']:hover) {
     background: var(--color-background-secondary-1);
     color: var(--color-text);
     border-top: 0px solid var(--color-background-secondary-1);
-    opacity: 1.0;
+    opacity: 1;
     cursor: default;
+  }
+
+  .tab-link {
+    font-family: inherit;
   }
 
   .share-btn {
     padding: var(--space-xs) var(--space-s);
     background: var(--color-button-background);
     border: none;
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     color: var(--color-text-dark);
     font-size: var(--step--1);
     cursor: pointer;
@@ -395,7 +415,6 @@
     margin: 0;
   }
 
-  /* Evaluation Tab Styles */
   .evaluation-content {
     padding: var(--space-m);
   }
@@ -436,23 +455,27 @@
   }
 
   .decision-badge.considering {
-    background: var(--color-mint);
-    color: var(--color-mint-dark)
+    background: var(--color-info);
+    color: var(--color-info-text);
+    border: var(--border-thickness) solid var(--color-info-border);
   }
 
   .decision-badge.approved {
-    background: #D1FAE5;
-    color: #065F46;
+    background: var(--color-success);
+    color: var(--color-success-text);
+    border: var(--border-thickness) solid var(--color-success-border);
   }
 
   .decision-badge.rejected {
-    background: #FEE2E2;
-    color: #991B1B;
+    background: var(--color-error);
+    color: var(--color-error-text);
+    border: var(--border-thickness) solid var(--color-error-border);
   }
 
   .decision-badge.using {
-    background: var(--color-mint);
-    color: var(--color-text-dark);
+    background: var(--color-success);
+    color: var(--color-success-text);
+    border: var(--border-thickness) solid var(--color-success-border);
   }
 
   .evaluation-meta {
@@ -493,7 +516,6 @@
     margin: var(--space-l) 0;
   }
 
-  /* Learning Tab Styles */
   .learning-content {
     padding: var(--space-m);
   }

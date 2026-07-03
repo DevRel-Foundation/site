@@ -5,13 +5,13 @@
 </script>
 
 
-<InfoPage title="Tools Catalog Definitions" 
-  description="Definitions for job categories and outcomes used in the DevRel Foundation Tools Catalog."
-  breadcrumbs={[{label:"About | Tools Catalog", link: "/projects/tools-catalog"}]}
+<InfoPage title="Tools catalog definitions" 
+  description="Definitions for job categories and outcomes used in the DevRel Foundation tools catalog."
+  breadcrumbs={[{label:"Tools catalog", link: "/projects/tools-catalog"}]}
   wide={true}
   >
 
-    <h2>Job Categories</h2>
+    <h2>Job categories</h2>
     <table class="styled-table">
         <thead>
             <tr>
@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each data.categories as cat}
+            {#each data.categories as cat (cat.value)}
                 <tr>
                     <td><b>{cat.value}</b></td>
                     <td>{cat.description}</td>
@@ -29,7 +29,7 @@
         </tbody>
     </table>
 
-    <h2>Job Outcomes</h2>
+    <h2>Job outcomes</h2>
     <table class="styled-table">
         <thead>
             <tr>
@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each data.outcomes as outcome}
+            {#each data.outcomes as outcome (outcome.value)}
                 <tr>
                     <td><b>{outcome.value}</b></td>
                     <td>{outcome.description}</td>
@@ -47,7 +47,7 @@
         </tbody>
     </table>
 
-    <h2>Job Motivations</h2>
+    <h2>Job motivations</h2>
     <table class="styled-table">
         <thead>
             <tr>
@@ -56,7 +56,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each data.motivations as motivation}
+            {#each data.motivations as motivation (motivation.value)}
                 <tr>
                     <td><b>{motivation.value}</b></td>
                     <td>{motivation.description}</td>
@@ -66,7 +66,7 @@
     </table>    
 
 
-    <h2>Job Situations</h2>
+    <h2>Job situations</h2>
     <table class="styled-table">
         <thead>
             <tr>
@@ -75,7 +75,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each data.situations as situation}
+            {#each data.situations as situation (situation.value)}
 
                 <tr>
                     <td><b>{situation.value}</b></td>
@@ -125,7 +125,7 @@
 
 .styled-table td:first-child,
 .styled-table th:first-child {
-    min-width: 180px; /* or use width: 180px for fixed */
+    min-width: 180px;
     white-space: nowrap;
 }
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-  // Use callback props instead of createEventDispatcher
   export let onAccept: () => void = () => {};
   export let onReject: () => void = () => {};
 </script>
@@ -13,8 +12,8 @@
       </p>
     </div>
     <div class="cookie-actions">
-      <button on:click={onAccept} class="btn-accept">Accept All</button>
-      <button on:click={onReject} class="btn-reject">Reject</button>
+      <button onclick={onAccept} class="btn-accept">Accept all</button>
+      <button onclick={onReject} class="btn-reject">Reject</button>
     </div>
   </div>
 </div>
@@ -28,8 +27,8 @@
     background: rgba(0,36,46,0.95);
     color: white;
     padding: 1rem;
-    z-index: 10000;
-    border-top: 2px solid var(--color-mint-dark, #79bf44);
+    z-index: var(--z-max);
+    border-top: 2px solid var(--color-forest, #79bf44);
     backdrop-filter: blur(10px);
   }
 
@@ -66,11 +65,11 @@
   }
 
   .btn-accept {
-    background: var(--color-mint-dark, #79bf44);
+    background: var(--color-forest, #79bf44);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-weight: 600;
     white-space: nowrap;
@@ -81,7 +80,7 @@
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     white-space: nowrap;
   }

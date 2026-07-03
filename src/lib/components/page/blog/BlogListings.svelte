@@ -1,62 +1,111 @@
-<script>
-  let githubUsersCache = $state({});
-  let authorsData = $state({});
+<script lang="ts">
+  import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
+
+  type BlogPost = {
+    slug: string;
+    title: string;
+    image?: string;
+    category?: string;
+    date: string;
+    author?: string;
+    excerpt?: string;
+    readingTime?: string;
+  };
+
+  type AuthorData = {
+    name?: string;
+    avatar?: string;
+    url?: string;
+  };
+
+  type GithubUser =
+    | {
+        type: 'github';
+        username: string;
+        name: string;
+        avatar?: string;
+        url?: string;
+      }
+    | {
+        type: 'text';
+        name: string;
+      };
+
+  const { posts } = $props<{ posts: BlogPost[] }>();
+
+  let githubUsersCache = $state<Record<string, GithubUser[]>>({});
+  let authorsData = $state<Record<string, AuthorData>>({});
   let authorsLoaded = $state(false);
-  
-  const { posts } = $props();
-  
-  // Load authors data from API endpoint
+
+  onMount(() => {
+    void loadAuthorsData();
+  });
+
   async function loadAuthorsData() {
-    if (authorsLoaded) return;
-    
+    if (!browser || authorsLoaded) return;
+
     try {
       const response = await fetch('/api/authors');
       if (response.ok) {
-        authorsData = await response.json();
+        authorsData = (await response.json()) as Record<string, AuthorData>;
       }
     } catch (error) {
       console.error('Failed to load authors data:', error);
     }
     authorsLoaded = true;
   }
-  
-  // Function to get author data from API endpoint
-  async function fetchGithubUsers(author) {
-    if (!author || githubUsersCache[author]) return githubUsersCache[author] || [];
-    
-    // Ensure authors data is loaded
+
+  function parseAuthorsAsText(author: string): GithubUser[] {
+    return author.split(',').map((authorName) => ({
+      type: 'text',
+      name: authorName.trim(),
+    }));
+  }
+
+  async function fetchGithubUsers(author: string): Promise<GithubUser[]> {
+    if (!author || githubUsersCache[author]) return githubUsersCache[author] ?? [];
+
+    if (!browser) {
+      return parseAuthorsAsText(author);
+    }
+
     await loadAuthorsData();
-    
-    const authors = author.split(',').map(a => a.trim());
-    const users = authors.map((authorName) => {
+
+    const authors = author.split(',').map((a) => a.trim());
+    const users: GithubUser[] = authors.map((authorName) => {
       if (authorName.startsWith('@')) {
         const username = authorName.slice(1);
         const authorKey = `@${username}`;
         const authorData = authorsData[authorKey];
-        
+
         if (authorData) {
           return {
             type: 'github',
             username,
             name: authorData.name || username,
             avatar: authorData.avatar,
-            url: authorData.url
+            url: authorData.url,
           };
-        } else {
-          // If not in authors.json, treat as text
-          return { type: 'text', name: authorName };
         }
+
+        return { type: 'text', name: authorName };
       }
+
       return { type: 'text', name: authorName };
     });
-    
+
     githubUsersCache[author] = users;
     return users;
+  }
+
+  function authorUserKey(user: GithubUser): string {
+    return user.type === 'github' ? user.username : user.name;
   }
 </script>
 
 <div class="posts-list">
-  {#each posts as post}
+  {#each posts as post (post.slug)}
   <article class="post-item">
     <div class="post-image">
       <a href="/blog/{post.slug}">
@@ -81,7 +130,7 @@
             {:then githubUsers}
               {#if githubUsers.length > 0}
                 <div class="authors">
-                  {#each githubUsers as user, index}
+                  {#each githubUsers as user, index (authorUserKey(user))}
                     {#if user.type === 'github'}
                       <a href="/blog/author/{user.username}" class="github-author">
                         {#if user.avatar}
@@ -125,7 +174,7 @@
   .posts-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-s);
+    gap: var(--space-xl);
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--space-2xs);
@@ -135,28 +184,29 @@
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: var(--space-m);
-    padding-bottom: var(--space-2xs);
-    border-bottom: 1px solid var(--color-background-secondary-2);
     align-items: start;
-  }
-  
-  .post-item:last-child {
-    border-bottom: none;
   }
   
   .post-image {
     aspect-ratio: 16/9;
     overflow: hidden;
-    border-radius: var(--radius-s);
     align-self: start;
+    border: 1px solid var(--color-accent-green);
+    border-radius: var(--radius-s);
+  }
 
-    border: 1px solid var(--color-mint);
-    border-radius: 8px;
+  .post-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
   
   .post-image img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
     transition: transform 0.2s ease;
   }
   
@@ -191,9 +241,9 @@
   
   .category-tag {
     background-color: var(--color-background-secondary-2-dark);
-    color: var(--color-background);
+    color: var(--color-light-cream);
     padding: var(--space-3xs) var(--space-2xs);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--step--2);
@@ -273,15 +323,11 @@
       grid-template-columns: 200px 1fr;
       gap: var(--space-s);
     }
-    
-    .post-image {
-      height: 112px;
-    }
   }
   
   @media (max-width: 480px) {
     .posts-list {
-      gap: var(--space-s);
+      gap: var(--space-l);
     }
     
     .post-item {

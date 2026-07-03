@@ -1,9 +1,8 @@
 <script>
 	import BioSteeringCommittee from '$lib/components/page/bios/BioSteeringCommittee.svelte';
+	import { MotifConcentricCircles } from '$lib/components/ui/atoms/motifs';
 	const img_wes = '/images/steering-committee/wes_f.jpg';
 	const img_ana = '/images/steering-committee/ana_j.jpg';
-	const img_jon = '/images/steering-committee/jon_l.jpg';
-	const img_kat = '/images/steering-committee/katie_m.jpg';
 	const img_stacey = '/images/steering-committee/stacey_k.jpg';
 	const img_jayson = '/images/steering-committee/jayson_d.jpg';
 	const img_aditya = '/images/steering-committee/aditya_o.jpg';
@@ -16,20 +15,20 @@
 	<title>Steering Committee | About | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="motif-section steering-page">
+	<MotifConcentricCircles />
+	<div class="container">
 	<section class="team-section">
-		<div class="container">
-			<h2 id="steering-committee">Steering Committee</h2>
-			<p>
-				The <strong>Steering Committee</strong> provides expectations, timelines, tools, and regular oversight and continuity for <a href="/about/working-groups" class="link">working groups</a> and the Developer Relations Foundation (DRF) and its initiatives.
-			</p>
-		</div>
+		<h1 id="steering-committee">Steering Committee</h1>
+		<p>
+			The <strong>Steering Committee</strong> provides expectations, timelines, tools, and regular oversight and continuity for <a href="/about/working-groups" class="link">working groups</a> and the Developer Relations Foundation (DRF) and its initiatives.
+		</p>
 
-		<div class="team-grid">
+		<div class="u-grid u-grid-cards team-grid">
 
 			<BioSteeringCommittee
 				name="Stacey Kruczek"
-				title="Marketing and Brand"
+				title="Marketing and brand"
 				accountabilities="
 					Formulates integrated marketing plans and acts as spokesperson, overseeing messaging, press, and brand identity.
 					"
@@ -41,7 +40,7 @@
 
 			<BioSteeringCommittee
 				name="Wesley Faulkner"
-				title="Community Strategy"
+				title="Community strategy"
 				accountabilities="
 					Develops community engagement strategy, coordinating outreach and relationships with other communities.
 					"
@@ -54,7 +53,7 @@
 
 			<BioSteeringCommittee
 				name="Jayson DeLancey"
-				title="Technology Innovation"
+				title="Technology innovation"
 				term="2027"
 				accountabilities="
 					Innovates on new engineering projects, tool development, and advises on technical strategy for working groups and new open-source development practices.
@@ -130,18 +129,15 @@
 			/>
 		</div>
 
-		<div class="container">
-			<h2 id="steering-committee">Foundation Staff</h2>
-			<p>
-				Linux Foundation Staff provide guidance and expertise to support our mission.
-			</p>
-		</div>
+		<h2 id="foundation-staff">Foundation staff</h2>
+		<p>
+			Linux Foundation Staff provide guidance and expertise to support our mission.
+		</p>
 
-		<div class="team-grid">
-
+		<div class="u-grid u-grid-cards team-grid">
 			<BioSteeringCommittee
 				name="Ana Jiménez"
-				title="Project Manager"
+				title="Project manager"
 				accountabilities="
 					Collaborates with Linux Foundation projects and teams while representing the DevRel Foundation. Manages
 					resources, including GitHub, Netlify, PCC, etc.
@@ -156,28 +152,16 @@
 
 
 	</section>
+	</div>
 </div>
 
 <style>
-  .container {
-    margin-bottom: var(--space-m);
+  .steering-page {
+    position: relative;
+    overflow: visible;
   }
 
-	.team-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--space-l);
-	}
-
-	@media (min-width: 769px) {
-		.team-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (min-width: 1025px) {
-		.team-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
+  .steering-page .container {
+    margin-bottom: var(--space-m);
+  }
 </style>

@@ -1,90 +1,251 @@
-<script>
+<script lang="ts">
   import MenuIcon from 'iconoir/icons/menu.svg';
   import SunLightIcon from 'iconoir/icons/sun-light.svg';
   import HalfMoonIcon from 'iconoir/icons/half-moon.svg';
   import DiscordIcon from 'iconoir/icons/regular/discord.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
   import CallToActionButton from '$lib/components/ui/molecules/NavJoinButton.svelte';
-  
+  import NavDropdown from '$lib/components/nav/NavDropdown.svelte';
+
+  const menuIcons = {
+    discord: DiscordIcon,
+    github: GitHubIcon
+  } as const;
+
+  type NavMenuIcon = keyof typeof menuIcons;
+
+  type NavMenuItem = {
+    title: string;
+    href: string;
+    target?: string;
+    rel?: string;
+    variant?: 'brief';
+    icon?: NavMenuIcon;
+    iconAlt?: string;
+  };
+
+  type NavMenuSection = {
+    title: string;
+    description: string;
+    items: NavMenuItem[];
+  };
+
+  type NavMenu = {
+    id: string;
+    label: string;
+    href: string;
+    sections: NavMenuSection[];
+  };
+
+  const NAV_MENUS: NavMenu[] = [
+    {
+      id: 'about',
+      label: 'About',
+      href: '/about/mission',
+      sections: [
+        {
+          title: 'About the DevRel Foundation',
+          description: 'Our mission and working groups.',
+          items: [
+            { title: 'Mission', href: '/about/mission' },
+            { title: 'Steering Committee', href: '/about/steering-committee' },
+            { title: 'Working groups', href: '/about/working-groups' },
+            {
+              title: 'Community calendar',
+              href: '/calendar',
+              rel: 'noopener noreferrer'
+            },
+            { title: 'Contact', href: '/contact' }
+          ]
+        },
+        {
+          title: 'Foundation resources',
+          description: 'Governance documents.',
+          items: [
+            {
+              title: 'Charter ↗',
+              href: 'https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief'
+            },
+            {
+              title: 'Code of conduct ↗',
+              href: 'https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'learn',
+      label: 'Learn',
+      href: '/learn/what-is-devrel',
+      sections: [
+        {
+          title: 'Learn about DevRel',
+          description: 'Blog posts, guides, and introductions to developer relations.',
+          items: [
+            { title: 'DevRel Foundation blog', href: '/blog' },
+            { title: 'What is developer relations?', href: '/learn/what-is-devrel' }
+          ]
+        },
+        {
+          title: 'Community resources',
+          description: 'Join the conversation with fellow DevRel professionals.',
+          items: [
+            {
+              title: 'Discord ↗',
+              href: 'https://discord.gg/G7CSTKZcuT',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief',
+              icon: 'discord',
+              iconAlt: 'Join us on Discord'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'projects',
+      label: 'Projects',
+      href: '/projects',
+      sections: [
+        {
+          title: 'Get involved',
+          description: 'Explore open projects and contribute to the foundation.',
+          items: [
+            { title: 'Explore projects', href: '/projects' },
+            {
+              title: 'Contribute',
+              href: '/join-us',
+              rel: 'noopener noreferrer'
+            }
+          ]
+        },
+        {
+          title: 'Project resources',
+          description: 'Open-source code, data, and frameworks on GitHub.',
+          items: [
+            {
+              title: 'GitHub ↗',
+              href: 'https://github.com/devrel-foundation/',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              variant: 'brief',
+              icon: 'github',
+              iconAlt: 'Explore our GitHub'
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
   let isMenuOpen = $state(false);
   let isDarkMode = $state(false);
-  let activeDropdown = $state(null);
-  let activeAccordion = $state(null);
+  let activeDropdown = $state<string | null>(null);
+  let hideDropdownTimeout: ReturnType<typeof setTimeout> | undefined;
   let mediaQuery;
   let isMobile = $state(false);
-  
+
+  const DROPDOWN_CLOSE_DELAY_MS = 200;
+
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
+    if (!isMenuOpen) {
+      activeDropdown = null;
+    }
   }
-  
+
+  function toggleMobileDropdown(menuId: string) {
+    activeDropdown = activeDropdown === menuId ? null : menuId;
+  }
+
+  function setDarkModeClass(enabled: boolean) {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.toggle('dark-mode', enabled);
+      document.body?.classList.toggle('dark-mode', enabled);
+    }
+  }
+
   function toggleDarkMode() {
     isDarkMode = !isDarkMode;
-    if (typeof document !== 'undefined' && document.body) {
-      document.body.classList.toggle('dark-mode', isDarkMode);
-    }
-    // Save user preference
+    setDarkModeClass(isDarkMode);
     if (typeof window !== 'undefined') {
       localStorage.setItem('darkMode', isDarkMode.toString());
     }
   }
-  
-  function showDropdown(menuItem) {
+
+  function showDropdown(menuItem: string) {
+    if (hideDropdownTimeout) {
+      clearTimeout(hideDropdownTimeout);
+      hideDropdownTimeout = undefined;
+    }
     activeDropdown = menuItem;
   }
-  
+
   function hideDropdown() {
-    activeDropdown = null;
-  }
-  
-  function toggleAccordion(section) {
-    if (activeAccordion === section) {
-      activeAccordion = null;
-    } else {
-      activeAccordion = section;
+    if (hideDropdownTimeout) {
+      clearTimeout(hideDropdownTimeout);
     }
+    hideDropdownTimeout = setTimeout(() => {
+      activeDropdown = null;
+      hideDropdownTimeout = undefined;
+    }, DROPDOWN_CLOSE_DELAY_MS);
   }
-  
+
   function closeAll() {
+    if (hideDropdownTimeout) {
+      clearTimeout(hideDropdownTimeout);
+      hideDropdownTimeout = undefined;
+    }
     isMenuOpen = false;
     activeDropdown = null;
-    activeAccordion = null;
   }
-  
+
   $effect(() => {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const savedMode = localStorage.getItem('darkMode');
-      
+
       if (savedMode !== null) {
         isDarkMode = savedMode === 'true';
       } else {
         mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         isDarkMode = mediaQuery.matches;
-        
+
         mediaQuery.addEventListener('change', (e) => {
           if (localStorage.getItem('darkMode') === null) {
             isDarkMode = e.matches;
-            if (document.body) {
-              document.body.classList.toggle('dark-mode', isDarkMode);
-            }
+            setDarkModeClass(isDarkMode);
           }
         });
       }
-      
-      if (document.body) {
-        document.body.classList.toggle('dark-mode', isDarkMode);
-      }
+
+      setDarkModeClass(isDarkMode);
     }
   });
-  
+
   $effect(() => {
     if (typeof window !== 'undefined') {
       const checkMobile = () => {
-        isMobile = window.innerWidth <= 768;
+        const nextIsMobile = window.innerWidth <= 768;
+        if (nextIsMobile !== isMobile) {
+          activeDropdown = null;
+          if (!nextIsMobile) {
+            isMenuOpen = false;
+          }
+        }
+        isMobile = nextIsMobile;
       };
-      
+
       checkMobile();
       window.addEventListener('resize', checkMobile);
-      
+
       return () => {
         window.removeEventListener('resize', checkMobile);
       };
@@ -93,7 +254,15 @@
 </script>
 
 <nav class="nav">
-  <div class="nav-container">
+  {#if isMenuOpen && isMobile}
+    <button
+      type="button"
+      class="nav-backdrop"
+      onclick={closeAll}
+      aria-label="Close menu"
+    ></button>
+  {/if}
+  <div class="layout-section nav-container">
     <div class="nav-brand">
       <a href="/">
         <img src="/drf_logo_symbol.svg" alt="DevRel Foundation" class="logo-symbol" />
@@ -103,241 +272,58 @@
         </div>
       </a>
     </div>
-    
+
     <div class="nav-menu-container">
       <ul class="nav-menu" class:open={isMenuOpen}>
-
-
-
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('about')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/about/mission" class="nav-link" class:active={activeDropdown === 'about'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('about');
-            }
-          }}>About</a>
-          <div class="dropdown" class:active={activeDropdown === 'about'} class:accordion-open={activeAccordion === 'about'}>
-            <div class="dropdown-content">
+        {#each NAV_MENUS as menu (menu.id)}
+          <NavDropdown
+            id={menu.id}
+            label={menu.label}
+            href={menu.href}
+            {isMobile}
+            mobileActive={activeDropdown === menu.id}
+            onMobileToggle={() => toggleMobileDropdown(menu.id)}
+            desktopActive={activeDropdown === menu.id}
+            onDesktopEnter={() => showDropdown(menu.id)}
+            onDesktopLeave={hideDropdown}
+          >
+            {#each menu.sections as section (section.title)}
               <div class="dropdown-section">
-                <h3 class="menu-header">About the DevRel Foundation</h3>
+                <h3 class="menu-header">{section.title}</h3>
+                <p class="menu-header-description">{section.description}</p>
                 <div class="dropdown-items">
-
-                  <a href="/about/mission" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Mission</span>
-                      <span class="item-description">Our mission and vision.</span>
-                    </div>
-                  </a>
-
-                  <a href="/about/steering-committee" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Steering Committee</span>
-                      <span class="item-description">Meet the leaders guiding the DevRel Foundation.</span>
-                    </div>
-                  </a>
-
-                  <a href="/about/working-groups" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Working Groups</span>
-                      <span class="item-description">Working groups to drive sourcing and innovation.</span>
-                    </div>
-                  </a>
-
-                  <a href="/calendar" onclick={closeAll} rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">
-                        Community Calendar
-                      </span>
-                      <span class="item-description">Public community events.</span>
-                    </div>
-                  </a>
-
-                  <a href="/contact" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Contact</span>
-                      <span class="item-description">Get in touch with us.</span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>  
-
-              <div class="dropdown-section">
-                <h3 class="menu-header">Foundation Resources</h3>
-                <div class="dropdown-items">
-
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">Charter ↗</span>
-                    </div>
-                  </a>
-
-                  <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">Code of Conduct ↗</span>
-                    </div>
-                  </a>
-
-
+                  {#each section.items as item (item.href)}
+                    <a
+                      href={item.href}
+                      onclick={closeAll}
+                      target={item.target}
+                      rel={item.rel}
+                    >
+                      <div class={item.variant === 'brief' ? 'dropdown-item-brief' : 'dropdown-item'}>
+                        <span class="item-title">
+                          {#if item.icon}
+                            <img
+                              src={menuIcons[item.icon]}
+                              alt={item.iconAlt ?? ''}
+                              class="social-icon"
+                            />
+                          {/if}
+                          {item.title}
+                        </span>
+                      </div>
+                    </a>
+                  {/each}
                 </div>
               </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('learn')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/learn/what-is-devrel" class="nav-link" class:active={activeDropdown === 'learn'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('learn');
-            }
-          }}>Learn</a>
-          <div class="dropdown" class:active={activeDropdown === 'learn'} class:accordion-open={activeAccordion === 'learn'}>
-            <div class="dropdown-content">
-              <div class="dropdown-section">
-                <h3 class="menu-header">Learn About DevRel</h3>
-                <div class="dropdown-items">
-
-                  <a href="/blog" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">DevRel Foundation Blog</span>
-                      <span class="item-description">The latest news and updates.</span>
-                    </div>
-                  </a>
-
-                  <a href="/learn/what-is-devrel" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">What is Developer Relations?</span>
-                      <span class="item-description">Defining this critical role in technology adoption.</span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Community Resources</h3>
-                <div class="dropdown-items">
-
-                  <a href="https://discord.gg/G7CSTKZcuT" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
-                        Discord ↗
-                      </span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-
-
-
-        <!-- 
-        
-
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('community')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/blog" class="nav-link" class:active={activeDropdown === 'community'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('community');
-            }
-          }}>Community</a>
-          <div class="dropdown" class:active={activeDropdown === 'community'} class:accordion-open={activeAccordion === 'community'}>
-            <div class="dropdown-content">
-              <div class="dropdown-section">
-                <h3 class="menu-header">The DevRel Community</h3>
-                <div class="dropdown-items">
-                  <a href="/blog" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Blog</span>
-                      <span class="item-description">News and updates.</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Community Resources</h3>
-                <div class="dropdown-items">
-                  <a href="https://discord.gg/G7CSTKZcuT" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={DiscordIcon} alt="Join us on Discord" class="social-icon" />
-                        Discord ↗
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        -->
-
-	
-
-
-        <li class="nav-item dropdown-container" 
-            onmouseenter={() => !isMobile && showDropdown('projects')} 
-            onmouseleave={() => !isMobile && hideDropdown()}>
-          <a href="/projects" class="nav-link" class:active={activeDropdown === 'projects'} onclick={(e) => {
-            if (isMobile) {
-              e.preventDefault();
-              toggleAccordion('projects');
-            }
-          }}>Projects</a>
-          <div class="dropdown" class:active={activeDropdown === 'projects'} class:accordion-open={activeAccordion === 'projects'}>
-            <div class="dropdown-content">
-              <div class="dropdown-section">
-                <h3 class="menu-header">Get Involved</h3>
-                <div class="dropdown-items">
-                  <a href="/projects" onclick={closeAll}>
-                    <div class="dropdown-item">
-                      <span class="item-title">Explore Projects</span>
-                      <span class="item-description">Find open-data, frameworks, and guides to support your program.</span>
-                    </div>
-                  </a>
-                  <a href="/join-us" onclick={closeAll} rel="noopener noreferrer">
-                    <div class="dropdown-item">
-                      <span class="item-title">Contribute</span>
-                      <span class="item-description">Join the 400+ professionals who want to see DevRel thrive.
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="dropdown-section">
-                <h3 class="menu-header">Project Resources</h3>
-                <div class="dropdown-items">
-                  <a href="https://github.com/devrel-foundation/" onclick={closeAll} target="_blank" rel="noopener noreferrer">
-                    <div class="dropdown-item-brief">
-                      <span class="item-title">
-                        <img src={GitHubIcon} alt="Explore our GitHub" class="social-icon" />
-                        GitHub ↗
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+            {/each}
+          </NavDropdown>
+        {/each}
       </ul>
 
       <div class="cta">
         <CallToActionButton />
       </div>
 
-      
       <button class="theme-toggle" onclick={toggleDarkMode} aria-label="Toggle dark mode">
         {#if isDarkMode}
           <img src={SunLightIcon} alt="Light mode" />
@@ -345,7 +331,7 @@
           <img src={HalfMoonIcon} alt="Dark mode" />
         {/if}
       </button>
-      
+
       <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
         <img src={MenuIcon} alt="Menu" />
       </button>
@@ -354,56 +340,71 @@
 </nav>
 
 <style>
-
-  .cta {
-    margin-left: var(--space-l);
-  }
-
   .nav {
+    --nav-bar-height: 4rem;
     background-color: var(--color-background);
     border-bottom: var(--border-thickness) solid var(--color-background-secondary-2);
     position: sticky;
     top: 0;
     z-index: 1000;
   }
-  
+
+  .nav :global(a) {
+    text-decoration: none;
+  }
+
+  .nav-backdrop {
+    position: fixed;
+    top: var(--nav-bar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: default;
+    background: color-mix(in srgb, var(--color-text) 12%, transparent);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 0;
+  }
+
   .nav-container {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-m);
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 4rem;
+    min-height: var(--nav-bar-height);
   }
-  
+
   .nav-brand {
     flex-shrink: 0;
   }
-  
+
   .nav-brand a {
     color: var(--color-text);
     text-decoration: none;
     display: flex;
     align-items: center;
   }
-  
+
   .nav-brand a:hover {
     opacity: 0.8;
   }
-  
+
   .logo-symbol {
     height: 3rem;
     width: auto;
   }
-  
+
   .brand-text {
     display: flex;
     flex-direction: column;
     margin-left: var(--space-xs);
     line-height: 1;
   }
-  
+
   .devrel-text {
     font-family: var(--font-headings);
     font-weight: 800;
@@ -411,7 +412,7 @@
     color: var(--color-logo-text);
     text-transform: uppercase;
   }
-  
+
   .foundation-text {
     font-family: var(--font-headings);
     font-weight: 300;
@@ -419,26 +420,31 @@
     color: var(--color-logo-text);
     text-transform: uppercase;
   }
-  
+
   @media (max-width: 480px) {
     .brand-text {
       margin-left: var(--space-2xs);
     }
-    
+
     .devrel-text {
       font-size: 0.75rem;
     }
-    
+
     .foundation-text {
       font-size: 0.625rem;
     }
   }
-  
+
   .nav-menu-container {
     display: flex;
     align-items: center;
   }
-  
+
+  .cta {
+    margin-left: var(--space-s);
+  }
+
+  /* Mobile: collapsible full-width menu */
   .nav-menu {
     position: absolute;
     top: 100%;
@@ -457,267 +463,232 @@
     visibility: hidden;
     transition: all 0.3s ease;
   }
-  
+
   .nav-menu.open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-  
-  .nav-menu li {
+
+  @media (max-width: 768px) {
+    .nav-menu.open {
+      max-height: calc(100dvh - var(--nav-bar-height));
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  .nav-menu :global(li) {
     width: 100%;
   }
-  
-  .nav-menu a {
+
+  .nav-menu :global(li) > :global(.nav-link) {
     color: var(--color-text);
     text-decoration: none;
     transition: color 0.2s ease;
     display: block;
-    padding: var(--space-s) 0;
-    border-bottom: 1px solid var(--color-background-secondary-1);
+    padding: var(--space-xs) 0;
+    border-bottom: none;
     white-space: nowrap;
   }
-  
-  .nav-menu a:last-child {
-    border-bottom: none;
+
+  @media (max-width: 768px) {
+    .nav-menu :global(li) > :global(.nav-link) {
+      border-bottom: var(--border-thickness) solid var(--color-background-secondary-1);
+    }
+
+    .nav-menu :global(li:last-child) > :global(.nav-link) {
+      border-bottom: none;
+    }
   }
-  
-  .nav-menu a:hover {
+
+  .nav-menu :global(li) > :global(.nav-link:hover) {
     color: var(--color-link);
     background-color: var(--color-background-secondary-1);
   }
 
-  .nav-link {
-    position: relative;
-    transition: all 0.2s ease;
-  }
-
-  .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background-color: var(--color-mint);
-    border-radius: 2px;
-  }
-
-  .dropdown-container {
-    position: relative;
-  }
-  
-  .dropdown {
-    position: fixed;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    background: var(--color-background);
-    border-top: 3px solid var(--color-mint-dark);
-    border-bottom: 1px solid var(--color-mint-dark);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 999;
-  }
-  
-  .dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .dropdown-content {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    padding: var(--space-l);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-  }
-  
-  .dropdown-section h3 {
-    margin: 0 0 var(--space-m) 0;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  .nav-menu .dropdown-items a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding-block: var(--space-3xs);
+    padding-inline: 0;
     border-bottom: none;
-    padding-bottom: 0;
-  }
-  
-  .dropdown-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-  
-  .dropdown-item {
-    font-size: 1.5rem;
-    padding: var(--space-3xs);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3xs);
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
-  .dropdown-item-brief {
-    padding: calc(var(--space-4xs) / 32);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-
-  .dropdown-items a:has(.dropdown-item-brief):hover {
+  .nav-menu .dropdown-items a:hover {
+    color: var(--color-link);
     background-color: transparent;
   }
 
-  .menu-header {
-    font-size: 0.7rem;
-    font-weight: 200;
-    color: var(--color-background-secondary-2);
-    margin-bottom: var(--space-s);
-  }
-  
-  .item-title {
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: var(--color-text);
-    font-size: 1rem;
+  .menu-toggle {
     display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    white-space: nowrap;
-  }
-  
-  .item-description {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    line-height: 1.4;
+    margin-left: var(--space-xs);
+    margin-right: var(--space-xs);
   }
 
-  .social-icon {
-    width: 1rem;
-    height: 1rem;
-    filter: var(--icon-filter);
-    flex-shrink: 0;
-  }
-  
   .theme-toggle,
   .menu-toggle {
     background: none;
     border: none;
     padding: var(--space-xs);
     cursor: pointer;
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     transition: background-color 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .theme-toggle:hover,
   .menu-toggle:hover {
     background-color: var(--color-background-secondary-1);
   }
-  
+
   .theme-toggle img,
   .menu-toggle img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--step-1);
+    height: var(--step-1);
     filter: var(--icon-filter);
   }
-  
-  .menu-toggle {
-    display: flex;
-    margin-left: var(--space-xs);
-    margin-right: var(--space-xs);
+
+  /* Mobile: compact accordion dropdown content */
+  .dropdown-section {
+    margin: 0;
   }
-  
+
+  .menu-header {
+    display: block;
+    margin: var(--space-m) 0 var(--space-3xs) 0;
+    padding: 0;
+    border-bottom: none;
+    font-size: var(--step--2);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dropdown-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .dropdown-item,
+  .dropdown-item-brief {
+    font-size: var(--step-0);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .dropdown-items a:has(.dropdown-item-brief):hover {
+    background-color: transparent;
+  }
+
+  .menu-header-description {
+    font-size: var(--step--1);
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+    margin: 0 0 var(--space-2xs) 0;
+  }
+
+  .item-title {
+    font-weight: 800;
+    color: var(--color-text);
+    font-size: var(--step-0);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding-block: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .social-icon {
+    width: var(--step-0);
+    height: var(--step-0);
+    filter: var(--icon-filter);
+    flex-shrink: 0;
+  }
+
   @media (min-width: 769px) {
-    .nav-menu {
+    .cta {
+      margin-left: var(--space-l);
+    }
+
+    .nav-menu,
+    .nav-menu.open {
       position: static;
+      flex-direction: row;
+      align-items: center;
       background: none;
       border: none;
-      flex-direction: row;
       gap: var(--space-m);
       padding: 0;
       transform: none;
       opacity: 1;
       visibility: visible;
+      max-height: none;
+      overflow: visible;
     }
-    
-    .nav-menu li {
+
+    .nav-menu :global(li) {
       width: auto;
     }
-    
-    .nav-menu a {
+
+    .nav-menu :global(li) > :global(.nav-link) {
       display: inline;
       padding: var(--space-xs) var(--space-xs);
-      border-bottom: none;
       border-radius: var(--radius-s);
     }
-    
+
     .menu-toggle {
       display: none;
     }
-  }
-  
-  @media (max-width: 768px) {
-    .nav-link.active::after {
-      display: none;
-    }
-    .nav-menu.open { 
-      max-height:calc(100dvh - 4rem);
-      overflow-y:auto;
-      -webkit-overflow-scrolling:touch;
-    }
-    .dropdown {
-      position: static;
-      opacity: 0;
-      visibility: hidden;
-      height: 0;
-      overflow: hidden;
-      transform: none;
-      box-shadow: none;
-      border: none;
-      border-top: none;
-      background: var(--color-background-secondary-1);
+
+    .dropdown-section + .dropdown-section {
       margin-top: 0;
-      transition: all 0.3s ease;
     }
 
-    .dropdown.accordion-open {
-      opacity: 1;
-      visibility: visible;
-      height: auto;
-      margin-top: var(--space-xs);
+    .menu-header {
+      margin-top: 0;
+      margin-bottom: var(--space-3xs);
+      font-size: var(--step--1);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    
-    .dropdown-content {
-      padding: var(--space-s);
-      grid-template-columns: 1fr;
-      gap: 0;
+
+    .dropdown-items {
+      gap: var(--space-2xs);
     }
-    
-  @media (max-width: 768px) {
-  .dropdown-section:not(:first-child) {
-    display: block;
+
+    .dropdown-item {
+      font-size: var(--step-1);
+      padding: var(--space-3xs);
+      gap: var(--space-3xs);
+    }
+
+    .dropdown-item-brief {
+      padding: var(--space-3xs);
+      gap: var(--space-2xs);
+    }
+
+    .menu-header-description {
+      line-height: 1.4;
+      margin-bottom: var(--space-s);
+    }
+
+    .item-title {
+      padding-block: 0;
+      line-height: inherit;
+    }
   }
-
-  .item-description {
-    display: block;
-  }
-
-  .menu-header {
-    display: block;
-  }
-}
-
-
-
-  }
-
 </style>

@@ -28,7 +28,7 @@
       type="text"
       {placeholder}
       {value}
-      on:input={handleInput}
+      oninput={handleInput}
       class="search-field"
     />
     <SearchIcon />
@@ -36,7 +36,7 @@
       <button
         type="button"
         class="clear-button"
-        on:click={clearInput}
+        onclick={clearInput}
         aria-label="Clear search"
       >
         ✕
@@ -65,8 +65,8 @@
   }
 
   .search-wrapper:focus-within {
-    outline: 2px solid var(--color-mint);
-    border-color: var(--color-mint);
+    outline: 2px solid var(--color-accent-green);
+    border-color: var(--color-accent-green);
   }
 
   .search-field {
@@ -91,13 +91,13 @@
     font-weight: bold;
     font-size: 1.1em;
     padding: 2px;
-    border-radius: 3px;
+    border-radius: var(--radius-pill);
     transition: background-color 0.15s, color 0.15s;
     margin-left: var(--space-xs);
   }
 
   .clear-button:hover {
     background-color: var(--color-background-secondary-2);
-    color: var(--color-mint);
+    color: var(--color-accent-green);
   }
 </style>

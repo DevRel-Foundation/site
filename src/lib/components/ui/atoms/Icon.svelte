@@ -5,12 +5,12 @@
   export let label = '';
   export let href = '';
   export let icon = '';
-  export let enclosed = '';
+  export let enclosed = false;
 
 </script>
 
 
-{#if enclosed === "True"}
+{#if enclosed}
 	<IconEnclosed {alt} {label} {href} {icon} />
 {:else}
 
@@ -28,7 +28,7 @@
 	.social-icon {
 		width: 1rem;
 		height: 1rem;
-		fill: currentColor; /* inherit */
+		fill: currentColor;
 		filter: var(--icon-filter);
 		display: inline;
 		vertical-align: middle;
@@ -36,7 +36,7 @@
 	}
 
 	.social-link {
-		color: inherit; /* match parent */
+		color: inherit;
 		text-decoration: none;
 	}
 

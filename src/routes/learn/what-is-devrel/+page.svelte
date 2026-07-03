@@ -1,34 +1,8 @@
-<script>
-  const endorsers = [
-    "Jayson DeLancey",
-    "Wesley Faulkner",
-    "Stacey Kruczek",
-    "Jonathan LeBlanc",
-	  "Aditya Oberai",
-    "Phil Leggetter",
-	  "Ana Jimenez Santamaria",
-    "Katie Miller"
-  ];
-
-  // Sort names alphabetically by last name
-  const sortedEndorsers = endorsers.sort((a, b) => {
-    const lastNameA = a.split(' ').pop();
-    const lastNameB = b.split(' ').pop();
-    return lastNameA.localeCompare(lastNameB);
-  });
-
-  // Split into 3 columns
-  const columns = [[], [], []];
-  sortedEndorsers.forEach((name, index) => {
-    columns[index % 3].push(name);
-  });
-</script>
-
 <svelte:head>
 	<title>What is Developer Relations | About | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
 	<section class="section">
 		<h1>What is Developer Relations?</h1>
 
@@ -37,11 +11,11 @@
 		</p>
 
 
-    <div class="pillars-grid">
+    <div class="u-grid u-grid-auto-fit-sm pillars-grid">
       <div class="pillar-circle">Advocacy</div>
-      <div class="pillar-circle">Community Engagement</div>
+      <div class="pillar-circle">Community engagement</div>
       <div class="pillar-circle">Education</div>
-      <div class="pillar-circle">Technical Support</div>
+      <div class="pillar-circle">Technical support</div>
     </div>
 
 
@@ -50,27 +24,7 @@
 	<p>
 		Definitions on this page are a synthesis of the collective knowledge and experiences of the Developer Relations community.
 	</p>
-
-    <div class="section-divider"></div>
-
-	<!--
-    <p>
-      The DevRel Foundation definitions are endorsed by a growing list of professionals in the field to align on the core principles and practices of Developer Relations. This is a living document, and we welcome contributions to future iterations.
-    </p>
-
-
-		<div class="endorsements-grid">
-			{#each columns as column}
-				<div class="endorsement-column">
-					{#each column as name}
-						<div class="endorsement-item">{name}</div>
-					{/each}
-				</div>
-			{/each}
-		</div>
-	
-	-->
-
+  
     <div class="contribute-button-container">
       <a href="/join-us" class="contribute-button">
         Contribute to or endorse these definitions →
@@ -94,7 +48,7 @@
     background-color: var(--color-background-secondary-1);
     color: var(--color-link);
     padding: var(--space-xs) var(--space-m);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     font-weight: 600;
     text-decoration: none;
     transition: background-color 0.2s ease;
@@ -112,17 +66,12 @@
   }
 
   .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--space-m);
-    margin-top: var(--space-m);
-    margin-bottom: var(--space-m);
-    justify-items: center;
+    margin-block: var(--space-m);
   }
 
   .pillar-circle {
     background-color: var(--color-background-secondary-1);
-    border: 2px solid var(--color-mint);
+    border: 2px solid var(--color-accent-green);
     color: var(--color-text);
     border-radius: 50%;
     width: 140px;
@@ -141,42 +90,9 @@
 
   .pillar-circle:hover {
     box-shadow: 0 0 20px rgba(115, 207, 181, 0.6), 0 12px 30px rgba(0, 0, 0, 0.3);
-    border-color: var(--color-mint-dark);
+    border-color: var(--color-forest);
     transform: translateY(-6px);
   }
 
-  .endorsements-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-s);
-    margin-top: var(--space-s);
-  }
-
-  .endorsement-column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4xs);
-  }
-
-  .endorsement-item {
-    text-align: center;
-    font-size: var(--step-0);
-    color: var(--color-text);
-    padding: var(--space-4xs) 0;
-  }
-
-	.section-divider {
-		width: 100%;
-		height: 3px;
-		background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
-		margin: var(--space-s) var(--space-xs);
-		border-radius: var(--radius-s);
-	}
-
-  @media (max-width: 768px) {
-    .endorsements-grid {
-      grid-template-columns: 1fr;
-    }
-  }
 
 </style>

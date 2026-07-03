@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "npm run sync-authors && vite dev",
+		"dev": "vite dev",
 		"build": "npm run sync-authors && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -34,9 +34,11 @@
 		"vite": "^6.2.6"
 	},
 	"dependencies": {
-		"iconoir": "^7.11.0",
+		"bits-ui": "^2.18.1",
+		"dompurify": "^3.4.5",
 		"gray-matter": "^4.0.3",
-		"posthog-js": "^1.258.5",
-		"ical.js": "^2.2.0"
+		"ical.js": "^2.2.0",
+		"iconoir": "^7.11.0",
+		"posthog-js": "^1.258.5"
 	}
 }

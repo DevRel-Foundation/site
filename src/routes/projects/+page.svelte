@@ -1,40 +1,52 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
+	import ActionCard from '$lib/components/ui/molecules/ActionCard.svelte';
+	import { CtaButton } from '$lib/components/ui/primitives';
+
+	type ProjectStatus = 'sandbox' | 'incubation' | 'graduated';
+	type ProjectFilter = 'all' | ProjectStatus;
+
+	interface Project {
+		title: string;
+		description: string;
+		status: ProjectStatus;
+		learnMoreUrl: string;
+	}
 	
 	function handleJoinClick() {
 		goto('/join-us');
 	}
 
-	const projects = [
+	const projects: Project[] = [
 		{
-			title: "Tools Catalog",
-			description: "Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done.",
-			status: "incubation",
-			learnMoreUrl: "/projects/tools-catalog"
+			title: 'Tools catalog',
+			description: 'Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done.',
+			status: 'incubation',
+			learnMoreUrl: '/projects/tools-catalog'
 		},
 		{
-			title: "Persona Library",
-			description: "Reference collection for the study and standardization of developer personas. Aims to offer pragmatic advice for use in day-to-day go-to-market strategies.",
-			status: "incubation",
-			learnMoreUrl: "https://github.com/devrel-foundation/persona-library"
+			title: 'Persona library',
+			description: 'Reference collection for the study and standardization of developer personas. Aims to offer pragmatic advice for use in day-to-day go-to-market strategies.',
+			status: 'incubation',
+			learnMoreUrl: 'https://github.com/devrel-foundation/persona-library'
 		},
 		{
-			title: "Events Directory",
-			description: "Directory of developer events, conferences, and meetups to engage with community strategies.",
-			status: "sandbox",
-			learnMoreUrl: "https://github.com/devrel-foundation/events-directory"
+			title: 'Events directory',
+			description: 'Directory of developer events, conferences, and meetups to engage with community strategies.',
+			status: 'sandbox',
+			learnMoreUrl: 'https://github.com/devrel-foundation/events-directory'
 		},
 		{
-			title: "Metrics Index",
-			description: "Index of metrics and KPIs for measuring the performance and impact of DevRel initiatives.",
-			status: "sandbox",
-			learnMoreUrl: "https://github.com/devrel-foundation/metrics-index"
+			title: 'Metrics index',
+			description: 'Index of metrics and KPIs for measuring the performance and impact of DevRel initiatives.',
+			status: 'sandbox',
+			learnMoreUrl: 'https://github.com/devrel-foundation/metrics-index'
 		},
 		{
-			title: "DevRel Maturity Model",
-			description: "Framework for assessing the maturity of the organization and structure in executing DevRel tactics and programs.",
-			status: "sandbox",
-			learnMoreUrl: "https://github.com/devrel-foundation/devrel-maturity-model"
+			title: 'DevRel maturity model',
+			description: 'Framework for assessing the maturity of the organization and structure in executing DevRel tactics and programs.',
+			status: 'sandbox',
+			learnMoreUrl: 'https://github.com/devrel-foundation/devrel-maturity-model'
 		}
 	];
 
@@ -42,18 +54,16 @@
 	let searchTerm = '';
 	
 	$: filteredProjects = projects.filter(project => {
-		// Filter by status
 		const statusMatch = selectedFilter === 'all' || project.status === selectedFilter;
 		
-		// Filter by search term
-		const searchMatch = !searchTerm || 
+		const searchMatch = !searchTerm ||
 			project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			project.description.toLowerCase().includes(searchTerm.toLowerCase());
 		
 		return statusMatch && searchMatch;
 	});
 
-	function setFilter(filter) {
+	function setFilter(filter: ProjectFilter) {
 		selectedFilter = filter;
 	}
 </script>
@@ -62,37 +72,37 @@
 	<title>Projects | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
 	<section>
 		<h1>Projects</h1>
 		<p>
 			<strong>Projects are the output of the Developer Relations Foundation working group initiatives to source and innovate on best practices.</strong> These open-source initiatives gather knowledge, open-data, and other resources that advance the effectiveness of Developer Relations activities and tactics.
 		</p>
 
-		<h2>Explore</h2>
+		<h2>Explore projects</h2>
 		<div class="filter-controls">
 			<div class="filter-menu">
 				<button 
-					class="filter-btn {selectedFilter === 'all' ? 'active' : ''}"
-					on:click={() => setFilter('all')}
+					class="category-link {selectedFilter === 'all' ? 'active' : ''}"
+					onclick={() => setFilter('all')}
 				>
-					All Projects
+					All projects
 				</button>
 				<button 
-					class="filter-btn {selectedFilter === 'sandbox' ? 'active' : ''}"
-					on:click={() => setFilter('sandbox')}
+					class="category-link {selectedFilter === 'sandbox' ? 'active' : ''}"
+					onclick={() => setFilter('sandbox')}
 				>
 					Sandbox
 				</button>
 				<button 
-					class="filter-btn {selectedFilter === 'incubation' ? 'active' : ''}"
-					on:click={() => setFilter('incubation')}
+					class="category-link {selectedFilter === 'incubation' ? 'active' : ''}"
+					onclick={() => setFilter('incubation')}
 				>
-					Incubation
+					Incubating
 				</button>
 				<button 
-					class="filter-btn {selectedFilter === 'graduated' ? 'active' : ''}"
-					on:click={() => setFilter('graduated')}
+					class="category-link {selectedFilter === 'graduated' ? 'active' : ''}"
+					onclick={() => setFilter('graduated')}
 				>
 					Graduated
 				</button>
@@ -108,7 +118,7 @@
 						type="text" 
 						placeholder="Find project..." 
 						bind:value={searchTerm}
-						class="search-input"
+						class="category-search"
 					/>
 				</div>
 			</div>
@@ -129,21 +139,21 @@
 			{/if}
 		</div>
 
-		<div class="projects-grid">
-			{#each filteredProjects as project}
-				<div class="project-card">
-					<h3>{project.title}</h3>
-					<p class="description">{project.description}</p>
-					{#if project.learnMoreUrl.startsWith('http')}
-						<button class="cta" on:click={() => window.open(project.learnMoreUrl, '_blank')}>
-							Learn more →
-						</button>
-					{:else}
-						<button class="cta" on:click={() => goto(project.learnMoreUrl)}>
-							Learn more →
-						</button>
-					{/if}
-				</div>
+		<div class="u-grid u-grid-auto-fill projects-grid">
+			{#each filteredProjects as project (project.title)}
+				<ActionCard
+					title={project.title}
+					description={project.description}
+					descriptionClamp={true}
+					ctaLabel="Learn more →"
+					onclick={() => {
+						if (project.learnMoreUrl.startsWith('http')) {
+							window.open(project.learnMoreUrl, '_blank');
+						} else {
+							goto(project.learnMoreUrl);
+						}
+					}}
+				/>
 			{:else}
 				<div class="no-projects">
 					<p>
@@ -162,7 +172,7 @@
 			{/each}
 		</div>
 
-		<h2>Contributing</h2>
+		<h2>Contributing to projects</h2>
 
 		<p>
 			The value of open-source projects comes from the collaborative ideation that happens when gathering professionals of varied backgrounds and experiences with common goals.
@@ -172,7 +182,7 @@
 			To propose new projects or give feedback, attend a working group call, and start the conversation.
 		</p>
 
-		<button class="cta" on:click={handleJoinClick}>Join Us</button>
+		<CtaButton onclick={handleJoinClick}>Join us</CtaButton>
 
 	</section>
 </div>
@@ -186,44 +196,6 @@
 		margin-bottom: var(--space-s);
 	}
 
-	.cta {
-		margin: 0;
-		padding: 0.75em;
-		padding-left: 3em;;
-		padding-right: 3em;;
-		background: var(--color-button-background);
-		border: none;
-		cursor: pointer;
-		border-radius: 4px;
-		font-weight: 500;
-		transition: all 0.2s ease;
-		color: var(--color-button-text);
-		display: block;
-	}
-
-	.cta:hover {
-		background-color: var(--color-button-background);
-		transform: translateY(-1px);
-		color: var(--color-button-text);
-		text-decoration: underline;
-	}
-
-	.cta:focus {
-		outline: 2px solid var(--color-button-background);
-		outline-offset: 2px;
-	}
-
-	.cta:active {
-		transform: translateY(0);
-		background-color: var(--color-button-background);
-	}
-
-	.cta:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-		transform: none;
-	}
-
 	.filter-controls {
 		display: flex;
 		justify-content: space-between;
@@ -235,7 +207,7 @@
 
 	.filter-menu {
 		display: flex;
-		gap: 1rem;
+		gap: var(--space-s);
 		flex-wrap: wrap;
 	}
 
@@ -251,7 +223,7 @@
 
 	.search-icon {
 		position: absolute;
-		left: 0.75rem;
+		left: var(--space-s);
 		width: 1rem;
 		height: 1rem;
 		color: var(--color-background-secondary-2-dark);
@@ -259,51 +231,13 @@
 		z-index: 1;
 	}
 
-	.search-input {
-		padding: 0.5rem 1rem 0.5rem 2.5rem;
-		border: 2px solid var(--color-accent-text);
-		border-radius: 4px;
-		font-size: 1rem;
-		min-width: 200px;
-		transition: border-color 0.2s ease;
-	}
-
-	.search-input:focus {
-		outline: none;
-		border-color: var(--color-background-secondary-2-dark);
+	:global(body.dark-mode) .search-input-wrapper .search-icon,
+	:global(html.dark-mode) .search-input-wrapper .search-icon {
+		color: var(--color-text-dark);
 	}
 
 	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: var(--space-l);
 		margin-top: var(--space-m);
-	}
-
-	.project-card {
-		border: 1px solid var(--color-light-gray);
-		border-radius: 8px;
-		padding: var(--space-m);
-		background-color: var(--color-background-secondary-1);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		transition: box-shadow 0.2s ease, transform 0.2s ease;
-	}
-
-	.project-card:hover {
-		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-		background-color: var(--color-background-secondary-1);
-		transform: translateY(-2px);
-	}
-
-	.project-card h3 {
-		margin: 0 0 var(--space-s) 0;
-		color: var(--color-dark);
-	}
-
-	.project-card p {
-		margin: 0 0 var(--space-m) 0;
-		color: var(--color-gray);
-		line-height: 1.5;
 	}
 
 	.no-projects {
@@ -316,44 +250,6 @@
 
 	.no-projects p {
 		margin: 0;
-	}
-
-	.filter-btn {
-		padding: 0.5rem 1rem;
-		border: 2px solid var(--color-accent-text);
-		background: transparent;
-		color: var(--color-background-secondary-2-dark);
-		cursor: pointer;
-		border-radius: 4px;
-		font-weight: 500;
-		transition: all 0.2s ease;
-	}
-
-	.filter-btn:hover:not(.active) {
-		background-color: var(--color-background-secondary-2-dark);
-		color: var(--color-background);
-	}
-
-	.filter-btn.active {
-		background-color: var(--color-accent-text) !important;
-		color: var(--color-mint-dark) !important;
-	}
-
-	.filter-btn:not(.active) {
-		background: transparent;
-		color: var(--color-background-secondary-2-dark);
-	}
-
-	.description {
-		font-size: var(--step-0);
-		color: var(--color-gray);
-		margin-bottom: var(--space-m);
-		height: calc(4 * 1.5em);
-		line-height: 1.5;
-		overflow: hidden;
-		display: -webkit-box;
-		-webkit-line-clamp: 4;
-		-webkit-box-orient: vertical;
 	}
 
 </style>

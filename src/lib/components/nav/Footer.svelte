@@ -3,17 +3,18 @@
   import LinkedInIcon from 'iconoir/icons/regular/linkedin.svg';
   import GitHubIcon from 'iconoir/icons/regular/github.svg';
   import MailIcon from 'iconoir/icons/regular/mail.svg';
+  import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
 </script>
 
 <footer>
-  <div class="footer-content">
+  <div class="layout-section u-grid u-grid-footer footer-content">
 
     
     <div class="footer-column">
       <h2>About</h2>
       <a href="/about/mission">About DevRel Foundation</a>
       <a href="/about/steering-committee">Steering Committee</a>
-      <a href="/about/working-groups">Working Groups</a>
+      <a href="/about/working-groups">Working groups</a>
       <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" rel="noopener noreferrer">Charter ↗</a>
     </div>
     
@@ -21,18 +22,18 @@
       <h2>Resources</h2>
       <a href="/blog">Blog</a>
       <a href="/projects">Projects</a>
-      <a href="/brand">Brand Guide</a>
+      <a href="/brand">Brand guide</a>
     </div>
 
     <div class="footer-column">
       <h2>Legal</h2>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Use</a>
+      <a href="/privacy">Privacy policy</a>
+      <a href="/terms">Terms of use</a>
       <a href="https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md" target="_blank" rel="noopener noreferrer">Code of Conduct ↗</a>
     </div>
 
     <div class="footer-column">
-      <h2>Find Us</h2>
+      <h2>Find us</h2>
       <div class="social-icons">
         <a href="https://discord.gg/G7CSTKZcuT" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
           <img src={DiscordIcon} alt="Discord" />
@@ -43,16 +44,18 @@
         <a href="https://github.com/devrel-foundation" target="_blank" rel="noopener noreferrer" aria-label="Follow us on GitHub">
           <img src={GitHubIcon} alt="GitHub" />
         </a>
-        <a href="https://lists.dev-rel.org/g/community" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to Community Group">
+        <a href="https://lists.dev-rel.org/g/community" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to community group">
           <img src={MailIcon} alt="Mail" />
         </a>
       </div>
+
+      <EditThisPage variant="footer" />
     </div>
 
   </div>
   
   
-  <div class="legal-notice">
+  <div class="layout-section legal-notice">
     <hr />
     <p>
       Copyright © 2025 The Linux Foundation® .
@@ -73,15 +76,11 @@
 <style>
   footer {
     background-color: var(--color-background-secondary-1);
-    padding: var(--space-s) var(--space-m);
+    padding-block: var(--space-s);
     border-top: var(--border-thickness) solid var(--color-background-secondary-1);
   }
 
   .footer-content {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
     gap: var(--space-m);
   }
   
@@ -91,7 +90,7 @@
     margin-bottom: var(--space-s);
   }
   
-  .footer-column a {
+  .footer-column > a {
     color: var(--color-link);
     text-decoration: none;
     font-size: var(--step--1);
@@ -114,28 +113,13 @@
     filter: var(--icon-filter);
   }
   
-  @media (min-width: 481px) {
-    .footer-content {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-m);
-    }
-  }
-  
   @media (min-width: 769px) {
     .footer-content {
-      grid-template-columns: 1fr 1fr;
       gap: var(--space-l);
       justify-items: start;
     }
   }
 
-  @media (min-width: 1024px) {
-    .footer-content {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      justify-items: center;
-    }
-  }
-  
   hr {
     border: none;
     border-top: var(--border-thickness) solid var(--color-background-secondary-1);
@@ -144,9 +128,6 @@
   
   .legal-notice {
     text-align: center;
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-xl);
   }
   
   .legal-notice p {

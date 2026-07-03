@@ -1,14 +1,16 @@
-<script>
-  import { page } from '$app/stores';
+<script lang="ts">
+  import { page } from '$app/state';
   import { browser } from '$app/environment';
   import HomeIcon from 'iconoir/icons/home.svg';
   import MailIcon from 'iconoir/icons/mail.svg';
   import GitHubIcon from 'iconoir/icons/github.svg';
   import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
-  
-  const { status, error } = $props();
-  
-  // Browser debugging info (only available on client side)
+
+  type ExtendedNavigator = Navigator & {
+    connection?: { effectiveType?: string };
+    deviceMemory?: number;
+  };
+
   let debugInfo = $state({
     userAgent: '',
     language: '',
@@ -16,37 +18,42 @@
     screenSize: '',
     viewport: '',
     referrer: '',
-    timestamp: ''
+    timestamp: '',
+    connectionType: '',
+    deviceMemory: '',
+    pageLoadTime: ''
   });
-  
-  // Populate debug info on client side
+
   $effect(() => {
     if (browser) {
+      const nav = navigator as ExtendedNavigator;
       debugInfo = {
-        userAgent: navigator.userAgent,
-        language: navigator.language,
-        cookiesEnabled: navigator.cookieEnabled,
+        userAgent: nav.userAgent,
+        language: nav.language,
+        cookiesEnabled: nav.cookieEnabled,
         screenSize: `${screen.width}x${screen.height}`,
         viewport: `${window.innerWidth}x${window.innerHeight}`,
         referrer: document.referrer || 'Direct navigation',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        connectionType: nav.connection?.effectiveType || 'Unknown',
+        deviceMemory: nav.deviceMemory ? `${nav.deviceMemory}GB` : 'Unknown',
+        pageLoadTime: `${performance.now().toFixed(2)}ms`
       };
     }
   });
-  
-  // Different messages for different error types
-  const getErrorMessage = (status) => {
+
+  const getErrorMessage = (status: number) => {
     switch (status) {
       case 404:
         return {
-          title: "This Page Needs to Grow!",
+          title: "This page needs to grow!",
           subtitle: "404 - Page Not Found",
           message: "Looks like this branch of our site hasn't sprouted yet.",
           suggestion: "Ready to contribute? Maybe you can help us plant something new."
         };
       case 500:
         return {
-          title: "Our Servers Need Some Nurturing",
+          title: "Our servers need some nurturing",
           subtitle: "500 - Internal Server Error",
           message: "Something went wrong on our end.",
           suggestion: "We're working to fix this. Please try again in a moment."
@@ -61,7 +68,7 @@
     }
   };
   
-  const errorInfo = $derived(getErrorMessage(status));
+  const errorInfo = $derived(getErrorMessage(page.status));
 </script>
 
 <svelte:head>
@@ -69,7 +76,7 @@
   <meta name="description" content="Page not found - DevRel Foundation" />
 </svelte:head>
 
-<div class="error-page">
+<div class="container error-page">
   <div class="error-banner">
     <div class="custom-404">
       <div class="digit digit-4">4</div>
@@ -91,75 +98,75 @@
     </div>
   </div>
 
-  <EditThisPage currentPath={$page.url.pathname} />
+  <EditThisPage />
 
   <div class="action-buttons">
 
 
     <a href="/" class="cta-button primary">
       <img src={HomeIcon} alt="Home" class="button-icon" />
-      Visit Homepage
+      Visit homepage
     </a>
     
     <a href="/contact" class="cta-button secondary">
       <img src={MailIcon} alt="Contact" class="button-icon" />
-      Contact Us
+      Contact us
     </a>
 
 
 
     
-    {#if status === 404}
+    {#if page.status === 404}
       <a 
-        href="https://github.com/DevRel-Foundation/site/issues/new?title=Missing%20Page%3A%20{encodeURIComponent($page.url.pathname)}&body=I%20was%20looking%20for%20this%20page%3A%20{encodeURIComponent($page.url.href)}%0A%0AExpected%20to%20find%3A%0A%0APlease%20add%20this%20page%20or%20redirect%20to%20the%20correct%20location." 
+        href="https://github.com/DevRel-Foundation/site/issues/new?title=Missing%20Page%3A%20{encodeURIComponent(page.url.pathname)}&body=I%20was%20looking%20for%20this%20page%3A%20{encodeURIComponent(page.url.href)}%0A%0AExpected%20to%20find%3A%0A%0APlease%20add%20this%20page%20or%20redirect%20to%20the%20correct%20location." 
         class="cta-button secondary"
         target="_blank"
         rel="noopener noreferrer"
       >
         <img src={GitHubIcon} alt="GitHub" class="button-icon" />
-        Request This Page
+        Request this page
       </a>
     {/if}
   </div>
 
   <div class="error-details">
     <details>
-      <summary>Debugging Details</summary>
-      <div class="debug-grid">
+      <summary>Debugging details</summary>
+      <div class="u-grid u-grid-auto-fill debug-grid">
         <div class="debug-section">
-          <h4>Error Information</h4>
-          <p><strong>Status Code:</strong> {status}</p>
-          <p><strong>Path:</strong> {$page.url.pathname}</p>
-          <p><strong>Full URL:</strong> {$page.url.href}</p>
-          {#if error?.message}
-            <p><strong>Error Message:</strong> {error.message}</p>
+          <h4>Error information</h4>
+          <p><strong>Status code:</strong> {page.status}</p>
+          <p><strong>Path:</strong> {page.url.pathname}</p>
+          <p><strong>Full URL:</strong> {page.url.href}</p>
+          {#if page.error?.message}
+            <p><strong>Error message:</strong> {page.error.message}</p>
           {/if}
           <p><strong>Timestamp:</strong> {debugInfo.timestamp}</p>
         </div>
         
         {#if browser}
           <div class="debug-section">
-            <h4>Browser Information</h4>
-            <p><strong>User Agent:</strong> <span class="user-agent">{debugInfo.userAgent}</span></p>
+            <h4>Browser information</h4>
+            <p><strong>User agent:</strong> <span class="user-agent">{debugInfo.userAgent}</span></p>
             <p><strong>Language:</strong> {debugInfo.language}</p>
-            <p><strong>Cookies Enabled:</strong> {debugInfo.cookiesEnabled ? 'Yes' : 'No'}</p>
+            <p><strong>Cookies enabled:</strong> {debugInfo.cookiesEnabled ? 'Yes' : 'No'}</p>
             <p><strong>Referrer:</strong> {debugInfo.referrer}</p>
           </div>
           
           <div class="debug-section">
-            <h4>Display Information</h4>
-            <p><strong>Screen Size:</strong> {debugInfo.screenSize}</p>
-            <p><strong>Viewport Size:</strong> {debugInfo.viewport}</p>
-            <p><strong>Device Pixel Ratio:</strong> {window.devicePixelRatio || 'Unknown'}</p>
-            <p><strong>Color Scheme:</strong> {window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light'}</p>
+            <h4>Display information</h4>
+            <p><strong>Screen size:</strong> {debugInfo.screenSize}</p>
+            <p><strong>Viewport size:</strong> {debugInfo.viewport}</p>
+            <p><strong>Device pixel ratio:</strong> {window.devicePixelRatio || 'Unknown'}</p>
+            <p><strong>Color scheme:</strong> {window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light'}</p>
           </div>
           
           <div class="debug-section">
-            <h4>Network & Performance</h4>
-            <p><strong>Connection:</strong> {navigator.connection?.effectiveType || 'Unknown'}</p>
-            <p><strong>Online Status:</strong> {navigator.onLine ? 'Online' : 'Offline'}</p>
-            <p><strong>Page Load Time:</strong> {performance.now().toFixed(2)}ms</p>
-            <p><strong>Memory Usage:</strong> {navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown'}</p>
+            <h4>Network & performance</h4>
+            <p><strong>Connection:</strong> {debugInfo.connectionType}</p>
+            <p><strong>Online status:</strong> {navigator.onLine ? 'Online' : 'Offline'}</p>
+            <p><strong>Page load time:</strong> {debugInfo.pageLoadTime}</p>
+            <p><strong>Memory usage:</strong> {debugInfo.deviceMemory}</p>
           </div>
         {/if}
       </div>
@@ -172,20 +179,22 @@
     min-height: 70vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    padding: var(--space-xl) var(--space-l);
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+    padding-block: var(--space-xl);
   }
 
   .error-banner {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-l);
     margin-bottom: var(--space-2xl);
+  }
+
+  .error-content {
+    width: 100%;
+    max-width: 600px;
   }
 
   .custom-404 {
@@ -208,7 +217,7 @@
   .digit-4 {
     font-size: 10rem;
     color: var(--color-button-background);
-    text-shadow: 0 4px 8px rgba(var(--color-mint-dark-rgb), 0.3);
+    text-shadow: 0 4px 8px rgba(var(--color-forest-rgb), 0.3);
     animation: pulse-4 3s ease-in-out infinite;
   }
 
@@ -274,10 +283,6 @@
     }
   }
 
-  .error-content {
-    max-width: 600px;
-  }
-
   .error-title {
     font-size: var(--step-3);
     color: var(--color-text);
@@ -287,7 +292,7 @@
 
   .error-subtitle {
     font-size: var(--step-1);
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
     margin-bottom: var(--space-m);
     font-weight: 600;
   }
@@ -319,7 +324,7 @@
     align-items: center;
     gap: var(--space-2xs);
     padding: var(--space-s) var(--space-m);
-    border-radius: var(--radius-m);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--step-0);
@@ -332,14 +337,14 @@
   .cta-button.primary {
     background-color: var(--color-button-background);
     color: var(--color-background);
-    border-color: var(--color-mint-dark);
+    border-color: var(--color-forest);
   }
 
   .cta-button.primary:hover {
-    background-color: color-mix(in srgb, var(--color-mint-dark) 60%, white 40%);
-    border-color: color-mix(in srgb, var(--color-mint-dark) 80%, white 20%);
+    background-color: color-mix(in srgb, var(--color-forest) 60%, white 40%);
+    border-color: color-mix(in srgb, var(--color-forest) 80%, white 20%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--color-mint-dark-rgb), 0.3);
+    box-shadow: 0 4px 12px rgba(var(--color-forest-rgb), 0.3);
   }
 
   .cta-button.secondary {
@@ -352,7 +357,7 @@
     background-color: var(--color-button-background);
     color: var(--color-background);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--color-mint-dark-rgb), 0.2);
+    box-shadow: 0 4px 12px rgba(var(--color-forest-rgb), 0.2);
   }
 
   .button-icon {
@@ -371,7 +376,6 @@
 
   .error-details {
     width: 100%;
-    max-width: 800px;
     margin-top: var(--space-l);
   }
 
@@ -391,13 +395,10 @@
   }
 
   .error-details summary:hover {
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
   }
 
   .debug-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-m);
     margin-top: var(--space-s);
   }
 
@@ -409,7 +410,7 @@
 
   .debug-section h4 {
     margin: 0 0 var(--space-xs) 0;
-    color: var(--color-mint-dark);
+    color: var(--color-forest);
     font-size: var(--step--1);
     font-weight: 600;
     border-bottom: 1px solid var(--color-background-secondary-1);

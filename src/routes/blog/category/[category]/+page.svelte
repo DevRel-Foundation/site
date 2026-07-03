@@ -1,14 +1,15 @@
-<script>
+<script lang="ts">
   import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
   import ContributorCallout from '$lib/components/page/blog/ContributorCallout.svelte';
   
   const { data } = $props();
   const { posts, category, categoryDescriptions, categories } = data;
+  const descriptions = categoryDescriptions as Record<string, string>;
   
-  let hoveredCategory = $state(null);
+  let hoveredCategory = $state<string | null>(null);
   
-  function handleCategoryHover(cat) {
+  function handleCategoryHover(cat: string) {
     hoveredCategory = cat;
   }
   
@@ -16,50 +17,46 @@
     hoveredCategory = null;
   }
   
-  // Get current description based on hovered category or current category
+  const categoryDescription = $derived(descriptions[category] ?? descriptions.all);
+
   const currentDescription = $derived(
-    hoveredCategory 
-      ? (categoryDescriptions[hoveredCategory] || categoryDescriptions.all)
-      : (categoryDescriptions[category] || categoryDescriptions.all)
+    hoveredCategory
+      ? descriptions[hoveredCategory] ?? descriptions.all
+      : categoryDescription
   );
 </script>
 
 <svelte:head>
   <title>{category.toUpperCase()} | Blog | DevRel Foundation</title>
-  <meta name="description" content="{categoryDescriptions[category] || categoryDescriptions.all}" />
+  <meta name="description" content={categoryDescription} />
   
-  <!-- RSS Feed -->
   <link rel="alternate" type="application/rss+xml" title="DevRel Foundation Blog - {category.charAt(0).toUpperCase() + category.slice(1)}" href="/blog/category/{category}/feed.xml" />
   
-  <!-- SEO Optimizations -->
   <meta name="keywords" content="DevRel, Developer Relations, {category}, {posts.map(p => p.tags).flat().join(', ')}" />
   <meta name="author" content="DevRel Foundation" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href={page.url.href} />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:url" content={page.url.href} />
   <meta property="og:title" content="{category.toUpperCase()} Posts | DevRel Foundation Blog" />
-  <meta property="og:description" content="{categoryDescriptions[category] || categoryDescriptions.all}" />
+  <meta property="og:description" content={categoryDescription} />
   <meta property="og:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="DevRel Foundation" />
   
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={page.url.href} />
   <meta name="twitter:title" content="{category.toUpperCase()} Posts | DevRel Foundation Blog" />
-  <meta name="twitter:description" content="{categoryDescriptions[category] || categoryDescriptions.all}" />
+  <meta name="twitter:description" content={categoryDescription} />
   <meta name="twitter:image" content="{page.url.origin}/images/devrel-foundation-logo.png" />
   
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
     {JSON.stringify({
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": `${category.toUpperCase()} Posts | DevRel Foundation`,
-      "description": categoryDescriptions[category] || categoryDescriptions.all,
+      "description": categoryDescription,
       "url": page.url.href,
       "isPartOf": {
         "@type": "Blog",
@@ -70,7 +67,7 @@
 </svelte:head>
 
 {#key category}
-  <div class="container container-content">
+  <div class="container">
     <header class="category-header">
       <h1>{category}</h1>
       <p>{currentDescription}</p>
@@ -83,7 +80,7 @@
            onmouseleave={handleCategoryLeave}>
           all 
         </a>
-        {#each categories as cat}
+        {#each categories as cat (cat)}
           <a href="/blog/category/{cat}" 
              class="category-link {cat === category ? 'active' : ''}"
              data-sveltekit-reload
@@ -116,7 +113,6 @@
 
 <style>
   .category-header {
-    text-align: center;
     margin-bottom: var(--space-l);
   }
   
@@ -138,27 +134,10 @@
   
   .category-nav {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--space-s);
     flex-wrap: wrap;
     align-items: center;
-  }
-  
-  .category-link {
-    padding: var(--space-2xs) var(--space-s);
-    border: 1px solid var(--color-background-secondary-2-dark);
-    border-radius: var(--radius-s);
-    text-decoration: none;
-    color: var(--color-background-secondary-2-dark);
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-  }
-  
-  .category-link:hover,
-  .category-link.active {
-    background-color: var(--color-background-secondary-2-dark);
-    color: var(--color-background);
-    border-color: var(--color-background-secondary-2-dark);
   }
   
   .rss-link {

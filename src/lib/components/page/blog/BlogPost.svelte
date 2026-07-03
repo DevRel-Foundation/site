@@ -14,12 +14,17 @@
     category = 'all',
     tags = [],
     readingTime = '',
-    slug,
     image,
     children
   } = $props();
   
-  let showShareMenu = $state(false);
+  type AuthorRecord = {
+    name?: string;
+    avatar?: string;
+    url?: string;
+    bio?: string;
+  };
+
   let githubUsers = $state<Array<{
     type: 'github' | 'text';
     username?: string;
@@ -49,16 +54,11 @@
     '@katiewaz1977'
   ];
   
-  // Check if author is a foundation representative
   const isFoundationRepresentative = $derived(
     author && foundationRepresentatives.some(rep => 
       author.toLowerCase().includes(rep.toLowerCase())
     )
   );
-  
-  function toggleShareMenu() {
-    showShareMenu = !showShareMenu;
-  }
   
   function copyLink() {
     navigator.clipboard.writeText($page.url.href);
@@ -86,7 +86,6 @@
   }
   
   function shareBluesky() {
-    const url = encodeURIComponent($page.url.href);
     const text = encodeURIComponent(`${title}\n\n${excerpt || ''}\n\n${$page.url.href}`);
     window.open(`https://bsky.app/intent/compose?text=${text}`, '_blank');
   }
@@ -96,12 +95,10 @@
     navigator.clipboard.writeText(url);
     copiedAnchorId = headingId;
     
-    // Clear any existing timeout
     if (anchorCopyTimeout) {
       clearTimeout(anchorCopyTimeout);
     }
     
-    // Clear the confirmation after 2 seconds
     anchorCopyTimeout = setTimeout(() => {
       copiedAnchorId = null;
     }, 2000);
@@ -110,13 +107,12 @@
   function generateId(text: string): string {
     return text
       .toLowerCase()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
       .trim();
   }
 
-  // Parse authors and load from authors.json
   onMount(() => {
     let handleScroll: () => void;
     
@@ -124,12 +120,11 @@
       if (author) {
         const authors = author.split(',').map((a: string) => a.trim());
         
-        // Load authors data from API endpoint
-        let authorsData = {};
+        let authorsData: Record<string, AuthorRecord> = {};
         try {
           const response = await fetch('/api/authors');
           if (response.ok) {
-            authorsData = await response.json();
+            authorsData = (await response.json()) as Record<string, AuthorRecord>;
           }
         } catch (error) {
           console.error('Failed to load authors data:', error);
@@ -151,7 +146,6 @@
                 bio: authorData.bio
               };
             } else {
-              // Fallback for authors not in authors.json
               return { 
                 type: 'github' as const, 
                 username, 
@@ -168,7 +162,6 @@
         githubUsers = await Promise.all(userPromises);
       }
 
-      // Add anchor links to headings and collect H2s for TOC
       const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3');
       const h2Headings: Array<{ id: string; text: string }> = [];
       
@@ -176,17 +169,14 @@
         const text = heading.textContent || '';
         const id = generateId(text);
         
-        // Set the heading ID if it doesn't already have one
         if (!heading.id) {
           heading.id = id;
         }
         
-        // Collect H2 headings for table of contents
         if (heading.tagName === 'H2') {
           h2Headings.push({ id, text });
         }
         
-        // Create anchor link container
         const anchorContainer = document.createElement('span');
         anchorContainer.className = 'heading-anchor';
         anchorContainer.innerHTML = `
@@ -197,13 +187,11 @@
           <span class="copy-confirmation" style="opacity: 0;">Copied!</span>
         `;
         
-        // Add click handler
         anchorContainer.addEventListener('click', (e) => {
           e.preventDefault();
           copyAnchorLink(heading.id);
           
-          // Show confirmation for this specific anchor
-          const confirmation = anchorContainer.querySelector('.copy-confirmation');
+          const confirmation = anchorContainer.querySelector<HTMLElement>('.copy-confirmation');
           if (confirmation) {
             confirmation.style.opacity = '1';
             setTimeout(() => {
@@ -212,15 +200,12 @@
           }
         });
         
-        // Append the anchor to the heading
         heading.appendChild(anchorContainer);
       });
       
-      // Update table of contents
       tocHeadings = h2Headings;
     }
 
-    // Set up scroll listener for active heading tracking
     let scrollTimeout: number;
     handleScroll = () => {
       if (scrollTimeout) {
@@ -231,16 +216,13 @@
         const headingElements = document.querySelectorAll('.post-content h2');
         let currentActiveId = null;
         
-        // Find the heading that's currently in view
         headingElements.forEach((heading) => {
           const rect = heading.getBoundingClientRect();
-          // Consider a heading active if it's within the top 30% of the viewport
           if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
             currentActiveId = heading.id;
           }
         });
         
-        // If no heading is in the top 30%, use the last heading that passed the top
         if (!currentActiveId) {
           let lastPassedId = null;
           headingElements.forEach((heading) => {
@@ -253,16 +235,14 @@
         }
         
         activeHeadingId = currentActiveId;
-      }, 10); // Small throttle to improve performance
+      }, 10);
     };
 
     initializeComponent().then(() => {
-      // Add scroll listener after initialization
       window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial check
+      handleScroll();
     });
 
-    // Cleanup function
     return () => {
       if (anchorCopyTimeout) {
         clearTimeout(anchorCopyTimeout);
@@ -271,7 +251,6 @@
     };
   });
 
-  // Effect to update copy confirmations
   $effect(() => {
     const confirmations = document.querySelectorAll('.copy-confirmation');
     confirmations.forEach((confirmation, index) => {
@@ -290,7 +269,7 @@
 <div class="blog-header-wrapper">
   <header class="blog-header">
     <div class="post-meta">
-      <a href="/blog" class="blog-title">BLOG</a> | 
+      <a href="/blog" class="blog-title">Blog</a> | 
       <a href="/blog/category/{category}" class="category-tag">{category}</a>
       <time datetime={date}>{new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { 
         year: 'numeric', 
@@ -349,7 +328,7 @@
               <div class="authors">
                 <div class="author-line">
 
-                  {#each githubUsers as user, index}
+                  {#each githubUsers as user, index (user.type === 'github' ? user.username : user.name)}
                     {#if user.type === 'github'}
                       <a href="/blog/author/{user.username}" class="github-author">
                         {#if user.avatar}
@@ -366,10 +345,10 @@
                   {/each}
                 </div>
                 
-                {#each githubUsers as user}
+                {#each githubUsers as user (user.type === 'github' ? user.username : user.name)}
                   {#if user.type === 'github' && user.bio}
                     <div class="author-bio">
-                      {#each user.bio.split('\n') as bioLine}
+                      {#each user.bio.split('\n') as bioLine, i (i)}
                         <p class="author-bio">{bioLine}</p>
                       {/each}
                     </div>
@@ -403,7 +382,7 @@
           <div class="sidebar-toc">
             <h4 class="sidebar-title">Contents</h4>
             <nav class="toc-nav">
-              {#each tocHeadings as heading}
+              {#each tocHeadings as heading (heading.id)}
                 <a 
                   href="#{heading.id}" 
                   class="toc-link"
@@ -420,7 +399,7 @@
           <div class="sidebar-tags">
             <h4 class="sidebar-title">Topics</h4>
             <div class="meta-tags">
-              {#each tags as tag}
+              {#each tags as tag (tag)}
                 <a href="/blog/tag/{tag}"><span class="meta-tag">#{tag}</span></a>
               {/each}
             </div>
@@ -458,7 +437,7 @@
     aspect-ratio: 16/9;
     overflow: hidden;
 
-    border: 1px solid var(--color-mint);
+    border: 1px solid var(--color-accent-green);
     border-radius: 8px;
   }
   
@@ -565,9 +544,9 @@
   
   .category-tag {
     background-color: var(--color-background-secondary-2-dark);
-    color: var(--color-background);
+    color: var(--color-light-cream);
     padding: var(--space-3xs) var(--space-2xs);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--step--2);
@@ -641,7 +620,7 @@
   .share-icon-button {
     background: none;
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     padding: var(--space-2xs);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -719,13 +698,12 @@
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   }
   
-  /* JSON syntax highlighting */
   .post-content :global(pre code .token.property) {
     color: var(--color-accent-text-dark);
   }
   
   .post-content :global(pre code .token.string) {
-    color: #fbbf24; /* yellow-400 */
+    color: var(--color-syntax-string);
   }
   
   .post-content :global(pre code .token.number),
@@ -1013,7 +991,6 @@
     z-index: 10;
   }
 
-  /* Heading anchor styles */
   .post-content :global(h1),
   .post-content :global(h2), 
   .post-content :global(h3) {

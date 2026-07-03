@@ -15,7 +15,7 @@
 </script>
 
 <InfoPage 
-  title="Tools Catalog" 
+  title="Tools catalog" 
   description="Collection of physical and digital tools useful to evaluate in DevRel programs. Assets are categorized by use case and jobs to be done."
   breadcrumbs={[{label:"Projects", link: "/projects"}]}
    >
@@ -27,19 +27,19 @@
 
         <div>&nbsp;</div>
 
-        <OpenInBrowser enclosed="True" label="Explore the Tools Catalog" href="/projects/tools-catalog/explore" alt="Open Tools Catalog" />
+        <OpenInBrowser enclosed={true} label="Explore the tools catalog" href="/projects/tools-catalog/explore" alt="Open tools catalog" />
 
         <br/>
 
-        <ChatBubbleIcon enclosed="True" label="Discuss the Project" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog" alt="Discuss the Tools Catalog" />
+        <ChatBubbleIcon enclosed={true} label="Discuss the project" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog" alt="Discuss the tools catalog" />
 
         <br/>
 
-        <Check enclosed="True" label="Open Issues" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/issues?q=is%3Aissue%20state%3Aopen%20label%3Aresource%3Atools" alt="See Open Issues" />
+        <Check enclosed={true} label="Open issues" href="https://github.com/DevRel-Foundation/wg-resource-aggregation/issues?q=is%3Aissue%20state%3Aopen%20label%3Aresource%3Atools" alt="See open issues" />
 
         <br/>
 
-        <SourceCodeIcon enclosed="True" label="View Source" href="https://github.com/devrel-foundation/tools-catalog" alt="View Project Source" />
+        <SourceCodeIcon enclosed={true} label="View source" href="https://github.com/devrel-foundation/tools-catalog" alt="View project source" />
 
 
 
@@ -50,7 +50,7 @@
   </div>
 
 
-  <BlogCarousel posts={relatedPosts()} title="More About the Tools Catalog" />
+  <BlogCarousel posts={relatedPosts()} title="More about the tools catalog" />
 
 </InfoPage>
 

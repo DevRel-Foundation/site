@@ -4,81 +4,128 @@
   import { browser } from '$app/environment';
 
   import ToolsFilter from '$lib/components/ui/organisms/projects/ToolsFilter.svelte';
-	import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
-  import SectionDivider from '$lib/components/ui/atoms/SectionDivider.svelte';
+  import InfoPage from '$lib/components/ui/organisms/InfoPage.svelte';
   import ToolsExplorer from '$lib/components/ui/organisms/projects/ToolsExplorer.svelte';
 
-  let filters: { category: string | null; label: string | null; outcome: string | null; search: string } = { category: null, label: null, outcome: null, search: '' };
+  type FacetOption = { label: string; value: string };
 
-  // Uses /api/tools-catalog to initialize page data
-  export let data: any;
-  $: allTools = data?.tools || {};
-  $: labels = data?.labels || [];
-  $: categories = data?.categories || [];
-  $: outcomes = data?.outcomes || [];
-  $: motivations = data?.motivations || [];
-  $: situations = data?.situations || [];
+  type CatalogTool = {
+    id?: string;
+    name: string;
+    description?: string;
+    [key: string]: unknown;
+  };
 
-  // Tool filtering parameters may be passed in query string
-  $: selectedLabel = page.url.searchParams.get('label');
-  $: selectedCategory = page.url.searchParams.get('category');
-  $: selectedOutcome = page.url.searchParams.get('outcome');
-  $: selectedTool = page.url.searchParams.get('tool');
-  $: searchText = page.url.searchParams.get('search') || '';
-  $: selectedToolData = selectedTool ? allTools[selectedTool] : null;
+  type PageData = {
+    labels: FacetOption[];
+    categories: FacetOption[];
+    outcomes: FacetOption[];
+    count: number;
+    tools: Record<string, CatalogTool>;
+  };
 
-  // Get filter descriptions for selected items
-  $: filteredTools = allTools;
-  $: categoryDescription = '';
-  $: outcomeDescription = '';
+  type ToolFilters = {
+    category: string | null;
+    label: string | null;
+    outcome: string | null;
+    search: string;
+  };
 
-  // Load selected tool from URL parameter
-  $: if (selectedTool) {
-      handleToolSelect(selectedTool);
-  } else if (!selectedTool) {
-    // Select first item from the filtered list by default
-    selectedTool = Object.keys(filteredTools)[0];
-    handleToolSelect(selectedTool);
-  }
+  type CategoryResponse = {
+    categories?: {
+      description?: string;
+      tools?: string[];
+    };
+  };
 
-  // Update selected tool after a filter change
-  $: {
-    const toolKeys = Object.keys(filteredTools);
-    if (toolKeys.length > 0 && (!selectedTool || !filteredTools[selectedTool])) {
-      selectedTool = toolKeys[0];
-      handleToolSelect(selectedTool);
+  type LabelResponse = {
+    result?: {
+      tools?: string[];
+    };
+  };
+
+  type OutcomeResponse = {
+    outcomes?: {
+      description?: string;
+      tools?: string[];
+    };
+  };
+
+  let { data }: { data: PageData } = $props();
+
+  const allTools = $derived(data?.tools ?? {});
+  const labels = $derived(data?.labels ?? []);
+  const categories = $derived(data?.categories ?? []);
+  const outcomes = $derived(data?.outcomes ?? []);
+
+  let filters = $state<ToolFilters>({
+    category: null,
+    label: null,
+    outcome: null,
+    search: ''
+  });
+  let appliedFilterResult = $state<Record<string, CatalogTool> | null>(null);
+  let categoryDescription = $state('');
+  let outcomeDescription = $state('');
+  let selectedCategory = $state<string | null>(null);
+  let selectedLabel = $state<string | null>(null);
+  let selectedOutcome = $state<string | null>(null);
+  let selectedTool = $state<string | null>(null);
+  let selectedToolData = $state<CatalogTool | null>(null);
+  let searchText = $state('');
+
+  const filteredTools = $derived(appliedFilterResult ?? allTools);
+
+  $effect(() => {
+    if (allTools) {
+      appliedFilterResult = null;
     }
-  }
+  });
 
-  /**
-   * Get description and tool list for a category
-   * @param category
-   */
-  async function fetchCategory(category: string): Promise<any> {
-    if (!browser) return {}; // should only be a user triggered action, not ssr
+  $effect(() => {
+    selectedLabel = page.url.searchParams.get('label');
+    selectedCategory = page.url.searchParams.get('category');
+    selectedOutcome = page.url.searchParams.get('outcome');
+    selectedTool = page.url.searchParams.get('tool');
+    searchText = page.url.searchParams.get('search') || '';
+  });
+
+  $effect(() => {
+    const tools = filteredTools;
+    const toolParam = page.url.searchParams.get('tool');
+    const toolKeys = Object.keys(tools);
+
+    if (toolKeys.length === 0) {
+      selectedToolData = null;
+      return;
+    }
+
+    const targetTool = toolParam && tools[toolParam] ? toolParam : toolKeys[0];
+
+    if (selectedTool !== targetTool || selectedToolData?.id !== targetTool) {
+      void loadToolDetails(targetTool);
+    }
+  });
+
+  async function fetchCategory(category: string): Promise<CategoryResponse> {
+    if (!browser) return {};
     try {
       const res = await fetch(`/api/tools-catalog/categories/${encodeURIComponent(category)}`);
       if (res.ok) {
-        const json = await res.json();
-        return json;
+        return await res.json();
       }
     } catch (err) {
       console.error('Error fetching category description:', err);
     }
     return {};
-  } 
+  }
 
-  /**
-   * Get tool list for a label
-   * @param outcome
-   */
-  async function fetchLabel(label: string): Promise<any> {
-    if (!browser) return {}; // should only be a user triggered action, not ssr
+  async function fetchLabel(label: string): Promise<LabelResponse> {
+    if (!browser) return {};
     try {
       const res = await fetch(`/api/tools-catalog/labels/${encodeURIComponent(label)}`);
       if (res.ok) {
-        const json = await res.json();
-        return json;
+        return await res.json();
       }
     } catch (err) {
       console.error('Error fetching label description:', err);
@@ -86,38 +133,29 @@
     return {};
   }
 
-
-  /**
-   * Get description and tool list for an outcome
-   * @param outcome
-   */
-  async function fetchOutcome(outcome: string): Promise<any> {
-    if (!browser) return {}; // should only be a user triggered action, not ssr
+  async function fetchOutcome(outcome: string): Promise<OutcomeResponse> {
+    if (!browser) return {};
     try {
       const res = await fetch(`/api/tools-catalog/outcomes/${encodeURIComponent(outcome)}`);
       if (res.ok) {
-        const json = await res.json();
-        return json;
+        return await res.json();
       }
     } catch (err) {
       console.error('Error fetching outcome description:', err);
     }
-    return '';
+    return {};
   }
 
-  /**
-   * Filter tools by search text (name or description)
-   * @param tools - Object of tools to filter
-   * @param searchText - Text to search for
-   * @returns Filtered tools object
-   */
-  function filterToolsBySearch(tools: any, searchText: string): any {
-    if (!searchText || searchText.trim() === '') {
+  function filterToolsBySearch(
+    tools: Record<string, CatalogTool>,
+    query: string
+  ): Record<string, CatalogTool> {
+    if (!query || query.trim() === '') {
       return tools;
     }
 
-    const searchLower = searchText.toLowerCase().trim();
-    const filteredEntries = Object.entries(tools).filter(([id, tool]: [string, any]) => {
+    const searchLower = query.toLowerCase().trim();
+    const filteredEntries = Object.entries(tools).filter(([, tool]) => {
       const name = (tool.name || '').toLowerCase();
       const description = (tool.description || '').toLowerCase();
       return name.includes(searchLower) || description.includes(searchLower);
@@ -126,248 +164,133 @@
     return Object.fromEntries(filteredEntries);
   }
 
+  function filterToolsByIds(
+    tools: Record<string, CatalogTool>,
+    ids: string[]
+  ): Record<string, CatalogTool> {
+    return Object.fromEntries(
+      ids.filter((id) => Object.hasOwn(tools, id)).map((id) => [id, tools[id]])
+    );
+  }
 
-
-   /**
-   * Handles changes to the filter selections.
-   * @param newFilters
-   */
-  async function handleFilterChange(newFilters: any) {
+  async function handleFilterChange(newFilters: ToolFilters) {
     filters = newFilters;
 
-    // Add any selections to query params
     const params = new URLSearchParams();
-
-    // Start from all tools for progressive filtering
     let nextTools = allTools;
 
-    // Category filter
     if (typeof filters.category === 'string' && filters.category.trim() !== '') {
       selectedCategory = filters.category;
       params.set('category', filters.category);
 
-      let category = await fetchCategory(filters.category);
+      const category = await fetchCategory(filters.category);
       categoryDescription = category.categories?.description || '';
 
       if (Array.isArray(category.categories?.tools)) {
-        nextTools = Object.fromEntries(
-          category.categories.tools
-            .filter((id: any) => nextTools.hasOwnProperty(id))
-            .map((id: any) => [id, nextTools[id]])
-        );
+        nextTools = filterToolsByIds(nextTools, category.categories.tools);
       }
     } else {
       categoryDescription = '';
       selectedCategory = null;
     }
 
-    // Label filter
     if (typeof filters.label === 'string' && filters.label.trim() !== '') {
       selectedLabel = filters.label;
       params.set('label', filters.label);
 
-      let label = await fetchLabel(filters.label);
+      const label = await fetchLabel(filters.label);
       if (Array.isArray(label.result?.tools)) {
-        nextTools = Object.fromEntries(
-          label.result.tools
-            .filter((id: any) => nextTools.hasOwnProperty(id))
-            .map((id: any) => [id, nextTools[id]])
-        );
+        nextTools = filterToolsByIds(nextTools, label.result.tools);
       }
     } else {
       selectedLabel = null;
     }
 
-    // Outcome filter
     if (typeof filters.outcome === 'string' && filters.outcome.trim() !== '') {
       selectedOutcome = filters.outcome;
       params.set('outcome', filters.outcome);
 
-      let outcome = await fetchOutcome(filters.outcome);
+      const outcome = await fetchOutcome(filters.outcome);
       outcomeDescription = outcome.outcomes?.description || '';
 
       if (Array.isArray(outcome.outcomes?.tools)) {
-        nextTools = Object.fromEntries(
-          outcome.outcomes.tools
-            .filter((id: any) => nextTools.hasOwnProperty(id))
-            .map((id: any) => [id, nextTools[id]])
-        );
+        nextTools = filterToolsByIds(nextTools, outcome.outcomes.tools);
       }
     } else {
       outcomeDescription = '';
       selectedOutcome = null;
     }
 
-    // Search filter
     if (typeof filters.search === 'string' && filters.search.trim() !== '') {
       params.set('search', filters.search);
       nextTools = filterToolsBySearch(nextTools, filters.search);
     }
 
-    // Update filteredTools once, after all filters
-    filteredTools = nextTools;
+    appliedFilterResult = nextTools;
 
-    // Update the URL for filters
     if (browser) {
       goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
     }
   }
 
+  async function loadToolDetails(tool: string) {
+    selectedTool = tool;
 
-  /**
-   * Handles changes to the filter selections.
-   * @param newFilters
-   */
-  async function handleFilterChangeOLD(newFilters: any) {
-    const isCategoryReset = filters.category && !newFilters.category;
-    const isLabelReset = filters.label && !newFilters.label;
-    const isOutcomeReset = filters.outcome && !newFilters.outcome;
-    const isSearchReset = filters.search && !newFilters.search;
+    if (!browser) return;
 
-    // If any filter was reset, start from all tools
-    if (isCategoryReset || isLabelReset || isOutcomeReset || isSearchReset) { 
-      filteredTools = allTools;
-    }
-
-    filters = newFilters;
-
-    // Add any selections to query params
-    const params = new URLSearchParams();
-    
-    // Check for a category filter
-    if (typeof filters.category === 'string' && filters.category.trim() !== '') {
-      // Update state for selected category and description
-      selectedCategory = filters.category;
-      params.set('category', filters.category);
-
-      // Filter tools for the category
-      let category = await fetchCategory(filters.category);
-      categoryDescription = category.categories.description || '';
-
-      filteredTools = Object.fromEntries(
-        category.categories.tools
-          .filter((id: any) => filteredTools.hasOwnProperty(id))
-          .map((id: any) => [id, filteredTools[id]])
-      );
-    } else {
-      // Reset category state to clear selection
-      categoryDescription = '';
-      selectedCategory = null;
-    }
-
-    // Check for a label filter
-    if (typeof filters.label === 'string' && filters.label.trim() !== '') {
-      // Update state for selected label (don't have descriptions)
-      selectedLabel = filters.label;
-      params.set('label', filters.label);
-
-      // Filter tools for the label
-      let label = {result: []};
-      label = await fetchLabel(filters.label);
-      filteredTools = Object.fromEntries(
-        label.result?.tools
-          .filter((id: any) => filteredTools.hasOwnProperty(id))
-          .map((id: any) => [id, filteredTools[id]])
-      );
-    } else {
-      // Reset label state to clear selection
-      selectedLabel = null;
-    }
-
-    // Check for an outcome filter
-    if (typeof filters.outcome === 'string' && filters.outcome.trim() !== '') {
-      // Update state for selected outcome and description
-      selectedOutcome = filters.outcome;
-      params.set('outcome', filters.outcome);
-
-      // Filter tools for the outcome
-      let outcome = await fetchOutcome(filters.outcome);
-      outcomeDescription = outcome.outcomes.description || '';
-
-      filteredTools = Object.fromEntries(
-        outcome.outcomes.tools
-          .filter((id: any) => filteredTools.hasOwnProperty(id))
-          .map((id: any) => [id, filteredTools[id]])
-      );
-    } else {
-      // Reset category state to clear selection
-      outcomeDescription = '';
-      selectedOutcome = null;
-    }
-
-    // Apply search filter to the already filtered tools
-    if (typeof filters.search === 'string' && filters.search.trim() !== '') {
-      params.set('search', filters.search);
-      filteredTools = filterToolsBySearch(filteredTools, filters.search);
-    }
-
-    // Update the URL for filters
-    if (browser) {
-      goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
-    }
-  }
-
-  /**
-   * Handle when a specific tool is selected, fetch and display its details.
-   * @param tool
-   */
-  async function handleToolSelect(tool: string) {
-    selectedTool = tool
     try {
-      // Fetch detailed tool data
-      if (!browser) return {}; // should only be a user triggered action, not ssr
       const response = await fetch(`/api/tools-catalog/tools/${tool}`);
       if (response.ok) {
-        const data = await response.json();
-        data.result.id = tool;
-        selectedToolData = data.result;
-        
-        // Update URL to include selected tool
+        const json = await response.json();
+        selectedToolData = { ...json.result, id: tool };
+
         const params = new URLSearchParams(page.url.searchParams);
-        params.set('tool', tool);
-        goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
+        if (params.get('tool') !== tool) {
+          params.set('tool', tool);
+          goto(`?${params.toString()}`, { replaceState: true, keepFocus: true, noScroll: true });
+        }
       }
     } catch (err) {
       console.error('Error loading tool details:', err);
     }
   }
+
+  function handleToolSelect(tool: string) {
+    void loadToolDetails(tool);
+  }
 </script>
 
-<InfoPage title="Tools Catalog Explorer" 
-  description="Browse and filter tools in the DevRel Foundation Tools Catalog by job category and label. Find the right tools for your Developer Relations needs."
-  breadcrumbs={[{label:"About | Tools Catalog", link: "/projects/tools-catalog"}]}
+<InfoPage
+  title="Tools catalog explorer"
+  description="Browse and filter tools in the DevRel Foundation tools catalog by job category and label. Find the right tools for your Developer Relations needs."
+  breadcrumbs={[{ label: 'Tools catalog', link: '/projects/tools-catalog' }]}
   wide={true}
-  >
+>
+  <ToolsFilter
+    {categories}
+    {labels}
+    {outcomes}
+    {selectedLabel}
+    {selectedCategory}
+    {selectedOutcome}
+    {searchText}
+    onFilterChange={handleFilterChange}
+  />
 
-    <SectionDivider />
+  <p class="description">
+    <b>{categoryDescription ? `Job category: ` : ''}</b>{categoryDescription}
+  </p>
+  <p class="description"><b>{outcomeDescription ? `Outcome: ` : ''}</b>{outcomeDescription}</p>
 
-    <ToolsFilter
-      {categories}
-      {labels}
-      {outcomes}
-      {selectedLabel}
-      {selectedCategory}
-      {selectedOutcome}
-      {searchText}
-      onFilterChange={handleFilterChange}
-    />
+  <p>Matched {Object.keys(filteredTools).length} out of {data.count} devrel tools.</p>
 
-    <p class="description"><b>{categoryDescription ? `Job Category: ` : ''}</b>{categoryDescription}</p>
-    <p class="description"><b>{outcomeDescription ? `Outcome: ` : ''}</b>{outcomeDescription}</p>
-
-    <p>Matched {Object.keys(filteredTools).length} out of {data.count} devrel tools.</p>
-
-    <SectionDivider />
-
-    <ToolsExplorer 
-      tools={filteredTools}
-      {selectedTool}
-      {selectedToolData}
-      onToolSelect={handleToolSelect}
-    />
-
+  <ToolsExplorer
+    tools={filteredTools}
+    {selectedTool}
+    {selectedToolData}
+    onToolSelect={handleToolSelect}
+  />
 </InfoPage>
-
 
 <style>
   .description {

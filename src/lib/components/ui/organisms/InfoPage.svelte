@@ -1,38 +1,59 @@
-<script>
+<script lang="ts">
+  import type { Snippet } from 'svelte';
   import Badge from '$lib/components/ui/molecules/Badge.svelte';
 
-  export let title = '';
-  export let description = '';
-  export let breadcrumbs = []; // array of strings or dictionaries with links
-  export let wide = false;
+  type Breadcrumb = string | { label: string; link?: string };
+
+  interface Props {
+    title?: string;
+    description?: string;
+    breadcrumbs?: string | Breadcrumb[];
+    wide?: boolean;
+    children?: Snippet;
+  }
+
+  let {
+    title = '',
+    description = '',
+    breadcrumbs = [],
+    wide = false,
+    children,
+  }: Props = $props();
+
+  type NormalizedBreadcrumb = { label: string; link?: string };
+
+  const breadcrumbItems = $derived.by((): NormalizedBreadcrumb[] => {
+    if (typeof breadcrumbs === 'string') {
+      return breadcrumbs.split(',').map((label) => ({ label: label.trim() }));
+    }
+
+    return breadcrumbs.map((badge) =>
+      typeof badge === 'string'
+        ? { label: badge }
+        : { label: badge.label, link: badge.link }
+    );
+  });
 </script>
 
 <svelte:head>
   <title>{title} | DevRel Foundation</title>
-  <meta name="description" content={description}>
+  <meta name="description" content={description} />
 </svelte:head>
 
-<div class="container {wide ? 'container-content-wide' : 'container-content'}">
-  {#if typeof breadcrumbs === 'string'}
-    {#each breadcrumbs.split(',') as badge}
-      <Badge label={badge.trim()} />
-    {/each}
-  {:else if Array.isArray(breadcrumbs)}
-    {#each breadcrumbs as badge}
-      <Badge label={badge.label ?? badge} link={badge.link} />
-    {/each}
-  {/if}
+<div class="container {wide ? 'container-content-wide' : ''}">
+  {#each breadcrumbItems as badge (badge.label + (badge.link ?? ''))}
+    <Badge label={badge.label} link={badge.link ?? ''} />
+  {/each}
   <section>
     <h1 class="info-title">{title}</h1>
-    
-    <slot/>
 
+    {@render children?.()}
   </section>
 </div>
 
 <style>
-.info-title {
-  margin-top: var(--space-s); /* or 0, or your preferred small value */
-  margin-bottom: var(--space-l); /* or 0, or your preferred small value */
-}
+  .info-title {
+    margin-top: var(--space-s);
+    margin-bottom: var(--space-l);
+  }
 </style>

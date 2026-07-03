@@ -9,9 +9,9 @@
 <style>
 .badge {
   display: inline-block;
-  background: var(--color-background-secondary-2-dark, #111); /* dark circle */
-  padding: 0.25rem 0.5rem; /* tight pill */
-  color: var(--color-text-dark, #FAFAF0);
+  background: var(--color-background-secondary-2-dark, #2C2B24);
+  padding: 0.25rem 0.5rem;
+  color: var(--color-text-dark, #E9E8E1);
   font-size: var(--step--1);
   font-weight: 600;
   margin-bottom: var(--space-xs);
@@ -22,12 +22,12 @@
   white-space: nowrap;
   vertical-align: middle;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
-  border: 1px solid var(--color-mint-dark);
+  border: 1px solid var(--color-forest);
   cursor: default;
 }
 
 .badge-link {
-  color: var(--color-text-dark, #FAFAF0) !important;
+  color: var(--color-text-dark, #E9E8E1) !important;
   text-decoration: none;
   cursor: pointer;
 }

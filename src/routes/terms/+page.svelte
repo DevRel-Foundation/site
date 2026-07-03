@@ -1,45 +1,45 @@
-<script>
-
+<script lang="ts">
   import CopyIcon from 'iconoir/icons/copy.svg';
 
-  let copiedIndex = null;
-  let copyTimeout;
+  let copiedIndex: number | null = null;
+  let copyTimeout: ReturnType<typeof setTimeout> | undefined;
 
-  function handleCopy(index, event) {
-    // Find the blockquote element
-    const blockquote = event.currentTarget.closest('blockquote');
+  function handleCopy(index: number, event: MouseEvent) {
+    const target = event.currentTarget;
+    if (!(target instanceof HTMLElement)) return;
+
+    const blockquote = target.closest('blockquote');
     if (!blockquote) return;
-    // Get the text content (excluding the icon)
     const text = Array.from(blockquote.childNodes)
-      .filter(node => node.nodeType === Node.TEXT_NODE || node.nodeName !== 'IMG')
-      .map(node => node.textContent)
+      .filter((node) => node.nodeType === Node.TEXT_NODE || node.nodeName !== 'IMG')
+      .map((node) => node.textContent)
       .join(' ')
       .trim();
 
-    navigator.clipboard.writeText(text);
+    void navigator.clipboard.writeText(text);
     copiedIndex = index;
-    clearTimeout(copyTimeout);
-    copyTimeout = setTimeout(() => copiedIndex = null, 1500);
+    if (copyTimeout) clearTimeout(copyTimeout);
+    copyTimeout = setTimeout(() => {
+      copiedIndex = null;
+    }, 1500);
   }
-
-
 </script>
 
 <svelte:head>
-  <title>Terms of Use | DevRel Foundation</title>
-  <meta name="description" content="DevRel Foundation Terms of Use and Licensing" />
+  <title>Terms of use | DevRel Foundation</title>
+  <meta name="description" content="DevRel Foundation terms of use and licensing" />
 </svelte:head>
 
-<div class="container container-content">
+<div class="container">
   <header class="page-header">
-    <h1>Terms of Use</h1>
+    <h1>Terms of use</h1>
     <p class="subtitle">Intellectual property and licensing considerations for DevRel Foundation projects.</p>
   </header>
 
   <div class="content">
 
     <section>
-      <h2>License and Intellectual Property</h2>
+      <h2>License and intellectual property</h2>
       <p>All documentation is made available by the Developer Relations Foundation under the <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer"> Creative Commons Attribution 4.0 International License</a>.</p>
       <p>
         This means that anyone contributing to or using this documentation—including managers, working groups, and users—must follow the terms of this license. In simple terms:
@@ -58,7 +58,9 @@
         <span class="copy-confirm">Copied!</span>
       {/if}
       <blockquote>
-        <img src="{CopyIcon}" alt="Copy Citation" class="copy-icon" on:click={(e) => handleCopy(0,e)} />
+        <button type="button" class="copy-icon-btn" aria-label="Copy citation" onclick={(e) => handleCopy(0, e)}>
+          <img src={CopyIcon} alt="" class="copy-icon" />
+        </button>
         This documentation includes material from the Developer Relations Foundation, available under the 
         <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
           Creative Commons Attribution 4.0 International License
@@ -71,7 +73,9 @@
         <span class="copy-confirm">Copied!</span>
       {/if}
       <blockquote>
-        <img src="{CopyIcon}" alt="Copy Citation" class="copy-icon" on:click={(e) => handleCopy(1,e)} />
+        <button type="button" class="copy-icon-btn" aria-label="Copy citation" onclick={(e) => handleCopy(1, e)}>
+          <img src={CopyIcon} alt="" class="copy-icon" />
+        </button>
         This documentation is adapted from materials originally created by the Developer Relations Foundation, available under the 
         <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
           Creative Commons Attribution 4.0 International License
@@ -80,7 +84,7 @@
     </section>
 
     <section>
-      <h2>Contact Us</h2>
+      <h2>Contact us</h2>
       <p>If you have any questions about these terms and proper use, please contact us:</p>
       <ul>
         <li><strong>Email:</strong> info@dev-rel.org</li>
@@ -174,19 +178,26 @@
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.03);
   }
 
-  .copy-icon {
+  .copy-icon-btn {
     float: right;
     margin-left: var(--space-m);
     margin-top: 0.2em;
     margin-right: 0.2em;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    line-height: 0;
+  }
+
+  .copy-icon {
     width: 1.5em;
     height: 1.5em;
-    cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s;
   }
 
-  .copy-icon:hover {
+  .copy-icon-btn:hover .copy-icon {
     opacity: 1;
   }
 

@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import DOMPurify from 'dompurify';
+  import type { Config } from 'dompurify';
   const { eventId } = $props<{ eventId?: string }>();
   
   interface CalendarEvent {
@@ -17,22 +19,22 @@
   let events = $state<CalendarEvent[]>([]);
   let loading = $state(true);
   let error = $state<string | null>(null);
-  let currentDate = $state(new Date());
   let selectedEvent = $state<CalendarEvent | null>(null);
   let userLocale = $state<string>('');
   let userTimezone = $state<string>('');
 
-  // Copy state
   let copied = $state(false);
   let copyTimeout: number | null = null;
   
-  // Pagination state
   let currentPage = $state(0);
   const eventsPerPage = 10;
+
+  const descriptionSanitizeConfig: Config = {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'li', 'h2', 'h3'],
+    ALLOWED_ATTR: ['href', 'target', 'rel'],
+  };
   
-  // Load events from API
   onMount(async () => {
-    // Detect user's locale and timezone
     userLocale = navigator.language || 'en-US';
     userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     
@@ -50,15 +52,12 @@
       events = data.events || [];
       loading = false;
 
-      // Helper to get simplified ID
       function getSimpleId(id: string) {
         return id.split('@')[0];
       }
 
-      // Use eventId prop if provided
       let initialId = eventId;
       if (!initialId) {
-        // Fallback: try to get from URL (for direct browser navigation)
         const match = window.location.pathname.match(/\/calendar\/event\/([^/]+)/);
         initialId = match ? decodeURIComponent(match[1]) : undefined;
       }
@@ -70,7 +69,6 @@
           return;
         }
       }
-      // Auto-select first event if available
       if (events.length > 0) {
         const filtered = filteredEvents();
         if (filtered.length > 0) {
@@ -84,13 +82,10 @@
     }
   });
   
-
-  // Show all events returned by the API (API already filters for 2 weeks past + future + recurring)
   const filteredEvents = $derived(() => {
     return events || [];
   });
   
-  // Pagination calculations
   const totalPages = $derived(() => Math.ceil(filteredEvents().length / eventsPerPage));
   const paginatedEvents = $derived(() => {
     const start = currentPage * eventsPerPage;
@@ -100,7 +95,6 @@
   
   function goToPage(page: number) {
     currentPage = Math.max(0, Math.min(page, totalPages() - 1));
-    // Auto-select first event on new page
     const paginated = paginatedEvents();
     if (paginated.length > 0) {
       selectEvent(paginated[0]);
@@ -119,7 +113,6 @@
     }
   }
   
-  // Copy the event link to the user's clipboard
   function copyPageUrl() {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
@@ -135,11 +128,10 @@
       });
   }
   
-  function formatEventDate(event: CalendarEvent, year: false) {
+  function formatEventDate(event: CalendarEvent, year = false) {
     const start = new Date(event.start);
     const end = event.end ? new Date(event.end) : null;
     
-    // Use user's locale for formatting, fallback to 'en-US'
     const locale = userLocale || 'en-US';
     
     if (event.allDay) {
@@ -189,9 +181,7 @@
   function parseMarkdown(text: string): string {
     if (!text) return '';
     
-    // Simple markdown parser for basic features
     let html = text
-      // Convert markdown links
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
         if (url.startsWith('http://') || url.startsWith('https://')) {
           return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
@@ -199,7 +189,6 @@
         return `<a href="${url}">${text}</a>`;
       })
       
-      // Convert plain URLs that start with https://
       .replace(/(^|[^"'(>\]])https:\/\/[^\s<>)]+/g, (match, prefix) => {
         const url = match.replace(prefix, '');
         return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer">${url} ↗</a>`;
@@ -214,23 +203,18 @@
       .replace(/^\* (.+)$/gm, '<li>$1</li>')
       .replace(/^- (.+)$/gm, '<li>$1</li>')
       
-      // Convert bold and italic (with word boundaries to be safer)
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|\,|\])/g, '$1<em>$2</em>$3')
+      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|,|\])/g, '$1<em>$2</em>$3')
       
-      // Convert regular headings
       .replace(/^### (.*$)/gm, '<h3>$1</h3>')
       .replace(/^## (.*$)/gm, '<h2>$1</h2>')
       .replace(/^# (.*$)/gm, '<h2>$1</h2>')
       
-      // Convert line breaks to paragraphs
       .split('\n\n')
       .map(paragraph => paragraph.trim())
       .filter(paragraph => paragraph.length > 0)
       .map(paragraph => {
-        // Check if this paragraph contains list items
         if (paragraph.includes('<li>')) {
-          // Wrap consecutive list items in <ul> tags
           return `<ul>${paragraph.replace(/\n/g, '')}</ul>`;
         }
         return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
@@ -239,9 +223,12 @@
       
     return html;
   }
+
+  function renderDescription(text: string): string {
+    return DOMPurify.sanitize(parseMarkdown(text), descriptionSanitizeConfig);
+  }
   
   function selectEvent(event: CalendarEvent) {
-    // If the same event is clicked again, deselect it
     if (selectedEvent === event) {
       selectedEvent = null;
       updateURLWithEvent(null);
@@ -251,17 +238,11 @@
     }
   }
 
-  function deselectEvent() {
-    selectedEvent = null;
-    updateURLWithEvent(null);
-  }
-
   function updateURLWithEvent(event: CalendarEvent | null) {
     if (!event) {
       window.history.replaceState({}, '', '/calendar');
       return;
     }
-    // Use simplified ID for URL
     const simpleId = event.id.split('@')[0];
     const encodedId = encodeURIComponent(simpleId);
     window.history.replaceState({}, '', `/calendar/event/${encodedId}`);
@@ -271,14 +252,21 @@
 
 <div class="calendar-container">
     <div class="calendar-layout">
-        <!-- Left column: Events list -->
         <div class="events-sidebar">
             <div class="sidebar-header">
-                <h2>Recent & Upcoming Events</h2>
+                <h2>Recent & upcoming events</h2>
             </div>
             <div class="events-list">
-                {#if paginatedEvents().length > 0}
-                    {#each paginatedEvents() as event}
+                {#if loading}
+                    <div class="no-events-message">
+                        <p>Loading events...</p>
+                    </div>
+                {:else if error}
+                    <div class="no-events-message">
+                        <p>{error}</p>
+                    </div>
+                {:else if paginatedEvents().length > 0}
+                    {#each paginatedEvents() as event (event.id)}
                         <button 
                             class="event-list-item" 
                             class:selected={selectedEvent === event}
@@ -296,7 +284,6 @@
                 {/if}
             </div>
 
-            <!-- Pagination controls -->
             {#if totalPages() > 1}
                 <div class="pagination">
                     <button 
@@ -332,13 +319,12 @@
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    View Full Calendar and Subscribe
+                    View full calendar and subscribe
                 </a>
             </div>
 
         </div>
 
-        <!-- Right column: Event details -->
         <div class="event-details-panel">
             {#if selectedEvent}
                 <div class="event-item">
@@ -372,14 +358,15 @@
                             </div>
                         {/if}
                         {#if selectedEvent.description}
-                            <div class="event-description">{@html parseMarkdown(selectedEvent.description)}</div>
+                            <!-- eslint-disable-next-line svelte/no-at-html-tags -- HTML sanitized via DOMPurify in renderDescription -->
+                            <div class="event-description">{@html renderDescription(selectedEvent.description)}</div>
                         {/if}
                         {#if selectedEvent.isRecurring}
-                            <div class="event-recurring">🔄 Recurring Event</div>
+                            <div class="event-recurring">🔄 Recurring event</div>
                         {/if}
                         {#if selectedEvent.url}
                             <a href={selectedEvent.url} target="_blank" rel="noopener noreferrer" class="event-link">
-                                View Details →
+                                View details →
                             </a>
                         {/if}
                     </div>
@@ -462,7 +449,7 @@
     text-align: left;
     padding: var(--space-s);
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     background: var(--color-background);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -553,7 +540,7 @@
     line-height: 1.3;
     text-decoration: none;
     border-bottom: 2px solid transparent;
-    background-image: linear-gradient(to right, var(--color-mint-dark), var(--color-mint), rgba(var(--color-mint-rgb, 0, 255, 127), 0.3), transparent);
+    background-image: linear-gradient(to right, var(--color-forest), var(--color-mint), rgba(var(--color-mint-rgb), 0.3), transparent);
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 100% 2px;
@@ -658,7 +645,7 @@
     font-size: var(--step--1);
     padding: var(--space-xs) var(--space-s);
     border: 1px solid var(--color-link);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-pill);
     width: fit-content;
     transition: all 0.2s ease;
   }
@@ -681,7 +668,7 @@
     text-align: left;
     padding: var(--space-s);
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     background: var(--color-background);
     color: var(--color-text);
     cursor: pointer;
@@ -694,7 +681,7 @@
   
   .subscribe-link:hover {
     background: var(--color-background-secondary-1);
-    border-color: var(--color-mint);
+    border-color: var(--color-accent-green);
     text-decoration: none;
   }
   
@@ -721,7 +708,7 @@
     width: 32px;
     height: 32px;
     border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-pill);
     background: var(--color-background);
     color: var(--color-text);
     cursor: pointer;
@@ -732,7 +719,7 @@
   
   .pagination-btn:hover:not(:disabled) {
     background: var(--color-background-secondary-1);
-    border-color: var(--color-mint);
+    border-color: var(--color-accent-green);
   }
   
   .pagination-btn:disabled {
@@ -792,7 +779,7 @@
     top: -2rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-mint-dark);
+    background-color: var(--color-forest);
     color: var(--color-background);
     padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-s);

@@ -1,28 +1,27 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import BlogPost from '$lib/components/page/blog/BlogPost.svelte';
   import { onMount } from 'svelte';
+  import type { Component } from 'svelte';
   
   const { data } = $props();
-  const { post, PostContent } = data;
+  const { post } = data;
   
-  let ContentComponent = $state(null);
+  let ContentComponent = $state<Component | null>(null);
   let loading = $state(true);
   let error = $state(false);
   
   onMount(async () => {
     try {
-      // Get all possible .md files in blog and subfolders
       const modules = import.meta.glob('../../../blog/**/*.md');
-      // Find the matching key
       const match = Object.keys(modules).find(
         (key) =>
-          key.endsWith(`${post.slug}.md`) // matches both flat and nested
+          key.endsWith(`${post.slug}.md`)
       );
       if (!match) throw new Error('Markdown file not found for slug: ' + post.slug);
-      const module = await modules[match]();
+      const mdModule = (await modules[match]()) as { default: Component };
 
-      ContentComponent = module.default;
+      ContentComponent = mdModule.default;
     } catch (err) {
       console.error('Failed to load blog content:', err);
       error = true;
@@ -36,7 +35,6 @@
   <title>{post?.title || 'Blog Post'} | DevRel Foundation</title>
   <meta name="description" content={post?.excerpt || 'DevRel Foundation blog post'} />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content={$page.url.href} />
   <meta property="og:title" content={post?.title || 'Blog Post'} />
@@ -47,12 +45,11 @@
   <meta property="article:published_time" content={post?.date ? `${post.date}T00:00:00Z` : ''} />
   <meta property="article:section" content={post?.category || 'DevRel'} />
   {#if post?.tags}
-    {#each post.tags as tag}
+    {#each post.tags as tag (tag)}
       <meta property="article:tag" content={tag} />
     {/each}
   {/if}
   
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={$page.url.href} />
   <meta name="twitter:title" content={post?.title || 'Blog Post'} />
@@ -67,9 +64,7 @@
   <div class="error">Failed to load blog content</div>
 {:else if ContentComponent}
   <BlogPost {...post}>
-    {#if ContentComponent}
-      <ContentComponent />
-    {/if}
+    <ContentComponent />
   </BlogPost>
 {:else}
   <div class="error">Content not found</div>
@@ -86,6 +81,6 @@
   }
   
   .error {
-    color: var(--color-error, #dc2626);
+    color: var(--color-error-text);
   }
 </style>

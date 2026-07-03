@@ -1,8 +1,7 @@
-<script>
-  // This component renders a call-to-action button and will not change even in dark mode
+<script lang="ts">
   export let href = '/join';
   export let label = 'Join';
-  export let type = 'button';
+  export let type: 'button' | 'reset' | 'submit' = 'button';
 </script>
 
 {#if href}
@@ -18,14 +17,16 @@
 <style>
 .cta {
   background-color: var(--color-mint);
-  color: var(--color-mint-dark);
-  padding: var(--space-xs) var(--space-s);
+  color: var(--color-forest);
+  padding: var(--space-xs) var(--space-m);
   text-decoration: none;
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-pill);
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.2s ease;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast);
   border: none;
   display: flex;
   align-items: center;

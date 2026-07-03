@@ -2,22 +2,28 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import * as env from '$env/dynamic/public';
+  import { env } from '$env/dynamic/public';
 
   import '../reset.css';
   import '../app.css';
   import Nav from '$lib/components/nav/Nav.svelte';
   import Footer from '$lib/components/nav/Footer.svelte';
-  import EditThisPage from '$lib/components/feedback/EditThisPage.svelte';
+  import { MotifDotGrid, MotifOverlappingCircles } from '$lib/components/ui/atoms/motifs';
   import CookieConsent from '$lib/ui/CookieConsent.svelte';
+  import { Tooltip } from 'bits-ui';
   import { writable } from 'svelte/store';
+  import type { PostHog } from 'posthog-js';
 
   let { children } = $props();
-  let posthog: any = null;
+  const isHomepage = $derived($page.url.pathname === '/');
+  const showOverlappingCircles = $derived(
+    !isHomepage && $page.url.pathname !== '/about/steering-committee'
+  );
+  let posthog: PostHog | null = null;
   let gaLoaded = false;
+  const DEFAULT_GA_ID = 'G-Z5ZG34WJP1';
   const showConsent = writable(false);
 
-  // Helper: inject Google Analytics (gtag)
   function injectGA(gaId: string) {
     if (gaLoaded || !browser) return;
     try {
@@ -36,8 +42,6 @@
     }
   }
 
-  // Cookie consent UI is implemented as a Svelte component `CookieConsent`.
-  // showConsent controls whether it's visible.
   function handleAccept() {
     localStorage.setItem('analytics_consent', 'true');
     if (posthog) {
@@ -45,7 +49,7 @@
       posthog.capture('$pageview');
       posthog.capture('cookie_consent_given', { action: 'accept' });
     }
-  const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
+    const gaId = env.PUBLIC_GA_ID || DEFAULT_GA_ID;
     injectGA(gaId);
     showConsent.set(false);
   }
@@ -59,7 +63,6 @@
     showConsent.set(false);
   }
 
-  // Track page changes (only if consent given)
   $effect(() => {
     if (browser && posthog && $page.url) {
       const hasConsent = localStorage.getItem('analytics_consent');
@@ -68,11 +71,10 @@
           $current_url: $page.url.href,
           $pathname: $page.url.pathname,
         });
-        // If GA is loaded, also send a page view
-        if (gaLoaded && (window as any).gtag) {
+        if (gaLoaded && window.gtag) {
           try {
-            (window as any).gtag('event', 'page_view', { page_path: $page.url.pathname });
-          } catch (e) {
+            window.gtag('event', 'page_view', { page_path: $page.url.pathname });
+          } catch {
             // ignore
           }
         }
@@ -80,10 +82,8 @@
     }
   });
 
-  // Single onMount: initialize PostHog and decide whether to show consent banner / inject GA
   onMount(async () => {
     if (!browser) return;
-    // Initialize PostHog library
     try {
       const { default: posthogLib } = await import('posthog-js');
       posthogLib.init(
@@ -99,40 +99,58 @@
         }
       );
       posthog = posthogLib;
-      // Check consent state
       const hasConsent = localStorage.getItem('analytics_consent');
       if (hasConsent === 'true') {
         posthog.opt_in_capturing();
         posthog.capture('$pageview');
-  // initialize GA immediately as consent already given
-  const gaId = (typeof env.PUBLIC_GA_ID !== 'undefined' && env.PUBLIC_GA_ID) ? env.PUBLIC_GA_ID : 'G-Z5ZG34WJP1';
+        const gaId = env.PUBLIC_GA_ID || DEFAULT_GA_ID;
         injectGA(gaId);
       } else if (hasConsent === null) {
-        // Show consent banner for new users
           showConsent.set(true);
       } else {
-        // explicitly rejected or other state: ensure opt-out
-        posthog.opt_out_capturing && posthog.opt_out_capturing();
+        posthog.opt_out_capturing();
       }
       console.log('PostHog initialized with GDPR compliance');
     } catch (e) {
       console.error('Failed to initialize PostHog', e);
-      // Even if posthog fails, still show the banner so user can give/deny GA consent
       const hasConsent = localStorage.getItem('analytics_consent');
         if (hasConsent === null) showConsent.set(true);
     }
   });
 </script>
 
-<Nav />
+<Tooltip.Provider delayDuration={200} skipDelayDuration={300}>
+  <div class="site-chrome">
+    {#if !isHomepage}
+      <MotifDotGrid variant="header" />
+    {/if}
 
-<main class="main">
-  {@render children()}
-</main>
+    <Nav />
 
-{#if $showConsent}
-  <CookieConsent onAccept={handleAccept} onReject={handleReject} />
-{/if}
+    <main class="main">
+      {#if showOverlappingCircles}
+        <MotifOverlappingCircles />
+      {/if}
+      {@render children()}
+    </main>
 
-<Footer />
-<EditThisPage />
+    {#if !isHomepage}
+      <div class="footer-dot-grid-anchor">
+        <MotifDotGrid variant="footer" />
+      </div>
+    {/if}
+
+    <Footer />
+  </div>
+
+  {#if $showConsent}
+    <CookieConsent onAccept={handleAccept} onReject={handleReject} />
+  {/if}
+</Tooltip.Provider>
+
+<style>
+  .footer-dot-grid-anchor {
+    position: relative;
+    height: 0;
+  }
+</style>

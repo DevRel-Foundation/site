@@ -1,7 +1,14 @@
-<script>
-  const { post, href } = $props();
-  
-  function formatDate(dateString) {
+<script lang="ts">
+  type BlogPost = {
+    title: string;
+    date: string;
+    image?: string;
+    excerpt?: string;
+  };
+
+  const { post, href }: { post: BlogPost; href: string } = $props();
+
+  function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -30,7 +37,7 @@
     display: block;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-fast);
   }
 
   .blog-card:hover {
@@ -41,11 +48,11 @@
     width: 100%;
     height: 200px;
     overflow: hidden;
-    border: 1px solid var(--color-mint);
-    border-radius: 8px;
+    border: 1px solid var(--color-accent-green);
+    border-radius: var(--radius-s);
     margin-bottom: var(--space-s);
-    box-shadow: 0 0 0 0 var(--color-mint), 2px 2px 2px 0 var(--color-mint);
-    transition: box-shadow 0.2s;
+    box-shadow: var(--shadow-xs), 2px 2px 2px 0 var(--color-accent-green);
+    transition: box-shadow var(--transition-fast);
   }
 
   .blog-card-image img {

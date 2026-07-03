@@ -1,13 +1,12 @@
 <script>
   import RocketIcon from 'iconoir/icons/rocket.svg';
-
 </script>
 
 <svelte:head>
 	<title>Mission | About | Developer Relations Foundation</title>
 </svelte:head>
 
-<div class="container container-content">
+<div class="container mission-intro">
 	<section class="mission-section">
 		<h1 id="about">Developer Relations Foundation</h1>
 
@@ -20,16 +19,26 @@
 </div>
 
 <section class="devrel-callout">
-	<div class="callout-content">
-		<h2>DevRel: Accelerating Technology Adoption</h2>
-		<p>
-			Developer Relations (DevRel) is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
-		</p>
-		<a href="/learn/what-is-devrel" class="callout-cta">Learn About Developer Relations →</a>
+	<div class="layout-section">
+		<div class="callout-block u-grid u-grid-2 devrel-callout-grid">
+			<div class="callout-text">
+				<h2>Accelerating technology adoption</h2>
+				<p>
+					Developer Relations (DevRel) is the practice of building and nurturing relationships with external and internal teams through community engagement, technical support, education, and advocacy to enable the successful adoption of an organization’s developer products and drive business value.
+				</p>
+				<a href="/learn/what-is-devrel" class="callout-cta">Learn about developer relations →</a>
+			</div>
+			<div class="callout-image-box">
+				<img
+					src="/images/headway-F2KRf_QfCqw-unsplash.jpg"
+					alt="People collaborating at a technology event"
+				/>
+			</div>
+		</div>
 	</div>
 </section>
 
-<div class="container container-content">
+<div class="container">
 	<section class="mission-section">
 		<h2>Vision</h2>
 
@@ -78,30 +87,29 @@
 </div>
 
 <section class="governance-callout">
-<div class="container container-content">
-	<section class="mission-section">
-		<h2>Governance Playbook</h2>
-		<p>
-			The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">Working Groups</a> that focus on sourcing and innovating best practices  through peer-reviewed resources and materials.
-		</p>
-
-		<p>
-			<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our Charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
-		</p>
-	</section>
-</div>
+	<div class="layout-section">
+		<div class="governance-block">
+			<h2>Governance playbook</h2>
+			<p>
+				The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">working groups</a> that focus on sourcing and innovating best practices through peer-reviewed resources and materials.
+			</p>
+			<p>
+				<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.
+			</p>
+		</div>
+	</div>
 </section>
 
-<div class="container container-content">
-	<section class="container-content">
-		<h2>Why Do We Need a DevRel Foundation?</h2>
+<div class="container">
+	<section class="mission-section">
+		<h2>Why do we need a DevRel Foundation?</h2>
 		<p>
 			The major benefit of a foundation is that it promotes participatory governance, preventing any single company from monopolizing a collaborative project. Specifically, a foundation ensures:
 		</p>
 
-		<div class="two-column-layout">
-			<div class="icon-column">
-				<img src="{RocketIcon}" alt="Rocket Icon" class="icon-left" />
+		<div class="u-grid u-grid-icon-text">
+			<div class="u-icon-column">
+				<img src="{RocketIcon}" alt="Rocket Icon" class="u-icon" />
 			</div>
 			<div class="text-column">
 
@@ -130,8 +138,8 @@
 	</section>
 </div>  
 
-<div class="container container-content">
-	<section class="container-content">
+<div class="container">
+	<section class="mission-section">
 		<h2>Why the Linux Foundation?</h2>
 		<p>
 			This collaborative project has been hosted as a community project, with no funding involved. This means taking advantage of the governance structure, project management staff, and back-end resources that the Linux Foundation (LF) provides to all hosted projects under an unfunded model, to ensure long-term sustainability. Developer Relations Foundation is part of the LF project series, as a <a href="https://donorbox.org/nonprofit-blog/501c3-vs-501c6" target="_blank" rel="noopener noreferrer">non-profit 501(c)(6)</a>.
@@ -142,13 +150,13 @@
 
 		<div class="text-column">
 		<ul class="benefit-list">
-			<li class="benefit-item"><div><strong>DevRel Value Outside DevRel</strong></div>
+			<li class="benefit-item"><div><strong>DevRel value outside DevRel</strong></div>
 				Being part of a renowned and large open source foundation like the Linux Foundation enhances the project's credibility within the DevRel community and among external stakeholders and decision-makers. This recognition elevates DevRel's visibility and perceived value as a profession, demonstrating its importance and impact beyond industry peers.
 			</li>
-			<li class="benefit-item"><div><strong>Level Playing Field</strong></div>
+			<li class="benefit-item"><div><strong>Level playing field</strong></div>
 				Ensuring that no single company in the ecosystem can exert undue control over the project by owning the trademark.
 			</li>
-			<li class="benefit-item"><div><strong>Licensing Integrity</strong></div>
+			<li class="benefit-item"><div><strong>Licensing integrity</strong></div>
 				Protecting the licensing integrity of the collaborative project, as detailed in this blog post: <a href="https://www.linuxfoundation.org/blog/how-open-source-foundations-protect-the-licensing-integrity-of-open-source-projects">How Open Source Foundations Protect the Licensing Integrity of Open Source Projects</a>.
 			</li>
 
@@ -168,6 +176,10 @@
 
 
 <style>
+  .mission-intro {
+    margin-bottom: var(--space-l);
+  }
+
   .container {
     margin-bottom: var(--space-l);
   }
@@ -191,129 +203,128 @@
  }
 
   .devrel-callout {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-					  url('/images/headway-F2KRf_QfCqw-unsplash.jpg');
-    background-size: cover;
-    background-position: center 50%;
     margin: var(--space-m) 0;
-    padding: var(--space-l) var(--space-s);
-    color: white;
-    text-align: center;
+    padding-block: var(--space-s);
   }
 
-  .callout-content {
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
+  .callout-block {
+    background-color: var(--color-background-secondary-1);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    border: var(--border-thickness) solid var(--color-background-secondary-2);
   }
 
-  .callout-content h2 {
+  .devrel-callout-grid {
+    align-items: stretch;
+  }
+
+  .callout-text h2 {
     font-size: var(--step-3);
     margin-top: 0;
     margin-bottom: var(--space-m);
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
   }
 
-  .callout-content p {
+  .callout-text p {
     font-size: var(--step-0);
     line-height: 1.6;
-    max-width: 60ch;
-    margin: 0 auto var(--space-l);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--space-m);
+    color: var(--color-text);
+  }
+
+  .callout-image-box {
+    height: 100%;
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    min-height: 12rem;
+  }
+
+  .callout-image-box img {
+    width: 100%;
+    height: 100%;
+    min-height: 12rem;
+    object-fit: cover;
+    object-position: center 50%;
+    display: block;
   }
 
   .callout-cta {
     display: inline-block;
-    background-color: var(--color-button-background-dark);
-    color: var(--color-button-text-dark);
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
     padding: var(--space-s) var(--space-l);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
   }
 
   .callout-cta:hover {
-    background-color: var(--color-button-background-dark);
-    color: var(--color-button-text-dark);
+    background-color: color-mix(in srgb, var(--color-button-background) 80%, white 20%);
+    color: var(--color-button-text);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
 
   .governance-callout {
-    background-image: 
-      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
-      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
-      radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(135deg, var(--color-button-background), var(--color-button-background));
-    background-size: 60px 60px, 80px 80px, 40px 40px, 100% 100%;
-    margin: var(--space-s) 0;
-	padding: var(--space-3xs) var(--space-3xs);
-    color: var(--color-text-dark);
-    text-align: left;
+    margin: var(--space-m) 0;
+    padding-block: var(--space-s);
   }
 
-  .governance-callout .link {
+  .governance-block {
+    background-color: var(--color-button-background);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    border: var(--border-thickness) solid var(--color-forest);
+    color: var(--color-text-dark);
+  }
+
+  :global(body.dark-mode) .governance-block,
+  :global(html.dark-mode) .governance-block {
+    background-color: var(--color-forest);
+  }
+
+  .governance-block h2 {
+    font-size: var(--step-3);
+    margin-top: 0;
+    margin-bottom: var(--space-m);
+    color: var(--color-text-dark);
+  }
+
+  .governance-block p {
+    font-size: var(--step-0);
+    line-height: 1.6;
+    margin-bottom: var(--space-m);
+    color: var(--color-text-dark);
+  }
+
+  .governance-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .governance-block .link {
     color: var(--color-link-dark);
     text-decoration: underline;
   }
 
   @media (max-width: 768px) {
-    .devrel-callout {
-      padding: var(--space-l) var(--space-m);
-    }
-
-    .callout-content h2 {
+    .callout-text h2 {
       font-size: var(--step-2);
     }
 
-    .callout-content p {
+    .callout-text p {
       font-size: var(--step--1);
     }
 
-    .governance-callout {
-      padding: var(--space-l) var(--space-m);
-    }
-
-    .governance-callout .callout-content h2 {
+    .governance-block h2 {
       font-size: var(--step-2);
     }
 
-    .governance-callout .callout-content p {
+    .governance-block p {
       font-size: var(--step--1);
     }
-
   }
-
-	.two-column-layout {
-		display: grid;
-		grid-template-columns: 1fr 5fr;
-		gap: var(--space-l);
-		align-items: center;
-	}
-
-	.icon-column {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		min-height: 200px;
-	}
-
 	.text-column {
-		flex: 1;
-    font-size: var(--step-0);
-	}
-
-	.icon-left {
-		height: auto;
-		max-width: min(50vw, 250px);
-		width: 50%;
-		flex-shrink: 0;
-		filter: var(--icon-filter);
-		stroke-width: 1;
-		opacity: 0.8;
+		font-size: var(--step-0);
 	}
 
 </style>

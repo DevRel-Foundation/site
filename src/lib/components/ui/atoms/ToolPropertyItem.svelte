@@ -1,7 +1,7 @@
 <script lang="ts">
     export let format = '';
     export let label = '';
-    export let value = '';
+    export let value: string | string[] | Record<string, unknown> | null = '';
 
     $: format = format || '';
     $: label = label || '';
@@ -19,7 +19,7 @@
     {#if Array.isArray(value)}
       {#if value.length > 0}
         <ul class="property-list">
-          {#each value as item}
+          {#each value as item, index (index)}
             <li>{item}</li>
           {/each}
         </ul>
@@ -95,7 +95,7 @@
   }
 
   .property-link:hover {
-    color: var(--color-mint);
+    color: var(--color-accent-green);
   }
 
   .property-text {
