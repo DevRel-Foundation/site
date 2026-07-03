@@ -20,6 +20,11 @@ const redirects = [
     from: /^\/join-us\/?$/,
     to: '/join',
     status: 302
+  },
+  {
+    from: /^\/blog\/2025\/10\/tools-catalog-github-discussions/,
+    to: '/blog/tools-catalog/github-discussions',
+    status: 302
   }
 ];
 
