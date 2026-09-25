@@ -76,7 +76,7 @@
 				title="Sourcing"
 				description="Some groups curate and evaluate proven frameworks, models, templates, and resources from across the ecosystem. By consolidating what already works, legitimacy and consistency are achieved through trustworthy guides."
 				ctaLabel="Learning resources →"
-				onclick={() => goto('/learn/what-is-devrel')}
+				onclick={() => goto('/learn/resources')}
 			/>
 
 			<ActionCard

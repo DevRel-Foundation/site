@@ -20,6 +20,7 @@
     
     <div class="footer-column">
       <h2>Resources</h2>
+      <a href="/learn/resources">Research &amp; resources</a>
       <a href="/blog">Blog</a>
       <a href="/projects">Projects</a>
       <a href="/brand">Brand guide</a>
