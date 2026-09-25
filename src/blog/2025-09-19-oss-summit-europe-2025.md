@@ -7,7 +7,14 @@ category: "announce"
 tags: ["community", "events"]
 ---
 
-At Open-Source Summit Europe 2025 in Amsterdam, we hosted an Ask Me Anything with leaders from our community and the Linux Foundation. The goal was simple. Surface your biggest questions about DevRel and show practical ways the Foundation can help. 
+At Open-Source Summit Europe 2025 in Amsterdam, DRF hosted an [Ask Me Anything](https://youtu.be/Ovqs4Zy2-go?si=eCd4UWmN0sfFZ4Hg&t=612) with leaders from our community:
+
+- Ana, project manager at the Linux Foundation. Former researcher in DevRel metrics 
+- Stacey, DevRel Leader, Community and developer marketing leader
+- Marcos, long-time DevRel builder and consultant
+- Divya, developer advocate focused on metrics and community
+
+The goal was simple. Surface your biggest questions about DevRel and show practical ways the Foundation can help. 
 
 What we heard was clear. Teams want DevRel to focus less on activity and more on outcomes. Leaders want to invest with confidence, not gut feeling. If you care about making DevRel measurable and strategic, we want your voice in this Foundation.
 
