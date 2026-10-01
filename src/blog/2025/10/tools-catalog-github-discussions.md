@@ -45,7 +45,7 @@ GitHub Discussions may not be your ideal tool if you have constraints such as:
 
 ## Consideration: User Accounts
 
-One limitations of GitHub Discussions is account management.
+One limitation of GitHub Discussions is account management.
 
 If you want to be able to email everybody in your community, GitHub Discussions does not allow you to get email addresses unless participants have opted to share them publicly.
 
@@ -53,11 +53,11 @@ If you want to let your community participate in GitHub Discussions using the sa
 
 ## Consideration: Scoping Your Community Discussions
 
-Typically on GitHub, you'll have a one to many relationship of an **organization** to **repositories**. You can enable GitHub Discussions on each individual repository but you can only have one for the organization overall. 
+Typically on GitHub, you'll have a one-to-many relationship of an **organization** to **repositories**. You can enable GitHub Discussions on each individual repository but you can only have one for the organization overall. 
 
 This can be a source of confusion for your community if discussions are happening in multiple places unless the repositories are for projects that are very distinct. 
 
-## Recommendation: A Community Repos for Your Organization
+## Recommendation: A Community Repo for Your Organization
 
 A recommended approach to setting up discussions for your technical community.
 
@@ -80,7 +80,7 @@ See the GitHub Docs:
 
 Once you've set up your community repository, it's important to consolidate discussions to avoid confusion.
 
-Check for any other repositories with discusisons enabled but inactive or not used much. You should disable them to avoid confusing your community on where to find activity and get responses.
+Check for any other repositories with discussions enabled but inactive or not used much. You should disable them to avoid confusing your community on where to find activity and get responses.
 
 ## Recommendation: Customize Discussion Categories
 
@@ -93,13 +93,13 @@ For many organizations this may be a fine place to start. If you have folks in y
 
 For example, with the DevRel Foundation we are part of one community, but somebody interested in the [Tools Catalog](https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/tools-catalog) may not have any interest in the [Persona Library](https://github.com/DevRel-Foundation/wg-resource-aggregation/discussions/categories/persona-library). Using separate categories would be a way of offering a filter when projects are unrelated.
 
-You might consider using a separate category for each repository, so while there is a single common community discussion groups, each repository can still carve off its own focused area.
+You might consider using a separate category for each repository, so while there is a single common community discussion group, each repository can still carve off its own focused area.
 
 ## Recommendation: Use Pinned Discussion Messages Effectively
 
 Create a message and call it something like "Welcome! How-to Get Started Here". Include a succinct introduction so that when somebody first finds your GitHub Discussions they know where to begin.
 
-![pinned messages for github discusions](/images/blog/2025/tools-catalog-discussions-pinned-messages.png)
+![pinned messages for GitHub Discussions](/images/blog/2025/tools-catalog-discussions-pinned-messages.png)
 
 In your welcome, make sure to cover:
 - [ ] explain what the community is
