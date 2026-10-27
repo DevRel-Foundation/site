@@ -17,7 +17,7 @@
   let { children } = $props();
   const isHomepage = $derived($page.url.pathname === '/');
   const showOverlappingCircles = $derived(
-    !isHomepage && $page.url.pathname !== '/about/steering-committee'
+    !isHomepage && $page.url.pathname !== '/about/governance'
   );
   let posthog: PostHog | null = null;
   let gaLoaded = false;

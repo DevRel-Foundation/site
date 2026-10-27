@@ -1,844 +1,862 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import DOMPurify from 'dompurify';
-  import type { Config } from 'dompurify';
-  const { eventId } = $props<{ eventId?: string }>();
-  
-  interface CalendarEvent {
-    id: string;
-    title: string;
-    start: string;
-    end?: string;
-    description?: string;
-    location?: string;
-    url?: string;
-    allDay?: boolean;
-    isRecurring?: boolean;
-  }
-  
-  let events = $state<CalendarEvent[]>([]);
-  let loading = $state(true);
-  let error = $state<string | null>(null);
-  let selectedEvent = $state<CalendarEvent | null>(null);
-  let userLocale = $state<string>('');
-  let userTimezone = $state<string>('');
+	import { onMount } from 'svelte';
+	import {
+		LFX_CALENDAR_URL,
+		LFX_SUBSCRIBE_URL,
+		eventSlug,
+		type CalendarEvent
+	} from '$lib/calendar';
+	import { TOUCHPOINTS_AGENDAS_URL } from '$lib/community';
 
-  let copied = $state(false);
-  let copyTimeout: number | null = null;
-  
-  let currentPage = $state(0);
-  const eventsPerPage = 10;
+	interface Props {
+		eventId?: string;
+	}
 
-  const descriptionSanitizeConfig: Config = {
-    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'li', 'h2', 'h3'],
-    ALLOWED_ATTR: ['href', 'target', 'rel'],
-  };
-  
-  onMount(async () => {
-    userLocale = navigator.language || 'en-US';
-    userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    
-    try {
-      const response = await fetch('/api/calendar');
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.message || 'Failed to load events');
-      }
-      
-      events = data.events || [];
-      loading = false;
+	let { eventId }: Props = $props();
 
-      function getSimpleId(id: string) {
-        return id.split('@')[0];
-      }
+	type View = 'month' | 'list';
+	type Zone = 'local' | 'UTC';
 
-      let initialId = eventId;
-      if (!initialId) {
-        const match = window.location.pathname.match(/\/calendar\/event\/([^/]+)/);
-        initialId = match ? decodeURIComponent(match[1]) : undefined;
-      }
+	const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+	const MAX_CHIPS = 3;
 
-      if (initialId && events.length > 0) {
-        const eventFromUrl = events.find(e => getSimpleId(e.id) === initialId);
-        if (eventFromUrl) {
-          selectedEvent = eventFromUrl;
-          return;
-        }
-      }
-      if (events.length > 0) {
-        const filtered = filteredEvents();
-        if (filtered.length > 0) {
-          selectedEvent = filtered[0];
-        }
-      }
-    } catch (err) {
-      console.error('Failed to load events:', err);
-      error = err instanceof Error ? err.message : 'Unknown error occurred';
-      loading = false;
-    }
-  });
-  
-  const filteredEvents = $derived(() => {
-    return events || [];
-  });
-  
-  const totalPages = $derived(() => Math.ceil(filteredEvents().length / eventsPerPage));
-  const paginatedEvents = $derived(() => {
-    const start = currentPage * eventsPerPage;
-    const end = start + eventsPerPage;
-    return filteredEvents().slice(start, end);
-  });
-  
-  function goToPage(page: number) {
-    currentPage = Math.max(0, Math.min(page, totalPages() - 1));
-    const paginated = paginatedEvents();
-    if (paginated.length > 0) {
-      selectEvent(paginated[0]);
-    }
-  }
-  
-  function nextPage() {
-    if (currentPage < totalPages() - 1) {
-      goToPage(currentPage + 1);
-    }
-  }
-  
-  function prevPage() {
-    if (currentPage > 0) {
-      goToPage(currentPage - 1);
-    }
-  }
-  
-  function copyPageUrl() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url)
-      .then(() => {
-        copied = true;
-        if (copyTimeout) clearTimeout(copyTimeout);
-        copyTimeout = window.setTimeout(() => {
-          copied = false;
-        }, 1200);
-      })
-      .catch(err => {
-        console.error('Failed to copy page url:', err);
-      });
-  }
-  
-  function formatEventDate(event: CalendarEvent, year = false) {
-    const start = new Date(event.start);
-    const end = event.end ? new Date(event.end) : null;
-    
-    const locale = userLocale || 'en-US';
-    
-    if (event.allDay) {
-      return start.toLocaleDateString(locale, {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        timeZone: userTimezone || undefined
-      });
-    }
-    
-    const timeFormat: Intl.DateTimeFormatOptions = {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: userTimezone || undefined
-    };
-    
-    const dateFormat: Intl.DateTimeFormatOptions = {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      timeZone: userTimezone || undefined
-    };
+	let events = $state<CalendarEvent[]>([]);
+	let loading = $state(true);
+	let failed = $state(false);
+	let view = $state<View>('month');
+	let zone = $state<Zone>('local');
+	let localZone = $state('');
+	let cursor = $state(firstOfMonth(new Date()));
+	let selected = $state<CalendarEvent | null>(null);
+	let dialog = $state<HTMLDialogElement>();
 
-    if (year) {
-      dateFormat.year = 'numeric';
-    } else {
-      dateFormat.year = undefined;
-    }
-    
-    let result = start.toLocaleDateString(locale, dateFormat) + ' at ' + start.toLocaleTimeString(locale, timeFormat);
-    
-    if (end && !event.allDay) {
-      const isSameDay = start.toDateString() === end.toDateString();
-      if (isSameDay) {
-        result += ' - ' + end.toLocaleTimeString(locale, timeFormat);
-      } else {
-        result += ' - ' + end.toLocaleDateString(locale, dateFormat) + ' at ' + end.toLocaleTimeString(locale, timeFormat);
-      }
-    }
-    
-    return result;
-  }
-  
-  function parseMarkdown(text: string): string {
-    if (!text) return '';
-    
-    let html = text
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-        if (url.startsWith('http://') || url.startsWith('https://')) {
-          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
-        }
-        return `<a href="${url}">${text}</a>`;
-      })
-      
-      .replace(/(^|[^"'(>\]])https:\/\/[^\s<>)]+/g, (match, prefix) => {
-        const url = match.replace(prefix, '');
-        return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer">${url} ↗</a>`;
-      })
-      
-      // Process bold-wrapped headings BEFORE general bold/italic processing
-      .replace(/^\*### (.*?)\*$/gm, '<h3>$1</h3>')
-      .replace(/^\*## (.*?)\*$/gm, '<h2>$1</h2>')
-      .replace(/^\*# (.*?)\*$/gm, '<h2>$1</h2>')
-      
-      // Convert list items (before bold/italic to avoid conflicts)
-      .replace(/^\* (.+)$/gm, '<li>$1</li>')
-      .replace(/^- (.+)$/gm, '<li>$1</li>')
-      
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/(\s|^|\(|\[)\*([^*\s][^*]*[^*\s]|[^*\s])\*(\s|$|\)|\.|,|\])/g, '$1<em>$2</em>$3')
-      
-      .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-      .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-      .replace(/^# (.*$)/gm, '<h2>$1</h2>')
-      
-      .split('\n\n')
-      .map(paragraph => paragraph.trim())
-      .filter(paragraph => paragraph.length > 0)
-      .map(paragraph => {
-        if (paragraph.includes('<li>')) {
-          return `<ul>${paragraph.replace(/\n/g, '')}</ul>`;
-        }
-        return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
-      })
-      .join('');
-      
-    return html;
-  }
+	const timeZone = $derived(zone === 'UTC' ? 'UTC' : localZone || undefined);
+	const zoneLabel = $derived(zone === 'UTC' ? 'UTC' : localZone);
 
-  function renderDescription(text: string): string {
-    return DOMPurify.sanitize(parseMarkdown(text), descriptionSanitizeConfig);
-  }
-  
-  function selectEvent(event: CalendarEvent) {
-    if (selectedEvent === event) {
-      selectedEvent = null;
-      updateURLWithEvent(null);
-    } else {
-      selectedEvent = event;
-      updateURLWithEvent(event);
-    }
-  }
+	const monthTitle = $derived(
+		new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(cursor)
+	);
 
-  function updateURLWithEvent(event: CalendarEvent | null) {
-    if (!event) {
-      window.history.replaceState({}, '', '/calendar');
-      return;
-    }
-    const simpleId = event.id.split('@')[0];
-    const encodedId = encodeURIComponent(simpleId);
-    window.history.replaceState({}, '', `/calendar/event/${encodedId}`);
-  }
-  
+	const eventsByDay = $derived.by(() => {
+		const map = new Map<string, CalendarEvent[]>();
+		for (const event of events) {
+			const key = dayKey(event);
+			map.set(key, [...(map.get(key) ?? []), event]);
+		}
+		return map;
+	});
+
+	const todayKey = $derived(keyFor(new Date(), timeZone));
+
+	const weeks = $derived.by(() => {
+		const year = cursor.getFullYear();
+		const month = cursor.getMonth();
+		const first = new Date(year, month, 1);
+		const offset = (first.getDay() + 6) % 7;
+		const daysInMonth = new Date(year, month + 1, 0).getDate();
+		const cells = Math.ceil((offset + daysInMonth) / 7) * 7;
+		const days = Array.from({ length: cells }, (_, index) => {
+			const date = new Date(year, month, index - offset + 1);
+			const key = plainKey(date);
+			return {
+				key,
+				day: date.getDate(),
+				inMonth: date.getMonth() === month,
+				isToday: key === todayKey,
+				events: eventsByDay.get(key) ?? []
+			};
+		});
+		return Array.from({ length: cells / 7 }, (_, index) => days.slice(index * 7, index * 7 + 7));
+	});
+
+	const monthEvents = $derived.by(() => {
+		const prefix = plainKey(cursor).slice(0, 7);
+		return [...eventsByDay.entries()]
+			.filter(([key]) => key.startsWith(prefix))
+			.sort(([a], [b]) => a.localeCompare(b));
+	});
+
+	function firstOfMonth(date: Date): Date {
+		return new Date(date.getFullYear(), date.getMonth(), 1);
+	}
+
+	function plainKey(date: Date): string {
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+		return `${date.getFullYear()}-${month}-${day}`;
+	}
+
+	function keyFor(date: Date, tz: string | undefined): string {
+		return new Intl.DateTimeFormat('en-CA', {
+			timeZone: tz,
+			year: 'numeric',
+			month: '2-digit',
+			day: '2-digit'
+		}).format(date);
+	}
+
+	function dayKey(event: CalendarEvent): string {
+		return event.allDay ? event.start.slice(0, 10) : keyFor(new Date(event.start), timeZone);
+	}
+
+	function formatTime(value: string): string {
+		return new Intl.DateTimeFormat('en', {
+			timeZone,
+			hour: '2-digit',
+			minute: '2-digit',
+			hourCycle: 'h23'
+		}).format(new Date(value));
+	}
+
+	function formatDayHeading(key: string): string {
+		const [year, month, day] = key.split('-').map(Number);
+		return new Intl.DateTimeFormat('en', {
+			weekday: 'long',
+			month: 'long',
+			day: 'numeric'
+		}).format(new Date(year, month - 1, day));
+	}
+
+	function formatRange(event: CalendarEvent): string {
+		if (event.allDay) {
+			const [year, month, day] = event.start.split('-').map(Number);
+			return new Intl.DateTimeFormat('en', { dateStyle: 'full' }).format(
+				new Date(year, month - 1, day)
+			);
+		}
+		const formatter = new Intl.DateTimeFormat('en', {
+			timeZone,
+			dateStyle: 'full',
+			timeStyle: 'short',
+			hourCycle: 'h23'
+		});
+		const start = new Date(event.start);
+		const text = event.end
+			? formatter.formatRange(start, new Date(event.end))
+			: formatter.format(start);
+		return `${text} (${zoneLabel})`;
+	}
+
+	function paragraphs(text: string): string[] {
+		return text
+			.split(/\n\s*\n/)
+			.map((part) => part.trim())
+			.filter(Boolean);
+	}
+
+	function shiftMonth(step: number) {
+		cursor = new Date(cursor.getFullYear(), cursor.getMonth() + step, 1);
+	}
+
+	function goToToday() {
+		cursor = firstOfMonth(new Date());
+	}
+
+	function openEvent(event: CalendarEvent) {
+		selected = event;
+		dialog?.showModal();
+		history.replaceState(history.state, '', `/calendar/event/${eventSlug(event)}`);
+	}
+
+	function closeEvent() {
+		dialog?.close();
+	}
+
+	function handleDialogClose() {
+		selected = null;
+		history.replaceState(history.state, '', '/calendar');
+	}
+
+	function handleBackdropClick(event: MouseEvent) {
+		if (event.target === dialog) closeEvent();
+	}
+
+	onMount(async () => {
+		localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		if (window.matchMedia('(max-width: 700px)').matches) view = 'list';
+
+		try {
+			const response = await fetch('/api/calendar');
+			const data = await response.json();
+			if (!response.ok || data.error) throw new Error(data.error ?? `HTTP ${response.status}`);
+			events = data.events ?? [];
+		} catch (error) {
+			console.error('Failed to load calendar events', error);
+			failed = true;
+		} finally {
+			loading = false;
+		}
+
+		if (eventId) {
+			const target = events.find((event) => event.id === decodeURIComponent(eventId));
+			if (target) {
+				cursor = firstOfMonth(new Date(target.allDay ? `${target.start}T00:00:00` : target.start));
+				openEvent(target);
+			}
+		}
+	});
 </script>
 
-<div class="calendar-container">
-    <div class="calendar-layout">
-        <div class="events-sidebar">
-            <div class="sidebar-header">
-                <h2>Recent & upcoming events</h2>
-            </div>
-            <div class="events-list">
-                {#if loading}
-                    <div class="no-events-message">
-                        <p>Loading events...</p>
-                    </div>
-                {:else if error}
-                    <div class="no-events-message">
-                        <p>{error}</p>
-                    </div>
-                {:else if paginatedEvents().length > 0}
-                    {#each paginatedEvents() as event (event.id)}
-                        <button 
-                            class="event-list-item" 
-                            class:selected={selectedEvent === event}
-                            class:hidden={selectedEvent && selectedEvent !== event}
-                            onclick={() => selectEvent(event)}
-                        >
-                            <div class="event-date-compact">{formatEventDate(event)}</div>
-                            <h3 class="event-title-compact">{event.title}</h3>
-                        </button>
-                    {/each}
-                {:else}
-                    <div class="no-events-message">
-                        <p>No events available.</p>
-                    </div>
-                {/if}
-            </div>
+<section class="calendar" aria-label="DevRel Foundation meetings calendar">
+	<div class="calendar__toolbar">
+		<div class="calendar__nav">
+			<button
+				type="button"
+				class="calendar__button"
+				onclick={() => shiftMonth(-1)}
+				aria-label="Previous month"
+			>
+				←
+			</button>
+			<button type="button" class="calendar__button" onclick={goToToday}>Today</button>
+			<button
+				type="button"
+				class="calendar__button"
+				onclick={() => shiftMonth(1)}
+				aria-label="Next month"
+			>
+				→
+			</button>
+			<h2 class="calendar__title" aria-live="polite">{monthTitle}</h2>
+		</div>
 
-            {#if totalPages() > 1}
-                <div class="pagination">
-                    <button 
-                        class="pagination-btn" 
-                        onclick={prevPage}
-                        disabled={currentPage === 0}
-                        aria-label="Previous page"
-                    >
-                        ←
-                    </button>
-                    
-                    <div class="pagination-info">
-                        Page {currentPage + 1} of {totalPages()}
-                        <span class="events-count">({filteredEvents().length} events)</span>
-                    </div>
-                    
-                    <button 
-                        class="pagination-btn" 
-                        onclick={nextPage}
-                        disabled={currentPage >= totalPages() - 1}
-                        aria-label="Next page"
-                    >
-                        →
-                    </button>
-                </div>
-            {/if}
+		<div class="calendar__options">
+			<div class="calendar__views" role="group" aria-label="Calendar view">
+				<button
+					type="button"
+					class="calendar__view"
+					aria-pressed={view === 'month'}
+					onclick={() => (view = 'month')}
+				>
+					Month
+				</button>
+				<button
+					type="button"
+					class="calendar__view"
+					aria-pressed={view === 'list'}
+					onclick={() => (view = 'list')}
+				>
+					List
+				</button>
+			</div>
+			<label class="calendar__zone">
+				<span>Time zone</span>
+				<select bind:value={zone}>
+					<option value="local">Your local time{localZone ? ` (${localZone})` : ''}</option>
+					<option value="UTC">UTC</option>
+				</select>
+			</label>
+		</div>
+	</div>
 
-            <div class="subscribe-button" class:hidden={selectedEvent}>
-                <a href="https://lists.dev-rel.org/g/community/calendar" target="_blank" rel="noopener noreferrer" class="subscribe-link">
-                    <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    View full calendar and subscribe
-                </a>
-            </div>
+	<ul class="calendar__legend" aria-label="Legend">
+		<li>
+			<span class="calendar__dot calendar__dot--touchpoint" aria-hidden="true"></span>Community
+			Touchpoint
+		</li>
+		<li><span class="calendar__dot" aria-hidden="true"></span>Other meetings</li>
+	</ul>
 
-        </div>
+	{#if loading}
+		<p class="calendar__status" role="status">Loading meetings…</p>
+	{:else if failed}
+		<p class="calendar__status calendar__status--error" role="alert">
+			We couldn't load the calendar right now. You can still see every meeting on the
+			<a href={LFX_CALENDAR_URL} target="_blank" rel="noopener noreferrer">LFX calendar ↗</a>.
+		</p>
+	{/if}
 
-        <div class="event-details-panel">
-            {#if selectedEvent}
-                <div class="event-item">
-                    <div class="event-title-copy-wrap">
-                        <button class="copy-link-btn" title="Copy event link" onclick={copyPageUrl} aria-label="Copy event link">
+	{#if view === 'month'}
+		<div class="calendar__grid" role="grid" aria-label={monthTitle}>
+			<div class="calendar__row calendar__row--head" role="row">
+				{#each WEEKDAYS as weekday (weekday)}
+					<div class="calendar__weekday" role="columnheader">{weekday}</div>
+				{/each}
+			</div>
+			{#each weeks as week (week[0].key)}
+				<div class="calendar__row" role="row">
+					{#each week as day (day.key)}
+						<div
+							class="calendar__day"
+							class:calendar__day--muted={!day.inMonth}
+							class:calendar__day--today={day.isToday}
+							role="gridcell"
+							aria-label={formatDayHeading(day.key)}
+						>
+							<span class="calendar__date">{day.day}</span>
+							{#each day.events.slice(0, MAX_CHIPS) as event (event.id)}
+								<button
+									type="button"
+									class="calendar__chip"
+									class:calendar__chip--touchpoint={event.isTouchpoint}
+									onclick={() => openEvent(event)}
+									title={event.title}
+								>
+									{#if !event.allDay}<span class="calendar__chip-time"
+											>{formatTime(event.start)}</span
+										>{/if}
+									<span class="calendar__chip-title">{event.title}</span>
+								</button>
+							{/each}
+							{#if day.events.length > MAX_CHIPS}
+								<button type="button" class="calendar__more" onclick={() => (view = 'list')}>
+									+{day.events.length - MAX_CHIPS} more
+								</button>
+							{/if}
+						</div>
+					{/each}
+				</div>
+			{/each}
+		</div>
+	{:else}
+		<div class="calendar__list">
+			{#each monthEvents as [key, dayEvents] (key)}
+				<div class="calendar__list-day" class:calendar__list-day--today={key === todayKey}>
+					<h3>{formatDayHeading(key)}</h3>
+					<ul>
+						{#each dayEvents as event (event.id)}
+							<li>
+								<button
+									type="button"
+									class="calendar__list-item"
+									class:calendar__list-item--touchpoint={event.isTouchpoint}
+									onclick={() => openEvent(event)}
+								>
+									<span class="calendar__list-time">
+										{event.allDay
+											? 'All day'
+											: `${formatTime(event.start)}${event.end ? `–${formatTime(event.end)}` : ''}`}
+									</span>
+									<span class="calendar__list-title">{event.title}</span>
+								</button>
+							</li>
+						{/each}
+					</ul>
+				</div>
+			{:else}
+				{#if !loading}
+					<p class="calendar__empty">
+						No meetings this month. Try another month or check the LFX calendar.
+					</p>
+				{/if}
+			{/each}
+		</div>
+	{/if}
 
-                            <svg class="anchor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                            </svg>
+	<div class="calendar__footer">
+		<a href={LFX_SUBSCRIBE_URL}>Subscribe to the calendar</a>
+		<a href={LFX_CALENDAR_URL} target="_blank" rel="noopener noreferrer">Open the LFX calendar ↗</a
+		>
+		<a href={TOUCHPOINTS_AGENDAS_URL} target="_blank" rel="noopener noreferrer"
+			>Read meeting agendas ↗</a
+		>
+	</div>
+</section>
 
-                            {#if copied}
-                                <span class="copy-confirmation">Copied!</span>
-                            {/if}
-                        </button>
-                        <h3 class="event-title">{selectedEvent.title}</h3>
-                    </div>
-                    <div class="event-date-detail">{formatEventDate(selectedEvent, true)}</div>
-
-                    <div class="event-details">
-                        {#if selectedEvent.location}
-                            <div class="event-location">
-                                {#if selectedEvent.location.startsWith('https')}
-                                    ↗
-                                    <a href={selectedEvent.location} target="_blank" rel="noopener noreferrer" class="location-link">
-                                        {selectedEvent.location}
-                                    </a>
-                                {:else}
-                                    {selectedEvent.location}
-                                {/if}
-                            </div>
-                        {/if}
-                        {#if selectedEvent.description}
-                            <!-- eslint-disable-next-line svelte/no-at-html-tags -- HTML sanitized via DOMPurify in renderDescription -->
-                            <div class="event-description">{@html renderDescription(selectedEvent.description)}</div>
-                        {/if}
-                        {#if selectedEvent.isRecurring}
-                            <div class="event-recurring">🔄 Recurring event</div>
-                        {/if}
-                        {#if selectedEvent.url}
-                            <a href={selectedEvent.url} target="_blank" rel="noopener noreferrer" class="event-link">
-                                View details →
-                            </a>
-                        {/if}
-                    </div>
-                </div>
-            {:else}
-                <div class="no-selection">
-                    <p>Select an event from the list to view details</p>
-                </div>
-            {/if}
-
-            {#if userLocale && userTimezone}
-                <div class="locale-info">
-                    <div class="locale-display">{userTimezone}</div>
-                </div>
-            {/if}
-
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
+<dialog
+	bind:this={dialog}
+	class="meeting"
+	aria-labelledby="meeting-title"
+	onclose={handleDialogClose}
+	onclick={handleBackdropClick}
+>
+	{#if selected}
+		<div class="meeting__body">
+			<div class="meeting__header">
+				<p class="meeting__kind">
+					{selected.isTouchpoint ? 'Community Touchpoint' : 'DevRel Foundation meeting'}
+				</p>
+				<button
+					type="button"
+					class="meeting__close"
+					onclick={closeEvent}
+					aria-label="Close meeting details">×</button
+				>
+			</div>
+			<h2 id="meeting-title">{selected.title}</h2>
+			<p class="meeting__time">{formatRange(selected)}</p>
+			{#if selected.isRecurring}
+				<p class="meeting__recurring">Recurring meeting</p>
+			{/if}
+			{#each paragraphs(selected.description) as paragraph, index (index)}
+				<p class="meeting__description">{paragraph}</p>
+			{/each}
+			<div class="meeting__actions">
+				<a class="meeting__primary" href={selected.url} target="_blank" rel="noopener noreferrer">
+					Join or register on LFX ↗
+				</a>
+				{#if selected.isTouchpoint}
+					<a class="meeting__secondary" href="/community/touchpoints">About Community Touchpoints</a
+					>
+				{/if}
+			</div>
+		</div>
+	{/if}
+</dialog>
 
 <style>
-  .calendar-container {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: var(--space-s) var(--space-xl);
-    box-sizing: border-box;
-  }
+	.calendar {
+		--touchpoint-color: var(--color-link);
+		--meeting-color: var(--color-info-text);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+	}
 
-  .calendar-layout {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: var(--space-m);
-    height: 100%;
-  }
+	.calendar__toolbar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-s);
+	}
 
-  .events-sidebar {
-    border-right: 1px solid var(--color-background-secondary-2);
-    padding-right: var(--space-s);
-    min-width: 0;
-    overflow: hidden;
-  }
+	.calendar__nav,
+	.calendar__options {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-xs);
+	}
 
-  .events-sidebar h2 {
-    margin: 0 0 var(--space-s) 0;
-    font-size: var(--step-1);
-    color: var(--color-text);
-  }
+	.calendar__title {
+		margin: 0 0 0 var(--space-xs);
+		font-size: var(--step-2);
+		color: var(--color-text);
+	}
 
-  .sidebar-header {
-    margin-bottom: var(--space-s);
-  }
+	.calendar__button,
+	.calendar__view {
+		padding: var(--space-2xs) var(--space-s);
+		border: 1px solid var(--color-background-secondary-2);
+		border-radius: var(--radius-pill);
+		background: var(--color-background);
+		color: var(--color-text);
+		font: inherit;
+		font-size: var(--step--1);
+		font-weight: 600;
+		cursor: pointer;
+		transition:
+			background-color var(--transition-fast),
+			border-color var(--transition-fast);
+	}
 
-  .locale-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-    margin-top: var(--space-xs);
-  }
+	.calendar__button:hover,
+	.calendar__view:hover {
+		background: var(--color-background-secondary-1);
+		border-color: var(--color-accent-green);
+	}
 
-  .locale-display {
-    font-size: var(--step--2);
-    color: var(--color-text);
-    font-weight: 500;
-    background: var(--color-background-secondary-1);
-    padding: var(--space-2xs) var(--space-xs);
-    border-radius: var(--radius-xs);
-    width: fit-content;
-  }
+	.calendar__views {
+		display: inline-flex;
+		gap: var(--space-3xs);
+		padding: var(--space-3xs);
+		border: 1px solid var(--color-background-secondary-2);
+		border-radius: var(--radius-pill);
+	}
 
-  .event-list-item {
-    width: 100%;
-    text-align: left;
-    padding: var(--space-s);
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-pill);
-    background: var(--color-background);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-bottom: var(--space-xs);
-  }
+	.calendar__view {
+		border-color: transparent;
+	}
 
-  .event-list-item:hover {
-    background: var(--color-background-secondary-1);
-    border-color: var(--color-accent-text);
-  }
+	.calendar__view[aria-pressed='true'] {
+		background: var(--color-button-background);
+		color: var(--color-button-text);
+	}
 
-  .event-list-item.selected {
-    background: var(--color-background-dark);
-    color: var(--color-text);
-    border-color: var(--color-accent-text);
-  }
+	.calendar__zone {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2xs);
+		font-size: var(--step--1);
+		color: var(--color-text);
+	}
 
-  .event-date-compact {
-    font-size: var(--step--2);
-    color: var(--color-text);
-    margin-bottom: var(--space-2xs);
-    font-weight: 400;
-  }
+	.calendar__zone select {
+		padding: var(--space-2xs) var(--space-xs);
+		border: 1px solid var(--color-background-secondary-2);
+		border-radius: var(--radius-s);
+		background: var(--color-background);
+		color: var(--color-text);
+		font: inherit;
+	}
 
-  .event-list-item.selected .event-date-compact {
-    color: var(--color-text-dark);
-  }
+	.calendar__legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-m);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: var(--step--1);
+		color: var(--color-text);
+	}
 
-  .event-title-compact {
-    font-weight: 600;
-    font-size: var(--step--1);
-    color: var(--color-text);
-    margin: 0;
-    line-height: 1.3;
-  }
+	.calendar__legend li {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2xs);
+	}
 
-  .event-list-item.selected .event-title-compact {
-    color: var(--color-text-dark);
-  }
+	.calendar__dot {
+		width: 0.75rem;
+		height: 0.75rem;
+		border-radius: var(--radius-circle);
+		background: var(--meeting-color);
+	}
 
-  .event-details-panel {
-    padding-left: var(--space-s);
-    min-width: 0;
-    overflow: hidden;
-  }
+	.calendar__dot--touchpoint {
+		background: var(--touchpoint-color);
+	}
 
-  .no-selection {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: max-content;
-    color: var(--color-text);
-    font-style: italic;
-  }
-  
-  
-  .events-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .no-events-message {
-    padding: var(--space-m);
-    text-align: center;
-    color: var(--color-text);
-    font-style: italic;
-  }
-  
-  .no-events-message p {
-    margin: 0;
-    font-size: var(--step--1);
-  }
-  
-  .event-item {
-    padding: var(--space-m);
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-s);
-    background: var(--color-background);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .event-title {
-    margin: 0 0 var(--space-s) 0;
-    font-size: var(--step-1);
-    color: var(--color-text);
-    font-weight: 700;
-    line-height: 1.3;
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    background-image: linear-gradient(to right, var(--color-forest), var(--color-mint), rgba(var(--color-mint-rgb), 0.3), transparent);
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 100% 2px;
-    padding-bottom: var(--space-2xs);
-    display: block;
-    width: 100%;
-  }
-  
-  .event-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-  }
-  
-  
-  .event-description {
-    margin: 0;
-    color: var(--color-text);
-    line-height: 1.6;
-    font-size: var(--step--1);
-  }
-  
-  .event-description :global(h2) {
-    font-size: var(--step--1);
-    color: var(--color-text);
-    margin: var(--space-s) 0 var(--space-xs) 0;
-    font-weight: 700;
-  }
-  
-  .event-description :global(h3) {
-    font-size: var(--step--2);
-    color: var(--color-text);
-    margin: var(--space-s) 0 var(--space-xs) 0;
-    font-weight: 600;
-  }
-  
-  .event-description :global(p) {
-    margin: 0 0 var(--space-s) 0;
-    line-height: 1.6;
-    font-size: var(--step--2);
-  }
-  
-  .event-description :global(a) {
-    color: var(--color-link);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .event-description :global(a:hover) {
-    text-decoration: underline;
-  }
-  
-  .event-description :global(strong) {
-    font-weight: 700;
-    color: var(--color-text);
-  }
-  
-  .event-description :global(em) {
-    font-style: italic;
-  }
-  
-  .event-description :global(ul) {
-    margin: 0 0 var(--space-s) 0;
-    padding-left: var(--space-m);
-    list-style-type: disc;
-  }
-  
-  .event-description :global(li) {
-    margin: 0 0 var(--space-2xs) 0;
-    line-height: 1.6;
-    font-size: var(--step--2);
-    color: var(--color-text);
-  }
-  
-  .event-location {
-    font-size: var(--step--1);
-    color: var(--color-text);
-    font-weight: 500;
-  }
-  
-  .location-link {
-    color: var(--color-link);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .location-link:hover {
-    text-decoration: underline;
-  }
-  
-  .event-recurring {
-    font-size: var(--step--1);
-    color: var(--color-text);
-    font-weight: 500;
-  }
-  
-  .event-link {
-    display: inline-block;
-    color: var(--color-link);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: var(--step--1);
-    padding: var(--space-xs) var(--space-s);
-    border: 1px solid var(--color-link);
-    border-radius: var(--radius-pill);
-    width: fit-content;
-    transition: all 0.2s ease;
-  }
-  
-  .event-link:hover {
-    background: var(--color-link);
-    color: var(--color-background);
-    text-decoration: none;
-  }
-  
-  .subscribe-button {
-    margin-top: var(--space-m);
-  }
-  
-  .subscribe-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    width: 100%;
-    text-align: left;
-    padding: var(--space-s);
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-pill);
-    background: var(--color-background);
-    color: var(--color-text);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: var(--step--1);
-    margin-bottom: var(--space-xs);
-  }
-  
-  .subscribe-link:hover {
-    background: var(--color-background-secondary-1);
-    border-color: var(--color-accent-green);
-    text-decoration: none;
-  }
-  
-  .calendar-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
-  
-  .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: var(--space-s);
-    padding: var(--space-s);
-    border-top: 1px solid var(--color-background-secondary-2);
-    gap: var(--space-xs);
-  }
-  
-  .pagination-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--color-background-secondary-2);
-    border-radius: var(--radius-pill);
-    background: var(--color-background);
-    color: var(--color-text);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    font-size: var(--step--1);
-  }
-  
-  .pagination-btn:hover:not(:disabled) {
-    background: var(--color-background-secondary-1);
-    border-color: var(--color-accent-green);
-  }
-  
-  .pagination-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .pagination-info {
-    flex: 1;
-    text-align: center;
-    font-size: var(--step--2);
-    color: var(--color-text);
-    font-weight: 500;
-  }
-  
-  .events-count {
-    font-size: var(--step--3);
-    opacity: 0.7;
-  }
-  
-  .event-title-copy-wrap {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  position: relative;
-}
+	.calendar__status {
+		margin: 0;
+		font-size: var(--step--1);
+		color: var(--color-text);
+	}
 
-.copy-link-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: var(--color-link);
-  opacity: 0;
-  position: absolute;
-  left: -28px;
-  transition: opacity 0.2s;
-  z-index: 2;
-}
+	.calendar__status--error {
+		padding: var(--space-xs) var(--space-s);
+		border: 1px solid var(--color-warning-border);
+		border-radius: var(--radius-s);
+		background: var(--color-warning);
+		color: var(--color-warning-text);
+	}
 
-.event-title-copy-wrap:hover .copy-link-btn,
-.copy-link-btn:focus {
-  opacity: 1;
-}
+	.calendar__grid {
+		border: 1px solid var(--color-background-secondary-2);
+		border-radius: var(--radius-m);
+		overflow: hidden;
+		background: var(--color-background);
+	}
 
-.copy-link-btn svg {
-  width: 18px;
-  top: 42%;
-  transform: translateY(-42%);
-  height: 14px;
-  display: block;
-}
+	.calendar__row {
+		display: grid;
+		grid-template-columns: repeat(7, minmax(0, 1fr));
+	}
 
-.copy-confirmation {
-    top: -2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--color-forest);
-    color: var(--color-background);
-    padding: var(--space-3xs) var(--space-2xs);
-    border-radius: var(--radius-s);
-    font-size: var(--step--2);
-    white-space: nowrap;
-    z-index: 10;
-}
+	.calendar__row + .calendar__row {
+		border-top: 1px solid var(--color-background-secondary-2);
+	}
 
-.anchor-icon {
-    opacity: 1;
-}
+	.calendar__weekday {
+		padding: var(--space-2xs) var(--space-xs);
+		font-size: var(--step--2);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--color-text);
+		background: var(--color-background-secondary-1);
+	}
 
-.event-date-detail {
-  font-size: var(--step--2);
-  color: var(--color-text);
-  margin-bottom: var(--space-xs);
-  font-weight: 400;
-}
+	.calendar__day {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3xs);
+		min-height: 7rem;
+		padding: var(--space-2xs);
+		border-left: 1px solid var(--color-background-secondary-2);
+		min-width: 0;
+	}
 
-  
-  @media (max-width: 768px) {
-    .calendar-container {
-      padding: var(--space-s);
-    }
-    
-    .calendar-layout {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-s);
-    }
-    
-    .events-sidebar {
-      border-right: none;
-      border-bottom: 1px solid var(--color-background-secondary-2);
-      padding-right: 0;
-      padding-bottom: var(--space-s);
-    }
-    
-    .event-list-item {
-      width: 100%;
-      padding: var(--space-s);
-      margin-bottom: var(--space-xs);
-    }
-    
-    .event-list-item.hidden {
-      display: none;
-    }
-    
-    .subscribe-button.hidden {
-      display: none;
-    }
-    
-    .event-details-panel {
-      padding-left: 0;
-      display: none;
-    }
-    
-    .event-details-panel:has(.event-item) {
-      display: block;
-    }
-  }
+	.calendar__day:first-child {
+		border-left: none;
+	}
+
+	.calendar__day--muted {
+		background: var(--color-background-secondary-1);
+	}
+
+	.calendar__day--muted .calendar__date {
+		opacity: 0.5;
+	}
+
+	.calendar__date {
+		align-self: flex-end;
+		min-width: 1.75rem;
+		padding: var(--space-3xs);
+		border-radius: var(--radius-pill);
+		font-size: var(--step--2);
+		font-weight: 600;
+		text-align: center;
+		color: var(--color-text);
+	}
+
+	.calendar__day--today .calendar__date {
+		background: var(--color-button-background);
+		color: var(--color-button-text);
+	}
+
+	.calendar__chip {
+		display: flex;
+		gap: var(--space-3xs);
+		width: 100%;
+		padding: var(--space-3xs) var(--space-2xs);
+		border: none;
+		border-left: 3px solid var(--meeting-color);
+		border-radius: var(--radius-xs);
+		background: var(--color-background-secondary-1);
+		color: var(--color-text);
+		font: inherit;
+		font-size: var(--step--2);
+		text-align: left;
+		cursor: pointer;
+		overflow: hidden;
+	}
+
+	.calendar__chip--touchpoint {
+		border-left-color: var(--touchpoint-color);
+	}
+
+	.calendar__chip:hover,
+	.calendar__chip:focus-visible {
+		background: var(--color-background-secondary-2);
+	}
+
+	.calendar__chip-time {
+		flex-shrink: 0;
+		font-weight: 700;
+	}
+
+	.calendar__chip-title {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.calendar__more {
+		padding: 0 var(--space-2xs);
+		border: none;
+		background: none;
+		color: var(--color-link);
+		font: inherit;
+		font-size: var(--step--2);
+		font-weight: 600;
+		text-align: left;
+		cursor: pointer;
+	}
+
+	.calendar__list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-m);
+	}
+
+	.calendar__list-day h3 {
+		margin: 0 0 var(--space-2xs);
+		padding-bottom: var(--space-3xs);
+		border-bottom: 1px solid var(--color-background-secondary-2);
+		font-size: var(--step-0);
+		color: var(--color-text);
+	}
+
+	.calendar__list-day--today h3::after {
+		content: 'Today';
+		margin-left: var(--space-xs);
+		padding: var(--space-3xs) var(--space-xs);
+		border-radius: var(--radius-pill);
+		background: var(--color-button-background);
+		color: var(--color-button-text);
+		font-size: var(--step--2);
+		vertical-align: middle;
+	}
+
+	.calendar__list-day ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.calendar__list-item {
+		display: grid;
+		grid-template-columns: 8rem 1fr;
+		gap: var(--space-s);
+		width: 100%;
+		padding: var(--space-xs) var(--space-s);
+		border: 1px solid var(--color-background-secondary-2);
+		border-left: 4px solid var(--meeting-color);
+		border-radius: var(--radius-s);
+		background: var(--color-background);
+		color: var(--color-text);
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
+		transition: background-color var(--transition-fast);
+	}
+
+	.calendar__list-item--touchpoint {
+		border-left-color: var(--touchpoint-color);
+	}
+
+	.calendar__list-item:hover,
+	.calendar__list-item:focus-visible {
+		background: var(--color-background-secondary-1);
+	}
+
+	.calendar__list-time {
+		font-size: var(--step--1);
+		font-weight: 700;
+	}
+
+	.calendar__list-title {
+		font-size: var(--step--1);
+		font-weight: 600;
+	}
+
+	.calendar__empty {
+		margin: 0;
+		font-style: italic;
+		color: var(--color-text);
+	}
+
+	.calendar__footer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs) var(--space-l);
+		font-size: var(--step--1);
+		font-weight: 600;
+	}
+
+	.calendar__footer a {
+		color: var(--color-link);
+	}
+
+	.meeting {
+		margin: auto;
+		width: min(36rem, calc(100vw - 2rem));
+		max-height: calc(100vh - 4rem);
+		padding: 0;
+		border: 1px solid var(--color-background-secondary-2);
+		border-radius: var(--radius-m);
+		background: var(--color-background);
+		color: var(--color-text);
+		box-shadow: var(--shadow-l);
+	}
+
+	.meeting:focus,
+	.meeting:focus-visible {
+		outline: none;
+	}
+
+	.meeting::backdrop {
+		background: rgba(0, 0, 0, 0.45);
+	}
+
+	.meeting__body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+		padding: var(--space-m);
+	}
+
+	.meeting__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-s);
+	}
+
+	.meeting__kind {
+		margin: 0;
+		font-size: var(--step--2);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--color-link);
+	}
+
+	.meeting__close {
+		width: 2rem;
+		height: 2rem;
+		border: 1px solid var(--color-background-secondary-2);
+		border-radius: var(--radius-circle);
+		background: var(--color-background);
+		color: var(--color-text);
+		font-size: var(--step-1);
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.meeting h2 {
+		margin: 0;
+		font-size: var(--step-2);
+	}
+
+	.meeting__time {
+		margin: 0;
+		font-weight: 600;
+	}
+
+	.meeting__recurring {
+		margin: 0;
+		font-size: var(--step--1);
+		opacity: 0.8;
+	}
+
+	.meeting__description {
+		margin: 0;
+		font-size: var(--step--1);
+		line-height: 1.6;
+		white-space: pre-line;
+	}
+
+	.meeting__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs);
+		margin-top: var(--space-xs);
+	}
+
+	.meeting__primary,
+	.meeting__secondary {
+		padding: var(--space-xs) var(--space-m);
+		border-radius: var(--radius-pill);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.meeting__primary {
+		background: var(--color-button-background);
+		color: var(--color-button-text);
+	}
+
+	.meeting__secondary {
+		border: 1px solid var(--color-link);
+		color: var(--color-link);
+	}
+
+	@media (max-width: 700px) {
+		.calendar__title {
+			width: 100%;
+			margin: var(--space-2xs) 0 0;
+		}
+
+		.calendar__day {
+			min-height: 4.5rem;
+		}
+
+		.calendar__chip-title,
+		.calendar__chip-time {
+			display: none;
+		}
+
+		.calendar__chip {
+			height: 0.5rem;
+			padding: 0;
+			border-left: none;
+			background: var(--meeting-color);
+		}
+
+		.calendar__chip--touchpoint {
+			background: var(--touchpoint-color);
+		}
+
+		.calendar__list-item {
+			grid-template-columns: 1fr;
+			gap: var(--space-3xs);
+		}
+	}
 </style>

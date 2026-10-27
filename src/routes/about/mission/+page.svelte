@@ -91,7 +91,10 @@
 		<div class="governance-block">
 			<h2>Governance playbook</h2>
 			<p>
-				The DevRel Foundation's Steering Committee oversees the Foundation's activities as defined by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">working groups</a> that focus on sourcing and innovating best practices through peer-reviewed resources and materials.
+				The DevRel Foundation's activities are governed by its Charter. The efforts are undertaken by <a href="/about/working-groups" class="link">working groups</a> that focus on sourcing and innovating best practices through peer-reviewed resources and materials.
+			</p>
+			<p>
+				The Foundation is currently in a <a href="/about/governance" class="link">governance transition</a>. The Linux Foundation is facilitating an open community process, run through <a href="/community/touchpoints" class="link">Community Touchpoints</a>, to set the next priorities and establish the next Steering Committee.
 			</p>
 			<p>
 				<strong>Learn more by reviewing:</strong> <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" class="link">Our charter</a> and <a class="link" href="https://github.com/DevRel-Foundation/governance/blob/main/README.md" target="_blank">Playbook</a>.

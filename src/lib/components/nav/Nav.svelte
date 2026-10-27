@@ -45,11 +45,12 @@
       sections: [
         {
           title: 'About the DevRel Foundation',
-          description: 'Our mission and working groups.',
+          description: 'Our mission, governance, and community meetings.',
           items: [
             { title: 'Mission', href: '/about/mission' },
-            { title: 'Steering Committee', href: '/about/steering-committee' },
+            { title: 'Governance', href: '/about/governance' },
             { title: 'Working groups', href: '/about/working-groups' },
+            { title: 'Community Touchpoints', href: '/community/touchpoints' },
             {
               title: 'Community calendar',
               href: '/calendar',

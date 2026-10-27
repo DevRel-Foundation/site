@@ -5,7 +5,6 @@
 <script>
   const emailContacts = [
     { label: "General", email: "info@dev-rel.org" },
-    { label: "Steering Committee", email: "steering-committee@dev-rel.org" },
     { label: "Code of Conduct", email: "conduct@dev-rel.org" }
   ];
 

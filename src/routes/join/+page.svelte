@@ -4,6 +4,7 @@
   import GiftIcon from 'iconoir/icons/gift.svg';
   import MegaphoneIcon from 'iconoir/icons/megaphone.svg';
   import ActionCard from '$lib/components/ui/molecules/ActionCard.svelte';
+  import GovernanceNotice from '$lib/components/ui/molecules/GovernanceNotice.svelte';
 
 
 </script>
@@ -21,6 +22,8 @@
 		<p>
 			Whether you're a seasoned DevRel professional, just starting your journey, or simply interested in learning more about the field, this foundation has a place for you.
 		</p>
+
+		<GovernanceNotice />
 		
 		<div class="u-grid u-grid-3 join-cards">
 			
@@ -38,10 +41,10 @@
 				</p>
 			</ActionCard>
 
-			<ActionCard title="Leaders" ctaLabel="Become a leader" ctaHref="#lead">
-				<p class="action-card__question">Want to establish yourself as an industry leader?</p>
+			<ActionCard title="Community Touchpoints" ctaLabel="Join a Touchpoint" ctaHref="/community/touchpoints">
+				<p class="action-card__question">Want to help shape what comes next?</p>
 				<p>
-					<a href="/contact">Contact</a> the steering committee to learn more about leadership opportunities. We can shape the ecosystem and drive cross-company collaboration with hundreds of participants together.
+					Join our biweekly Community Touchpoints to meet other practitioners, share your work, and help set the Foundation's next priorities.
 				</p>
 			</ActionCard>
 
@@ -95,7 +98,12 @@
 				Working groups often have additional mailing lists to subscribe to for project updates and calendar invites for working group sessions.
 			</p>
 
-			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="step-cta" target="_blank">Step 3. Explore the GitHub repositories</a>
+			<a href="/community/touchpoints" class="step-cta">Step 3. Join a Community Touchpoint</a>
+			<p>
+				<a href="/community/touchpoints">Community Touchpoints</a> are open calls every other Wednesday where the community meets, shares work, and decides together where the foundation can be most useful. Find the next one in the <a href="/calendar">community calendar</a>.
+			</p>
+
+			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="step-cta" target="_blank">Step 4. Explore the GitHub repositories</a>
 			<p>
 				The <a href="https://github.com/orgs/DevRel-Foundation/repositories" target="_blank">DevRel-Foundation GitHub</a> is where you will find all the open-source projects and resources created by the community. Star any projects you find interesting and consider helpful.
 			</p>
@@ -108,7 +116,7 @@
 			Contributing to open-source projects is a great way to give back to the community, improve your skills, and gain recognition for your work.
 		</p>
 		<div class="steps">
-			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="step-cta" target="_blank">Step 4. Make a contribution</a>
+			<a href="https://github.com/orgs/DevRel-Foundation/repositories" class="step-cta" target="_blank">Step 5. Make a contribution</a>
 			<p>
 				To contribute to a project, start by familiarizing yourself with the project's goals and guidelines. Engage with the community to understand their needs and how you can help. Then create issues or pull requests for the projects you are interested in. Join the <a href="/about/working-groups">working groups</a> to collaborate with other contributors.
 			</p>
@@ -126,9 +134,9 @@
 			</div>
 		</div>	
 		<div class="steps">
-			<a href="/projects" class="step-cta" target="_blank">Step 5. Spread the word</a>
+			<a href="/projects" class="step-cta" target="_blank">Step 6. Spread the word</a>
 			<p>
-				Stay connected with the community through foundation events such as community calls, office hours, and working group meetings. These events provide opportunities to share your work, learn from others, and build relationships within the wider DevRel community about our <a href="/projects">projects</a>.
+				Stay connected with the community through foundation events such as <a href="/community/touchpoints">Community Touchpoints</a> and working group meetings. These events provide opportunities to share your work, learn from others, and build relationships within the wider DevRel community about our <a href="/projects">projects</a>.
 			</p>
 		</div>
 		<div class="u-grid u-grid-icon-text">
@@ -143,20 +151,6 @@
 				</ul>
 			</div>
 		</div>	
-	</section>
-	
-	<section class="page-section">
-		<h2 id="lead" class="content-header">Become a leader</h2>
-		<p>
-			How far will you go? Lead a working group, organize events, or become a member of the steering committee in the next election. The foundation is always looking for passionate individuals to take on leadership roles and help shape the future of Developer Relations.
-		</p>
-		<div class="steps">
-			<a href="/about/steering-committee" class="step-cta" target="_blank">Step 6. Contact the Steering Committee</a>
-			<p>
-				If you're interested in taking on a leadership role or have project ideas for the community, reach out to the <a href="/about/steering-committee">steering committee</a>. They can provide guidance, support, and help you get involved in shaping the future of the foundation.
-			</p>
-		</div>
-
 	</section>
 
 </div>

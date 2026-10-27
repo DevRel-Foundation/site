@@ -76,6 +76,7 @@
   import PlantIcon from 'iconoir/icons/regular/watering-soil.svg';
   import TreeIcon from 'iconoir/icons/regular/tree.svg';
   import HeroLogo from '$lib/components/ui/atoms/HeroLogo.svelte';
+  import TouchpointsBand from '$lib/components/page/touchpoints/TouchpointsBand.svelte';
 </script>
 
 <svelte:head>
@@ -170,6 +171,8 @@
 			<button class="content-button" onclick={handleJoinClick}>Get involved</button>
 		</div>
 	</section>
+
+	<TouchpointsBand />
 
 	<section class="layout-section newsletter-wrap">
 		<div class="newsletter-section">
