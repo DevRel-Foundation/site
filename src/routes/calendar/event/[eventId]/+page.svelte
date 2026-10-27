@@ -1,33 +1,22 @@
 <script lang="ts">
-  import Calendar from '$lib/components/Calendar.svelte';
-  import { page } from '$app/state';
-
-  const eventId = $derived(page.params.eventId);
+	import { page } from '$app/state';
+	import Calendar from '$lib/components/Calendar.svelte';
+	import CalendarIntro from '$lib/components/page/calendar/CalendarIntro.svelte';
 </script>
 
-<div class="calendar-page">
-  <h1>DevRel Foundation calendar</h1>
-  <Calendar eventId={eventId} />
+<svelte:head>
+	<title>Community calendar | Developer Relations Foundation</title>
+</svelte:head>
+
+<div class="container calendar-page">
+	<CalendarIntro />
+	{#key page.params.eventId}
+		<Calendar eventId={page.params.eventId} />
+	{/key}
 </div>
 
 <style>
-  .calendar-page {
-    width: 100vw;
-    height: 100vh;
-    margin: var(--space-m) auto;
-    padding: 0;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    display: flex;
-    flex-direction: column;
-  }
-  .calendar-page h1 {
-    margin: var(--space-s) 0;
-    padding: 0 var(--space-m);
-    font-size: var(--step-5);
-    color: var(--color-text);
-  }
+	.calendar-page {
+		margin-block: var(--space-m) var(--space-2xl);
+	}
 </style>

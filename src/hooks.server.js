@@ -20,6 +20,16 @@ const redirects = [
     from: /^\/join-us\/?$/,
     to: '/join',
     status: 302
+  },
+  {
+    from: /^\/about\/steering-committee\/?$/,
+    to: '/about/governance',
+    status: 301
+  },
+  {
+    from: /^\/community\/?$/,
+    to: '/community/touchpoints',
+    status: 302
   }
 ];
 

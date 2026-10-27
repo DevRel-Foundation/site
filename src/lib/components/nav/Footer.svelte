@@ -13,7 +13,7 @@
     <div class="footer-column">
       <h2>About</h2>
       <a href="/about/mission">About DevRel Foundation</a>
-      <a href="/about/steering-committee">Steering Committee</a>
+      <a href="/about/governance">Governance</a>
       <a href="/about/working-groups">Working groups</a>
       <a href="https://github.com/DevRel-Foundation/governance/blob/main/Technical_Charter.adoc" target="_blank" rel="noopener noreferrer">Charter ↗</a>
     </div>
