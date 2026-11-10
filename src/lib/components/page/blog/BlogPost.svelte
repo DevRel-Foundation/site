@@ -5,13 +5,13 @@
   import LinkedInIcon from 'iconoir/icons/linkedin.svg';
   import LinkIcon from 'iconoir/icons/link.svg';
   import FacebookIcon from 'iconoir/icons/facebook.svg';
+  import { topicLabel } from '$lib/blog-topics';
   
   const { 
     title, 
     excerpt, 
     author, 
     date, 
-    category = 'all',
     tags = [],
     readingTime = '',
     image,
@@ -270,7 +270,9 @@
   <header class="blog-header">
     <div class="post-meta">
       <a href="/blog" class="blog-title">Blog</a> | 
-      <a href="/blog/category/{category}" class="category-tag">{category}</a>
+      {#if tags[0]}
+        <a href="/blog/tag/{tags[0]}" class="category-tag">{topicLabel(tags[0])}</a>
+      {/if}
       <time datetime={date}>{new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { 
         year: 'numeric', 
         month: 'long', 
@@ -400,7 +402,7 @@
             <h4 class="sidebar-title">Topics</h4>
             <div class="meta-tags">
               {#each tags as tag (tag)}
-                <a href="/blog/tag/{tag}"><span class="meta-tag">#{tag}</span></a>
+                <a href="/blog/tag/{tag}"><span class="meta-tag">{topicLabel(tag)}</span></a>
               {/each}
             </div>
           </div>

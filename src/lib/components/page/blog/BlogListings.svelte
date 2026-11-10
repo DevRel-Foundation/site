@@ -1,12 +1,13 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
+  import { topicLabel } from '$lib/blog-topics';
 
   type BlogPost = {
     slug: string;
     title: string;
     image?: string;
-    category?: string;
+    tags?: string[];
     date: string;
     author?: string;
     excerpt?: string;
@@ -116,8 +117,8 @@
     <div class="post-content">
       <div class="post-main">
         <div class="post-meta">
-          {#if post.category}
-          <a href="/blog/category/{post.category}" class="category-tag">{post.category}</a>
+          {#if post.tags?.[0]}
+          <a href="/blog/tag/{post.tags[0]}" class="category-tag">{topicLabel(post.tags[0])}</a>
           {/if}
           <time datetime={post.date}>
             {new Date(post.date + 'T12:00:00').toLocaleDateString('en-CA', { 

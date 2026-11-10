@@ -3,8 +3,7 @@ title: "Tools Catalog Moves to Incubation Stage"
 excerpt: "The Tools Catalog project gathers digital and physical tools that aid in the job of DevRel."
 author: "@j12y"
 date: "2025-07-29"
-category: "early-ic"
-tags: ["tools-catalog"]
+tags: ["projects"]
 image: "/images/blog/devrel-foundation-tools-catalog.png"
 ---
 

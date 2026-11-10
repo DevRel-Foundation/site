@@ -1,3 +1,5 @@
+import { topicLabel } from '$lib/blog-topics';
+
 const SITE_URL = 'https://dev-rel.org';
 const SITE_TITLE = 'DevRel Foundation Blog';
 const SITE_DESCRIPTION = 'Elevating the professional practice of Developer Relations';
@@ -33,9 +35,8 @@ export function generateRSSFeed(posts, options = {}) {
       <link>${postUrl}</link>
       <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${postDate}</pubDate>
-      <category>${escapeXml(post.category || '')}</category>
       ${post.author ? `<author>${escapeXml(post.author)}</author>` : ''}
-      ${post.tags ? post.tags.map(tag => `<category>${escapeXml(tag)}</category>`).join('\n      ') : ''}
+      ${post.tags ? post.tags.map(tag => `<category>${escapeXml(topicLabel(tag))}</category>`).join('\n      ') : ''}
     </item>`;
   }).join('\n');
 

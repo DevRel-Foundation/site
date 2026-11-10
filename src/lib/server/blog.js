@@ -30,19 +30,6 @@ export async function getBlogPosts() {
   return posts;
 }
 
-export function getCategories() {
-  return {
-    categories: ['announce', 'early-ic', 'pro-lead', 'exec'],
-    descriptions: {
-      all: "Elevating the professional practice of Developer Relations",
-      announce: "Announcements and updates from the DevRel Foundation",
-      'early-ic': "Resources and insights for early-career Developer Relations professionals",
-      'pro-lead': "Advanced strategies and leadership perspectives for experienced practitioners",
-      exec: "Executive-level insights on the business value of Developer Relations strategy"
-    }
-  };
-}
-
 export async function getBlogPost(slug) {
   const path = `/src/blog/${slug}.md`;
   const post = blogPostsGlob[path];
@@ -62,20 +49,6 @@ export function getBlogPostContent(slug) {
   const path = `/src/blog/${slug}.md`;
   const post = blogPostsGlob[path];
   return post?.default || null;
-}
-
-export async function getBlogPostsByCategory(category) {
-  const posts = await getBlogPosts();
-  
-  if (category === 'all') {
-    return posts;
-  }
-  
-  const filtered = posts.filter(post => {
-    return post.category === category;
-  });
-  
-  return filtered;
 }
 
 export function calculateReadingTime(content) {

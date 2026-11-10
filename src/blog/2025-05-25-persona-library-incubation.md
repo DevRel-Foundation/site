@@ -3,8 +3,7 @@ title: "Persona Library Moves to Incubation Stage"
 excerpt: "The Persona Library aims to capture the sociology behind developer community and technology adoption."
 author: "@j12y"
 date: "2025-05-25"
-category: "pro-lead"
-tags: ["persona-library"]
+tags: ["projects"]
 image: "/images/blog/devrel-foundation-persona-library.png"
 ---
 

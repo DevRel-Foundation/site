@@ -88,10 +88,9 @@
       sections: [
         {
           title: 'Learn about DevRel',
-          description: 'Research, blog posts, guides, and introductions to developer relations.',
+          description: 'Research, guides, and introductions to developer relations.',
           items: [
             { title: 'Research & resources', href: '/learn/resources' },
-            { title: 'DevRel Foundation blog', href: '/blog' },
             { title: 'What is developer relations?', href: '/learn/what-is-devrel' }
           ]
         },
@@ -320,6 +319,9 @@
             {/each}
           </NavDropdown>
         {/each}
+        <li class="nav-item">
+          <a href="/blog" class="nav-link" onclick={closeAll}>Blog</a>
+        </li>
       </ul>
 
       <div class="cta">

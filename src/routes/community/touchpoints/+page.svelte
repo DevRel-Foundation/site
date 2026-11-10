@@ -1,6 +1,6 @@
 <script lang="ts">
+	import CommunitySpotlight from '$lib/components/page/touchpoints/CommunitySpotlight.svelte';
 	import NextTouchpoint from '$lib/components/page/touchpoints/NextTouchpoint.svelte';
-	import GovernanceNotice from '$lib/components/ui/molecules/GovernanceNotice.svelte';
 	import CtaButton from '$lib/components/ui/primitives/CtaButton.svelte';
 	import {
 		DISCORD_URL,
@@ -56,14 +56,13 @@
 				most useful.
 			</p>
 			<div class="touchpoints__ctas">
-				<CtaButton href="/calendar">See the calendar</CtaButton>
-				<a class="touchpoints__secondary" href="/community/touchpoints/submit">Submit a session</a>
+				<CtaButton href="#community-spotlight">See sessions</CtaButton>
 			</div>
 		</div>
 		<NextTouchpoint />
 	</section>
 
-	<GovernanceNotice compact />
+	<CommunitySpotlight />
 
 	<section class="touchpoints__section">
 		<h2>How Touchpoints work</h2>
