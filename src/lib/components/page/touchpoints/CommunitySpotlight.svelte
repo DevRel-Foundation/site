@@ -9,6 +9,9 @@
 
 	const speakers = [...TOUCHPOINT_SPEAKERS].sort((a, b) => a.date.localeCompare(b.date));
 
+	/** Copies of the card list in each half of the scrolling track; 3 covers screens up to ~3900px. */
+	const SETS_PER_HALF = 3;
+
 	/** Touchpoint event pages keyed by UTC date (YYYY-MM-DD). */
 	let eventLinks = $state<Record<string, string>>({});
 
@@ -113,14 +116,21 @@
 	</p>
 
 	<div class="spotlight__viewport">
-		<div class="spotlight__track">
-			<ul class="spotlight__row">
-				{@render cards(false)}
-			</ul>
-			<!-- Duplicate row for a seamless loop: clickable, but skipped by screen readers and Tab. -->
-			<ul class="spotlight__row spotlight__row--clone" aria-hidden="true">
-				{@render cards(true)}
-			</ul>
+		<!--
+			The track is two identical halves of SETS_PER_HALF copies each, so moving it by -50%
+			loops seamlessly and each half is wider than any screen. Only the first copy is read by
+			screen readers and reached with Tab; the rest are clickable copies.
+		-->
+		<div class="spotlight__track" style="--spotlight-duration: {SETS_PER_HALF * 45}s">
+			{#each Array.from({ length: SETS_PER_HALF * 2 }, (_, i) => i) as copy (copy)}
+				<ul
+					class="spotlight__row"
+					class:spotlight__row--clone={copy > 0}
+					aria-hidden={copy > 0 ? 'true' : undefined}
+				>
+					{@render cards(copy > 0)}
+				</ul>
+			{/each}
 		</div>
 	</div>
 </section>
@@ -159,7 +169,7 @@
 	.spotlight__track {
 		display: flex;
 		width: max-content;
-		animation: spotlight-scroll 45s linear infinite;
+		animation: spotlight-scroll var(--spotlight-duration, 135s) linear infinite;
 	}
 
 	.spotlight__viewport:hover .spotlight__track,
