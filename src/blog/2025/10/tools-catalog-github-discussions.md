@@ -5,8 +5,7 @@ excerpt: |
     used for engaging your developer community.
 author: "@j12y"
 date: "2025-10-18"
-category: "early-ic"
-tags: ["tools-catalog"]
+tags: ["projects", "community"]
 image: "/images/blog/devrel-foundation-tools-catalog.png"
 ---
 

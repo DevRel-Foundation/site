@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import BlogPost from '$lib/components/page/blog/BlogPost.svelte';
+  import { topicLabel } from '$lib/blog-topics';
   import { onMount } from 'svelte';
   import type { Component } from 'svelte';
   
@@ -43,10 +44,10 @@
   <meta property="og:site_name" content="DevRel Foundation" />
   <meta property="article:author" content={post?.author || 'DevRel Foundation'} />
   <meta property="article:published_time" content={post?.date ? `${post.date}T00:00:00Z` : ''} />
-  <meta property="article:section" content={post?.category || 'DevRel'} />
+  <meta property="article:section" content={post?.tags?.[0] ? topicLabel(post.tags[0]) : 'DevRel'} />
   {#if post?.tags}
     {#each post.tags as tag (tag)}
-      <meta property="article:tag" content={tag} />
+      <meta property="article:tag" content={topicLabel(tag)} />
     {/each}
   {/if}
   

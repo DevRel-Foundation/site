@@ -3,8 +3,7 @@ title: "Top 10 Definitions of Developer Relations"
 excerpt: "What is Developer Relations anyway?"
 author: "@j12y"
 date: "2025-08-04"
-category: "exec"
-tags: ["orgs"]
+tags: ["devrel-practice"]
 ---
 
 With the Developer Relations Foundation, we are on a mission to elevate the professional practice of Developer Relations. 

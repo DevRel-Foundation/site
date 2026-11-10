@@ -1,22 +1,24 @@
-import { getBlogPosts, getCategories } from '$lib/server/blog.js';
-import { error } from '@sveltejs/kit';
+import { getBlogPosts } from '$lib/server/blog.js';
+import { LEGACY_TAG_TOPICS, getTopic, topicsWithPosts } from '$lib/blog-topics';
+import { error, redirect } from '@sveltejs/kit';
 
 export async function load({ params }) {
-  try {
-    const posts = await getBlogPosts();
-    const categoryData = getCategories();
-    
-    const filteredPosts = posts.filter(post => 
-      post.tags && post.tags.includes(params.tag)
-    );
-    
-    return {
-      posts: filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date)),
-      tag: params.tag,
-      categoryDescriptions: categoryData.descriptions
-    };
-  } catch (err) {
-    console.error('Error loading tag page:', err);
-    throw error(500, 'Failed to load tag posts');
+  const legacy = LEGACY_TAG_TOPICS[params.tag];
+  if (legacy) {
+    redirect(301, `/blog/tag/${legacy}`);
   }
+
+  const topic = getTopic(params.tag);
+  if (!topic) {
+    error(404, 'Topic not found');
+  }
+
+  const posts = await getBlogPosts();
+  const filteredPosts = posts.filter((post) => post.tags?.includes(topic.slug));
+
+  return {
+    posts: filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date)),
+    topic,
+    topics: topicsWithPosts(posts)
+  };
 }

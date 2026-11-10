@@ -2,25 +2,14 @@
   import { page } from '$app/state';
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
   import ContributorCallout from '$lib/components/page/blog/ContributorCallout.svelte';
-  
+  import TopicNav from '$lib/components/page/blog/TopicNav.svelte';
+  import { ALL_TOPICS_DESCRIPTION } from '$lib/blog-topics';
+
   const { data } = $props();
-  const { posts, categories, categoryDescriptions } = data;
-  
-  let hoveredCategory = $state<string | null>(null);
-  
-  function handleCategoryHover(category: string) {
-    hoveredCategory = category;
-  }
-  
-  function handleCategoryLeave() {
-    hoveredCategory = null;
-  }
-  
-  const currentDescription = $derived(
-    hoveredCategory
-      ? (categoryDescriptions as Record<string, string>)[hoveredCategory] ?? categoryDescriptions.all
-      : categoryDescriptions.all
-  );
+  const { posts, topics } = data;
+
+  let preview = $state<string | null>(null);
+  const currentDescription = $derived(preview ?? ALL_TOPICS_DESCRIPTION);
 </script>
 
 <svelte:head>
@@ -82,27 +71,12 @@
     <h1>DevRel Foundation news</h1>
     <p>{currentDescription}</p>
     
-    <nav class="category-nav">
-      <a href="/blog" 
-         class="category-link {!page.url.pathname.includes('/category/') ? 'active' : ''}"
-         onmouseenter={() => handleCategoryHover('all')}
-         onmouseleave={handleCategoryLeave}>
-        all 
-      </a>
-      {#each categories as category (category)}
-        <a href="/blog/category/{category}" 
-           class="category-link"
-           onmouseenter={() => handleCategoryHover(category)}
-           onmouseleave={handleCategoryLeave}>
-          {category}
-        </a>
-      {/each}
-      <a href="/blog/feed.xml" class="rss-link" title="Subscribe to RSS feed" aria-label="Subscribe to RSS feed" data-sveltekit-reload>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248S0 22.546 0 20.752s1.456-3.248 3.252-3.248 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
-        </svg>
-      </a>
-    </nav>
+    <TopicNav
+      {topics}
+      feedHref="/blog/feed.xml"
+      feedLabel="Subscribe to RSS feed"
+      onPreview={(description) => (preview = description)}
+    />
   </header>
   
   <BlogListings {posts} />
@@ -126,26 +100,4 @@
     max-width: 60ch;
   }
 
-  .category-nav {
-    display: flex;
-    justify-content: flex-start;
-    gap: var(--space-s);
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  
-  .rss-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--color-background-secondary-2-dark);
-    transition: all 0.2s ease;
-    padding: var(--space-2xs);
-  }
-  
-  .rss-link:hover {
-    color: var(--color-background-secondary-2-dark);
-    opacity: 0.7;
-  }
 </style>

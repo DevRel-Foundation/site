@@ -89,8 +89,7 @@ title: "Your Blog Post Title"
 excerpt: "A brief description (1-2 sentences) that will appear in listings"
 author: "@your-github-username"
 date: "YYYY-MM-DD"
-category: "announce|early-ic|pro-lead|exec"
-tags: ["tag1", "tag2", "tag3"]
+tags: ["community", "agent-experience"]
 ---
 ```
 
@@ -99,12 +98,16 @@ tags: ["tag1", "tag2", "tag3"]
 - `excerpt`: Brief summary for social sharing and listings
 - `author`: Your GitHub username (prefixed with @)
 - `date`: Publication date in YYYY-MM-DD format
-- `category`: Content type or primary audience — one of:
-  - `announce` — announcements from the DevRel Foundation
-  - `early-ic` — resources and insights for early-career DevRel professionals
-  - `pro-lead` — advanced strategies and leadership perspectives for experienced practitioners
-  - `exec` — executive-level insights on the business value of DevRel
-- `tags`: 2-5 relevant tags for categorization
+- `tags`: 1-3 topics from the list below. The first one is the post's main topic and appears as its label. Topics are defined in `src/lib/blog-topics.ts`; add new ones there.
+  - `newsletter` — the monthly DevRel Foundation digest
+  - `foundation-news` — launches, announcements, and milestones
+  - `governance` — elections, the Steering Committee, the charter
+  - `community` — Community Touchpoints, events, show and tell, spotlights
+  - `projects` — Tools Catalog, Persona Library, and other Foundation projects
+  - `agent-experience` — agents, agent-assisted DevRel workflows, docs for agents
+  - `developer-experience` — onboarding, documentation, DX research
+  - `evals-measurement` — metrics, ROI, evaluating DevRel programs and AI tools
+  - `devrel-practice` — what DevRel is, careers, team strategy
 
 ### Content Guidelines
 
