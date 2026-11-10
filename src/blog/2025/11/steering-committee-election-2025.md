@@ -4,7 +4,7 @@ excerpt: |
    Results from the 2025 Elections for the DevRel Foundation Steering Committee
 author: "@katiewaz1977"
 date: "2025-11-10"
-tags: ["governance"]
+tags: ["announcements"]
 ---
 
 The DevRel Foundation has completed its first election cycle since its full formation in August 2025, and we’re pleased to share the results.

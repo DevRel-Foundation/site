@@ -3,7 +3,7 @@ title: "Developer Relations Foundation Intent to Form"
 excerpt: "The Linux Foundation announces intent to form Developer Relations Foundation."
 author: "@devrel-foundation"
 date: "2024-09-16"
-tags: ["foundation-news", "governance"]
+tags: ["announcements"]
 image: "/images/blog/devrel-foundation-governance.png"
 ---
 

@@ -6,10 +6,7 @@
   import { ALL_TOPICS_DESCRIPTION } from '$lib/blog-topics';
 
   const { data } = $props();
-  const { posts, topics } = data;
-
-  let preview = $state<string | null>(null);
-  const currentDescription = $derived(preview ?? ALL_TOPICS_DESCRIPTION);
+  const { posts } = data;
 </script>
 
 <svelte:head>
@@ -69,14 +66,9 @@
 <div class="container">
   <header class="blog-header">
     <h1>DevRel Foundation news</h1>
-    <p>{currentDescription}</p>
+    <p>{ALL_TOPICS_DESCRIPTION}</p>
     
-    <TopicNav
-      {topics}
-      feedHref="/blog/feed.xml"
-      feedLabel="Subscribe to RSS feed"
-      onPreview={(description) => (preview = description)}
-    />
+    <TopicNav feedHref="/blog/feed.xml" feedLabel="Subscribe to RSS feed" />
   </header>
   
   <BlogListings {posts} />

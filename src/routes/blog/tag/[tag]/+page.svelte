@@ -2,15 +2,10 @@
   import BlogListings from '$lib/components/page/blog/BlogListings.svelte';
   import ContributorCallout from '$lib/components/page/blog/ContributorCallout.svelte';
   import TopicNav from '$lib/components/page/blog/TopicNav.svelte';
-  import { BLOG_TOPICS } from '$lib/blog-topics';
 
   const { data } = $props();
   const posts = $derived(data.posts);
   const topic = $derived(data.topic);
-  // Keep the current topic in the filters even before it has posts (e.g. a new newsletter).
-  const topics = $derived(
-    BLOG_TOPICS.filter((t) => t.slug === topic.slug || data.topics.some((u) => u.slug === t.slug))
-  );
 </script>
 
 <svelte:head>
@@ -26,7 +21,6 @@
     <p>{topic.description}</p>
 
     <TopicNav
-      {topics}
       active={topic.slug}
       feedHref="/blog/tag/{topic.slug}/feed.xml"
       feedLabel="Subscribe to the {topic.label} RSS feed"

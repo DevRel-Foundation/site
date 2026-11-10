@@ -1,5 +1,5 @@
 import { getBlogPosts } from '$lib/server/blog.js';
-import { LEGACY_TAG_TOPICS, getTopic, topicsWithPosts } from '$lib/blog-topics';
+import { LEGACY_TAG_TOPICS, getTopic } from '$lib/blog-topics';
 import { error, redirect } from '@sveltejs/kit';
 
 export async function load({ params }) {
@@ -18,7 +18,6 @@ export async function load({ params }) {
 
   return {
     posts: filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date)),
-    topic,
-    topics: topicsWithPosts(posts)
+    topic
   };
 }

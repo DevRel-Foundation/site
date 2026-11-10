@@ -5,24 +5,19 @@ export interface BlogTopic {
 }
 
 /**
- * The blog's topics. Posts list them in frontmatter as `tags: ["governance", ...]`;
+ * The blog's topics. Posts list them in frontmatter as `tags: ["announcements", ...]`;
  * the first one is the post's primary topic. Order here is the order of the filters.
  */
 export const BLOG_TOPICS: BlogTopic[] = [
 	{
+		slug: 'announcements',
+		label: 'Announcements',
+		description: 'News, elections, and governance updates from the DevRel Foundation.'
+	},
+	{
 		slug: 'newsletter',
 		label: 'Newsletter',
 		description: 'The monthly DevRel Foundation digest.'
-	},
-	{
-		slug: 'foundation-news',
-		label: 'Foundation news',
-		description: 'Launches, announcements, and milestones from the DevRel Foundation.'
-	},
-	{
-		slug: 'governance',
-		label: 'Governance',
-		description: 'Elections, the Steering Committee, the charter, and how the Foundation is run.'
 	},
 	{
 		slug: 'community',
@@ -36,19 +31,20 @@ export const BLOG_TOPICS: BlogTopic[] = [
 	},
 	{
 		slug: 'agent-experience',
-		label: 'Agent Experience (AX)',
+		label: 'Agent Experience',
 		description:
 			'Agents, agent-assisted DevRel workflows, and making docs and products work for agents.'
 	},
 	{
 		slug: 'developer-experience',
-		label: 'Developer Experience (DX)',
+		label: 'Developer Experience',
 		description: 'Onboarding, documentation, and research on the developer experience.'
 	},
 	{
-		slug: 'evals-measurement',
-		label: 'Evals & Measurement',
-		description: 'Metrics, ROI, and how to evaluate DevRel programs and AI tools.'
+		slug: 'metrics-impact',
+		label: 'Metrics & Impact',
+		description:
+			'Measuring DevRel: metrics, ROI, attribution, and showing the impact of programs and tools.'
 	},
 	{
 		slug: 'devrel-practice',
@@ -61,7 +57,7 @@ export const ALL_TOPICS_DESCRIPTION = 'Elevating the professional practice of De
 
 /** Old audience categories, mapped to the closest topic for redirects. */
 export const LEGACY_CATEGORY_TOPICS: Record<string, string> = {
-	announce: 'foundation-news',
+	announce: 'announcements',
 	'early-ic': 'devrel-practice',
 	'pro-lead': 'devrel-practice',
 	exec: 'devrel-practice'
@@ -69,8 +65,10 @@ export const LEGACY_CATEGORY_TOPICS: Record<string, string> = {
 
 /** Old free-form tags, mapped to topics so existing links keep working. */
 export const LEGACY_TAG_TOPICS: Record<string, string> = {
-	foundation: 'foundation-news',
-	elections: 'governance',
+	foundation: 'announcements',
+	'foundation-news': 'announcements',
+	governance: 'announcements',
+	elections: 'announcements',
 	events: 'community',
 	'community-touchpoints': 'community',
 	agents: 'agent-experience',
@@ -87,10 +85,4 @@ export function getTopic(slug: string | undefined): BlogTopic | undefined {
 
 export function topicLabel(slug: string): string {
 	return getTopic(slug)?.label ?? slug;
-}
-
-/** Topics that have at least one post, in BLOG_TOPICS order. */
-export function topicsWithPosts(posts: Array<{ tags?: string[] }>): BlogTopic[] {
-	const used = new Set(posts.flatMap((post) => post.tags ?? []));
-	return BLOG_TOPICS.filter((topic) => used.has(topic.slug));
 }

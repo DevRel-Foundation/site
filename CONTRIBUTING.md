@@ -99,14 +99,13 @@ tags: ["community", "agent-experience"]
 - `author`: Your GitHub username (prefixed with @)
 - `date`: Publication date in YYYY-MM-DD format
 - `tags`: 1-3 topics from the list below. The first one is the post's main topic and appears as its label. Topics are defined in `src/lib/blog-topics.ts`; add new ones there.
+  - `announcements` — news, elections, and governance updates
   - `newsletter` — the monthly DevRel Foundation digest
-  - `foundation-news` — launches, announcements, and milestones
-  - `governance` — elections, the Steering Committee, the charter
   - `community` — Community Touchpoints, events, show and tell, spotlights
   - `projects` — Tools Catalog, Persona Library, and other Foundation projects
   - `agent-experience` — agents, agent-assisted DevRel workflows, docs for agents
   - `developer-experience` — onboarding, documentation, DX research
-  - `evals-measurement` — metrics, ROI, evaluating DevRel programs and AI tools
+  - `metrics-impact` — metrics, ROI, attribution, and showing DevRel's impact
   - `devrel-practice` — what DevRel is, careers, team strategy
 
 ### Content Guidelines

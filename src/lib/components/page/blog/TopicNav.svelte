@@ -1,17 +1,14 @@
 <script lang="ts">
-	import type { BlogTopic } from '$lib/blog-topics';
+	import { BLOG_TOPICS } from '$lib/blog-topics';
 
 	interface Props {
-		topics: BlogTopic[];
 		/** Slug of the topic being viewed; omit on the all-posts page. */
 		active?: string;
 		feedHref: string;
 		feedLabel: string;
-		/** Called with a description while a filter is hovered, or null when it is left. */
-		onPreview?: (description: string | null) => void;
 	}
 
-	let { topics, active, feedHref, feedLabel, onPreview = () => {} }: Props = $props();
+	let { active, feedHref, feedLabel }: Props = $props();
 </script>
 
 <nav class="topic-nav" aria-label="Blog topics">
@@ -20,18 +17,15 @@
 		class="category-link"
 		class:active={!active}
 		aria-current={!active ? 'page' : undefined}
-		onmouseenter={() => onPreview(null)}
 	>
 		All
 	</a>
-	{#each topics as topic (topic.slug)}
+	{#each BLOG_TOPICS as topic (topic.slug)}
 		<a
 			href="/blog/tag/{topic.slug}"
 			class="category-link"
 			class:active={active === topic.slug}
 			aria-current={active === topic.slug ? 'page' : undefined}
-			onmouseenter={() => onPreview(topic.description)}
-			onmouseleave={() => onPreview(null)}
 		>
 			{topic.label}
 		</a>
@@ -56,7 +50,14 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--space-xs);
+		gap: var(--space-2xs);
+	}
+
+	/* Smaller than the site-wide pill so all topics fit on one or two lines. */
+	.topic-nav .category-link {
+		padding: var(--space-3xs) var(--space-xs);
+		font-size: var(--step--1);
+		letter-spacing: 0.02em;
 	}
 
 	.rss-link {
