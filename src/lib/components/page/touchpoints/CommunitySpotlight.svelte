@@ -66,7 +66,6 @@
 					alt=""
 					width="96"
 					height="96"
-					loading="lazy"
 					referrerpolicy="no-referrer"
 				/>
 			{:else}
@@ -207,6 +206,7 @@
 
 	.spotlight__row {
 		display: flex;
+		flex: none;
 		gap: var(--space-s);
 		margin: 0;
 		padding: 0 var(--space-s) 0 0;
@@ -215,7 +215,10 @@
 
 	.spotlight__card {
 		display: flex;
-		flex: 0 0 15rem;
+		/* Fixed width (not just flex-basis) so every browser sizes the row from 15rem cards,
+		   not from the unwrapped length of the longest topic. */
+		flex: none;
+		width: 15rem;
 		flex-direction: column;
 		align-items: center;
 		margin: 0;
