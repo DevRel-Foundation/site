@@ -28,39 +28,14 @@ export const BLOG_TOPICS: BlogTopic[] = [
 		slug: 'projects',
 		label: 'Projects',
 		description: 'Updates from Foundation projects such as the Tools Catalog and Persona Library.'
-	},
-	{
-		slug: 'agent-experience',
-		label: 'Agent Experience',
-		description:
-			'Agents, agent-assisted DevRel workflows, and making docs and products work for agents.'
-	},
-	{
-		slug: 'developer-experience',
-		label: 'Developer Experience',
-		description: 'Onboarding, documentation, and research on the developer experience.'
-	},
-	{
-		slug: 'metrics-impact',
-		label: 'Metrics & Impact',
-		description:
-			'Measuring DevRel: metrics, ROI, attribution, and showing the impact of programs and tools.'
-	},
-	{
-		slug: 'devrel-practice',
-		label: 'DevRel Practice',
-		description: 'What developer relations is, careers in DevRel, and team strategy.'
 	}
 ];
 
 export const ALL_TOPICS_DESCRIPTION = 'Elevating the professional practice of Developer Relations';
 
-/** Old audience categories, mapped to the closest topic for redirects. */
+/** Old audience categories, mapped to the closest topic for redirects (others go to /blog). */
 export const LEGACY_CATEGORY_TOPICS: Record<string, string> = {
-	announce: 'announcements',
-	'early-ic': 'devrel-practice',
-	'pro-lead': 'devrel-practice',
-	exec: 'devrel-practice'
+	announce: 'announcements'
 };
 
 /** Old free-form tags, mapped to topics so existing links keep working. */
@@ -71,10 +46,10 @@ export const LEGACY_TAG_TOPICS: Record<string, string> = {
 	elections: 'announcements',
 	events: 'community',
 	'community-touchpoints': 'community',
-	agents: 'agent-experience',
+	agents: 'community',
 	'tools-catalog': 'projects',
 	'persona-library': 'projects',
-	orgs: 'devrel-practice'
+	orgs: 'community'
 };
 
 const TOPICS_BY_SLUG = new Map(BLOG_TOPICS.map((topic) => [topic.slug, topic]));

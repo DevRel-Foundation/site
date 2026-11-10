@@ -4,7 +4,7 @@ excerpt: |
    Community Touchpoints are where the DevRel Foundation's next phase takes shape. We're inviting show-and-tell sessions on agent-assisted DevRel workflows, and you can now submit yours on the website.
 author: "@devrel-foundation"
 date: "2026-10-27"
-tags: ["community", "agent-experience"]
+tags: ["community"]
 ---
 
 The DevRel Foundation is in a governance transition. As we [shared in July](https://github.com/DevRel-Foundation/governance/discussions/165), the previous Steering Committee has completed its service, and the Linux Foundation is facilitating an open community process to shape the Foundation's next priorities, contribution paths, and leadership.

@@ -89,7 +89,7 @@ title: "Your Blog Post Title"
 excerpt: "A brief description (1-2 sentences) that will appear in listings"
 author: "@your-github-username"
 date: "YYYY-MM-DD"
-tags: ["community", "agent-experience"]
+tags: ["community"]
 ---
 ```
 
@@ -103,10 +103,6 @@ tags: ["community", "agent-experience"]
   - `newsletter` — the monthly DevRel Foundation digest
   - `community` — Community Touchpoints, events, show and tell, spotlights
   - `projects` — Tools Catalog, Persona Library, and other Foundation projects
-  - `agent-experience` — agents, agent-assisted DevRel workflows, docs for agents
-  - `developer-experience` — onboarding, documentation, DX research
-  - `metrics-impact` — metrics, ROI, attribution, and showing DevRel's impact
-  - `devrel-practice` — what DevRel is, careers, team strategy
 
 ### Content Guidelines
 
