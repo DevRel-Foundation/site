@@ -9,8 +9,8 @@
 
 	const speakers = [...TOUCHPOINT_SPEAKERS].sort((a, b) => a.date.localeCompare(b.date));
 
-	/** Copies of the card list in each half of the scrolling track; 3 covers screens up to ~3900px. */
-	const SETS_PER_HALF = 3;
+	/** Copies of the card list in each half of the scrolling track; each half must be wider than the page container. */
+	const SETS_PER_HALF = 2;
 
 	/** Touchpoint event pages keyed by UTC date (YYYY-MM-DD). */
 	let eventLinks = $state<Record<string, string>>({});
@@ -162,13 +162,35 @@
 	}
 
 	.spotlight__viewport {
+		position: relative;
 		overflow: hidden;
-		mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+	}
+
+	/* Edge fades drawn on top of the row (a mask on the moving row can leave parts unpainted). */
+	.spotlight__viewport::before,
+	.spotlight__viewport::after {
+		content: '';
+		position: absolute;
+		inset-block: 0;
+		z-index: 1;
+		width: var(--space-l);
+		pointer-events: none;
+	}
+
+	.spotlight__viewport::before {
+		left: 0;
+		background: linear-gradient(to right, var(--color-background), transparent);
+	}
+
+	.spotlight__viewport::after {
+		right: 0;
+		background: linear-gradient(to left, var(--color-background), transparent);
 	}
 
 	.spotlight__track {
 		display: flex;
 		width: max-content;
+		will-change: transform;
 		animation: spotlight-scroll var(--spotlight-duration, 135s) linear infinite;
 	}
 
@@ -278,7 +300,11 @@
 	@media (prefers-reduced-motion: reduce) {
 		.spotlight__viewport {
 			overflow-x: auto;
-			mask-image: none;
+		}
+
+		.spotlight__viewport::before,
+		.spotlight__viewport::after {
+			display: none;
 		}
 
 		.spotlight__track {
