@@ -11,9 +11,9 @@ export interface TouchpointSpeaker {
 export const TOUCHPOINT_SPEAKERS: TouchpointSpeaker[] = [
 	{
 		name: 'Max Körbächer',
-		role: 'Co-Founder & Associate Partner',
+		role: 'Founder & Chief Technology Advisor',
 		company: 'Liquid Reply',
-		image: 'https://devopscon.io/wp-content/uploads/2022/02/Max-Korbacher.jpg',
+		image: 'https://max.koerbaecher.io/_astro/max-profil.CuRaYPSR_Z187njP.webp',
 		topic: 'The Infrastructure Factory',
 		date: '2026-11-11'
 	},
