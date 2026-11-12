@@ -5,7 +5,7 @@ excerpt: |
 author: "@anajsana, @mkorbi"
 date: "2026-11-12"
 tags: ["community"]
-image: "/images/blog/2026/11/infrastructure-factory-show-and-tell.jpg"
+image: "/images/blog/2026/infrastructure-factory-show-and-tell.jpg"
 ---
 
 At the November 11 Community Touchpoint, Max Körbächer presented **The Infrastructure Factory** as one of our first [show-and-tell sessions](/blog/2026/10/community-touchpoints-show-and-tell).
