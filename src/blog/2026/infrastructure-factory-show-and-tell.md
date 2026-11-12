@@ -41,23 +41,21 @@ The session closed with a message for our profession: your next developers are a
 - **Your documentation has a new reader:** Agents read documentation faster than anyone has written it. Tool descriptions and clear contracts are now part of your docs.
 - **A "no" is a teaching moment:** For an agent, "no" means "reshape the request". The reason behind a refusal helps agents, and people, find the next step.
 
-## From the group discussion
 
-The recording ends with the talk, but a group discussion followed. Here are two answers from it.
+## What the community is working on
 
-- **On humans in the loop:** Max explained that many approval steps have a predictable result, so you can turn them into rules over time. You still need a way to stop and ask a person when a case is new.
-- **On the numbers:** Max asked the audience to read industry statistics with care, because the organizations that publish them often benefit from them. In one customer migration project, his team saw time savings of more than 60%. That is one part of the process, not the whole factory.
+The call also included a few Foundation updates:
 
-## Resources
+- Show-and-tell sessions now have their own place on the [Community Touchpoints page](/community/touchpoints), with the upcoming speakers and a form to submit yours
+- A group of community members is planning a virtual unconference to define the DevRel Foundation priorities for 2027, with breakout rooms for each topic, and you can still propose a topic
+- The community has also started to define how existing projects can be donated to the Foundation, because there is no documented process for that yet. You can follow that work, and share how your organization handles it, in the [GitHub discussion](https://github.com/DevRel-Foundation/governance/discussions/174) and on [Discord](https://discord.gg/G7CSTKZcuT)
+
+## Resources shared
 
 - [Watch the session on YouTube](https://youtu.be/J0oPv6MzraY)
 - [Slides for this session](https://infrastructure-factory.com/presentations/devrel-foundation/)
 - [The Infrastructure Factory website](https://infrastructure-factory.com/)
 - [Source on GitHub](https://github.com/mkorbi/infrastructure-factory)
-
-## What the community is working on
-
-The call also included a few Foundation updates. Show-and-tell sessions now have their own place on the [Community Touchpoints page](/community/touchpoints), with the upcoming speakers and a form to submit yours. A group of community members is planning a virtual unconference to define the DevRel Foundation priorities for 2027, with breakout rooms for each topic, and you can still propose a topic. The community has also started to define how existing projects can be donated to the Foundation, because there is no documented process for that yet. You can follow that work, and share how your organization handles it, in the [GitHub discussion](https://github.com/DevRel-Foundation/governance/discussions/174) and on [Discord](https://discord.gg/G7CSTKZcuT).
 
 ## Join the next Community Touchpoint
 
