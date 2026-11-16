@@ -39,8 +39,24 @@ export const TOUCHPOINT_SPEAKERS: TouchpointSpeaker[] = [
 		company: 'Microsoft',
 		image:
 			'https://media.licdn.com/dms/image/v2/D4E03AQGc0p-IE8BJeQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1687003102248?e=1795651200&v=beta&t=Wzud_bKo4LoxvdA15MymTOXGFEZ5CReZQ-KJMKNLhDE',
-		topic: 'DevAX: how DevRel can use the Agent Experience Practitioner Playbook',
+		topic: 'AI agents are your new developer audience',
 		date: '2026-12-16'
+	},
+	{
+		name: 'Garry Trinder',
+		role: 'Senior Cloud Advocate',
+		company: 'Microsoft',
+		image:
+			'https://media.licdn.com/dms/image/v2/D4E03AQFl6fMeu-TVtA/profile-displayphoto-crop_800_800/B4EaCuq_46KEAI-/0/1789636903874?e=1796256000&v=beta&t=5InmqjFBv-nDc4ZAEFSgUrKiEnbnT1_49OdJv8EcN7I',
+		topic: 'AI agents are your new developer audience',
+		date: '2026-12-16'
+	},
+	{
+		name: 'Marcos Placona',
+		image:
+			'https://media.licdn.com/dms/image/v2/C4E03AQGDQmsb7kgGSg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1647423969474?e=1796256000&v=beta&t=t9ZYwJ7aTvNAuv4IcC4qonmffuDqyqeKynolAOER4z0',
+		topic: 'Write it down once: giving DevRel agents the context they keep asking for',
+		date: '2027-01-13'
 	}
 ];
 

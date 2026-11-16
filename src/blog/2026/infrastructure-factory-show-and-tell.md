@@ -65,7 +65,8 @@ Upcoming show-and-tell sessions:
 
 - **November 25:** Kate Astrid, "From Slides to Websites"
 - **December 9:** Raul Jimenez Ortega, "OpenTechEvents Specification"
-- **December 16:** Waldek Mastykarz, "DevAX: how DevRel can use the Agent Experience Practitioner Playbook"
+- **December 16:** Waldek Mastykarz and Garry Trinder, "AI agents are your new developer audience"
+- **January 13:** Marcos Placona, "Write it down once: giving DevRel agents the context they keep asking for"
 
 Find every session in the [community calendar](/calendar), and learn how to join on the [Community Touchpoints page](/community/touchpoints).
 
