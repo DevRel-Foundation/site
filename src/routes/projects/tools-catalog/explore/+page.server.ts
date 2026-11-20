@@ -23,7 +23,6 @@ export async function load({ fetch }: { fetch: typeof globalThis.fetch }) {
     const count = data.count;
     let tools: any = toolsData.tools || {};
 
-    // TODO: the server library could be reused but it's not currently structured for label/value pairs the way the dropdown components expect; refactor there and we can align the schema-reader.ts functions
     const labels = data.labels.map((l: any) => ({
       label: l ?? String(l),
       value: l ?? String(l)

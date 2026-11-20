@@ -6,11 +6,7 @@
 	const CODE_OF_CONDUCT_URL =
 		'https://github.com/DevRel-Foundation/governance/blob/main/code_of_conduct.md';
 
-	const formats = [
-		{ value: 'Show and tell', label: 'Show and tell: demo a workflow' },
-		{ value: 'Lightning talk', label: 'Lightning talk: share what you learned' },
-		{ value: 'Discussion starter', label: 'Discussion starter: bring a question or problem' }
-	];
+	const formats = ['Demo a workflow', 'Share what you learned', 'Bring a question or problem'];
 
 	const durations = ['5 to 10 minutes', '15 minutes', '20 to 30 minutes'];
 
@@ -21,6 +17,7 @@
 	];
 
 	let status = $state<'idle' | 'submitting' | 'success' | 'error'>('idle');
+	let presentedBefore = $state('');
 
 	async function handleSubmit(event: SubmitEvent) {
 		event.preventDefault();
@@ -40,6 +37,7 @@
 			});
 			if (!response.ok) throw new Error(`HTTP ${response.status}`);
 			form.reset();
+			presentedBefore = '';
 			status = 'success';
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		} catch (error) {
@@ -110,9 +108,21 @@
 						<small>We only use your email to coordinate your session.</small>
 					</label>
 				</div>
+				<label class="submit__field">
+					<span>Social media profile <abbr title="required">*</abbr></span>
+					<input
+						name="profile"
+						type="url"
+						placeholder="https://"
+						required
+						maxlength="300"
+						autocomplete="url"
+					/>
+					<small>A public profile such as LinkedIn, Mastodon, or GitHub.</small>
+				</label>
 				<div class="submit__row">
 					<label class="submit__field">
-						<span>GitHub or Discord username</span>
+						<span>DRF Discord username</span>
 						<input name="handle" type="text" maxlength="100" />
 					</label>
 					<label class="submit__field">
@@ -132,8 +142,8 @@
 					<label class="submit__field">
 						<span>Format <abbr title="required">*</abbr></span>
 						<select name="format" required>
-							{#each formats as format (format.value)}
-								<option value={format.value}>{format.label}</option>
+							{#each formats as format (format)}
+								<option value={format}>{format}</option>
 							{/each}
 						</select>
 					</label>
@@ -147,10 +157,26 @@
 					</label>
 				</div>
 				<label class="submit__field">
-					<span>What will you share? <abbr title="required">*</abbr></span>
+					<span>Abstract <abbr title="required">*</abbr></span>
 					<textarea name="summary" rows="5" required maxlength="2000"></textarea>
 					<small>The problem, how your workflow solves it, and what the community will learn.</small
 					>
+				</label>
+				<label class="submit__field">
+					<span
+						>What DevRel responsibility or challenge does your session address? <abbr
+							title="required">*</abbr
+						></span
+					>
+					<textarea name="challenge" rows="3" required maxlength="1000"></textarea>
+				</label>
+				<label class="submit__field">
+					<span
+						>What practical takeaway will attendees be able to apply in their own DevRel work? <abbr
+							title="required">*</abbr
+						></span
+					>
+					<textarea name="takeaway" rows="3" required maxlength="1000"></textarea>
 				</label>
 				<label class="submit__field">
 					<span>Tools, platforms, and reusable skills involved</span>
@@ -167,10 +193,48 @@
 						</select>
 					</label>
 					<label class="submit__field">
-						<span>Link to slides, a repository, or a past recording</span>
+						<span>Link to slides or a repository</span>
 						<input name="link" type="url" placeholder="https://" maxlength="500" />
 					</label>
 				</div>
+				<div class="submit__field" role="radiogroup" aria-labelledby="presented-before-label">
+					<span id="presented-before-label"
+						>Have you presented this session before? <abbr title="required">*</abbr></span
+					>
+					<div class="submit__choices">
+						<label class="submit__check">
+							<input
+								name="presented-before"
+								type="radio"
+								value="Yes"
+								required
+								bind:group={presentedBefore}
+							/>
+							<span>Yes</span>
+						</label>
+						<label class="submit__check">
+							<input name="presented-before" type="radio" value="No" bind:group={presentedBefore} />
+							<span>No</span>
+						</label>
+					</div>
+				</div>
+				{#if presentedBefore === 'Yes'}
+					<label class="submit__field">
+						<span
+							>Share the video recording or slides from a previous presentation <abbr
+								title="required">*</abbr
+							></span
+						>
+						<input
+							name="previous-recording"
+							type="url"
+							placeholder="https://"
+							required
+							maxlength="500"
+						/>
+						<small>A link to the recording, or to the slides if there is no recording.</small>
+					</label>
+				{/if}
 			</fieldset>
 
 			<fieldset>
@@ -178,6 +242,13 @@
 				<label class="submit__check">
 					<input name="recording" type="checkbox" value="yes" />
 					<span>The Touchpoint can be recorded and the recording can be shared publicly.</span>
+				</label>
+				<label class="submit__check">
+					<input name="not-sales-pitch" type="checkbox" value="yes" required />
+					<span>
+						I confirm this session is not a sales or product pitch. It shares practical experience
+						that DevRel practitioners can use. <abbr title="required">*</abbr>
+					</span>
 				</label>
 				<label class="submit__check">
 					<input name="code-of-conduct" type="checkbox" value="yes" required />
@@ -315,6 +386,12 @@
 		gap: var(--space-xs);
 		font-size: var(--step--1);
 		color: var(--color-text);
+	}
+
+	.submit__choices {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-m);
 	}
 
 	.submit__check input {

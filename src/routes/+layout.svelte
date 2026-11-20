@@ -75,7 +75,7 @@
           try {
             window.gtag('event', 'page_view', { page_path: $page.url.pathname });
           } catch {
-            // ignore
+            gaLoaded = false;
           }
         }
       }
