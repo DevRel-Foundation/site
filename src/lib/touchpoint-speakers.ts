@@ -4,7 +4,6 @@ export interface TouchpointSpeaker {
 	company?: string;
 	image?: string;
 	topic: string;
-	/** Touchpoint date, YYYY-MM-DD (calls start at 13:00 UTC). */
 	date: string;
 }
 
@@ -60,5 +59,4 @@ export const TOUCHPOINT_SPEAKERS: TouchpointSpeaker[] = [
 	}
 ];
 
-/** Open slot shown after the scheduled speakers, inviting new submissions. */
 export const OPEN_SLOT_LABEL = 'January 2027';

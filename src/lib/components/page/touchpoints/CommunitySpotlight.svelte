@@ -9,10 +9,8 @@
 
 	const speakers = [...TOUCHPOINT_SPEAKERS].sort((a, b) => a.date.localeCompare(b.date));
 
-	/** Copies of the card list in each half of the scrolling track; each half must be wider than the page container. */
 	const SETS_PER_HALF = 2;
 
-	/** Touchpoint event pages keyed by UTC date (YYYY-MM-DD). */
 	let eventLinks = $state<Record<string, string>>({});
 
 	onMount(async () => {
@@ -115,11 +113,6 @@
 	</p>
 
 	<div class="spotlight__viewport">
-		<!--
-			The track is two identical halves of SETS_PER_HALF copies each, so moving it by -50%
-			loops seamlessly and each half is wider than any screen. Only the first copy is read by
-			screen readers and reached with Tab; the rest are clickable copies.
-		-->
 		<div class="spotlight__track" style="--spotlight-duration: {SETS_PER_HALF * 45}s">
 			{#each Array.from({ length: SETS_PER_HALF * 2 }, (_, i) => i) as copy (copy)}
 				<ul
@@ -165,7 +158,6 @@
 		overflow: hidden;
 	}
 
-	/* Edge fades drawn on top of the row (a mask on the moving row can leave parts unpainted). */
 	.spotlight__viewport::before,
 	.spotlight__viewport::after {
 		content: '';
@@ -215,8 +207,6 @@
 
 	.spotlight__card {
 		display: flex;
-		/* Fixed width (not just flex-basis) so every browser sizes the row from 15rem cards,
-		   not from the unwrapped length of the longest topic. */
 		flex: none;
 		width: 15rem;
 		flex-direction: column;
@@ -299,7 +289,6 @@
 		color: var(--color-link);
 	}
 
-	/* No motion: a single row people can scroll themselves. */
 	@media (prefers-reduced-motion: reduce) {
 		.spotlight__viewport {
 			overflow-x: auto;

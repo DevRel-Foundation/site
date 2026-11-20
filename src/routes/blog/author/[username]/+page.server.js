@@ -15,7 +15,6 @@ export async function load({ params, url }) {
       posts: posts.sort((a, b) => new Date(b.date) - new Date(a.date)),
       author,
       username: params.username,
-      // Force reactivity by including the current path
       currentPath: url.pathname
     };
   } catch (err) {

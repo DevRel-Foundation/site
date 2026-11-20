@@ -128,7 +128,7 @@
         if (copiedKey === key) copiedKey = null;
       }, 1500);
     } catch {
-      /* clipboard unavailable */
+      copiedKey = null;
     }
   }
 </script>
@@ -1304,7 +1304,6 @@ h3 { font-size: var(--step-3); }
     opacity: 0.75;
   }
 
-  /* Pin light-mode sections to :root light tokens regardless of site theme */
   .brand-page .color-mode-container--light {
     --color-background: hsl(48, 100%, 98%);
     --color-background-secondary-1: hsl(48, 61.8%, 94%);
@@ -1334,7 +1333,6 @@ h3 { font-size: var(--step-3); }
     border-color: var(--color-background-secondary-2);
   }
 
-  /* Pin dark-mode sections to static -dark primitives regardless of site theme */
   .brand-page .color-mode-container--dark {
     --color-background: var(--color-background-dark);
     --color-background-secondary-1: var(--color-background-secondary-1-dark);
