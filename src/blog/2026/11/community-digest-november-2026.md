@@ -41,7 +41,6 @@ What came out of that call:
 
 - **Reviews now happen in the open with GitVote.** Reviewers vote on GitHub issues, and each submission is mirrored from the form without the speaker's name, email, or affiliation. The [first submission](https://github.com/DevRel-Foundation/governance/issues/184) passed, with a request to the submitter to make the DevRel angle stronger.
 - **The submission form now asks better questions.** The [updated form](/community/touchpoints/submit) asks which DevRel challenge a session addresses and what practical takeaway attendees get, and speakers confirm that the session is not a sales or product pitch ([pull request](https://github.com/DevRel-Foundation/site/pull/118)).
-- **Tools do not have to be open source.** The group removed this proposed requirement. The connection to DevRel practice is what matters.
 - **The session list is public.** Every scheduled show-and-tell session now has its own page in the [governance repository](https://github.com/DevRel-Foundation/governance/tree/main/touchpoints).
 
 > Do you have a workflow, a tool, or an experiment to share? Sessions run from 5 to 30 minutes, and work in progress is welcome.
@@ -105,33 +104,35 @@ DRF runs on volunteers. Thank you to everyone who gave their time this month. Ea
 
 ## DevRel jobs
 
-Recent roles listed on [DevRel Jobs](https://www.devreljob.com/). Many of them now ask for experience with AI agents and agentic applications.
+Open DevRel roles we found this month. Each link goes to the company's own careers page.
 
 **Remote**
 
-- [Staff Developer Advocate](https://www.devreljob.com/jobs/lightning-ai-staff-developer-advocate-791), Lightning AI
-- [Developer Advocate](https://www.devreljob.com/jobs/yugabytedb-developer-advocate-785), YugabyteDB
-- [Senior Staff, Developer Relations](https://www.devreljob.com/jobs/ripple-senior-staff-developer-relations-780), Ripple
-- [Staff Developer Relations Engineer](https://www.devreljob.com/jobs/render-staff-developer-relations-engineer-779), Render
-- [Senior Director, Developer Relations](https://www.devreljob.com/jobs/twilio-senior-director-developer-relations-770), Twilio
-- [Manager, Developer Relations Engineering](https://www.devreljob.com/jobs/tailscale-manager-developer-relations-engineering-766), Tailscale
-- [Developer Relations](https://www.devreljob.com/jobs/factory-developer-relations-765), Factory
-- [Senior AI Developer Relations Advocate, Agentic Applications](https://www.devreljob.com/jobs/intel-senior-ai-developer-relations-advocate-agentic-applications-764), Intel (remote, United States)
+- [Senior Director, Developer Relations](https://job-boards.greenhouse.io/twilio/jobs/8093320), Twilio, remote in the United States
+- [Staff Developer Relations Engineer](https://jobs.ashbyhq.com/render/5498e2c2-44d7-4a4b-9bb9-20c0eca92440), Render, remote in the United States
+- [Developer Advocate](https://job-boards.greenhouse.io/yugabyte/jobs/4727959006), YugabyteDB, remote in the United States
+- Developer Relations Engineer, Tailscale, remote in the [United States](https://job-boards.greenhouse.io/tailscale/jobs/4754084005), the [United Kingdom](https://job-boards.greenhouse.io/tailscale/jobs/4754085005), or [Canada](https://job-boards.greenhouse.io/tailscale/jobs/4754059005)
 
 **North America**
 
-- [Developer Advocate](https://www.devreljob.com/jobs/exa-developer-advocate-786), Exa, San Francisco Bay Area
-- [Developer Advocate](https://www.devreljob.com/jobs/diagrid-developer-advocate-787), Diagrid, San Francisco Bay Area
-- [Senior Developer Relations Engineer](https://www.devreljob.com/jobs/qdrant-senior-developer-relations-engineer-769), Qdrant, San Francisco Bay Area
-- [Manager, Developer Relations, Open Source](https://www.devreljob.com/jobs/databricks-manager-developer-relations-open-source-771), Databricks, San Francisco Bay Area
-- [Senior Developer Advocate](https://www.devreljob.com/jobs/auth0-okta-senior-developer-advocate-768), Auth0 (Okta), New York City
-- [Sr. Developer Advocate](https://www.devreljob.com/jobs/authzed-sr-developer-advocate-782), AuthZed, United States
-- [Developer Advocate, Edge and IoT](https://www.devreljob.com/jobs/telnyx-developer-advocate-edge-iot-781), Telnyx, United States
+- [Staff Developer Advocate](https://job-boards.greenhouse.io/lightningai/jobs/8010627003), Lightning AI, San Francisco
+- [Developer Advocate](https://jobs.ashbyhq.com/exa/fd015edb-c29b-40ff-aa6f-b477c730b4c1), Exa, San Francisco
+- [Developer Advocate](https://jobs.ashbyhq.com/Diagrid/778688dc-b9fe-4e5b-b73f-69b88fc94846), Diagrid, San Francisco (remote)
+- [Senior Developer Relations Engineer](https://jobs.ashbyhq.com/qdrant.tech/988b05e0-b044-4a91-b49e-33a117ed23a8), Qdrant, San Francisco
+- [Developer Relations](https://jobs.ashbyhq.com/factory/a6386a06-e9b4-4c0c-95c4-0d5a845c8d4e), Factory, San Francisco
+- [Senior Staff, Developer Relations](https://ripple.com/careers/all-jobs/job/8244768?gh_jid=8244768), Ripple, New York
+- [Senior Developer Advocate (Auth0)](https://www.okta.com/company/careers/opportunity/8114891?gh_jid=8114891), Okta, New York
+- [Manager, Developer Relations, Open Source](https://databricks.com/company/careers/open-positions/job?gh_jid=8716713002), Databricks, Seattle
+- [Sr. Developer Advocate](https://jobs.ashbyhq.com/authzed/168d6ddd-5d71-41bd-a7f0-996ff191bce3), AuthZed, United States
+- [Developer Advocate, Edge and IoT](https://job-boards.greenhouse.io/telnyx54/jobs/8040472003), Telnyx, United States
 
-**Europe**
+**Asia Pacific**
 
-- [Developer Relations Engineer](https://www.devreljob.com/jobs/adyen-developer-relations-engineer-783), Adyen, Amsterdam
-- [Developer Advocate](https://www.devreljob.com/jobs/tether-operations-limited-developer-advocate-767), Tether, Amsterdam
+- [Developer Advocate, Developer Experience](https://www.amazon.jobs/en/jobs/10587164/developer-advocate-developer-experience), AWS, Tokyo
+- [Senior Product Marketing Manager and Evangelist, ASEAN](https://jobs.ashbyhq.com/snowflake/648ec104-24f8-4057-9d0b-3ffb88947f30), Snowflake, Singapore
+- [Senior DevRel Engineer](https://job-boards.greenhouse.io/hackerrank/jobs/7907492), HackerRank, Bangalore (hybrid)
+- [Developer Advocate](https://jobs.ashbyhq.com/Diagrid/4b1828b2-2265-4610-8f3c-5c4fcaed0b2c), Diagrid, remote in India
+- [Developer Relations Engineer](https://job-boards.greenhouse.io/canonical/jobs/5143011), Canonical, home-based in Asia Pacific or EMEA
 
 Hiring for a DevRel role? Share it with the community in the #jobs channel on [Discord](https://discord.gg/G7CSTKZcuT).
 
